@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<style>
+    .gridjs-tbody, td.gridjs-td,
+    .gridjs *, .gridjs ::after, .gridjs ::before,
+    .table {
+        font-size: var(--vz-body-font-size);
+    }
+
+    .bg-primary-subtle {
+        background-color: #660000 !important;
+        opacity: .9 !important;
+    }   
+</style>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card mt-n4 mx-n4">
+                    <div class="bg-primary-subtle">
+                        <div class="card-body px-4 pb-4">
+                            <div class="row mb-3">
+                                <div class="col-md">
+                                    <div class="row align-items-center g-3">
+                                        <div class="col-md-auto">
+                                            <div class="avatar-md">
+                                                <div class="avatar-title bg-transparent">
+                                                    <i class="ri-chat-smile-3-line " style="font-size: 3rem !important;"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md">
+                                            <div>
+                                                    <h4 class="fw-bold text-white">Evaluation and Feedback</h4>
+                                                <div class="hstack gap-3 flex-wrap text-white">
+                                                    <div id="evalBreadtime"><i class="ri-map-pin-2-line align-bottom me-1"></i></div>
+                                                    <div class="vr"></div>
+                                                    <div>Post Date : <span id="evalBreaddate"></span></div>
+                                                    <div class="vr"></div>
+                                                    <div>Your Designation: <div class="badge rounded-pill bg-secondary fs-12">Academic Head</div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card body -->
+                    </div>
+                </div>
+                <!-- end card -->
+            </div>
+            <!--end col-->
+        </div>
+
+        <div class="row mt-n5">
+            <div class="col-md-2">
+                <div class="card" data-aos="fade-right">
+                    <div class="card-body">
+                        <div class="avatar-sm mx-auto">
+                            <div class="avatar-title bg-warning-subtle rounded">
+                                <img src="{% static 'img/pupqcfps.png' %}" alt="" class="avatar-xxs">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <a href="#!">
+                                <h5 class="mt-1">PUPQC-FPS</h5>
+                            </a>
+                            <p class="text-muted">Evaluation and Assessments</p>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-medium">Evaluations</td>
+                                        <td>7</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="mt-1 pt-2 hstack gap-2">
+                                <a href="#!" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myuploadModal">Upload</a>
+                                <a href="#!" class="btn btn-soft-danger btn-icon custom-toggle flex-shrink-0"  data-bs-toggle="modal" data-bs-target="#myannouncementModal">
+                                    <span class="icon-on"><i class="ri-question-line align-bottom"></i></span>
+                                    <span class="icon-off"><i class="ri-question-fill align-bottom"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- modal for announcement -->
+                <div class="modal fade" id="myannouncementModal" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body text-center p-5">
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/tdrtiskw.json"
+                                    trigger="loop"
+                                    colors="primary:#f7b84b,secondary:#405189"
+                                    style="width:130px;height:130px">
+                                </lord-icon>
+                                <div class="mt-4 pt-4">
+                                    <h4>Announcement</h4>
+                                    <p class="text-muted">We will be conducting a roll out system rotation from April 2024 up to August 2024 for scheduled maintenance.<br>Thank you for your understanding.</p>
+                                    <button class="btn btn-warning" data-bs-target="#secondmodal" data-bs-toggle="modal" data-bs-dismiss="modal">
+                                        Continue
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+
+                <!-- modal for upload -->
+                <div id="myuploadModal" class="modal fade zoomIn" tabindex="-1" aria-labelledby="zoomInModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="zoomInModalLabel">New Excel file</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h5 class="fs-16">
+                                    Upload something here
+                                </h5>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary ">Upload</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-aos="fade-left">
+                    <div class="card-body">
+                        <a href="#!">
+                            <h5 class="mt-1">Recent Upload</h5>
+                        </a>
+
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <tbody style="cursor: pointer;">
+                                    <tr>
+                                        <td class="fw-medium">
+                                            ITEES Summary SY2223 2nd.xls
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium">ITEES Summary SY2223 1st.xls</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium">
+                                            ITEES Summary SY2122 2nd.xls
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium">ITEES Summary SY2122 1st.xls</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium">
+                                            ITEES Summary SY2021 2nd.xls
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium">ITEES Summary SY2021 1st.xls</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-10" data-aos="zoom-in-up">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-sm-auto">
+                                <div>
+                                    <h4 class="card-title mb-0 flex-grow-1">ITEES Summary SY2324 1st.xls</h4>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="d-flex justify-content-sm-end">
+                                    <div class="search-box ms-2">
+                                        <input type="text" class="form-control" id="searchResultList" placeholder="Search for faculty name">
+                                        <i class="ri-search-line search-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="recomended-jobs" class="table-card"></div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+
+        <script>
+            //For showing time and date
+            function updateDateTime() {
+                const now = new Date();
+                const timeElement = document.getElementById('evalBreadtime');
+                const dateElement = document.getElementById('evalBreaddate');
+        
+                const options = {
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                    hour12: true
+                };
+        
+                timeElement.textContent = now.toLocaleTimeString(undefined, options);
+                dateElement.textContent = now.toDateString();
+        
+                const currentHour = now.getHours();
+                greetingElement.textContent = greeting;
+            }
+        
+            setInterval(updateDateTime, 1000); // Update every second
+            updateDateTime(); // Initial update
+        
+        
+        </script>
+
+        <!-- prismjs plugin -->
+        <script src="{% static 'libs/prismjs/prism.js' %}"></script>
+
+        <!-- Lord Icon -->
+        <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+
+        <!-- Modal Js -->
+        <script src="{% static 'js/pages/modal.init.js' %}"></script>
+{% endblock %}

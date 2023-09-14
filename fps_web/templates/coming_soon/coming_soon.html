@@ -1,0 +1,82 @@
+
+{% load static %}
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>myPUPQC-FPS{% block title %}{% endblock %}</title>
+    
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'img/pupqcfps.png' %}">
+
+    <!-- Layout config Js -->
+    <script src="{% static 'js/layout.js' %}"></script>
+    <!-- Bootstrap Css -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <!-- Icons Css -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- App Css-->
+    <link href="{% static 'css/app.min.css' %}" rel="stylesheet" type="text/css">
+    <!-- custom Css-->
+    <link href="{% static 'css/custom.min.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<style>
+    .auth-bg-cover > .bg-overlay {
+        background-image: url({%static 'images/cover-pattern.png'%});
+        background-color:
+        
+    }
+
+    .auth-bg-cover {
+        background: linear-gradient(-45deg, #660000 40%, #FFC000);
+    }
+</style>
+    <!-- auth-page wrapper -->
+    <div class="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center min-vh-100">
+        <div class="bg-overlay"></div>
+        <!-- auth-page content -->
+        <div class="auth-page-content overflow-hidden pt-lg-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-5">
+                        <div class="card overflow-hidden">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <lord-icon class="avatar-xl" src="https://cdn.lordicon.com/etwtznjn.json" trigger="loop"></lord-icon>
+                                    <h1 class="text-danger mb-4">This page is in development</h1>
+                                    <h4 class="text-uppercase">Sorry😶</h4>
+                                    <p class="text-muted mb-4">This page will be available soon,  Thank you for patience.</p>
+                                    <a href="{% url 'exec_dashboard' %}" class="btn btn-danger"><i class="mdi mdi-home me-1"></i>Back to home</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->
+                    </div>
+                    <!-- end col -->
+
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end auth page content -->
+    </div>
+    <!-- end auth-page-wrapper -->
+    
+
+    <!-- JAVASCRIPT -->
+    <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+    <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+    <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+    <script src="{% static 'js/pages/plugins/lord-icon-2.1.0.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+
+</body>
+</html>
