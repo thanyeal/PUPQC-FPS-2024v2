@@ -31,16 +31,25 @@
     <!-- Layout config Js -->
     <script src="{% static 'js/layout.js' %}"></script>
     <!-- Bootstrap Css -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <!-- Icons Css -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
     <!-- App Css-->
-    <link href="{% static 'css/app.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/app.min.css' %}" rel="stylesheet">
     <!-- custom Css-->
-    <link href="{% static 'css/custom.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/custom.min.css' %}" rel="stylesheet">
 </head>
 
 <body>
+    <style>
+        .btn.disabled, .btn:disabled, fieldset:disabled .btn {
+            color: var(--vz-btn-disabled-color);
+            pointer-events: none;
+            background-color: #660000;
+            border-color: #660000;
+            opacity: var(--vz-btn-disabled-opacity);
+        }
+    </style>
     <div class="auth-page-wrapper pt-5">
         {% block content %}{% endblock  %}
     </div>
@@ -49,9 +58,6 @@
         <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js" integrity="sha384-gdQErvCNWvHQZj6XZM0dNsAoY4v+j5P1XDpNkcM3HJG1Yx04ecqIHk7+4VBOCHOG" crossorigin="anonymous"></script>
     {% endcomment %}
-
-    <!-- main script -->
-    <script src=" {% static 'js/main.js' %}"></script>
 
     <!-- JAVASCRIPT -->
     <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -67,6 +73,6 @@
     <script src="{% static 'js/pages/particles.app.js' %}"></script>
     <!-- password-addon init -->
     <script src="{% static 'js/pages/password-addon.init.js' %}"></script>
-    
+
 </body>
 </html>

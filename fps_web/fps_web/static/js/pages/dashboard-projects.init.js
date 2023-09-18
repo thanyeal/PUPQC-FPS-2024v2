@@ -6,7 +6,7 @@ function getChartColorsArray(e) {
                 var t = e.replace(" ", "");
                 return -1 === t.indexOf(",")
                     ? getComputedStyle(document.documentElement).getPropertyValue(t) || t
-                    : 2 == (e = e.split(",")).length
+                    : 2 == (e = e.split(","))
                         ? "rgba(" +
                         getComputedStyle(document.documentElement).getPropertyValue(e[0]) +
                         "," +
@@ -17,6 +17,7 @@ function getChartColorsArray(e) {
         console.warn("data-colors Attribute not found on:", e);
     }
 }
+
 var options,
     chart,
     linechartcustomerColors = getChartColorsArray("projects-overview-chart"),
@@ -164,12 +165,3 @@ var options,
                     options
                 )).render()),
             "users-chat");
-function scrollToBottom(e) {
-    setTimeout(() => {
-        new SimpleBar(
-            document.getElementById("chat-conversation")
-        ).getScrollElement().scrollTop =
-            document.getElementById("users-conversation").scrollHeight;
-    }, 100);
-}
-scrollToBottom(currentChatId);

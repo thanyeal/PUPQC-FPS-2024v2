@@ -203,6 +203,8 @@
             </div>  
         </div>
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <script>
             //For showing time and date
             function updateDateTime() {
@@ -221,13 +223,9 @@
                 dateElement.textContent = now.toDateString();
         
                 const currentHour = now.getHours();
-                greetingElement.textContent = greeting;
             }
-        
             setInterval(updateDateTime, 1000); // Update every second
             updateDateTime(); // Initial update
-        
-        
         </script>
 
         <!-- prismjs plugin -->

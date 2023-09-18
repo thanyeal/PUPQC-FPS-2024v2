@@ -247,7 +247,7 @@
                                             <a href="javascript:void(0);" class="d-flex align-items-center py-2">
                                                 <div class="flex-shrink-0 me-2">
                                                     <div class="avatar-xs">
-                                                        <img src="assets/images/users/avatar-10.jpg" alt="" class="img-fluid rounded-circle candidate-img">
+                                                        <img src="{% static 'images/users/avatar-10.jpg' %}" alt="" class="img-fluid rounded-circle candidate-img">
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -261,7 +261,7 @@
                                             <a href="javascript:void(0);" class="d-flex align-items-center py-2">
                                                 <div class="flex-shrink-0 me-2">
                                                     <div class="avatar-xs">
-                                                        <img src="assets/images/users/avatar-1.jpg" alt="" class="img-fluid rounded-circle candidate-img">
+                                                        <img src="{% static 'images/users/avatar-1.jpg' %}" alt="" class="img-fluid rounded-circle candidate-img">
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -274,7 +274,7 @@
                                             <a href="javascript:void(0);" class="d-flex align-items-center py-2">
                                                 <div class="flex-shrink-0 me-2">
                                                     <div class="avatar-xs">
-                                                        <img src="assets/images/users/avatar-9.jpg" alt="" class="img-fluid rounded-circle candidate-img">
+                                                        <img src="{% static 'images/users/avatar-9.jpg' %}" alt="" class="img-fluid rounded-circle candidate-img">
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -287,7 +287,7 @@
                                             <a href="javascript:void(0);" class="d-flex align-items-center py-2">
                                                 <div class="flex-shrink-0 me-2">
                                                     <div class="avatar-xs">
-                                                        <img src="assets/images/users/avatar-2.jpg" alt="" class="img-fluid rounded-circle candidate-img">
+                                                        <img src="{% static 'images/users/avatar-2.jpg' %}" alt="" class="img-fluid rounded-circle candidate-img">
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -300,7 +300,7 @@
                                             <a href="javascript:void(0);" class="d-flex align-items-center py-2">
                                                 <div class="flex-shrink-0 me-2">
                                                     <div class="avatar-xs">
-                                                        <img src="assets/images/users/avatar-5.jpg" alt="" class="img-fluid rounded-circle candidate-img">
+                                                        <img src="{% static 'images/users/avatar-5.jpg' %}" alt="" class="img-fluid rounded-circle candidate-img">
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -600,8 +600,9 @@
                 </div> <!-- .card-->
             </div>
         </div>
-
-
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <script>
         //For showing time and date
         function updateDateTime() {
@@ -637,12 +638,5 @@
         setInterval(updateDateTime, 1000); // Update every second
         updateDateTime(); // Initial update
     
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth'
-            });
-            calendar.render();
-        });
     </script>
 {% endblock %}

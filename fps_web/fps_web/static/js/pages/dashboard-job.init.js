@@ -289,41 +289,28 @@ var jobListAll,
             "VERY OUTSTANDING",
         ],
     ],
+
     chartRadialbarBasicColors =
-        (document.getElementById("recomended-jobs") &&
-            ((jobListAll = new gridjs.Grid({
-                columns: [
-                    { name: "No.", width: "80px" },
-                    { name: "Faculty Name", width: "200px" },
-                    { name: "Rating", width: "100px" },
-                    { name: "Supervisor Interpretation", width: "200px" },
-                    { name: "Rating", width: "100px" },
-                    { name: "Students Interpretation", width: "200px" },
-                    { name: "Rating", width: "100px" },
-                    { name: "Peer Interpretation", width: "200px" },
-                    { name: "Rating", width: "100px" },
-                    { name: "Self Interpretation", width: "200px" },
-                ],
-                sort: !0,
-                pagination: { limit: 15 },
-                data: jobListAllData,
-            }).render(document.getElementById("recomended-jobs"))),
-                (searchResultList =
-                    document.getElementById("searchResultList")).addEventListener(
-                        "keyup",
-                        function () {
-                            var e = searchResultList.value.toLowerCase();
-                            a = e;
-                            var a,
-                                e = jobListAllData.filter(function (e) {
-                                    return (
-                                        -1 !== e[0].toLowerCase().indexOf(a.toLowerCase()) ||
-                                        -1 !== e[1].toLowerCase().indexOf(a.toLowerCase())
-                                    );
-                                });
-                            jobListAll.updateConfig({ data: e }).forceRender();
-                        }
-                    )),
+    (document.getElementById("recomended-jobs") &&
+        ((jobListAll = new gridjs.Grid({
+            columns: [
+                { name: "No.", width: "80px" },
+                { name: "Faculty Name", width: "200px" },
+                { name: "Rating", width: "100px" },
+                { name: "Supervisor Interpretation", width: "200px" },
+                { name: "Rating", width: "100px" },
+                { name: "Students Interpretation", width: "200px" },
+                { name: "Rating", width: "100px" },
+                { name: "Peer Interpretation", width: "200px" },
+                { name: "Rating", width: "100px" },
+                { name: "Self Interpretation", width: "200px" },
+            ],
+            sort: true,
+            pagination: { limit: 15 },
+            data: jobListAllData,
+        }).render(document.getElementById("recomended-jobs"))),
+        (searchResultList =
+            document.getElementById("searchResultList"))),
             Array.from(document.querySelectorAll("#candidate-list li")).forEach(
                 function (t) {
                     t.querySelector("a").addEventListener("click", function () {
@@ -337,148 +324,211 @@ var jobListAll,
                 }
             ),
             window.addEventListener("load", () => {
-                var r = document.getElementById("searchList"),
-                    t = document.querySelectorAll("#candidate-list li");
-                r.onkeyup = () => {
-                    var e,
-                        a = r.value.toLowerCase();
-                    for (e of t)
-                        -1 ==
-                            e.querySelector(".candidate-name").innerHTML.toLowerCase().indexOf(a)
-                            ? e.classList.add("d-none")
-                            : e.classList.remove("d-none");
-                };
-            }),
-            getChartColorsArray("total_jobs"));
-chartRadialbarBasicColors &&
-    ((options = {
-        series: [95],
-        chart: { type: "radialBar", width: 105, sparkline: { enabled: !0 } },
-        dataLabels: { enabled: !1 },
-        plotOptions: {
-            radialBar: {
-                hollow: { margin: 0, size: "70%" },
-                track: { margin: 1 },
-                dataLabels: {
-                    show: !0,
-                    name: { show: !1 },
-                    value: { show: !0, fontSize: "16px", fontWeight: 600, offsetY: 8 },
-                },
-            },
-        },
-        colors: chartRadialbarBasicColors,
-    }),
-        (chart = new ApexCharts(
-            document.querySelector("#total_jobs"),
-            options
-        )).render()),
-    (chartRadialbarBasicColors = getChartColorsArray("apply_jobs")) &&
-    ((options = {
-        series: [97],
-        chart: { type: "radialBar", width: 105, sparkline: { enabled: !0 } },
-        dataLabels: { enabled: !1 },
-        plotOptions: {
-            radialBar: {
-                hollow: { margin: 0, size: "70%" },
-                track: { margin: 1 },
-                dataLabels: {
-                    show: !0,
-                    name: { show: !1 },
-                    value: { show: !0, fontSize: "16px", fontWeight: 600, offsetY: 8 },
-                },
-            },
-        },
-        colors: chartRadialbarBasicColors,
-    }),
-        (chart = new ApexCharts(
-            document.querySelector("#apply_jobs"),
-            options
-        )).render()),
-    (chartRadialbarBasicColors = getChartColorsArray("interview_chart")) &&
-    ((options = {
-        series: [89],
-        chart: { type: "radialBar", width: 105, sparkline: { enabled: !0 } },
-        dataLabels: { enabled: !1 },
-        plotOptions: {
-            radialBar: {
-                hollow: { margin: 0, size: "70%" },
-                track: { margin: 1 },
-                dataLabels: {
-                    show: !0,
-                    name: { show: !1 },
-                    value: { show: !0, fontSize: "16px", fontWeight: 600, offsetY: 8 },
-                },
-            },
-        },
-        colors: chartRadialbarBasicColors,
-    }),
-        (chart = new ApexCharts(
-            document.querySelector("#interview_chart"),
-            options
-        )).render()),
-    (chartRadialbarBasicColors = getChartColorsArray("hired_chart")) &&
-    ((options = {
-        series: [64],
-        chart: { type: "radialBar", width: 105, sparkline: { enabled: !0 } },
-        dataLabels: { enabled: !1 },
-        plotOptions: {
-            radialBar: {
-                hollow: { margin: 0, size: "70%" },
-                track: { margin: 1 },
-                dataLabels: {
-                    show: !0,
-                    name: { show: !1 },
-                    value: { show: !0, fontSize: "16px", fontWeight: 600, offsetY: 8 },
-                },
-            },
-        },
-        colors: chartRadialbarBasicColors,
-    }),
-        (chart = new ApexCharts(
-            document.querySelector("#hired_chart"),
-            options
-        )).render()),
-    (chartRadialbarBasicColors = getChartColorsArray("rejected_chart")) &&
-    ((options = {
-        series: [20],
-        chart: { type: "radialBar", width: 105, sparkline: { enabled: !0 } },
-        dataLabels: { enabled: !1 },
-        plotOptions: {
-            radialBar: {
-                hollow: { margin: 0, size: "70%" },
-                track: { margin: 1 },
-                dataLabels: {
-                    show: !0,
-                    name: { show: !1 },
-                    value: { show: !0, fontSize: "16px", fontWeight: 600, offsetY: 8 },
-                },
-            },
-        },
-        colors: chartRadialbarBasicColors,
-    }),
-        (chart = new ApexCharts(
-            document.querySelector("#rejected_chart"),
-            options
-        )).render()),
-    (chartRadialbarBasicColors = getChartColorsArray("new_jobs_chart")) &&
-    ((options = {
-        series: [80],
-        chart: { type: "radialBar", width: 105, sparkline: { enabled: !0 } },
-        dataLabels: { enabled: !1 },
-        plotOptions: {
-            radialBar: {
-                hollow: { margin: 0, size: "70%" },
-                track: { margin: 1 },
-                dataLabels: {
-                    show: !0,
-                    name: { show: !1 },
-                    value: { show: !0, fontSize: "16px", fontWeight: 600, offsetY: 8 },
-                },
-            },
-        },
-        colors: chartRadialbarBasicColors,
-    }),
-        (chart = new ApexCharts(
-            document.querySelector("#new_jobs_chart"),
-            options
-        )).render());
+                var r = document.getElementById("searchList");
+                if (r) {
+                    var t = document.querySelectorAll("#candidate-list li");
+                    r.onkeyup = () => {
+                        var e,
+                            a = r.value.toLowerCase();
+                        for (e of t)
+                            -1 ==
+                                e.querySelector(".candidate-name").innerHTML.toLowerCase().indexOf(a)
+                                ? e.classList.add("d-none")
+                                : e.classList.remove("d-none");
+                    };
+                }
+            }))
+
+//   ,  chartRadialbarBasicColors =
+//         (document.getElementById("recomended-jobs") &&
+//             ((jobListAll = new gridjs.Grid({
+//                 columns: [
+//                     { name: "No.", width: "80px" },
+//                     { name: "Faculty Name", width: "200px" },
+//                     { name: "Rating", width: "100px" },
+//                     { name: "Supervisor Interpretation", width: "200px" },
+//                     { name: "Rating", width: "100px" },
+//                     { name: "Students Interpretation", width: "200px" },
+//                     { name: "Rating", width: "100px" },
+//                     { name: "Peer Interpretation", width: "200px" },
+//                     { name: "Rating", width: "100px" },
+//                     { name: "Self Interpretation", width: "200px" },
+//                 ],
+//                 sort: !0,
+//                 pagination: { limit: 15 },
+//                 data: jobListAllData,
+//             }).render(document.getElementById("recomended-jobs"))),
+//                 (searchResultList =
+//                     document.getElementById("searchResultList")).addEventListener(
+//                         "keyup",
+//                         function () {
+//                             var e = searchResultList.value.toLowerCase();
+//                             a = e;
+//                             var a,
+//                                 e = jobListAllData.filter(function (e) {
+//                                     return (
+//                                         -1 !== e[0].toLowerCase().indexOf(a.toLowerCase()) ||
+//                                         -1 !== e[1].toLowerCase().indexOf(a.toLowerCase())
+//                                     );
+//                                 });
+//                             jobListAll.updateConfig({ data: e }).forceRender();
+//                         }
+//                     )),
+//             Array.from(document.querySelectorAll("#candidate-list li")).forEach(
+//                 function (t) {
+//                     t.querySelector("a").addEventListener("click", function () {
+//                         var e = t.querySelector(".candidate-name").innerHTML,
+//                             a = t.querySelector(".candidate-position").innerHTML,
+//                             r = t.querySelector(".candidate-img").src;
+//                         (document.getElementById("candidate-name").innerHTML = e),
+//                             (document.getElementById("candidate-position").innerHTML = a),
+//                             (document.getElementById("candidate-img").src = r);
+//                     });
+//                 }
+//             ),
+//             window.addEventListener("load", () => {
+//                 var r = document.getElementById("searchList"),
+//                     t = document.querySelectorAll("#candidate-list li");
+//                 r.onkeyup = () => {
+//                     var e,
+//                         a = r.value.toLowerCase();
+//                     for (e of t)
+//                         -1 ==
+//                             e.querySelector(".candidate-name").innerHTML.toLowerCase().indexOf(a)
+//                             ? e.classList.add("d-none")
+//                             : e.classList.remove("d-none");
+//                 };
+//             }),
+//             getChartColorsArray("total_jobs"));
+// chartRadialbarBasicColors &&
+//     ((options = {
+//         series: [95],
+//         chart: { type: "radialBar", width: 105, sparkline: { enabled: !0 } },
+//         dataLabels: { enabled: !1 },
+//         plotOptions: {
+//             radialBar: {
+//                 hollow: { margin: 0, size: "70%" },
+//                 track: { margin: 1 },
+//                 dataLabels: {
+//                     show: !0,
+//                     name: { show: !1 },
+//                     value: { show: !0, fontSize: "16px", fontWeight: 600, offsetY: 8 },
+//                 },
+//             },
+//         },
+//         colors: chartRadialbarBasicColors,
+//     }),
+//         (chart = new ApexCharts(
+//             document.querySelector("#total_jobs"),
+//             options
+//         )).render()),
+//     (chartRadialbarBasicColors = getChartColorsArray("apply_jobs")) &&
+//     ((options = {
+//         series: [97],
+//         chart: { type: "radialBar", width: 105, sparkline: { enabled: !0 } },
+//         dataLabels: { enabled: !1 },
+//         plotOptions: {
+//             radialBar: {
+//                 hollow: { margin: 0, size: "70%" },
+//                 track: { margin: 1 },
+//                 dataLabels: {
+//                     show: !0,
+//                     name: { show: !1 },
+//                     value: { show: !0, fontSize: "16px", fontWeight: 600, offsetY: 8 },
+//                 },
+//             },
+//         },
+//         colors: chartRadialbarBasicColors,
+//     }),
+//         (chart = new ApexCharts(
+//             document.querySelector("#apply_jobs"),
+//             options
+//         )).render()),
+//     (chartRadialbarBasicColors = getChartColorsArray("interview_chart")) &&
+//     ((options = {
+//         series: [89],
+//         chart: { type: "radialBar", width: 105, sparkline: { enabled: !0 } },
+//         dataLabels: { enabled: !1 },
+//         plotOptions: {
+//             radialBar: {
+//                 hollow: { margin: 0, size: "70%" },
+//                 track: { margin: 1 },
+//                 dataLabels: {
+//                     show: !0,
+//                     name: { show: !1 },
+//                     value: { show: !0, fontSize: "16px", fontWeight: 600, offsetY: 8 },
+//                 },
+//             },
+//         },
+//         colors: chartRadialbarBasicColors,
+//     }),
+//         (chart = new ApexCharts(
+//             document.querySelector("#interview_chart"),
+//             options
+//         )).render()),
+//     (chartRadialbarBasicColors = getChartColorsArray("hired_chart")) &&
+//     ((options = {
+//         series: [64],
+//         chart: { type: "radialBar", width: 105, sparkline: { enabled: !0 } },
+//         dataLabels: { enabled: !1 },
+//         plotOptions: {
+//             radialBar: {
+//                 hollow: { margin: 0, size: "70%" },
+//                 track: { margin: 1 },
+//                 dataLabels: {
+//                     show: !0,
+//                     name: { show: !1 },
+//                     value: { show: !0, fontSize: "16px", fontWeight: 600, offsetY: 8 },
+//                 },
+//             },
+//         },
+//         colors: chartRadialbarBasicColors,
+//     }),
+//         (chart = new ApexCharts(
+//             document.querySelector("#hired_chart"),
+//             options
+//         )).render()),
+//     (chartRadialbarBasicColors = getChartColorsArray("rejected_chart")) &&
+//     ((options = {
+//         series: [20],
+//         chart: { type: "radialBar", width: 105, sparkline: { enabled: !0 } },
+//         dataLabels: { enabled: !1 },
+//         plotOptions: {
+//             radialBar: {
+//                 hollow: { margin: 0, size: "70%" },
+//                 track: { margin: 1 },
+//                 dataLabels: {
+//                     show: !0,
+//                     name: { show: !1 },
+//                     value: { show: !0, fontSize: "16px", fontWeight: 600, offsetY: 8 },
+//                 },
+//             },
+//         },
+//         colors: chartRadialbarBasicColors,
+//     }),
+//         (chart = new ApexCharts(
+//             document.querySelector("#rejected_chart"),
+//             options
+//         )).render()),
+//     (chartRadialbarBasicColors = getChartColorsArray("new_jobs_chart")) &&
+//     ((options = {
+//         series: [80],
+//         chart: { type: "radialBar", width: 105, sparkline: { enabled: !0 } },
+//         dataLabels: { enabled: !1 },
+//         plotOptions: {
+//             radialBar: {
+//                 hollow: { margin: 0, size: "70%" },
+//                 track: { margin: 1 },
+//                 dataLabels: {
+//                     show: !0,
+//                     name: { show: !1 },
+//                     value: { show: !0, fontSize: "16px", fontWeight: 600, offsetY: 8 },
+//                 },
+//             },
+//         },
+//         colors: chartRadialbarBasicColors,
+//     }),
+//         (chart = new ApexCharts(
+//             document.querySelector("#new_jobs_chart"),
+//             options
+//         )).render());
