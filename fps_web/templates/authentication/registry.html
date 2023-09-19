@@ -1,5 +1,6 @@
 {% extends 'base_auth.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
 <style>
@@ -78,25 +79,21 @@
                                     {% include 'partials/_messages.html' %}
 
                                     {% csrf_token %}
-                                    
+                                <!-- for email field part -->
                                     <div class="mb-3">
                                         <label class="form-label" for="useremail">Email</label>
-                                        <div class="position-relative auth-pass-inputgroup">
-                                            <input oncopy="return false" type="email" class="form-control pe-5 password-input useremail" onpaste="return false" placeholder="Enter webmail" id="webmail" aria-describedby="emailInput" name="email" required>
+                                        <div class="position-relative">
+                                            {{ form.email|add_class:"form-control pe-5 password-input useremail"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter webmail"|attr:"id:webmail"|attr:"aria-describedby:emailInput"|attr:"name:email"|attr:"required"|attr:"required maxlength:100" }}
                                             <div class="invalid-feedback webmailFeedBackArea"></div>
                                             <div class="valid-feedback webmailSuccessArea"></div>
                                         </div>
                                     </div>
-                                    
-                                    <div id="email-contain" class="p-3 bg-light mb-2 rounded" style="display: none;">
-                                        {% comment %} <!--h5 class="fs-13">Email must match:</!h5--> {% endcomment %}
-                                        <p class="text-sm text-primary WebmailSuccessOutput"></p>
-                                    </div>                                    
-
+                                
+                                <!-- for pass field part -->
                                     <div class="mb-3">
                                         <label class="form-label" for="password-input">Password</label>
                                         <div class="position-relative auth-pass-inputgroup">
-                                            <input oncopy="return false" type="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Enter password" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="password" required>
+                                            {{ form.password1|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"placeholder:Enter password"|attr:"id:password-input"|attr:"aria-describedby:passwordInput"|attr:"pattern:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"|attr:"name:password"|attr:"required"|attr:"required maxlength:100" }}
                                             <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none shadow-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                             
                                         </div>
@@ -108,20 +105,45 @@
                                         <p id="pass-upper" class="invalid fs-12 mb-2">At least <b>uppercase</b> letter (A-Z)</p>
                                         <p id="pass-number" class="invalid fs-12 mb-0">A least <b>number</b> (0-9)</p>
                                     </div>
+                                
+
+                                <!-- for fullname field part -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Lastname</label>
+                                        <div class="position-relative">
+                                            {{ form.lastname|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter lastname"|attr:"id:usersLast"|attr:"aria-describedby:lnameInput"|attr:"name:lastname"|attr:"required maxlength:100" }}
+                                            <div class="invalid-feedback lnameErrorFeedbackArea"></div>
+                                            <div class="valid-feedback lnameSuccessFeedbackArea"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Firstname</label>
+                                        <div class="position-relative">
+                                            {{ form.firstname|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter firstname"|attr:"id:usersFirst"|attr:"aria-describedby:fnameInput"|attr:"name:firstname"|attr:"required maxlength:100" }}
+                                            <div class="invalid-feedback fnameErrorFeedbackArea"></div>
+                                            <div class="valid-feedback fnameSuccessFeedbackArea"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Middlename</label>
+                                        <div class="position-relative">
+                                            {{ form.middlename|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter middlename"|attr:"id:usersMiddle"|attr:"aria-describedby:mnameInput"|attr:"name:middlename"|attr:"required maxlength:100" }}
+                                            <div class="invalid-feedback mnameErrorFeedbackArea"></div>
+                                            <div class="valid-feedback mnameSuccessFeedbackArea"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="password-input">Confirm Password</label>
+                                        <div class="position-relative auth-pass-inputgroup">
+                                            {{ form.password2|add_class:"form-control pe-5 password-input"|attr:"placeholder:Confirm Password"|attr:"id:password-input"|attr:"required"|attr:"required maxlength:100" }}
+                                        </div>
+                                    </div>
+                                
 
                                     <div class="mt-4">
                                         <button class="btn btn-primary w-100 submit-btn" type="submit">Sign Up</button>
                                     </div>
                                 </form>
-
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="#">
-                                    <label class="form-check-label" for="auth-remember-check">
-                                        I understand, follow, and agree to PUP <a href="https://www.pup.edu.ph/terms/" class="text-primary text-decoration-underline fst-normal fw-medium">Terms of Use</a>
-                                        and <a href="https://www.pup.edu.ph/privacy/" class="text-primary text-decoration-underline fst-normal fw-medium">Privacy Statement</a>
-                                    </label>
-                                </div>
-
                             </div>
                         </div>
                         <!-- end card body -->
@@ -165,7 +187,6 @@
         const webmail = document.querySelector("#webmail");
         const feedbackArea = document.querySelector(".invalid_feedback");
         const emailFeedBackArea = document.querySelector(".webmailFeedBackArea");
-        //const WebmailSuccessOutput = document.querySelector(".WebmailSuccessOutput");
         const emailSuccessArea = document.querySelector(".webmailSuccessArea");
         const submitBtn = document.querySelector(".submit-btn");
 
@@ -186,6 +207,7 @@
                     method: "POST",
                 })
                 .then((res) => res.json())
+
                 .then((data) => {
                     console.log("data", data);
                     if (data.email_valid) {
@@ -233,6 +255,108 @@
                         webmail.classList.add("is-invalid");
                         emailFeedBackArea.style.display = "block";
                         emailFeedBackArea.innerHTML = `<p>${data.error}</p>`;
+                    } else {
+                        submitBtn.removeAttribute("disabled");
+                    }
+                });
+            }
+        });
+        const users_last = document.querySelector("#usersLast");
+        const lnameErrorFeedbackArea = document.querySelector(".lnameErrorFeedbackArea");
+        const lnameSuccessFeedbackArea = document.querySelector(".lnameSuccessFeedbackArea");
+
+        users_last.addEventListener("keyup", (e)=> {
+            const lnameVal = e.target.value;
+
+            users_last.classList.remove("is-invalid");
+            lnameErrorFeedbackArea.style.display = "none";
+            lnameSuccessFeedbackArea.style.display = "none";
+
+            if (lnameVal.length > 0) {
+                fetch("/validate-lname", {
+                    body: JSON.stringify({ lastname: lnameVal }),
+                    method: "POST",
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log("data", data);
+                    if (data.lastname_valid) {
+                        lnameSuccessFeedbackArea.style.display = "block";
+                        lnameSuccessFeedbackArea.innerHTML = `<p>${data.lastname_valid}</p>`;
+                    }
+                    if (data.lastname_error) {
+                        submitBtn.disabled = true;
+                        webmail.classList.add("is-invalid");
+                        lnameErrorFeedbackArea.style.display = "block";
+                        lnameErrorFeedbackArea.innerHTML = `<p>${data.lastname_error}</p>`;
+                    } else {
+                        submitBtn.removeAttribute("disabled");
+                    }
+                });
+            }
+        });
+        const users_first = document.querySelector("#usersFirst");
+        const fnameErrorFeedbackArea = document.querySelector(".fnameErrorFeedbackArea");
+        const fnameSuccessFeedbackArea = document.querySelector(".fnameSuccessFeedbackArea");
+
+        users_first.addEventListener("keyup", (e)=> {
+            const fnameVal = e.target.value;
+
+            users_first.classList.remove("is-invalid");
+            fnameErrorFeedbackArea.style.display = "none";
+            fnameSuccessFeedbackArea.style.display = "none";
+
+            if (fnameVal.length > 0) {
+                fetch("/validate-fname", {
+                    body: JSON.stringify({ firstname: fnameVal }),
+                    method: "POST",
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log("data", data);
+                    if (data.firstname_valid) {
+                        fnameSuccessFeedbackArea.style.display = "block";
+                        fnameSuccessFeedbackArea.innerHTML = `<p>${data.firstname_valid}</p>`;
+                    }
+                    if (data.firstname_error) {
+                        submitBtn.disabled = true;
+                        webmail.classList.add("is-invalid");
+                        fnameErrorFeedbackArea.style.display = "block";
+                        fnameErrorFeedbackArea.innerHTML = `<p>${data.firstname_error}</p>`;
+                    } else {
+                        submitBtn.removeAttribute("disabled");
+                    }
+                });
+            }
+        });
+        const users_middle = document.querySelector("#usersMiddle");
+        const mnameErrorFeedbackArea = document.querySelector(".mnameErrorFeedbackArea");
+        const mnameSuccessFeedbackArea = document.querySelector(".mnameSuccessFeedbackArea");
+
+        users_middle.addEventListener("keyup", (e)=> {
+            const mnameVal = e.target.value;
+
+            users_middle.classList.remove("is-invalid");
+            mnameErrorFeedbackArea.style.display = "none";
+            mnameSuccessFeedbackArea.style.display = "none";
+
+            if (mnameVal.length > 0) {
+                fetch("/validate-mname", {
+                    body: JSON.stringify({ middlename: mnameVal }),
+                    method: "POST",
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log("data", data);
+                    if (data.middlename_valid) {
+                        mnameSuccessFeedbackArea.style.display = "block";
+                        mnameSuccessFeedbackArea.innerHTML = `<p>${data.middlename_valid}</p>`;
+                    }
+                    if (data.middlename_error) {
+                        submitBtn.disabled = true;
+                        webmail.classList.add("is-invalid");
+                        mnameErrorFeedbackArea.style.display = "block";
+                        mnameErrorFeedbackArea.innerHTML = `<p>${data.middlename_error}</p>`;
                     } else {
                         submitBtn.removeAttribute("disabled");
                     }

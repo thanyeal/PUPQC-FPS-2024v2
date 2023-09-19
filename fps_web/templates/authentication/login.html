@@ -1,5 +1,6 @@
 {% extends 'base_auth.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
 <style>
@@ -76,82 +77,39 @@
                             <div class="p-2 mt-4">
                                 <form class="needs-validation" novalidate action="{% url 'login' %}" method="post">
                                     {% include 'partials/_messages.html' %}
-                                    
                                     {% csrf_token %}
+
                                     
                                     <div class="mb-3">
                                         <label for="" class="form-label">Email</label>
                                         <div class="position-relative auth-pass-inputgroup">
-                                            <input type="email" class="form-control pe-5 password-input useremail" oncopy="return false" onpaste="return false" placeholder="Enter webmail" id="webmail" aria-describedby="emailInput" name="webmail" required>
+                                            {{ form.email|add_class:"form-control pe-5 password-input useremail"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter webmail"|attr:"id:webmail"|attr:"aria-describedby:emailInput"|attr:"name:webmail"|attr:"required" }}
+                                            
                                             <div class="invalid-feedback logwebmailFeedBackArea"></div>
                                             <div class="valid-feedback logwebmailSuccessArea"></div>
                                             <div class="valid-feedback text-warning feedbackAreaaa"></div>
                                         </div>
                                     </div> 
 
-
-
-                                    <!--div class="mb-3">
-                                        <div class="float-end">
-                                            <a href="#" class="text-muted">Forgot
-                                                password?</a>
-                                        </!div>
-                                        <label class="form-label" for="password-input">Password</label>
-                                        <div class="position-relative auth-pass-inputgroup mb-3">
-                                            <input type="password" class="form-control pe-5 password-input" oncopy="return false" onpaste="return false" placeholder="Enter password" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="webpass" required>
-                                            <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted shadow-none password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
-                                        </div>
-                                    </div>
-                                    <div-- id="password-contain" class="p-3 bg-light mb-2 rounded">
-                                        <h5 class="fs-13">Password must contain:</h5>
-                                        <p id="pass-lower" class="invalid fs-12 mb-2">At <b>lowercase</b> letter (a-z)</p>
-                                        <p id="pass-upper" class="invalid fs-12 mb-2">At least <b>uppercase</b> letter (A-Z)</p>
-                                        <p id="pass-number" class="invalid fs-12 mb-2">A least <b>number</b> (0-9)</p>
-                                        <p id="pass-length" class="invalid fs-12 mb-0">Minimum <b>8 characters</b></p>
-                                    </div-->
-
-
-
                                     <div class="mb-3">
-                                        <!--div class="float-end">
-                                            <a href="#" class="text-muted">Forgot
-                                                password?</a>
-                                        </!div-->
                                         <label class="form-label" for="password-input">Password</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">
-                                            <input type="password" class="form-control pe-5 password-input" oncopy="return false" onpaste="return false" placeholder="Enter password" id="password-inputX" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="webpass" required>
+                                            {{ form.password|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter password"|attr:"id:password-inputX"|attr:"aria-describedby:passwordInput"|attr:"pattern:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"|attr:"name:webpass"|attr:"required" }}
+                                            
                                             <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted shadow-none password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                             <div class="invalid-feedback passFeedbackArea"></div>
                                             <div class="valid-feedback passSuccessArea"></div>
                                         </div>
                                     </div>
-
-
-
-                                    <!--div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="auth-remember-check">
-                                        <label class="form-check-label" for="auth-remember-check">Remember
-                                            me</label>
-                                    </!div-->
-
+                                    
                                     <div class="mt-4">
                                         <button class="btn btn-primary w-100 submit-btn" type="submit">Sign In</button>
                                     </div>
 
-                                    <div class="mt-4 text-center" style="display: none;">
+                                    <div class="mt-4 text-center">
                                         <div class="signin-other-title">
                                             <h5 class="fs-13 mb-4 title">Or</h5>
                                         </div>
-                                        <!--div>
-                                            <button type="button"
-                                                class="btn btn-primary btn-icon waves-effect waves-light"><i
-                                                    class="ri-mail-fill fs-16"></i></button>
-                                            <button type="button"
-                                                class="btn btn-primary btn-icon waves-effect waves-light"><i
-                                                    class="ri-google-fill fs-16"></i></button>
-                                        </!div-->
-
                                         <div>
                                             <p class="mb-0">
                                                 
@@ -164,14 +122,14 @@
                                         </div>
 
                                     </div>
+                                    
                                 </form>
                             </div>
                         </div>
                         <!-- end card body -->
                     </div>
                     <!-- end card -->
-
-                    <div class="mt-4 text-center">
+                    <div class="text-center">
                         <p class="mb-0 fs-12 text-muted">By using this service, you understood, agree, and follow to the PUP<br>
                             <a href="https://www.pup.edu.ph/terms/" class="text-primary text-decoration-underline fst-normal fw-medium">Terms of Use</a>
                             and <a href="https://www.pup.edu.ph/privacy/" class="text-primary text-decoration-underline fst-normal fw-medium">Privacy Statement</a></p>

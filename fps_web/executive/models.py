@@ -22,6 +22,9 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractBaseUser):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
+    lastname = models.CharField(max_length=100, null=True)
+    firstname = models.CharField(max_length=100, null=True)
+    middlename = models.CharField(max_length=100, null=True)
     is_active = models.BooleanField(default=True)
 
     objects = CustomUserManager()
@@ -30,3 +33,4 @@ class User(AbstractBaseUser):
 
     def __str__(self):
         return self.email
+

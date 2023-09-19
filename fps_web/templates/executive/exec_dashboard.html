@@ -1,8 +1,10 @@
+
 {% extends 'base.html' %}
 
 {% load static %}
 
 {% block content %}
+
 <style>
     .breadcrumb-item + .breadcrumb-item::before {
         content: "/" !important;
@@ -28,7 +30,12 @@
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0">
-                        <span id="greeting"></span>, Faculty!
+                        <span id="greeting"></span>,
+                        {% if current_user.is_authenticated %}
+                            {{ current_user.first_name }}
+                        {% else %}
+                            Guest
+                        {% endif %}
                     </h4>
 
                     <div class="page-title-right">
@@ -637,6 +644,5 @@
     
         setInterval(updateDateTime, 1000); // Update every second
         updateDateTime(); // Initial update
-    
     </script>
 {% endblock %}
