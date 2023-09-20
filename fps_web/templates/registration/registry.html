@@ -78,7 +78,33 @@
                                 <form class="needs-validation" novalidate action="/registry/" method="post">
                                     {% include 'partials/_messages.html' %}
 
-                                    {% csrf_token %}
+                                    {% csrf_token %}                              
+                                <!-- for fullname field part -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Lastname</label>
+                                        <div class="position-relative">
+                                            {{ form.lastname|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter lastname"|attr:"id:usersLast"|attr:"aria-describedby:lnameInput"|attr:"name:lastname"|attr:"required maxlength:100" }}
+                                            <div class="invalid-feedback lnameErrorFeedbackArea"></div>
+                                            <div class="valid-feedback lnameSuccessFeedbackArea"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Firstname</label>
+                                        <div class="position-relative">
+                                            {{ form.firstname|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter firstname"|attr:"id:usersFirst"|attr:"aria-describedby:fnameInput"|attr:"name:firstname"|attr:"required maxlength:100" }}
+                                            <div class="invalid-feedback fnameErrorFeedbackArea"></div>
+                                            <div class="valid-feedback fnameSuccessFeedbackArea"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Middlename</label>
+                                        <div class="position-relative">
+                                            {{ form.middlename|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter middlename"|attr:"id:usersMiddle"|attr:"aria-describedby:mnameInput"|attr:"name:middlename"|attr:"required maxlength:100" }}
+                                            <div class="invalid-feedback mnameErrorFeedbackArea"></div>
+                                            <div class="valid-feedback mnameSuccessFeedbackArea"></div>
+                                        </div>
+                                    </div>
+
                                 <!-- for email field part -->
                                     <div class="mb-3">
                                         <label class="form-label" for="useremail">Email</label>
@@ -105,40 +131,12 @@
                                         <p id="pass-upper" class="invalid fs-12 mb-2">At least <b>uppercase</b> letter (A-Z)</p>
                                         <p id="pass-number" class="invalid fs-12 mb-0">A least <b>number</b> (0-9)</p>
                                     </div>
-                                
-
-                                <!-- for fullname field part -->
-                                    <div class="mb-3">
-                                        <label class="form-label">Lastname</label>
-                                        <div class="position-relative">
-                                            {{ form.lastname|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter lastname"|attr:"id:usersLast"|attr:"aria-describedby:lnameInput"|attr:"name:lastname"|attr:"required maxlength:100" }}
-                                            <div class="invalid-feedback lnameErrorFeedbackArea"></div>
-                                            <div class="valid-feedback lnameSuccessFeedbackArea"></div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="password-input">Re-enter Password</label>
+                                            <div class="position-relative auth-pass-inputgroup">
+                                                {{ form.password2|add_class:"form-control pe-5 password-input"|attr:"placeholder:Confirm Password"|attr:"id:password-input"|attr:"required"|attr:"required maxlength:100" }}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Firstname</label>
-                                        <div class="position-relative">
-                                            {{ form.firstname|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter firstname"|attr:"id:usersFirst"|attr:"aria-describedby:fnameInput"|attr:"name:firstname"|attr:"required maxlength:100" }}
-                                            <div class="invalid-feedback fnameErrorFeedbackArea"></div>
-                                            <div class="valid-feedback fnameSuccessFeedbackArea"></div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Middlename</label>
-                                        <div class="position-relative">
-                                            {{ form.middlename|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter middlename"|attr:"id:usersMiddle"|attr:"aria-describedby:mnameInput"|attr:"name:middlename"|attr:"required maxlength:100" }}
-                                            <div class="invalid-feedback mnameErrorFeedbackArea"></div>
-                                            <div class="valid-feedback mnameSuccessFeedbackArea"></div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="password-input">Confirm Password</label>
-                                        <div class="position-relative auth-pass-inputgroup">
-                                            {{ form.password2|add_class:"form-control pe-5 password-input"|attr:"placeholder:Confirm Password"|attr:"id:password-input"|attr:"required"|attr:"required maxlength:100" }}
-                                        </div>
-                                    </div>
-                                
 
                                     <div class="mt-4">
                                         <button class="btn btn-primary w-100 submit-btn" type="submit">Sign Up</button>

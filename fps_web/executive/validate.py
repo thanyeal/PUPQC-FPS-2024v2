@@ -1,6 +1,6 @@
 # validation.py
 from django.http import JsonResponse
-from executive.models import User
+from .models import User
 from validate_email import validate_email
 import json, re
 from django.views import View
