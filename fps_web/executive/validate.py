@@ -1,6 +1,6 @@
 # validation.py
 from django.http import JsonResponse
-from .models import User
+from django.contrib.auth.models import User
 from validate_email import validate_email
 import json, re
 from django.views import View
@@ -139,8 +139,6 @@ class LastnameValidation(View):
 
         if not re.match(r'^[A-Za-z\'\s.]+$', lastname):
             return JsonResponse({'lastname_error': "There's special character in your name? What?"}, status=409)
-        # if re.match(r'^[A-Za-z\'\s.-]+$', lastname):
-        #     return JsonResponse({'lastname_valid': 'The value is valid: ' + lastname}, status=200)
         if lastname:
             return JsonResponse({'lastname_valid': 'Looks good!'}, status=200)
 
@@ -158,14 +156,14 @@ class FirstnameValidation(View):
 
         return firstname
     
-class MiddlenameValidation(View):
+class UsernameValidation(View):
     def post(self, request):
         data = json.loads(request.body)
-        middlename = data.get('middlename')
+        username = data.get('username')
     
-        if not re.match(r'^[A-Za-z\'\s.]+$', middlename):
-            return JsonResponse({'middlename_error': "Holy! There's a special character in your middle name? What the.."}, status=400)
-        if re.match(r'^[A-Za-z\'\s.-]+$', middlename):
-            return JsonResponse({'middlename_valid': "Wow!, That's a cool middle name right there"}, status=200)
+        if not re.match(r'^[A-Za-z\'\s.]+$', username):
+            return JsonResponse({'username_error': "Holy! There's a special character in your middle name? What the.."}, status=400)
+        if re.match(r'^[A-Za-z\'\s.-]+$', username):
+            return JsonResponse({'username_valid': "Wow!, That's a cool middle name right there"}, status=200)
 
-        return middlename
+        return username

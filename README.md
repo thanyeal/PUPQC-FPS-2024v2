@@ -4,30 +4,37 @@
 
 Make sure you have the latest version of Python installed.
 
-Fork the project
+1. Fork or clone this project
+
 ```bash
-Yes, Fork it
+https://github.com/daenyuhl/PUPQC-FPS-2024v2.git
 ```
 
-Navigate the project
+2. Navigate the project
 
 ```bash
 cd <path of this repo on your device>
 ```
 
-activate the python environment
+3. create the python environment
 
 ```bash
 py -m pipenv shell
 ```
 
-Navigate dir. inside (if not inside ../PUPQC_FPS_2024v2/fps_web)
+4. install the django itself and it's modules
+
+```bash
+pip install -r requirements.txt
+```
+
+5. Navigate directory just inside 'PUPQC-FPS-2024v2'
 
 ```bash
 cd fps_web
 ```
 
-run the file
+6. run the file
 
 ```bash
 python manage.py runserver
@@ -36,7 +43,7 @@ python manage.py runserver
 ## Viewing The App
 
 just find that sus url: `http://127.0.0.1:8000`
-in the powershell.
+in the command line.
 <br />
 
 ## Project Details

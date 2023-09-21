@@ -37,7 +37,7 @@
 </style>
 
     <!-- auth page bg -->
-    <div class="auth-one-bg-position auth-one-bg" id="auth-particles">
+    <div class="auth-one-bg-position auth-one-bg" {% comment %}id="auth-particles"{% endcomment %}>
         <div class="bg-overlay"></div>
 
         <div class="shape">
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <!-- auth page content -->
+     <!-- auth page content --> 
     <div class="auth-page-content">
         <div class="container">
             <div class="row">
@@ -78,12 +78,10 @@
                                 <form class="needs-validation" novalidate action="{% url 'login' %}" method="post">
                                     {% include 'partials/_messages.html' %}
                                     {% csrf_token %}
-
-                                    
                                     <div class="mb-3">
                                         <label for="" class="form-label">Email</label>
                                         <div class="position-relative auth-pass-inputgroup">
-                                            {{ form.email|add_class:"form-control pe-5 password-input useremail"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter webmail"|attr:"id:webmail"|attr:"aria-describedby:emailInput"|attr:"name:webmail"|attr:"required" }}
+                                            {{ form.username|add_class:"form-control pe-5 password-input useremail"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter webmail"|attr:"id:webmail"|attr:"aria-describedby:emailInput"|attr:"name:webmail"|attr:"required" }}
                                             
                                             <div class="invalid-feedback logwebmailFeedBackArea"></div>
                                             <div class="valid-feedback logwebmailSuccessArea"></div>
@@ -103,10 +101,11 @@
                                     </div>
                                     
                                     <div class="mt-4">
-                                        <button class="btn btn-primary w-100 submit-btn" type="submit">Sign In</button>
+                                        <button class="btn btn-primary w-100 submit-btn mt-4" type="submit">Sign In</button>
                                     </div>
-
+                                    
                                     <div class="mt-4 text-center">
+                                        {% comment %}
                                         <div class="signin-other-title">
                                             <h5 class="fs-13 mb-4 title">Or</h5>
                                         </div>
@@ -120,7 +119,7 @@
                                                 </a>
                                             </p>
                                         </div>
-
+                                        {% endcomment %}
                                     </div>
                                     
                                 </form>

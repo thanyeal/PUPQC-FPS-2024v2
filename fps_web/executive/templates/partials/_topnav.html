@@ -195,10 +195,10 @@
                         <img class="rounded-circle header-profile-user" src="{% static 'images/users/avatar-1.jpg' %}" alt="Header Avatar">
                         <span class="text-start ms-xl-2">
                             <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
-                                {% if current_user.is_authenticated %}
-                                    {{ current_user.first_name }}
+                                {% if user.is_authenticated %}
+                                    {{ user.first_name }}
                                 {% else %}
-                                    Guest1
+                                    Guest
                                 {% endif %}
                             </span>
                             <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Faculty type</span>
@@ -208,8 +208,8 @@
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
                     <h6 class="dropdown-header">Welcome, 
-                        {% if current_user.is_authenticated %}
-                            {{ current_user.first_name }}
+                        {% if user.is_authenticated %}
+                            {{ user.first_name }}
                         {% else %}
                             Guest
                         {% endif %}

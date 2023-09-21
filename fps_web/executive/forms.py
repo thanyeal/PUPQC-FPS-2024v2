@@ -1,23 +1,21 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class CustomRegistrationForm(UserCreationForm):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password1'}))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password2'}))
-    lastname = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Lastname'}))
-    firstname = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Firstname'}))
-    middlename = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Middlename'}))
+    email = forms.EmailField(widget=forms.EmailInput)
+    password1 = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(widget=forms.PasswordInput)
+    last_name = forms.CharField(widget=forms.TextInput)
+    first_name = forms.CharField(widget=forms.TextInput)
+    username = forms.CharField(widget=forms.TextInput)
 
     class Meta:
         model = User
-        fields = ['email', 'password1', 'lastname', 'firstname', 'middlename']
+        fields = ['email', 'password1', 'last_name', 'first_name', 'username']
 
 class CustomLoginForm(forms.Form):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    email = forms.EmailField(widget=forms.EmailInput)
+    password = forms.CharField(widget=forms.PasswordInput)
+
     
-    class Meta:
-        model = User
-        fields = ['email', 'password']

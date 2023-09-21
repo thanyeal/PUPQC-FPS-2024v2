@@ -1,4 +1,4 @@
-{% extends 'base_auth.html' %}
+ {% extends 'base_auth.html' %}
 {% load static %}
 {% load widget_tweaks %}
 
@@ -83,7 +83,7 @@
                                     <div class="mb-3">
                                         <label class="form-label">Lastname</label>
                                         <div class="position-relative">
-                                            {{ form.lastname|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter lastname"|attr:"id:usersLast"|attr:"aria-describedby:lnameInput"|attr:"name:lastname"|attr:"required maxlength:100" }}
+                                            {{ form.last_name|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter lastname"|attr:"id:usersLast"|attr:"aria-describedby:lnameInput"|attr:"name:lastname"|attr:"required maxlength:100" }}
                                             <div class="invalid-feedback lnameErrorFeedbackArea"></div>
                                             <div class="valid-feedback lnameSuccessFeedbackArea"></div>
                                         </div>
@@ -91,17 +91,17 @@
                                     <div class="mb-3">
                                         <label class="form-label">Firstname</label>
                                         <div class="position-relative">
-                                            {{ form.firstname|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter firstname"|attr:"id:usersFirst"|attr:"aria-describedby:fnameInput"|attr:"name:firstname"|attr:"required maxlength:100" }}
+                                            {{ form.first_name|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter firstname"|attr:"id:usersFirst"|attr:"aria-describedby:fnameInput"|attr:"name:firstname"|attr:"required maxlength:100" }}
                                             <div class="invalid-feedback fnameErrorFeedbackArea"></div>
                                             <div class="valid-feedback fnameSuccessFeedbackArea"></div>
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Middlename</label>
+                                        <label class="form-label">Username</label>
                                         <div class="position-relative">
-                                            {{ form.middlename|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter middlename"|attr:"id:usersMiddle"|attr:"aria-describedby:mnameInput"|attr:"name:middlename"|attr:"required maxlength:100" }}
-                                            <div class="invalid-feedback mnameErrorFeedbackArea"></div>
-                                            <div class="valid-feedback mnameSuccessFeedbackArea"></div>
+                                            {{ form.username|add_class:"form-control pe-5 password-input"|attr:"oncopy:return false"|attr:"onpaste:return false"|attr:"placeholder:Enter username"|attr:"id:usersMiddle"|attr:"aria-describedby:unameInput"|attr:"name:username"|attr:"required maxlength:100" }}
+                                            <div class="invalid-feedback unameErrorFeedbackArea"></div>
+                                            <div class="valid-feedback unameSuccessFeedbackArea"></div>
                                         </div>
                                     </div>
 
@@ -290,6 +290,7 @@
                     } else {
                         submitBtn.removeAttribute("disabled");
                     }
+                    
                 });
             }
         });
@@ -324,37 +325,38 @@
                     } else {
                         submitBtn.removeAttribute("disabled");
                     }
+                    
                 });
             }
         });
-        const users_middle = document.querySelector("#usersMiddle");
-        const mnameErrorFeedbackArea = document.querySelector(".mnameErrorFeedbackArea");
-        const mnameSuccessFeedbackArea = document.querySelector(".mnameSuccessFeedbackArea");
+        const username = document.querySelector("#usersMiddle");
+        const unameErrorFeedbackArea = document.querySelector(".unameErrorFeedbackArea");
+        const unameSuccessFeedbackArea = document.querySelector(".unameSuccessFeedbackArea");
 
-        users_middle.addEventListener("keyup", (e)=> {
-            const mnameVal = e.target.value;
+        username.addEventListener("keyup", (e)=> {
+            const unameVal = e.target.value;
 
-            users_middle.classList.remove("is-invalid");
-            mnameErrorFeedbackArea.style.display = "none";
-            mnameSuccessFeedbackArea.style.display = "none";
+            username.classList.remove("is-invalid");
+            unameErrorFeedbackArea.style.display = "none";
+            unameSuccessFeedbackArea.style.display = "none";
 
-            if (mnameVal.length > 0) {
-                fetch("/validate-mname", {
-                    body: JSON.stringify({ middlename: mnameVal }),
+            if (unameVal.length > 0) {
+                fetch("/validate-uname", {
+                    body: JSON.stringify({ username: unameVal }),
                     method: "POST",
                 })
                 .then((res) => res.json())
                 .then((data) => {
                     console.log("data", data);
-                    if (data.middlename_valid) {
-                        mnameSuccessFeedbackArea.style.display = "block";
-                        mnameSuccessFeedbackArea.innerHTML = `<p>${data.middlename_valid}</p>`;
+                    if (data.username_valid) {
+                        unameSuccessFeedbackArea.style.display = "block";
+                        unameSuccessFeedbackArea.innerHTML = `<p>${data.username_valid}</p>`;
                     }
-                    if (data.middlename_error) {
+                    if (data.username_error) {
                         submitBtn.disabled = true;
                         webmail.classList.add("is-invalid");
-                        mnameErrorFeedbackArea.style.display = "block";
-                        mnameErrorFeedbackArea.innerHTML = `<p>${data.middlename_error}</p>`;
+                        unameErrorFeedbackArea.style.display = "block";
+                        unameErrorFeedbackArea.innerHTML = `<p>${data.username_error}</p>`;
                     } else {
                         submitBtn.removeAttribute("disabled");
                     }

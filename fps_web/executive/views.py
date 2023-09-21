@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from executive.models import User
+from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login, logout
 from .forms import CustomRegistrationForm, CustomLoginForm
 from django.contrib.auth.decorators import login_required
@@ -18,10 +17,7 @@ class RegistryView(View):
     def post(self, request):
         form = CustomRegistrationForm(request.POST)
         if form.is_valid():
-            # Save the user to the database with hashed password
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password2'])
-            user.save()
+            user = form.save()
             login(request, user)
             
             messages.success(request, 'Successfully registered!')
@@ -32,54 +28,82 @@ class RegistryView(View):
 
 class LoginView(View):
     def get(self, request):
-        form = CustomLoginForm()
+        form = CustomRegistrationForm(data=request.POST)
         return render(request, 'registration/login.html', {'form': form})
+    
+    # def post(self, request):
+    #     form = CustomLoginForm(data=request.POST)
 
-    def post(self, request):
-        form = CustomLoginForm(data=request.POST)
-        if form.is_valid():
-            email = form.cleaned_data.get('email')
-            password = form.cleaned_data.get('password')
-            
-            try:
-                user = User.objects.get(email=email)
-                if check_password(password, user.password):
-                    login(request, user)
-                    messages.success(request, 'Successfully logged in!')
-                    return redirect('exec_dashboard')
-                else:
-                    messages.error(request, 'Invalid credentials')
-            except User.DoesNotExist:
-                messages.error(request, 'User does not exist')
-        else:
-            messages.error(request, 'Invalid form submission')
-        return render(request, 'registration/login.html', {'form': form})
+    #     if form.is_valid():
+    #         email = form.cleaned_data.get('email')
+    #         password = form.cleaned_data.get('password')
+    #         print(f"Email: {email}, Password: {password}")
 
-class LogoutView(View):
-    def post(self, request):
-        logout(request)
-        messages.success(request, 'Successfully logged out')
-        return redirect('login')
+    #         user = authenticate(email=email, password=password)
+    #         print(user)
+
+    #         if user is not None:
+    #             login(request, user)
+    #             messages.success(request, 'Successfully logged in!')
+    #             return redirect('exec_dashboard')
+    #         else:
+    #             messages.error(request, 'Invalid credentials')
+                
+                
+    #     else:
+    #         messages.error(request, 'Invalid form submission')
+    #     return render(request, 'registration/login.html', {'form': form})
+
+
+# class LoginView(View):
+#     def get(self, request):
+#         form = CustomLoginForm()
+#         return render(request, 'registration/login.html', {'form': form})
+
+#     def post(self, request):
+#         form = CustomLoginForm(data=request.POST)
+#         if form.is_valid():
+#             Email = form.cleaned_data.get('email')
+#             password = form.cleaned_data.get('password')
+#             print(f"Email: {Email}, Password: {password}")
+
+#             if Email and password is not None:
+#                 check_password(password, password)
+#                 user = User.objects.get(email=Email)
+#                 authenticate(user)
+#                 login(request, user)
+#                 messages.success(request, 'Successfully logged in!')
+#                 return redirect('exec_dashboard')
+#             else:
+#                 messages.error(request, 'Invalid credentials')
+#                 print(user)
+#         else:
+#             messages.error(request, 'Invalid form submission')
+#         return render(request, 'registration/login.html', {'form': form})
+
+def logout(request):
+    logout(request)
+    messages.success(request, 'Successfully logged out')
+    return redirect('login')
 
 # ! ++++++++++++++++++++++++++  for main pages views  ++++++++++++++++++++++++++++++ #
 
-# @login_required
+@login_required(login_url='login')
 def exec_dashboard(request):
-    current_user = request.user
-    context = {
-        'current_user': current_user,
-    }   
-    return render(request, 'executive/exec_dashboard.html', context)
+    if request.user.is_authenticated:
+        first_name = request.user.first_name
+        custom_data = User.objects.filter(first_name='first_name')  # Replace with your query
+    else:
+        first_name = "" 
+        custom_data = []
+    return render(request, 'executive/exec_dashboard.html', {'first_name': first_name, 'custom_data': custom_data})
 
-# @login_required
+@login_required(login_url='login')
 def evaluations(request):
-    current_user = request.user
-    context = {
-        'current_user': current_user,
-    }   
-    return render(request, 'executive/pages/evaluations.html', context)
+    return render(request, 'executive/pages/evaluations.html')
 
 # for in development page
+@login_required(login_url='login')
 def coming_soon(request):
     return render(request, 'coming_soon/coming_soon.html')
 

@@ -1,0 +1,10 @@
+django
+psycopg2
+python-decouple
+django-heroku
+react
+nodejs
+validate-email
+validate-email-address
+email-validate
+django-widget-tweaks
