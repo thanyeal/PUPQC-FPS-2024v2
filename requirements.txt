@@ -8,3 +8,5 @@ validate-email
 validate-email-address
 email-validate
 django-widget-tweaks
+pandas
+openpyxl

@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load widget_tweaks %}
+
 {% block content %}
 <style>
     .gridjs-tbody, td.gridjs-td,
@@ -56,7 +58,7 @@
         </div>
 
         <div class="row mt-n5">
-            <div class="col-md-2">
+            <div class="col-lg-2">
                 <div class="card" >
                     <div class="card-body">
                         <div class="avatar-sm mx-auto">
@@ -70,25 +72,24 @@
                             </a>
                             <p class="text-muted">Evaluation and Assessments</p>
                         </div>
-
-                        <div class="table-responsive">
-                            <table class="table mb-0">
-                                <tbody>
-                                    <tr>
-                                        <td class="fw-medium">Evaluations</td>
-                                        <td>7</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            
-                            <div class="mt-1 pt-2 hstack gap-2">
-                                <a href="#!" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myuploadModal">Upload</a>
-                                <a href="#!" class="btn btn-soft-danger btn-icon custom-toggle flex-shrink-0"  data-bs-toggle="modal" data-bs-target="#myannouncementModal">
-                                    <span class="icon-on"><i class="ri-question-line align-bottom"></i></span>
-                                    <span class="icon-off"><i class="ri-question-fill align-bottom"></i></span>
-                                </a>
-                            </div>
+                        <div class="table-responsive" style="overflow-x: hidden !important">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% if upload_successful %}
+                                <p class="success-message">The Excel file has been uploaded and its contents have been saved to the database.</p>
+                                {% endif %} 
+                                {{ form.excel_file }}
+                                <div class="mt-1 pt-2 hstack gap-2">
+                                    <button type="submit" class="btn btn-primary w-100">Upload</button> {% comment %}data-bs-toggle="modal" data-bs-target="#myuploadModal"{% endcomment %}
+                                    <a href="#!" class="btn btn-soft-danger btn-icon custom-toggle flex-shrink-0"  data-bs-toggle="modal" data-bs-target="#myannouncementModal">
+                                        <span class="icon-on"><i class="ri-question-line align-bottom"></i></span>
+                                        <span class="icon-off"><i class="ri-question-fill align-bottom"></i></span>
+                                    </a>
+                                </div>
+                            </form>
                         </div>
+
+                        </form>
                     </div>
                 </div>
 
@@ -136,15 +137,14 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="card" >
                     <div class="card-body">
                         <a href="#!">
                             <h5 class="mt-1">Recent Upload</h5>
                         </a>
-
                         <div class="table-responsive">
                             <table class="table mb-0">
+                                
                                 <tbody style="cursor: pointer;">
                                     <tr>
                                         <td class="fw-medium">
@@ -177,9 +177,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-10" up">
+            <div class="col-xxl-10">
                 <div class="card">
-                    <div class="card-header">
+                    {% comment %} <div class="card-header">
                         <div class="row g-4 align-items-center">
                             <div class="col-sm-auto">
                                 <div>
@@ -195,9 +195,26 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     <div class="card-body">
-                        <div id="recomended-jobs" class="table-card"></div>
+                        {% comment %} <div id="recomended-jobs" class="table-card"></div> {% endcomment %}
+                        <table id="datatable" class="display">
+                            <thead>
+                                <tr>
+                                    <th>Faculty Name</th>
+                                    <th>Supervisor Rating</th>
+                                    <th>Supervisor Interpretation</th>
+                                    <th>Students Rating</th>
+                                    <th>Students Interpretation</th>
+                                    <th>Peer Rating</th>
+                                    <th>Peer Interpretation</th>
+                                    <th>Self Rating</th>
+                                    <th>Self Interpretation</th>
+                                    <!-- Add more columns as needed -->
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </div>
             </div>  
@@ -236,4 +253,38 @@
 
         <!-- Modal Js -->
         <script src="{% static 'js/pages/modal.init.js' %}"></script>
+
+        <!-- Include jQuery -->
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- Include DataTables JS -->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#datatable').DataTable({
+                    "ajax": {
+                        "url": "evaluations",  // Use the URL associated with your view
+                        "dataSrc": ""
+                    },
+                    "columns": [
+                        { "data": "facultyname" },
+                        { "data": "spvs_rating" },
+                        { "data": "spvs_interp" },
+                        { "data": "stud_rating" },
+                        { "data": "stud_interp" },
+                        { "data": "peer_rating" },
+                        { "data": "peer_interp" },
+                        { "data": "self_rating" },
+                        { "data": "self_interp" },
+                    ]
+                });
+
+                // Check if the table has no data
+                if (dataTable.data().count() === 0) {
+                    // Replace the table body with the message
+                    $('#datatable tbody').html('<tr><td colspan="9">There is currently no data in the database.</td></tr>');
+                }
+            });
+        </script>
 {% endblock %}

@@ -10,7 +10,6 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 from .views import LoginView, RegistryView
-# from .views import views
 from .validate import EmailValidation, PasswValidation, LogEmailValidation, LogPasswValidation, LastnameValidation, FirstnameValidation, UsernameValidation
 from django.views.decorators.csrf import csrf_exempt
 
@@ -19,6 +18,12 @@ urlpatterns = [
     path('', views.exec_dashboard, name="exec_dashboard"),
     path('dashboard', views.exec_dashboard, name="exec_dashboard"),
     path('evaluations', views.evaluations, name="evaluations"),
+
+
+    # path('test-evaluations', views.test_eval_upload,  name="test_evaluations"),
+    # path('list_saved_excel/', views.list_saved_excel_files, name='list_saved_excel'),
+    # path('load_excel/<str:file_name>/', views.load_excel, name='load_excel'),
+    # path('view-excel/<str:file_name>/', views.view_excel, name='view_excel'),
 
     # for maintenance page
     path('coming_soon', views.coming_soon,  name="coming_soon"),

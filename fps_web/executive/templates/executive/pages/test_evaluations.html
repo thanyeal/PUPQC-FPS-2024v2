@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+{% block content %}
+<style>
+    .gridjs-tbody, td.gridjs-td,
+    .gridjs *, .gridjs ::after, .gridjs ::before,
+    .table {
+        font-size: var(--vz-body-font-size);
+    }
+
+    .bg-primary-subtle {
+        background-color: #660000 !important;
+        opacity: .9 !important;
+    }
+</style>
+<div class="row mt-4">
+    <div class="col-md-12 mt-4">
+        <div class="card" >
+            <div class="card-body">
+                <h1>Upload Excel File</h1>
+
+                {% if upload_successful %}
+                <p class="success-message">The Excel file has been uploaded and its contents have been saved to the database.</p>
+                {% endif %}
+            
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    {{ form.excel_file|attr:"class:btn btn-primary w-100" }}
+                    <button type="submit" class="btn btn-success w-100">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- this is where the tables should show -->
+<div class="row mt-4">
+    <div class="col-md-12 mt-4">
+        <div class="card" >
+            <div class="card-body">
+                <table id="datatable" class="display">
+                    <thead>
+                        <tr>
+                            <th>Faculty Name</th>
+                            <th>Supervisor Rating</th>
+                            <th>Supervisor Interpretation</th>
+                            <th>Students Rating</th>
+                            <th>Students Interpretation</th>
+                            <th>Peer Rating</th>
+                            <th>Peer Interpretation</th>
+                            <th>Self Rating</th>
+                            <th>Self Interpretation</th>
+                            <!-- Add more columns as needed -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be populated here via DataTables AJAX -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include jQuery -->
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#datatable').DataTable({
+            "ajax": {
+                "url": "test-evaluations",  // Use the URL associated with your view
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "facultyname" },
+                { "data": "spvs_rating" },
+                { "data": "spvs_interp" },
+                { "data": "stud_rating" },
+                { "data": "stud_interp" },
+                { "data": "peer_rating" },
+                { "data": "peer_interp" },
+                { "data": "self_rating" },
+                { "data": "self_interp" },
+            ]
+        });
+
+        // Check if the table has no data
+        if (dataTable.data().count() === 0) {
+            // Replace the table body with the message
+            $('#datatable tbody').html('<tr><td colspan="9">There is currently no data in the database.</td></tr>');
+        }
+    });
+</script>
+
+
+
+{% endblock %}
