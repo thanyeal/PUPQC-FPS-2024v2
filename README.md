@@ -16,25 +16,37 @@ https://github.com/daenyuhl/PUPQC-FPS-2024v2.git
 cd <path of this repo on your device>
 ```
 
-3. create the python environment
+3. Create the python environment
 
 ```bash
 py -m pipenv shell
 ```
 
-4. install the django itself and it's modules
+4. Install the django itself and it's modules
 
 ```bash
 pip install -r requirements.txt
 ```
 
-5. Navigate directory just inside 'PUPQC-FPS-2024v2'
+5. Make migrations
+
+```bash
+python manage.py makemigrations
+```
+
+6. Migrate the database tables
+
+```bash
+python manage.py migrate
+```
+
+7. Navigate directory just inside 'PUPQC-FPS-2024v2'
 
 ```bash
 cd fps_web
 ```
 
-6. run the file
+8. Run the file
 
 ```bash
 python manage.py runserver
