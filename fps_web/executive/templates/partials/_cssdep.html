@@ -7,11 +7,13 @@
     <!-- gridjs css -->
     <link rel="stylesheet" href="{% static 'libs/gridjs/theme/mermaid.min.css' %}">
 
-    <!--datatable css-->
+    {% comment %} <!--datatable css-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    {% endcomment %}
 
     <!--datatable responsive css-->
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css">
+    {% comment %} <link href="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.css" rel="stylesheet">
+    {% endcomment %}
 
     <!-- data tables buttons -->
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
@@ -45,3 +47,6 @@
 
     <!-- Sweet alert init js-->
     <script src="{% static 'js/pages/sweetalerts.init.js' %}"></script>
+
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">

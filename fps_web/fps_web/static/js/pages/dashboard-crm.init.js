@@ -37,7 +37,7 @@ var valrepCommittee = {
     52: 20,
     0: 0,
 };
-
+// for research and productivity
 var options,
     chart,
     areachartSalesColors = getChartColorsArray("sales-forecast-chart"),
@@ -95,10 +95,12 @@ var options,
                 },
                 colors: areachartSalesColors,
             }),
-                (chart = new ApexCharts(
-                    document.querySelector("#sales-forecast-chart"),
-                    options
-                )).render()),
+            (chart = new ApexCharts(
+                document.querySelector("#sales-forecast-chart"),
+                options
+            )).render()),
+
+// for performance evaluation
             getChartColorsArray("deal-type-charts")),
     revenueExpensesChartsColors =
         (dealTypeChartsColors &&
@@ -128,10 +130,12 @@ var options,
                 colors: dealTypeChartsColors,
                 xaxis: { categories: ["2016", "2017", "2018", "2019", "2020", "2021"] },
             }),
-                (chart = new ApexCharts(
-                    document.querySelector("#deal-type-charts"),
-                    options
-                )).render()),
+            (chart = new ApexCharts(
+                document.querySelector("#deal-type-charts"),
+                options
+            )).render()),
+
+// for committee and service contributions
             getChartColorsArray("revenue-expenses-charts"));
     revenueExpensesChartsColors &&
     ((options = {
