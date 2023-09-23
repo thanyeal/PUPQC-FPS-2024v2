@@ -54,8 +54,7 @@ python manage.py runserver
 
 ## Viewing The App
 
-just find that sus url: `http://127.0.0.1:8000`
-in the command line.
+just find that sus url: `http://127.0.0.1:8000` in the command line.
 <br />
 
 ## Project Details
