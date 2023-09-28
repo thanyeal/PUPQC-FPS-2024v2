@@ -32,10 +32,10 @@ var linechartDashedColors = getChartColorsArray("line_chart_dashed"),
                 },
                 colors: linechartDashedColors,
                 dataLabels: { enabled: !1 },
-                stroke: { width: [3, 4, 3], curve: "straight", dashArray: [0, 3, 4] },
+                stroke: { width: [2, 2, 2, 2], curve: "straight", dashArray: [0, 1, 2, 3] },
                 series: [
                     {
-                        name: "Peer Evaluation",
+                        name: "Supervisor Evaluation",
                         data: [79, 86, 74, 88, 82, 98, 84, 96, 94],
                     },
                     {
@@ -43,8 +43,12 @@ var linechartDashedColors = getChartColorsArray("line_chart_dashed"),
                         data: [45, 55, 58, 64, 53, 56, 61, 70, 76],
                     },
                     {
-                        name: "Executive Evaluation",
+                        name: "Peer Evaluation",
                         data: [76, 42, 60, 42, 53, 58, 69, 77, 76],
+                    },
+                    {
+                        name: "Self Evaluation",
+                        data: [76, 82, 80, 92, 93, 88, 89, 77, 86],
                     },
                 ],
                 markers: { size: 0, hover: { sizeOffset: 6 } },

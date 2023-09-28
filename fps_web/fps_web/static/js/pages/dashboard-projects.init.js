@@ -33,10 +33,7 @@ var options,
                     {
                         name: "Performance Impact",
                         type: "area",
-                        data: [
-                            89, 88, 98, 91, 77, 84, 51, 28, 92,
-                            42, 88, 36,
-                        ],
+                        data: [89, 88, 98, 91, 77, 84, 51, 28, 92, 42, 88, 36],
                     },
                     {
                         name: "Recognized Faculties",
@@ -111,7 +108,8 @@ var options,
     isApexSeries = document.querySelectorAll("[data-chart-series]"),
     donutchartProjectsStatusColors =
         (isApexSeries &&
-            Array.from(isApexSeries).forEach(function (e) {
+            Array.from(isApexSeries).
+            ach(function (e) {
                 var t,
                     e = e.attributes;
                 e["data-chart-series"] &&

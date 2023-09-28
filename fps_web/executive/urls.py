@@ -17,19 +17,14 @@ urlpatterns = [
     # for main page
     path('', views.exec_dashboard, name="exec_dashboard"),
     path('dashboard', views.exec_dashboard, name="exec_dashboard"),
-    path('evaluations', views.evaluations, name="evaluations"),
-
-
-    # path('test-evaluations', views.test_eval_upload,  name="test_evaluations"),
-    # path('list_saved_excel/', views.list_saved_excel_files, name='list_saved_excel'),
-    # path('load_excel/<str:file_name>/', views.load_excel, name='load_excel'),
-    # path('view-excel/<str:file_name>/', views.view_excel, name='view_excel'),
+    path('eval_upload', views.evaluations, name="eval_upload"),
+    path('eval_analytics', views.eval_analytics, name="eval_analytics"),
 
     # for maintenance page
     path('coming_soon', views.coming_soon,  name="coming_soon"),
 
     # for log and reg page
-    path('', LoginView.as_view(), name="login"),
+    path('login', LoginView.as_view(), name="login"),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('registry/', RegistryView.as_view(), name="registry"),
 
