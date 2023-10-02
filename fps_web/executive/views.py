@@ -1,23 +1,22 @@
+import json
+import pandas as pd
+
+from decimal import Decimal
+
 from django.shortcuts import render, redirect
 from django.views import View
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import ExcelUploadForm
-from .models import TableOne
-from decimal import Decimal
-from django.http import HttpResponse
-from .forms import CustomRegistrationForm, CustomLoginForm
-from django.conf import settings
-
-
-import json, math
-import os
-from django.http import FileResponse, JsonResponse
-import pandas as pd
-from django.db.models import Avg, Sum, F
+from django.contrib.auth.models import User
+from django.db.models import Avg
 from django.db.models.functions import ExtractYear
+
+from .models import TableOne
+from .forms import ExcelUploadForm
+from .forms import CustomRegistrationForm
+
+from django.http import JsonResponse
 
 # ! ++++++++++++++++++++++++++  for authentication views  ++++++++++++++++++++++++++++++ #
 
@@ -51,7 +50,7 @@ def logout(request):
 
 @login_required(login_url='login')
 def exec_dashboard(request):
-    first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2022).order_by('semester', 'eval_year')
+    first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2023).order_by('semester', 'eval_year')
     first_semester_avg = first_semester_data.aggregate(
         avgz_spvs_rating=Avg('spvs_rating'),
         avgz_stud_rating=Avg('stud_rating'),
@@ -59,7 +58,7 @@ def exec_dashboard(request):
         avgz_self_rating=Avg('self_rating') 
     )
 
-    second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2022).order_by('semester', 'eval_year')
+    second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2023).order_by('semester', 'eval_year')
     second_semester_avg = second_semester_data.aggregate(
         avgz_spvs_rating=Avg('spvs_rating'),
         avgz_stud_rating=Avg('stud_rating'),
@@ -78,7 +77,7 @@ def exec_dashboard(request):
         'selff_second': [round ( float ( second_semester_avg ['avgz_self_rating'] ), 2)],
     }
 
-    first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2022).order_by('semester', 'eval_year')
+    first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2023).order_by('semester', 'eval_year')
     first_semester_avg = first_semester_data.aggregate(
         avgz_spvs_rating=Avg('spvs_rating'),
         avgz_stud_rating=Avg('stud_rating'),
@@ -87,7 +86,7 @@ def exec_dashboard(request):
     )
 
     # Calculate the average for the second semester
-    second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2022).order_by('semester', 'eval_year')
+    second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2023).order_by('semester', 'eval_year')
     second_semester_avg = second_semester_data.aggregate(
         avgz_spvs_rating=Avg('spvs_rating'),
         avgz_stud_rating=Avg('stud_rating'),
@@ -112,8 +111,8 @@ def exec_dashboard(request):
     overall_avg_first = round(overall_avg_first, 1)
     overall_avg_second = round(overall_avg_second, 1)
     
-    count_one = TableOne.objects.filter(semester="First", eval_year__year=2022).count()
-    count_two = TableOne.objects.filter(semester="Second", eval_year__year=2022).count()
+    count_one = TableOne.objects.filter(semester="First", eval_year__year=2023).count()
+    count_two = TableOne.objects.filter(semester="Second", eval_year__year=2023).count()
 
     overall_avg_first_percentage = (overall_avg_first / count_one) * 100
     overall_avg_second_percentage = (overall_avg_second / count_two) * 100
@@ -146,6 +145,7 @@ def exec_dashboard(request):
     }
 
     return render(request, 'executive/exec_dashboard.html', context)
+    # return JsonResponse(context)
 
 @login_required(login_url='login')
 def evaluations(request):
@@ -296,7 +296,7 @@ def eval_analytics(request):
             } for item in queryset]
         return JsonResponse(data, safe=False)
     # ================================================================================================================================================================================== teaching first data 
-    first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2019).order_by('semester', 'eval_year')
+    first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2023).order_by('semester', 'eval_year')
     first_semester_avg = first_semester_data.aggregate(
         avgz_spvs_rating=Avg('spvs_rating'),
         avgz_stud_rating=Avg('stud_rating'),
@@ -304,7 +304,7 @@ def eval_analytics(request):
         avgz_self_rating=Avg('self_rating') 
     )
 
-    second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2019).order_by('semester', 'eval_year')
+    second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2023).order_by('semester', 'eval_year')
     second_semester_avg = second_semester_data.aggregate(
         avgz_spvs_rating=Avg('spvs_rating'),
         avgz_stud_rating=Avg('stud_rating'),
@@ -324,7 +324,7 @@ def eval_analytics(request):
     }
     # ================================================================================================================================================================================== header
 
-    first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2019).order_by('semester', 'eval_year')
+    first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2023).order_by('semester', 'eval_year')
     first_semester_avg = first_semester_data.aggregate(
         avgz_spvs_rating=Avg('spvs_rating'),
         avgz_stud_rating=Avg('stud_rating'),
@@ -333,7 +333,7 @@ def eval_analytics(request):
     )
 
     # Calculate the average for the second semester
-    second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2019).order_by('semester', 'eval_year')
+    second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2023).order_by('semester', 'eval_year')
     second_semester_avg = second_semester_data.aggregate(
         avgz_spvs_rating=Avg('spvs_rating'),
         avgz_stud_rating=Avg('stud_rating'),
@@ -358,8 +358,8 @@ def eval_analytics(request):
     overall_avg_first = round(overall_avg_first, 1)
     overall_avg_second = round(overall_avg_second, 1)
     
-    count_one = TableOne.objects.filter(semester="First", eval_year__year=2019).count()
-    count_two = TableOne.objects.filter(semester="Second", eval_year__year=2019).count()
+    count_one = TableOne.objects.filter(semester="First", eval_year__year=2023).count()
+    count_two = TableOne.objects.filter(semester="Second", eval_year__year=2023).count()
 
     overall_avg_first_percentage = (overall_avg_first / count_one) * 100
     overall_avg_second_percentage = (overall_avg_second / count_two) * 100
@@ -388,4 +388,4 @@ def eval_analytics(request):
     }
 
     return render(request, 'executive/pages/eval_analytics.html', context)
-    # return JsonResponse(ave_per_catt, safe=False)
+    # return JsonResponse(context, safe=False)
