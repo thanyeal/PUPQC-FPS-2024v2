@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load widget_tweaks %}
 {% block content %}
+{% load widget_tweaks %}
 <style>
     .gridjs-tbody, td.gridjs-td,
     .gridjs *, .gridjs ::after, .gridjs ::before,
@@ -12,7 +12,59 @@
     .bg-primary-subtle {
         background-color: #660000 !important;
         opacity: .9 !important;
-    }   
+    }
+
+    table {
+        caption-side: bottom !important;
+        border-collapse: collapse !important;
+        border-collapse: separate !important;
+        text-indent: initial !important;
+        border-spacing: 2px !important;
+    }
+
+    table.dataTable thead .sorting {
+    background-image: none !important;
+    }
+
+    table.dataTable.no-footer {
+    border-bottom: 0px solid #d3d3d3 !important;
+    }
+
+    .form-select {
+        padding: 0.5rem 2.7rem 0.5rem 0.9rem !important;
+        font-size: .8125rem !important;
+        font-weight: 400 !important;
+        line-height: 1.5 !important;
+    }
+
+    .table>:not(:first-child) {
+        border-top-width: 1px !important;
+    }
+
+    tr {
+        border-color: inherit !important;
+        border-style: solid !important;
+        border-width: 0 !important;
+        display: table-row !important;
+        vertical-align: inherit !important;
+    }
+
+    table.table-bordered.dataTable td:first-child {
+        border-left-width: 1px !important;
+    }
+    .table>tbody {
+        vertical-align: inherit !important;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        margin: 2px 0 !important;
+        white-space: nowrap !important;
+        justify-content: flex-end !important;
+    }
+
+    table.table-bordered.dataTable th, table.table-bordered.dataTable td {
+        border-bottom-width: 1px !important;
+    }
 </style>
 
         <div class="row">
@@ -53,7 +105,6 @@
             </div>
             <!--end col-->
         </div>
-
         <div class="row mt-n5">
             <div class="col-lg-2">
                 <div class="card" >
@@ -72,10 +123,25 @@
                         <div class="table-responsive" style="overflow-x: hidden !important">
                             <form method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
-                                {% if upload_successful %}
-                                <p class="success-message">The Excel file has been uploaded and its contents have been saved to the database.</p>
-                                {% endif %} 
+                                    {% if upload_successful %}
+                                        {% comment %} <p class="success-message">The Excel file has been uploaded and its contents have been saved to the database.</p> {% endcomment %}
+                                        {% include 'partials/_messages.html' %}
+                                            {% else %}
+                                                {% include 'partials/_messages.html' %}
+                                    {% endif %} 
+
+                                {% comment %}    
+                                    <label for="customFileInput" class="custom-file-label">Choose File</label>
+                                    <input type="file" name="excel_file" class="custom-file-input" id="customFileInput">
+                                        {{ form.excel_file }}
+                                {% endcomment %}
+
+                                {% comment %} <label for="filepond" class="custom-file-label">Choose File</label> <input type="file" id="filepond-input" multiple> {% endcomment %}
+                                <!--label for="customFileInput" class="filepond" data-filepond></label-->
                                 {{ form.excel_file }}
+
+                                {% comment %} <label  class="btn btn-primary w-100">Choose File</label>{{ form.excel_file }} {% endcomment %}
+
                                 <div class="mt-1 pt-2 hstack gap-2">
                                     <button type="submit" class="btn btn-primary w-100">Upload</button> {% comment %}data-bs-toggle="modal" data-bs-target="#myuploadModal"{% endcomment %}
                                     <a href="#!" class="btn btn-soft-danger btn-icon custom-toggle flex-shrink-0"  data-bs-toggle="modal" data-bs-target="#myannouncementModal">
@@ -138,7 +204,7 @@
             <div class="col-lg-10">
                 <div class="card">
                     <div class="card-body">
-                        <table id="datatable" class="display">
+                        <table id="datatable" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Faculty Name</th>
@@ -162,10 +228,31 @@
 
         <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
         <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+        <!--datatable js-->
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 
         <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
         <script src="{% static 'js/main/eval_upload/eval_u_datatable.js' %}"></script>
+
         <script src="{% static 'libs/prismjs/prism.js' %}"></script>
         <script src="{% static 'js/pages/modal.init.js' %}"></script>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get a reference to the FilePond element
+                const inputElement = document.querySelector('.filepond');
+
+                // Create a FilePond instance
+                const pond = FilePond.create(inputElement);
+            });
+        </script>
 {% endblock %}

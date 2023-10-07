@@ -1,11 +1,3 @@
-# from django.urls import path
-# from . import views
-
-# urlpatterns = [
-#     path('', views.exec_dashboard, name="exec_dashboard"),
-#     path('evaluations', views.evaluations, name="evaluations")
-# ]
-
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
@@ -14,6 +6,9 @@ from .validate import EmailValidation, PasswValidation, LogEmailValidation, LogP
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
+    #for error pages
+    path('error', views.error_page_404),
+
     # for main page
     path('', views.exec_dashboard, name="exec_dashboard"),
     path('dashboard', views.exec_dashboard, name="exec_dashboard"),

@@ -48,12 +48,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 
 
-    <!-- filepond js -->
+    {% comment %} <!-- filepond js -->
     <script src="{% static 'libs/filepond/filepond.min.js' %}"></script>
     <script src="{% static 'libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js' %}"></script>
     <script src="{% static 'libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js' %}"></script>
     <script src="{% static 'libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js' %}"></script>
-    <script src="{% static 'libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js' %}"></script>
+    <script src="{% static 'libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js' %}"></script> {% endcomment %}
 
 
     <script src="{% static 'js/pages/form-file-upload.init.js' %}"></script>
@@ -73,3 +73,5 @@
 
     <!-- App js -->
     <script src="{% static 'js/app.js' %}"></script>
+    
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>

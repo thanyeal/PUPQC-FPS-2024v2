@@ -24,7 +24,13 @@ class CustomRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['email', 'password1', 'last_name', 'first_name', 'username']
+        fields = [
+            'email',
+            'password1',
+            'last_name',
+            'first_name',
+            'username'
+        ]
 
 class CustomLoginForm(forms.Form):
     email = forms.EmailField(
@@ -36,5 +42,7 @@ class CustomLoginForm(forms.Form):
 
 class ExcelUploadForm(forms.Form):
     excel_file = forms.FileField(
-        label='Choose Excel File'
+        widget=forms.FileInput (
+            attrs={'class': 'custom-file-input', 'id': 'customFileInput'}
+        )
     )

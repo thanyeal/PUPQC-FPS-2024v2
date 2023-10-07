@@ -53,7 +53,7 @@
     <!--end col-->
 </div>
 <div class="row mt-n5">
-    <div class="col-lg-7">
+    <div class="col-lg-9">
         <div class="card card-height-100">
             <div class="card-header border-0 align-items-center d-flex">
                 <h4 class="card-title mb-0 flex-grow-1">Faculty Performance vs. Institutional Requirement: Academic Year 20xx</h4>
@@ -87,13 +87,13 @@
                             </div>
                             <div class="col-6 col-sm-3">
                                 <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1 fs-17 fw-semibold text-primary"><span class="counter-value" id="frfs">0</span>%</h5>
+                                    <h5 class="mb-1 fs-17 fw-semibold text-primary"><span id="frfs">0</span>%</h5>
                                     <p class="text-muted mb-0">Faculty Rating: First Semester</p>
                                 </div>
                             </div>
                             <div class="col-6 col-sm">
                                 <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1 fs-17 fw-semibold text-success"><span class="counter-value" id="frss">0</span>%</h5>
+                                    <h5 class="mb-1 fs-17 fw-semibold text-success"><span id="frss">0</span>%</h5>
                                     <p class="text-muted mb-0">Faculty Rating: Second Semester</p>
                                 </div>
                             </div>
@@ -108,7 +108,66 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-3">
+        <div class="card card-height-100">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">
+                    Average Student Scores for Each Faculty
+                </h4>
+            </div>
+            <div class="card-body p-0 pb-2">
+                <div class="card-body">
+                    <div id="prjects-status-1" data-colors='["--vz-success", "--vz-primary", "--vz-warning", "--vz-danger"]' class="apex-charts" dir="ltr"></div>
+                    <div class="mt-3">
+                        <div class="d-flex justify-content-center align-items-center mb-4">
+                            <h2 class="me-3 ff-secondary mb-0"><span id="rb3">0</span></h2>
+                            <div>
+                                <p class="text-muted mb-0">Least Rated Faculties</p>
+                                <p class="text-success fw-medium mb-0">
+                                    <span class="badge bg-success-subtle text-success p-1 rounded-circle">
+                                        <i class="ri-arrow-right-up-line"></i>
+                                    </span> <span id="ra3"></span> Highest Rated Faculties
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between border-bottom border-bottom-dashed py-2">
+                            <p class="fw-medium mb-0 text-muted">Rate Consecutives Monitoring For Each Faculty</p>
+                        </div><!-- end -->
+
+                        <div class="d-flex justify-content-between border-bottom border-bottom-dashed py-2">
+                            <p class="fw-medium mb-0"><i class="ri-checkbox-blank-circle-fill text-primary align-middle me-2"></i>
+                                High</p>
+                            <div>
+                                {% comment %} <span class="text-muted pe-5">189 Overall Total</span> {% endcomment %}
+                                <span class="text-primary fw-medium fs-12">Karl Christian D. Abalos</span>
+                            </div>
+                        </div><!-- end -->
+                        <div class="d-flex justify-content-between border-bottom border-bottom-dashed py-2">
+                            <p class="fw-medium mb-0"><i class="ri-checkbox-blank-circle-fill text-secondary align-middle me-2"></i>
+                                Average</p>
+                            <div>
+                                {% comment %} <span class="text-muted pe-5">42 Workshops Completed</span>    {% endcomment %}
+                                <span class="text-secondary fw-medium fs-12">Atty. Jerome Christopher G. Leynes</span>
+                            </div>
+                        </div><!-- end -->
+                        <div class="d-flex justify-content-between border-bottom border-bottom-dashed py-2">
+                            <p class="fw-medium mb-0"><i class="ri-checkbox-blank-circle-fill text-danger align-middle me-2"></i>
+                                Least</p>
+                            <div>
+                                {% comment %} <span class="text-muted pe-5">58 Seminars Conducted</span> {% endcomment %}
+                                <span class="text-danger fw-medium fs-12">Richard B. Banate, CPA</span>
+                            </div>
+                        </div><!-- end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
         <div class="card card-height-100">
             <div class="card-header align-items-center d-flex">
                 <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">Trends in Teaching Effectiveness Over Time</h4>
@@ -119,14 +178,14 @@
                         <div class="row g-0 text-center">
                             <div class="col-6">
                                 <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1 fs-17 fw-semibold text-primary"><span class="counter-value" id="#">0</span></h5>
-                                    <p class="text-muted mb-0">Most Effective Year</p>
+                                    <h5 class="mb-1 fs-17 fw-semibold text-primary"><span id="#">0</span></h5>
+                                    <p class="text-muted mb-0">Average Student Ratings</p>
                                 </div>
                             </div>
                             <div class="col-6 col-sm">
                                 <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1 fs-17 fw-semibold text-success"><span class="counter-value" id="#">0</span></h5>
-                                    <p class="text-muted mb-0">Average Performance Over Time</p>
+                                    <h5 class="mb-1 fs-17 fw-semibold text-success"><span id="#">0</span></h5>
+                                    <p class="text-muted mb-0">Performing Year</p>
                                 </div>
                             </div>
                         </div>
@@ -140,24 +199,7 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-lg-3">
-        <div class="card card-height-100">
-            <div class="card-header align-items-center d-flex">
-                <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">
-                    Average Student Scores for Each Faculty
-                </h4>
-            </div>
-            <div class="card-body p-0 pb-2">
-                <div class="w-100">
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xxl-9">
+    {% comment %} <div class="col-xxl-9">
         <div class="card card-height-100">
             <div class="card-header align-items-center d-flex">
                 <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">
@@ -167,20 +209,10 @@
             <div class="card-body p-0 pb-2">
                 <div class="w-100">
                     <div id="line-chart"></div>
-                    {% comment %} <table id="AvestudRate" class="display">
-                        <thead>
-                            <tr>
-                                <th>Faculty Name</th>
-                                <th>Students Rating</th>
-                                <th>Students Interpretation</th>
-                                <th>Semester</th>
-                        </thead>
-                        <tbody></tbody>
-                    </table> {% endcomment %}
                 </div>
             </div>
         </div>
-    </div>
+    </div> {% endcomment %}
 </div>
 
 
@@ -195,7 +227,6 @@
         const json_data = JSON.parse('{{ overall_avg_data|escapejs }}');
         const valueToSet = json_data.overall_avg_first;
         const valueToSetTwo = json_data.overall_avg_second;
-        console.log(valueToSetTwo)
 
         const frfs = document.getElementById('frfs');
         frfs.textContent = valueToSet;
@@ -206,14 +237,14 @@
 </script>
 
 <script>
-    // Parse the serialized data from Django's context
+    // Faculty Performance vs. Institutional Requirement: 
     var chartDataTwo = JSON.parse('{{ chart_data_two|escapejs|safe }}');
 
     function initializeChartTwo() {
         var semesterData = [
             {
-                name: 'Institutional Average Rating', // Add a new category for the goal
-                data: [4.9, 4.9, 4.9, 4.9], // Static values for each evaluation category
+                name: 'Institutional Average Rating',
+                data: [4.9, 4.9, 4.9, 4.9],
             },
             {
                 name: 'First Sem',
@@ -234,7 +265,6 @@
                 ]
             },
         ];
-
         var options = {
             chart: {
                 type: 'bar',
@@ -242,7 +272,6 @@
                 zoom: { enabled: false },
                 toolbar: { show: false },
             },
-
             plotOptions: {
                 bar: {
                     horizontal: false,
@@ -250,15 +279,18 @@
                     endingShape: 'rounded',
                 },
             },
-
             colors: [
                 getComputedStyle(document.documentElement).getPropertyValue('--vz-warning'),
                 getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
                 getComputedStyle(document.documentElement).getPropertyValue('--vz-success')
             ],
-
             xaxis: {
-                categories: ['Supervisor Evaluation', 'Student Evaluation', 'Peer Evaluation', 'Self Evaluation'],
+                categories: [
+                    'Supervisor Evaluation',
+                    'Student Evaluation',
+                    'Peer Evaluation', 
+                    'Self Evaluation'
+                ],
                 title: {
                     text: 'Rating',
                 },
@@ -276,24 +308,17 @@
         var chartz = new ApexCharts(document.querySelector("#line-chart-two"), options);
         chartz.render();
     }
-
-    // Call the chart initialization function
     initializeChartTwo();
 </script>
 
 <script>
-    // Retrieve the serialized_combined_data from your Django context
+    // Trends in Teaching Effectiveness Over Time
     var combinedData = JSON.parse('{{ combined_data|safe }}');
-
-    // Extract the data from the combinedData object
     var chartData = Object.values(combinedData);
-
-    // Create an array to hold the years for the X-axis
     var years = chartData.map(function (item) {
         return item.year;
     });
 
-    // Extract the first semester and second semester ratings
     var firstSemesterRatings = chartData.map(function (item) {
         return {
             //'avg_spvs_rating': item.first_semester_avg.avg_spvs_rating,
@@ -423,6 +448,37 @@
 </script>
 
 <script>
+    var percentage_data = JSON.parse('{{ percentage|safe }}');
+    var percentage_above_3 = percentage_data.pctg_ra3;
+    var percentage_below_3 = percentage_data.pctg_rb3;
+
+    var options = {
+        series: [percentage_above_3, percentage_below_3],
+        chart: {
+            type: 'pie',
+            height: '350px',
+        },
+        labels: ['Above 3.0', 'Below or Equal to 3.0'],
+    };
+    var chart = new ApexCharts(document.querySelector("#prjects-status-1"), options);
+    chart.render();
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const percentaging    = JSON.parse('{{ percentage|escapejs }}');
+        const valueToSetThree = percentaging.count_ra3;
+        const valueToSetFour  = percentaging.count_rb3;
+
+        const ra3 = document.getElementById('ra3');
+        ra3.textContent = valueToSetThree;
+
+        const rb3 = document.getElementById('rb3');
+        rb3.textContent = valueToSetFour;
+    });
+</script>
+{% comment %} <script>
+    // Faculty Ratings 
     var chartData = JSON.parse('{{ chart_data|escapejs|safe }}');
     function initializeChartOne() {
         var options = {
@@ -480,132 +536,7 @@
         var chart = new ApexCharts(document.querySelector("#line-chart"), options);
         chart.render();
     }
-    // Call the chart initialization function
     initializeChartOne();
-</script>
-
-
-{% comment %}
-    <script>
-        // Parse the serialized data from Django's context
-        var chartDataTwo = JSON.parse('{{ chart_data_two|escapejs|safe }}');
-
-        function initializeChartTwo() {
-            var semesterData = [
-                {
-                    name: 'Institutional Average Rating', // Add a new category for the goal
-                    data: [4.9, 4.9, 4.9, 4.9], // Static values for each evaluation category
-                },
-                {
-                    name: 'First Sem',
-                    data: [
-                        chartDataTwo.spvs_first[0],
-                        chartDataTwo.stud_first[0],
-                        chartDataTwo.peerr_first[0],
-                        chartDataTwo.selff_first[0]
-                    ]
-                },
-                {
-                    name: 'Second Sem',
-                    data: [
-                        chartDataTwo.spvs_second[0],
-                        chartDataTwo.stud_second[0],
-                        chartDataTwo.peerr_second[0],
-                        chartDataTwo.selff_second[0]
-                    ]
-                },
-            ];
-
-            var options = {
-                chart: {
-                    type: 'bar',
-                    height: 345,
-                    zoom: { enabled: true },
-                    toolbar: { show: false },
-                },
-
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        columnWidth: '60%',
-                        endingShape: 'rounded',
-                    },
-                },
-
-                colors: [
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-warning'),
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-success')
-                ],
-
-                xaxis: {
-                    categories: ['Supervisor Evaluation', 'Student Evaluation', 'Peer Evaluation', 'Self Evaluation'],
-                    title: {
-                        text: 'Rating',
-                    },
-                },
-
-                yaxis: {
-                    title: {
-                        text: 'Evaluation Scores',
-                    },
-                },
-                
-                series: semesterData,
-            };
-
-            var chartz = new ApexCharts(document.querySelector("#line-chart-two"), options);
-            chartz.render();
-        }
-
-        // Call the chart initialization function
-        initializeChartTwo();
-    </script>
-
-    <script>
-        var overallAvgData = JSON.parse('{{ overall_avg_data|safe }}');
-        function iniiniminymow() {
-            var perYearData = [
-                {
-                    name: 'First Semester',
-                    data: [overallAvgData.overall_avg_first]
-                },
-                {
-                    name: 'Second Semester',
-                    data: [overallAvgData.overall_avg_second]
-                },
-            ];
-            var options = {
-                chart: {
-                    type: 'bar',
-                    height: 350,
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                    },
-                },
-                colors: [
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-warning'),
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-success')
-                ],
-                xaxis: {
-                    categories: ['First Semester', 'Second Semester'],
-                },
-                series: perYearData,
-            };
-
-            // Create the chart instance
-            var chart = new ApexCharts(document.querySelector("#chartzk"), options);
-            chart.render();
-        }
-        iniiniminymow();
-    </script>
-{% endcomment %}
-
-
-
-
+</script> {% endcomment %}
 
 {% endblock %}

@@ -10,3 +10,4 @@ email-validate
 django-widget-tweaks
 pandas
 openpyxl
+django-filepond

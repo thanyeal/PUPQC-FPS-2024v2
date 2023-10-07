@@ -6,7 +6,7 @@ function getChartColorsArray(e) {
                 var t = e.replace(" ", "");
                 return -1 === t.indexOf(",")
                     ? getComputedStyle(document.documentElement).getPropertyValue(t) || t
-                    : 2 == (e = e.split(","))
+                    : 2 == (e = e.split(",")).length
                         ? "rgba(" +
                         getComputedStyle(document.documentElement).getPropertyValue(e[0]) +
                         "," +
@@ -17,7 +17,6 @@ function getChartColorsArray(e) {
         console.warn("data-colors Attribute not found on:", e);
     }
 }
-
 var options,
     chart,
     linechartcustomerColors = getChartColorsArray("projects-overview-chart"),
@@ -26,17 +25,20 @@ var options,
             ((options = {
                 series: [
                     {
-                        name: "Projects Contributions",
+                        name: "Number of Projects",
                         type: "bar",
-                        data: [34, 65, 46, 68, 49, 61, 42, 44, 58, 62, 33, 77],
+                        data: [34, 65, 46, 68, 49, 61, 42, 44, 78, 52, 63, 67],
                     },
                     {
-                        name: "Performance Impact",
+                        name: "Revenue",
                         type: "area",
-                        data: [89, 88, 98, 91, 77, 84, 51, 28, 92, 42, 88, 36],
+                        data: [
+                            89.25, 98.58, 68.74, 108.87, 77.54, 84.03, 51.24, 28.57, 92.57,
+                            42.36, 88.51, 36.57,
+                        ],
                     },
                     {
-                        name: "Recognized Faculties",
+                        name: "Active Projects",
                         type: "bar",
                         data: [8, 12, 7, 17, 21, 11, 5, 9, 7, 29, 12, 35],
                     },
@@ -89,12 +91,12 @@ var options,
                         },
                         {
                             formatter: function (e) {
-                                return void 0 !== e ? e.toFixed(0) + "%" : e;
+                                return void 0 !== e ? "$" + e.toFixed(2) + "k" : e;
                             },
                         },
                         {
                             formatter: function (e) {
-                                return void 0 !== e ? e.toFixed(0): e;
+                                return void 0 !== e ? e.toFixed(0) : e;
                             },
                         },
                     ],
@@ -108,8 +110,7 @@ var options,
     isApexSeries = document.querySelectorAll("[data-chart-series]"),
     donutchartProjectsStatusColors =
         (isApexSeries &&
-            Array.from(isApexSeries).
-            ach(function (e) {
+            Array.from(isApexSeries).forEach(function (e) {
                 var t,
                     e = e.attributes;
                 e["data-chart-series"] &&
@@ -143,14 +144,14 @@ var options,
         (donutchartProjectsStatusColors &&
             ((options = {
                 series: [125, 42, 58, 89],
-                labels: ["Completed", "Workshops", "Seminars", "Trainings"],
+                labels: ["Completed", "In Progress", "Yet to Start", "Cancelled"],
                 chart: { type: "donut", height: 230 },
                 plotOptions: {
                     pie: {
                         size: 100,
                         offsetX: 0,
                         offsetY: 0,
-                        donut: { size: "90%", labels: { show: !1 } },
+                        donut: { size: "60%", labels: { show: !1 } },
                     },
                 },
                 dataLabels: { enabled: !1 },
@@ -163,3 +164,12 @@ var options,
                     options
                 )).render()),
             "users-chat");
+function scrollToBottom(e) {
+    setTimeout(() => {
+        new SimpleBar(
+            document.getElementById("chat-conversation")
+        ).getScrollElement().scrollTop =
+            document.getElementById("users-conversation").scrollHeight;
+    }, 100);
+}
+scrollToBottom(currentChatId);

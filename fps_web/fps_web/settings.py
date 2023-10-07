@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'executive.apps.ExecutiveConfig',
     'widget_tweaks',
+    'filepond',
 ]
 
 MIDDLEWARE = [

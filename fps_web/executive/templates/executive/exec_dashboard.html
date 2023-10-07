@@ -1,8 +1,6 @@
 
 {% extends 'base.html' %}
-
 {% load static %}
-
 {% block content %}
 
 <style>
@@ -132,7 +130,7 @@
         </div>
 
         <div class="row">
-            <div class="col-xxl-3 col-md-6">
+            <div class="col-xxl-6">
                 <div class="card">
                     <div class="card-header align-items-center d-flex">
                         <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">Research Productivity</h4>
@@ -146,7 +144,7 @@
                 </div>
             </div>
 
-            <div class="col-xxl-3 col-md-6">
+            <!--div class="col-xxl-3 col-md-6">
                 <div class="card card-height-100">
                     <div class="card-header align-items-center d-flex">
                         <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">Performance Evaluation</h4>
@@ -158,7 +156,7 @@
                         <div id="deal-type-charts" data-colors='["--vz-warning", "--vz-danger", "--vz-success"]' class="apex-charts" dir="ltr"></div>
                     </div>
                 </div>
-            </div>
+            </div-->
 
             <div class="col-xxl-6">
                 <div class="card card-height-100">
@@ -327,10 +325,7 @@
                                 </div>
                 
                                 <h5 id="candidate-name" class="mb-0">Please select a faculty</h5>
-                                <p id="candidate-position" class="text-muted">if you want to promote</p>
-                
-                                
-                
+                                <p id="candidate-position" class="text-muted">if you want to promote</p>                
                                 <div>
                                     <button type="button" class="btn btn-success custom-toggle w-100" data-bs-toggle="button" aria-pressed="false">
                                         <span class="icon-on"><i class="ri-add-line align-bottom me-1"></i>Promote</span>
@@ -735,4 +730,4 @@
         });
     </script>
     
-{% endblock %}
+{% endblock %} 
