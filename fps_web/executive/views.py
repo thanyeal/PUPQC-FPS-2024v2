@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db.models import Avg, Count
+from django.db.models import Avg
 from django.db.models.functions import ExtractYear
 
 from .models import TableOne
@@ -161,19 +161,23 @@ def evaluations(request):
         if form.is_valid():
             excel_file = request.FILES['excel_file']
             if excel_file.name.endswith('.xlsx'):
-                df = pd.read_excel(excel_file)
+                df = pd.read_excel(excel_file,  skiprows=1)
                 for _, row in df.iterrows():
                     TableOne.objects.create(
-                        facultyname=row['Faculty Name'],
-                        spvs_rating=row['Supervisor Rating'],
-                        spvs_interp=row['Supervisor Interpretation'],
-                        stud_rating=row['Students Rating'],
-                        stud_interp=row['Students Interpretation'],
-                        peer_rating=row['Peer Rating'],
-                        peer_interp=row['Peer Interpretation'],
-                        self_rating=row['Self Rating'],
-                        self_interp=row['Self Interpretation'],
-                        semester=row['Semester']
+                        faculty_num = row['No.']             ,
+                        facultyname = row['Faculty Name']    ,
+                        spvs_rating = row['Rating']          ,
+                        spvs_interp = row['Interpretation']  ,
+                        stud_rating = row['Rating']          ,
+                        stud_interp = row['Interpretation']  ,
+                        peer_rating = row['Rating']          ,
+                        peer_interp = row['Interpretation']  ,
+                        self_rating = row['Rating']          ,
+                        self_interp = row['Interpretation']  ,
+                        load_rating = row['Rating']          ,
+                        load_interp = row['Interpretation']  ,
+                        faculty_stat = row['Faculty Status']  ,
+                        semester = row['Semester']
                     )
                 messages.success(request, 'File uploaded successfully')
                 upload_successful = True
@@ -187,21 +191,22 @@ def evaluations(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         queryset = TableOne.objects.all() 
         data = [{
-                'facultyname': item.facultyname,
-                'spvs_rating': item.spvs_rating,
-                'spvs_interp': item.spvs_interp,
-                'stud_rating': item.stud_rating,
-                'stud_interp': item.stud_interp,
-                'peer_rating': item.peer_rating,
-                'peer_interp': item.peer_interp,
-                'self_rating': item.self_rating,
-                'self_interp': item.self_interp,
-                'semester': item.semester
+                'faculty_num'   : item.faculty_num ,
+                'facultyname'   : item.facultyname  ,
+                'spvs_rating'   : item.spvs_rating  ,
+                'spvs_interp'   : item.spvs_interp  ,
+                'stud_rating'   : item.stud_rating  ,
+                'stud_interp'   : item.stud_interp  ,
+                'peer_rating'   : item.peer_rating  ,
+                'peer_interp'   : item.peer_interp  ,
+                'self_rating'   : item.self_rating  ,
+                'self_interp'   : item.self_interp  ,
+                'load_rating'   : item.load_rating  ,
+                'load_interp'   : item.load_interp  ,
+                'faculty_stat'  : item.faculty_stat ,
+                'semester'      : item.semester
             } for item in queryset]
         return JsonResponse(data, safe=False)
-    # if not data:
-    #     return render(request, 'error_pages/page_404.html')
-    # else:
     return render(request, 'executive/pages/eval_upload.html', {'form': form, 'upload_successful': upload_successful})
 
 # for in development page
@@ -228,7 +233,7 @@ def eval_analytics(request):
     # }
     # ================================================================================================================================================================================== year
     if not TableOne.objects.exists():
-        return redirect('error_pages')
+        return redirect('error_page_404')
     else:
         first_semester_avg_by_year = (
             TableOne.objects.filter(semester='First')

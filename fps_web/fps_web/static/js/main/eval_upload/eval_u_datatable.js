@@ -5,6 +5,7 @@ $(document).ready(function () {
             "dataSrc": ""
         },
         "columns": [
+            { "data": "faculty_num" },
             { "data": "facultyname" },
             { "data": "spvs_rating" },
             { "data": "spvs_interp" },
@@ -14,6 +15,9 @@ $(document).ready(function () {
             { "data": "peer_interp" },
             { "data": "self_rating" },
             { "data": "self_interp" },
+            //{ "data": "load_rating" },
+            //{ "data": "load_interp" },
+            //{ "data": "faculty_stat"},
             { "data": "semester" }
         ]
         //"pageLength": 25

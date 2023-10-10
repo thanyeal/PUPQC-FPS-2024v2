@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     #for error pages
-    path('error', views.error_page_404),
+    path('error', views.error_page_404, name="error_page_404"),
 
     # for main page
     path('', views.exec_dashboard, name="exec_dashboard"),
