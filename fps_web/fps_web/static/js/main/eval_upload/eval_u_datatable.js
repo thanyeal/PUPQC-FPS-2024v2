@@ -27,4 +27,4 @@ $(document).ready(function () {
     if (dataTable.data().count() === 0) {
         $('#datatable tbody').html('<tr><td colspan="9">There is currently no data in the database.</td></tr>');
     }
-});e
+});

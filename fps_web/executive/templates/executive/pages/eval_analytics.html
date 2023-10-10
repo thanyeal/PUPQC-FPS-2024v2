@@ -56,7 +56,7 @@
     <div class="col-lg-9">
         <div class="card card-height-100">
             <div class="card-header border-0 align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">Faculty Performance vs. Institutional Requirement: Academic Year 20xx</h4>
+                <h4 class="card-title mb-0 flex-grow-1">Faculty Performance vs. Institutional Requirement: Academic Year 2023</h4>
                 <!--div>
                     <button type="button" class="btn btn-soft-primary btn-sm shadow-none">
                         2019
@@ -219,7 +219,6 @@
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
-<script src="{% static 'js/main/eval_analytics/eval_a_datatable.js' %}"></script>
 <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
 
 <script>
@@ -477,66 +476,4 @@
         rb3.textContent = valueToSetFour;
     });
 </script>
-{% comment %} <script>
-    // Faculty Ratings 
-    var chartData = JSON.parse('{{ chart_data|escapejs|safe }}');
-    function initializeChartOne() {
-        var options = {
-            chart: {
-                type: 'line',
-                height: 345,
-                zoom: { enabled: true },
-                toolbar: { show: true },
-            },
-            stroke: {
-                width: [1, 1, 1, 1],
-                curve: "straight",
-                dashArray: [0, 0, 0, 0]
-            },
-            fill: {
-                opacity: [1, 1, 1, 1]
-            },
-            markers: {
-                size: [0, 0, 0, 0],
-                strokeWidth: 2,
-                hover: { size: 4 }
-            },
-            series: [
-                {
-                    name: "Supervisor Evaluation",
-                    type: "bar",
-                    data: chartData.supervisor,
-                },
-                {
-                    name: "Student Evaluation",
-                    type: "bar",
-                    data: chartData.student,
-                },
-                {
-                    name: "Peer Evaluation",
-                    type: "bar",
-                    data: chartData.peer,
-                },
-                {
-                    name: "Self Evaluation",
-                    type: "bar",
-                    data: chartData.self,
-                }
-            ],
-            xaxis: {
-                categories: chartData.faculty,
-            },
-            colors: [
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-success'),
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-danger'),
-            ]
-        }
-        var chart = new ApexCharts(document.querySelector("#line-chart"), options);
-        chart.render();
-    }
-    initializeChartOne();
-</script> {% endcomment %}
-
 {% endblock %}

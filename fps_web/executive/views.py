@@ -372,7 +372,7 @@ def eval_analytics(request):
         }
         # ==================================================================================================================================================================================
         rating_above_3 = TableOne.objects.filter(stud_rating__gt=3.00)
-        rating_below_3 = TableOne.objects.filter(stud_rating__lte=3.00)
+        rating_below_3 = TableOne.objects.filter(stud_rating__lte=2.99)
 
         count_ra3 = rating_above_3.count()
         count_rb3 = rating_below_3.count()
@@ -413,3 +413,11 @@ def eval_analytics(request):
         }
         return render(request, 'executive/pages/eval_analytics.html', context)
         # return JsonResponse(count_ra3, safe=False)
+
+@login_required(login_url='login')
+def exec_p_page(request):
+    return render(request, 'profile/exec_p_page.html')
+
+@login_required(login_url='login')
+def exec_p_sett(request):
+    return render(request, 'profile/exec_p_sett.html')

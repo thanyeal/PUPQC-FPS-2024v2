@@ -14,6 +14,8 @@ urlpatterns = [
     path('dashboard', views.exec_dashboard, name="exec_dashboard"),
     path('eval_upload', views.evaluations, name="eval_upload"),
     path('eval_analytics', views.eval_analytics, name="eval_analytics"),
+    path('exec_profile', views.exec_p_page, name="exec_profile"),
+    path('exec_settings', views.exec_p_sett, name="exec_settings"),
 
     # for maintenance page
     path('coming_soon', views.coming_soon,  name="coming_soon"),
