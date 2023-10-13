@@ -1,16 +1,11 @@
 
 from django.shortcuts import render,redirect
-from django.views import View
 from django.contrib import messages
 from django.contrib.auth import login
 from executive.forms import CustomRegistrationForm
 
-class RegistryView(View):
-    def get(self, request):
-        form = CustomRegistrationForm()
-        return render(request, 'registration/registry.html', {'form': form})
-
-    def post(self, request):
+def registry(request):
+    if request.method == "POST":
         form = CustomRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
@@ -21,3 +16,7 @@ class RegistryView(View):
         else:
             messages.error(request, 'Registration failed. Please check the form for errors.')
             return render(request, 'registration/registry.html', {'form': form})
+    else:
+        form = CustomRegistrationForm()
+
+    return render(request, 'registration/registry.html', {'form': form})

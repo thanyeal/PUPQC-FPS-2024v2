@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from executive.models import TableOne
 from django.db.models import Avg
 import json
-
 @login_required(login_url='login')
 def exec_dashboard(request):
     if not TableOne.objects.exists():
@@ -105,4 +104,5 @@ def exec_dashboard(request):
             'overall_avg_data': serialized_overall_avg
         }
         return render(request, 'executive/exec_dashboard.html', context)
-        # return JsonResponse(context)
+        
+        # return JsonResponse(context, safe=False)

@@ -9,14 +9,62 @@
         content: none !important;
     }
 </style>
+{% comment %}
+{% if form.errors %}
+    <div class="messages">
+        <ul>
+            {% for error in form.errors %}
+                {% if error.tags %}
+                    <li>{{ error }}</li>
+                {% else %}
+                    <li>{{ error.messages }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
 
+
+{% if form.errors %}
+    <div class="messages">
+        <ul>
+            {% for error in form.errors %}
+                
+                    <li{% if error.tags %}{% endif %}>{{ error }}</li>
+                
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+{% endcomment %}
+
+{%comment%}
 {% if messages %}
-<div class="messages">
-    {% for message in messages %}
-        <div {% if message.tags %} class="alert alert-sm border-0 alert-dismissible shadow fade show alert-{{ message.tags }}" role="alert" {% endif %}>
-            <b>{{ message }}</b>
-            <button type="button" class="ri-close-circle-fill btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    {% endfor %}
-</div>
+    <div class="messages">
+        {% for message in messages %}
+            <div    {% if message.tags %}
+                        class="alert alert-sm border-0 alert-dismissible shadow fade show alert-{{ message.tags }}"
+                        role="alert"
+                    {% endif %}>
+                <b>
+                    {{ message }}
+                </b>
+                <button type="button" class="ri-close-circle-fill btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endcomment %}
+
+{% if request.messages %}
+    <div class="messages">
+        {% for message in request.messages %}
+            <div class="alert alert-sm border-0 alert-dismissible shadow fade show alert-{{ message.tags }}" role="alert">
+                <b>
+                    {{ message }}
+                </b>
+                <button type="button" class="ri-close-circle-fill btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    </div>
 {% endif %}

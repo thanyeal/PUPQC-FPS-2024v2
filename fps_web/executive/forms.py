@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 class CustomRegistrationForm(UserCreationForm):
@@ -32,13 +32,22 @@ class CustomRegistrationForm(UserCreationForm):
             'username'
         ]
 
-class CustomLoginForm(forms.Form):
-    email = forms.EmailField(
-        widget=forms.EmailInput
-    )
-    password = forms.CharField(
-        widget=forms.PasswordInput
-    )
+# class CustomLoginForm(forms.Form):
+#     email = forms.EmailField(
+#         widget=forms.EmailInput
+#     )
+#     password = forms.CharField(
+#         widget=forms.PasswordInput
+#     )
+#     class Meta:
+#         model = User
+#         fields = [
+#             'email',
+#             'password1',
+#             'last_name',
+#             'first_name',
+#             'username'
+#         ]
 
 class ExcelUploadForm(forms.Form):
     excel_file = forms.FileField(

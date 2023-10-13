@@ -69,8 +69,10 @@
                             </div>
                             <div class="p-2 mt-4">
                                 <form class="needs-validation" novalidate action="{% url 'login' %}" method="post">
-                                    {% include 'partials/_messages.html' %}
                                     {% csrf_token %}
+                                    {% include 'partials/_messages.html' %}
+                                    {% comment %}  {{form}}  {% endcomment %}
+                                
                                     <div class="mb-3">
                                         <label for="" class="form-label">Email</label>
                                         <div class="position-relative auth-pass-inputgroup">

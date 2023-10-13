@@ -62,11 +62,11 @@ class PasswValidation(View):
 
         # Check if the password has at least one digit (0-9)
         if not any(char.isdigit() for char in password):
-            return JsonResponse({'password_error': 'Password must contain at least one digit (0-9)'}, status=400)
+            return JsonResponse({'password_error': 'Password must contain at least one digit (0-15)'}, status=400)
 
         # Check if password is atleast 8 characters
-        if len(password) < 8:
-            return JsonResponse({'password_error': 'Password must be at least 8 characters long'}, status=400)
+        if len(password) < 15:
+            return JsonResponse({'password_error': 'Password must be at least 15 characters long'}, status=400)
 
         # If the password passes all validation checks, you can return a success response
         if password:
@@ -93,7 +93,7 @@ class LogEmailValidation(View):
             return JsonResponse({'pupwebmail_error': 'Email domain must be valid webmail'}, status=400)  
 
         if not User.objects.filter(email=webmail).exists():
-            return JsonResponse({'webmail_invalid': '&nbsp;&nbsp;&nbsp;' + "✖  &nbsp; Seems like you're not in our system"}, status=409)
+            return JsonResponse({'webmail_invalid': '&nbsp;&nbsp;&nbsp;' + "✖  &nbsp; Seems like I can't recognize you."}, status=409)
         
         if  User.objects.filter(email=webmail).exists():
             return JsonResponse({'webmail_valid': '&nbsp;&nbsp;&nbsp;' + '✔ &nbsp; Valid webmail'}, status=200)  
@@ -123,12 +123,12 @@ class LogPasswValidation(View):
             return JsonResponse({'webpass_number': 'Password must contain at least one digit (0-9)'}, status=400)
 
         # Check if webpass is atleast 8 characters
-        if len(webpass) < 8:
-            return JsonResponse({'webpass_len': 'Password must be at least 8 characters long'}, status=400)
+        if len(webpass) < 15:
+            return JsonResponse({'webpass_len': 'Password must be at least 15 characters long'}, status=400)
 
         # If the webpass passes all validation checks, you can return a success response
         if webpass:
-            return JsonResponse({'webpass_valid': 'Your password matched, hit the sign in now!'}, status=200)
+            return JsonResponse({'webpass_valid': '&nbsp;&nbsp;&nbsp;' + '✔ &nbsp; Validation Passed'}, status=200)
 
         return webpass
 
@@ -162,8 +162,8 @@ class UsernameValidation(View):
         username = data.get('username')
     
         if not re.match(r'^[A-Za-z\'\s.]+$', username):
-            return JsonResponse({'username_error': "Holy! There's a special character in your middle name? What the.."}, status=400)
+            return JsonResponse({'username_error': "Holy! There's a special character in your user name? What the.."}, status=400)
         if re.match(r'^[A-Za-z\'\s.-]+$', username):
-            return JsonResponse({'username_valid': "Wow!, That's a cool middle name right there"}, status=200)
+            return JsonResponse({'username_valid': "Wow!, That's a cool user name right there"}, status=200)
 
         return username
