@@ -17,6 +17,7 @@ django-widget-tweaks = "*"
 pandas = "*"
 openpyxl = "*"
 django-filepond = "*"
+gunicorn = "*"
 
 [dev-packages]
 
