@@ -103,13 +103,14 @@ WSGI_APPLICATION = 'fps_web.wsgi.application'
 #     }
 # }
 
+# ? For Local PSQL Database.
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': DB_NAME,
-#         'USER': DB_USER,
-#         'PASSWORD': DB_PASSWORD,
-#         'HOST': DB_HOST,
+#         'NAME': DB_NAME, #mypupqc_fpsv2
+#         'USER': DB_USER, #postgres
+#         'PASSWORD': DB_PASSWORD, #986495
+#         'HOST': DB_HOST, #localhost
 #     }
 # }
 
@@ -118,12 +119,12 @@ WSGI_APPLICATION = 'fps_web.wsgi.application'
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'mypupqc_fpsv2',
-    'USER': 'daenyuhl',
-    'PASSWORD': 'fLKvIhu42QWs',
-    'HOST': 'ep-jolly-salad-64757132.ap-southeast-1.aws.neon.tech',
-    'PORT': '5432',
-    'OPTIONS': {'sslmode': 'require'},
+    'NAME': 'DB_NAME',
+    'USER': 'DB_USER',
+    'PASSWORD': 'DB_PASSWORD',
+    'HOST': 'DB_HOST',
+    'PORT': 'DB_PORT',
+    'OPTIONS': 'DB_OPTIONS',
   }
 }
 
