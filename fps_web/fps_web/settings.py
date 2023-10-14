@@ -117,15 +117,15 @@ WSGI_APPLICATION = 'fps_web.wsgi.application'
 
 # ? Neon Tech PSQL Host for POSTGRESQL Database
 DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'DB_NAME',
-    'USER': 'DB_USER',
-    'PASSWORD': 'DB_PASSWORD',
-    'HOST': 'DB_HOST',
-    'PORT': 'DB_PORT',
-    'OPTIONS': 'DB_OPTIONS',
-  }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mypupqc_fpsv2',
+        'USER': 'daenyuhl',
+        'PASSWORD': 'fLKvIhu42QWs',
+        'HOST': 'ep-jolly-salad-64757132.ap-southeast-1.aws.neon.tech',
+        'PORT': '5432',
+        'OPTIONS': {'sslmode': 'require'},
+    }
 }
 
 # Password validation
