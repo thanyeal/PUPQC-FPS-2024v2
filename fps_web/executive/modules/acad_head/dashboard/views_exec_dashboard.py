@@ -10,7 +10,7 @@ def exec_dashboard(request):
     if not TableOne.objects.exists():
         return redirect('error_page_404')
     else:
-        first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2022).order_by('semester', 'eval_year')
+        first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2023).order_by('semester', 'eval_year')
         first_semester_avg = first_semester_data.aggregate(
             avgz_spvs_rating=Avg('spvs_rating'),
             avgz_stud_rating=Avg('stud_rating'),
@@ -18,7 +18,7 @@ def exec_dashboard(request):
             avgz_self_rating=Avg('self_rating') 
         )
 
-        second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2022).order_by('semester', 'eval_year')
+        second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2023).order_by('semester', 'eval_year')
         second_semester_avg = second_semester_data.aggregate(
             avgz_spvs_rating=Avg('spvs_rating'),
             avgz_stud_rating=Avg('stud_rating'),
@@ -37,7 +37,7 @@ def exec_dashboard(request):
             'selff_second': [round ( float ( second_semester_avg ['avgz_self_rating'] ), 1)],
         }
 
-        first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2022).order_by('semester', 'eval_year')
+        first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2023).order_by('semester', 'eval_year')
         first_semester_avg = first_semester_data.aggregate(
             avgz_spvs_rating=Avg('spvs_rating'),
             avgz_stud_rating=Avg('stud_rating'),
@@ -46,7 +46,7 @@ def exec_dashboard(request):
         )
 
         # Calculate the average for the second semester
-        second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2022).order_by('semester', 'eval_year')
+        second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2023).order_by('semester', 'eval_year')
         second_semester_avg = second_semester_data.aggregate(
             avgz_spvs_rating=Avg('spvs_rating'),
             avgz_stud_rating=Avg('stud_rating'),
