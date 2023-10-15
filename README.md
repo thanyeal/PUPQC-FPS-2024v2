@@ -16,37 +16,31 @@ https://github.com/daenyuhl/PUPQC-FPS-2024v2.git
 cd <path of this repo on your device>
 ```
 
-3. Navigate directory just inside 'PUPQC-FPS-2024v2'
+3. Create the python environment
 
 ```bash
-cd fps_web
+pipenv shell
 ```
 
-4. Create the python environment
-
-```bash
-py -m pipenv shell
-```
-
-5. Install the django itself and it's modules
+4. Install the django itself and it's modules
 
 ```bash
 pip install -r requirements.txt
 ```
 
-6. Make migrations
+5. Make migrations
 
 ```bash
 python manage.py makemigrations
 ```
 
-7. Migrate the database tables
+6. Migrate the database tables
 
 ```bash
 python manage.py migrate
 ```
 
-8. Run the file
+7. Run the file
 
 ```bash
 python manage.py runserver
@@ -63,8 +57,8 @@ just find that sus url: `http://127.0.0.1:8000` in the command line.
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Description**     | This project is for fullfillment of requirements in subject "Capstone Project ".                                                                                                                                                                                                                                                                             |
 | **Date Started**    | August 20, 2023                                                                                                                                                                                                                                                                                                                                               |
-| **Current Version** | v2.0.0                                                                                                                                                                                                                                                                                    
-| **Members**         | Developers<ul><li>[Reyes, Daniel](https://github.com/daenyuhl)</li><li>[Logan, Rafael Jayson](https://github.com/RafSyghtline)</li></ul>Documentation & QA Testers<ul><li>[Cantuja, Miguel](https://github.com/JuanTheArc)</li><li>[Macusi, John Vic](https://github.com/Jayvie01)</li></ul>Project Manager<ul><li>[Taga-oc, Angel Mae](https://github.com/angeltagaoc)</li></ul> _Students of PUPQC, BSIT 4-2(Batch 2020)_ |
+| **Current Version** | v2.0                                                                                                                                                                                                                                                                                    
+| **Members**         | Developers<ul><li>[Reyes, Daniel](https://github.com/daenyuhl)</li></ul>Documentation<ul><li>[Taga-oc, Angel Mae](https://github.com/angeltagaoc)</li><li>[Macusi, John Vic](https://github.com/Jayvie01)</li></ul>Q.A. Tester<ul><li>[Cantuja, Miguel](https://github.com/JuanTheArc)</li></ul>Project Manager<ul><li>[Logan, Rafael Jayson](https://github.com/RafSyghtline)</li></ul> _Students of PUPQC, BSIT 4-2(Batch 2020)_ |
 
 <br />
 <a href="#" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/python/python-original-wordmark.svg" alt="python" width="40" height="40"/></a>
