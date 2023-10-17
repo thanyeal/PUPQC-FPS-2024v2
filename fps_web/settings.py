@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from .db_config import SECRET_KEY, DB_NAME, DB_USER, DB_PASSWORD, DB_HOST
+from .db_config import SECRET_KEY, DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_OPTIONS
 import os
 from django.contrib import messages
 
@@ -99,12 +99,12 @@ WSGI_APPLICATION = 'fps_web.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mypupqc_fpsv2',
-        'USER': 'daenyuhl',
-        'PASSWORD': 'fLKvIhu42QWs',
-        'HOST': 'ep-jolly-salad-64757132.ap-southeast-1.aws.neon.tech',
-        'PORT': '5432',
-        'OPTIONS': {'sslmode': 'require'},
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
+        'OPTIONS': DB_OPTIONS,
     }
 }
 # Password validation
