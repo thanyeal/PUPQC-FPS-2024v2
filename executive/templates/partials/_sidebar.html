@@ -144,19 +144,19 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link disabled text-muted" href="#sidebar_proTraining" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebar_proTraining">
-                    <i class="ri-user-settings-line"></i> <span class="span-text-title" data-key="t-pages">Development & Training</span>
+                <a class="nav-link menu-link" href="#sidebar_proTraining" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebar_proTraining">
+                    <i class="ri-user-settings-line"></i> <span class="span-text-title" data-key="t-pages" style="color: violet !important;">Development & Training</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebar_proTraining">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                            <a href="#" class="nav-link" data-key="t-starter">
-                                Workshop and Seminar Attendance
+                            <a href="{% url 'prodev_attendance' %}" class="nav-link" data-key="t-starter">
+                                Development Event
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" role="button" aria-expanded="false" aria-controls="sidebarProfile" data-key="t-profile">
-                                Continuing Education
+                            <a href="{% url 'prodev_analytics' %}" class="nav-link" role="button" aria-expanded="false" aria-controls="sidebarProfile" data-key="t-profile">
+                                Analytics
                             </a>
                         </li>
                     </ul>
@@ -198,8 +198,8 @@
             <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Faculty Components</span></li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link disabled text-muted" href="#sidebarUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarUI">
-                    <i class="ri-shield-cross-line"></i> <span class="span-text-title" data-key="t-base-ui">Merit & Promotion</span>
+                <a class="nav-link menu-link" href="#sidebarUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarUI">
+                    <i class="ri-shield-cross-line"></i> <span class="span-text-title" data-key="t-base-ui" style="color: green !important;">Merit & Promotion</span>
                 </a>
                 <div class="collapse menu-dropdown mega-dropdown-menu" id="sidebarUI">
                     <div class="row">
@@ -211,80 +211,6 @@
                                 <li class="nav-item">
                                     <a href="ui-badges.html" class="nav-link" data-key="t-badges">...</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="ui-buttons.html" class="nav-link" data-key="t-buttons">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-colors.html" class="nav-link" data-key="t-colors">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-cards.html" class="nav-link" data-key="t-cards">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-carousel.html" class="nav-link" data-key="t-carousel">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-dropdowns.html" class="nav-link" data-key="t-dropdowns">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-grid.html" class="nav-link" data-key="t-grid">...</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-4">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="ui-images.html" class="nav-link" data-key="t-images">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-tabs.html" class="nav-link" data-key="t-tabs">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-accordions.html" class="nav-link" data-key="t-accordion-collapse">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-modals.html" class="nav-link" data-key="t-modals">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-offcanvas.html" class="nav-link" data-key="t-offcanvas">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-placeholders.html" class="nav-link" data-key="t-placeholders">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-progress.html" class="nav-link" data-key="t-progress">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-notifications.html" class="nav-link" data-key="t-notifications">...</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-4">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="ui-media.html" class="nav-link" data-key="t-media-object">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-embed-video.html" class="nav-link" data-key="t-embed-video">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-typography.html" class="nav-link" data-key="t-typography">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-lists.html" class="nav-link" data-key="t-lists">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-links.html" class="nav-link"><span data-key="t-links">...</span> <span class="badge badge-pill bg-success" data-key="t-new">New</span>...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-general.html" class="nav-link" data-key="t-general">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-ribbons.html" class="nav-link" data-key="t-ribbons">...</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-utilities.html" class="nav-link" data-key="t-utilities">...</a>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -292,95 +218,44 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link disabled text-muted" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI">
-                    <i class="ri-feedback-fill"></i> <span class="span-text-title" data-key="t-advance-ui">Communications</span>
+                <a class="nav-link menu-link" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI">
+                    <i class="ri-feedback-fill"></i> <span class="span-text-title" data-key="t-advance-ui" style="color: green !important;">Feedback and Comms.</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarAdvanceUI">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                            <a href="advance-ui-sweetalerts.html" class="nav-link" data-key="t-sweet-alerts">...</a>
+                            <a href="#" class="nav-link" data-key="t-sweet-alerts">...</a>
                         </li>
                         <li class="nav-item">
-                            <a href="advance-ui-nestable.html" class="nav-link" data-key="t-nestable-list">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="advance-ui-scrollbar.html" class="nav-link" data-key="t-scrollbar">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="advance-ui-animation.html" class="nav-link" data-key="t-animation">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="advance-ui-tour.html" class="nav-link" data-key="t-tour">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="advance-ui-swiper.html" class="nav-link" data-key="t-swiper-slider">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="advance-ui-ratings.html" class="nav-link" data-key="t-ratings">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="advance-ui-highlight.html" class="nav-link" data-key="t-highlight">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="advance-ui-scrollspy.html" class="nav-link" data-key="t-scrollSpy">...</a>
+                            <a href="#" class="nav-link" data-key="t-nestable-list">...</a>
                         </li>
                     </ul>
                 </div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link disabled text-muted" href="#sidebar_" data-bs-toggle="collapse" href="widgets.html">
-                    <i class="ri-walk-line"></i> <span class="span-text-title" >Attendance <br> and Leave Mgmt.</span>
+                <a class="nav-link menu-link" href="#sidebarAdvanceUI1" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI1">
+                    <i class="ri-walk-line"></i> <span class="span-text-title" style="color: violet !important;">Leave Management</span>
                 </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link menu-link disabled text-muted" href="#sidebarForms" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarForms">
-                    <i class="ri-medal-line"></i> <span class="span-text-title" data-key="t-forms">Awards & Recognition</span>
-                </a>
-                <div class="collapse menu-dropdown" id="sidebarForms">
+                <div class="collapse menu-dropdown" id="sidebarAdvanceUI1">
                     <ul class="nav nav-sm flex-column">
+                        {% comment %} <li class="nav-item">
+                            <a href="{% url 'attendance_record' %}" class="nav-link" data-key="t-sweet-alerts">Attendances Records</a>
+                        </li> {% endcomment %}
                         <li class="nav-item">
-                            <a href="forms-elements.html" class="nav-link" data-key="t-basic-elements">...</a>
+                            <a href="{% url 'attendance_leaves' %}" class="nav-link" data-key="t-nestable-list">Leaves Requests</a>
                         </li>
                         <li class="nav-item">
-                            <a href="forms-select.html" class="nav-link" data-key="t-form-select"> ...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="forms-checkboxs-radios.html" class="nav-link" data-key="t-checkboxs-radios">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="forms-pickers.html" class="nav-link" data-key="t-pickers"> ...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="forms-masks.html" class="nav-link" data-key="t-input-masks">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="forms-advanced.html" class="nav-link" data-key="t-advanced">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="forms-range-sliders.html" class="nav-link" data-key="t-range-slider"> ...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="forms-validation.html" class="nav-link" data-key="t-validation">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="forms-wizard.html" class="nav-link" data-key="t-wizard">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="forms-editors.html" class="nav-link" data-key="t-editors">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="forms-file-uploads.html" class="nav-link" data-key="t-file-uploads">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="forms-layouts.html" class="nav-link" data-key="t-form-layouts">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="forms-select2.html" class="nav-link" data-key="t-select2">...</a>
+                            <a href="{% url 'alm_analytics' %}" class="nav-link" data-key="t-nestable-list">Analytics</a>
                         </li>
                     </ul>
                 </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link menu-link" href="{% url 'awards_recog' %}" role="button" aria-expanded="false">
+                    <i class="ri-medal-line"></i> <span class="span-text-title" style="color: violet !important;">Awards & Recognition</span>
+                </a>
             </li>
 
             <li class="nav-item">
@@ -483,8 +358,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link disabled text-muted" href="#sidebarIcons" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarIcons">
-                    <i class="ri-run-line"></i> <span class="span-text-title" data-key="t-icons">Retention and Exit Mgmt.</span>
+                <a class="nav-link menu-link" href="#sidebarIcons" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarIcons">
+                    <i class="ri-run-line"></i> <span class="span-text-title" data-key="t-icons" style="color: violet !important;">Retention and Exit Mgmt.</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarIcons">
                     <ul class="nav nav-sm flex-column">
@@ -493,18 +368,6 @@
                         </li>
                         <li class="nav-item">
                             <a href="icons-boxicons.html" class="nav-link" data-key="t-boxicons">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="icons-materialdesign.html" class="nav-link" data-key="t-material-design">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="icons-lineawesome.html" class="nav-link" data-key="t-line-awesome">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="icons-feather.html" class="nav-link" data-key="t-feather">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="icons-crypto.html" class="nav-link"> <span data-key="t-crypto-svg"></span>...</a>
                         </li>
                     </ul>
                 </div>

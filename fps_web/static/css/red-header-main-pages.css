@@ -1,0 +1,62 @@
+.gridjs-tbody, td.gridjs-td,
+.gridjs *, .gridjs ::after, .gridjs ::before,
+.table {
+    font-size: var(--vz-body-font-size);
+}
+
+.bg-primary-subtle {
+    background-color: #660000 !important;
+    opacity: .9 !important;
+}
+
+table {
+    caption-side: bottom !important;
+    border-collapse: collapse !important;
+    border-collapse: separate !important;
+    text-indent: initial !important;
+    border-spacing: 2px !important;
+}
+
+table.dataTable thead .sorting {
+background-image: none !important;
+}
+
+table.dataTable.no-footer {
+border-bottom: 0px solid #d3d3d3 !important;
+}
+
+.form-select {
+    padding: 0.5rem 2.7rem 0.5rem 0.9rem !important;
+    font-size: .8125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+}
+
+.table>:not(:first-child) {
+    border-top-width: 1px !important;
+}
+
+tr {
+    border-color: inherit !important;
+    border-style: solid !important;
+    border-width: 0 !important;
+    display: table-row !important;
+    vertical-align: inherit !important;
+}
+
+table.table-bordered.dataTable td:first-child {
+    border-left-width: 1px !important;
+}
+.table>tbody {
+    vertical-align: inherit !important;
+}
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+    margin: 2px 0 !important;
+    white-space: nowrap !important;
+    justify-content: flex-end !important;
+}
+
+table.table-bordered.dataTable th, table.table-bordered.dataTable td {
+    border-bottom-width: 1px !important;
+}
