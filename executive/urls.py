@@ -8,7 +8,6 @@ urlpatterns = [
     #for error pages
     path('error'            , views.error_page_404  , name="error_page_404"),
 
-    # for main page
     path(''                 , views.exec_dashboard  , name="exec_dashboard" ),
     path('dashboard'        , views.exec_dashboard  , name="exec_dashboard" ),
     path('eval_upload'      , views.evaluations     , name="eval_upload"    ),
@@ -16,22 +15,25 @@ urlpatterns = [
     path('exec_profile'     , views.exec_p_page     , name="exec_profile"   ),
     path('exec_settings'    , views.exec_p_sett     , name="exec_settings"  ),
 
-    path('prodev_attendance', views.prdv_wrkshp_att   , name="prodev_attendance"),
-    path('prodev_analytics'  , views.prdv_wrkshp_anl   , name="prodev_analytics")  ,
+    path('prodev_attendance', views.prdv_wrkshp_att   , name="prodev_attendance" ),
+    path('prodev_analytics'  , views.prdv_wrkshp_anl  , name="prodev_analytics"  ),
 
-    # path('attendance_record', views.alm_attendance_rec, name="attendance_record"),
-    path('attendance_leaves', views.alm_leaves_rec    , name="attendance_leaves"),
-    path('alm_analytics'    , views.alm_analytics     , name="alm_analytics"    ),
+    path('attendance_leaves', views.alm_leaves_rec    , name="attendance_leaves" ),
+    path('alm_analytics'    , views.alm_analytics     , name="alm_analytics"     ),
 
-    path('awards_recog'     , views.awards_recog      , name="awards_recog"    ),
+    path('awards_recog'     , views.awards_recog      , name="awards_recog"      ),
+
+    path('retentions'       , views.retention_insights   , name="retentions"     ),
+    path('ret_analytics'    , views.retention_analytics  , name="ret_analytics"  ),
+
 
     # for maintenance page
     path('coming_soon'      , views.coming_soon     , name="coming_soon"),
 
     # for log and reg page
-    path('registry/'        , views.registry        , name="registry"),
-    path('login'   , auth_views.LoginView.as_view() , name="login" ),
-    path('logout/', auth_views.LogoutView.as_view() , name='logout'),
+    path('registry/'        , views.registry        , name="registry"   ),
+    path('login'   , auth_views.LoginView.as_view() , name="login"      ),
+    path('logout/', auth_views.LogoutView.as_view() , name='logout'     ),
 
     # for validation view for labels in the form
     path('validate-email'   , csrf_exempt(EmailValidation.as_view())    , name=''),

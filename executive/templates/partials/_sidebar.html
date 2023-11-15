@@ -145,17 +145,17 @@
 
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebar_proTraining" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebar_proTraining">
-                    <i class="ri-user-settings-line"></i> <span class="span-text-title" data-key="t-pages" style="color: violet !important;">Development & Training</span>
+                    <i class="ri-user-settings-line"></i> <span class="span-text-title" data-key="t-pages" style="color: cyan;">Professional Development</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebar_proTraining">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
                             <a href="{% url 'prodev_attendance' %}" class="nav-link" data-key="t-starter">
-                                Development Event
+                                Development Events
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'prodev_analytics' %}" class="nav-link" role="button" aria-expanded="false" aria-controls="sidebarProfile" data-key="t-profile">
+                            <a href="{% url 'prodev_analytics' %}" class="nav-link" role="button" aria-expanded="false" aria-controls="sidebarProfile" data-key="t-profile" style="color: violet !important;">
                                 Analytics
                             </a>
                         </li>
@@ -180,8 +180,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link disabled text-muted" href="#sidebar_perfEval" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebar_perfEval">
-                    <i class="ri-contacts-book-upload-line"></i> <span class="span-text-title" data-key="t-landing">Performance Eval & <br> Goal Setting</span>
+                <a class="nav-link menu-link" href="#sidebar_perfEval" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebar_perfEval">
+                    <i class="ri-contacts-book-upload-line"></i> <span class="span-text-title" data-key="t-landing" style="color: red;">Performance Eval & <br> Goal Setting</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebar_perfEval">
                     <ul class="nav nav-sm flex-column">
@@ -199,7 +199,7 @@
 
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebarUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarUI">
-                    <i class="ri-shield-cross-line"></i> <span class="span-text-title" data-key="t-base-ui" style="color: green !important;">Merit & Promotion</span>
+                    <i class="ri-shield-cross-line"></i> <span class="span-text-title" data-key="t-base-ui" style="color: cyan;">Merit & Promotion</span>
                 </a>
                 <div class="collapse menu-dropdown mega-dropdown-menu" id="sidebarUI">
                     <div class="row">
@@ -219,7 +219,7 @@
 
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI">
-                    <i class="ri-feedback-fill"></i> <span class="span-text-title" data-key="t-advance-ui" style="color: green !important;">Feedback and Comms.</span>
+                    <i class="ri-feedback-fill"></i> <span class="span-text-title" data-key="t-advance-ui" style="color: cyan;">Feedback and Comms.</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarAdvanceUI">
                     <ul class="nav nav-sm flex-column">
@@ -234,8 +234,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="#sidebarAdvanceUI1" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI1">
-                    <i class="ri-walk-line"></i> <span class="span-text-title" style="color: violet !important;">Leave Management</span>
+                <a class="nav-link menu-link disabled text-muted" href="#sidebarAdvanceUI1" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI1">
+                    <i class="ri-walk-line"></i> <span class="span-text-title">Leave Management</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarAdvanceUI1">
                     <ul class="nav nav-sm flex-column">
@@ -253,14 +253,14 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url 'awards_recog' %}" role="button" aria-expanded="false">
-                    <i class="ri-medal-line"></i> <span class="span-text-title" style="color: violet !important;">Awards & Recognition</span>
+                <a class="nav-link menu-link disabled text-muted" href="{% url 'awards_recog' %}" role="button" aria-expanded="false">
+                    <i class="ri-medal-line"></i> <span class="span-text-title">Awards & Recognition</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link disabled text-muted" href="#sidebarTables" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarTables">
-                    <i class="ri-refresh-line"></i> <span class="span-text-title" data-key="t-tables">Workload Distribution</span>
+                <a class="nav-link menu-link" href="#sidebarTables" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarTables">
+                    <i class="ri-refresh-line"></i> <span class="span-text-title" data-key="t-tables" style="color: red;">Workload Distribution</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarTables">
                     <ul class="nav nav-sm flex-column">
@@ -359,15 +359,15 @@
 
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebarIcons" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarIcons">
-                    <i class="ri-run-line"></i> <span class="span-text-title" data-key="t-icons" style="color: violet !important;">Retention and Exit Mgmt.</span>
+                    <i class="ri-run-line"></i> <span class="span-text-title" data-key="t-icons" style="color: cyan;">Retention Management</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarIcons">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                            <a href="icons-remix.html" class="nav-link" data-key="t-remix">...</a>
+                            <a href="{% url 'retentions' %}" class="nav-link" data-key="t-remix">Insights</a>
                         </li>
                         <li class="nav-item">
-                            <a href="icons-boxicons.html" class="nav-link" data-key="t-boxicons">...</a>
+                            <a href="{% url 'ret_analytics' %}" class="nav-link" data-key="t-boxicons" style="color: violet !important;">Analytics</a>
                         </li>
                     </ul>
                 </div>
