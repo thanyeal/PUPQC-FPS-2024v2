@@ -18,6 +18,10 @@ from .modules.acad_head.attend_leave.views_exec_alm_analytics   import alm_analy
 from .modules.acad_head.awards_recog.views_exec_awards          import awards_recog
 from .modules.acad_head.retention_exits.views_exec_rt_anl       import retention_analytics
 from .modules.acad_head.retention_exits.views_exec_rt_ins       import retention_insights
+from .modules.acad_head.merit_prmot.views_exec_mrt_promotion    import mrt_promote
+from .modules.acad_head.merit_prmot.views_exec_mrt_analytics    import mrt_analytics
+from .modules.acad_head.feedbacks.views_exec_feedback_comms     import fac_contents
+from .modules.acad_head.feedbacks.views_exec_feedback_analytics import fac_analytics
 
 # Authentication
 registry
@@ -38,12 +42,17 @@ exec_p_sett
 prdv_wrkshp_att
 prdv_wrkshp_anl
 
-# alm_attendance_rec
-alm_leaves_rec
 alm_analytics
+alm_leaves_rec
 
 retention_analytics
 retention_insights
+
+fac_analytics
+fac_contents
+
+mrt_analytics
+mrt_promote
 
 awards_recog
 

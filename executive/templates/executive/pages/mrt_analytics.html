@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card mt-n4 mx-n4">
+                    <div class="bg-primary-subtle">
+                        <div class="card-body px-4 pb-4">
+                            <div class="row mb-3">
+                                <div class="col-md">
+                                    <div class="row align-items-center g-3">
+                                        <div class="col-md-auto">
+                                            <div class="avatar-md">
+                                                <div class="avatar-title bg-transparent">
+                                                    <i class="ri-shield-cross-line" style="font-size: 3rem !important;"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md">
+                                            <div>
+                                                    <h4 class="fw-bold text-white">Promotion Analytics</h4>
+                                                <div class="hstack gap-3 flex-wrap text-white">
+                                                    <div id="evalBreadtime"><i class="ri-map-pin-2-line align-bottom me-1"></i></div>
+                                                    <div class="vr"></div>
+                                                    <div>Post Date : <span id="evalBreaddate"></span></div>
+                                                    <div class="vr"></div>
+                                                    <div>Your Designation: <div class="badge rounded-pill bg-secondary fs-12">Academic Head</div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
+        <script src="{% static 'js/main/eval_upload/eval_u_datatable.js' %}"></script>
+
+
+{% endblock %}

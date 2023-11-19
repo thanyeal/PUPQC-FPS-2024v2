@@ -8,10 +8,13 @@ urlpatterns = [
     #for error pages
     path('error'            , views.error_page_404  , name="error_page_404"),
 
+    #for acad head
     path(''                 , views.exec_dashboard  , name="exec_dashboard" ),
     path('dashboard'        , views.exec_dashboard  , name="exec_dashboard" ),
+    
     path('eval_upload'      , views.evaluations     , name="eval_upload"    ),
     path('eval_analytics'   , views.eval_analytics  , name="eval_analytics" ),
+    
     path('exec_profile'     , views.exec_p_page     , name="exec_profile"   ),
     path('exec_settings'    , views.exec_p_sett     , name="exec_settings"  ),
 
@@ -25,6 +28,12 @@ urlpatterns = [
 
     path('retentions'       , views.retention_insights   , name="retentions"     ),
     path('ret_analytics'    , views.retention_analytics  , name="ret_analytics"  ),
+
+    path("mrt_promotion"    , views.mrt_promote     , name="mrt_promotion"),
+    path("mrt_analytics"    , views.mrt_analytics   , name="mrt_analytics"),
+
+    path("fac_contents"    , views.fac_contents     , name="fac_contents"),
+    path("fac_analytics"    , views.fac_analytics   , name="fac_analytics"),
 
 
     # for maintenance page

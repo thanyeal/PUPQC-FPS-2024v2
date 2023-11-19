@@ -1,21 +1,21 @@
 from django.shortcuts import render
 from django.core.serializers import serialize
 from django.http import JsonResponse
-from executive.models import TableThree
+# from executive.models import TableThree
 
 def prdv_wrkshp_att(request):
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        queryset = TableThree.objects.all() 
-        data = [{
-                'faculty_no'        : item.faculty_no       ,
-                'training_title'    : item.training_title   ,
-                'description'       : item.description      ,
-                'training_date'     : item.training_date    ,
-                'training_time'     : item.training_time    ,
-                'duration'          : item.duration         ,
-                'location'          : item.location         ,
-            } for item in queryset]
-        return JsonResponse(data, safe=False)
+    # if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    #     queryset = TableThree.objects.all() 
+    #     data = [{
+    #             'faculty_no'        : item.faculty_no       ,
+    #             'training_title'    : item.training_title   ,
+    #             'description'       : item.description      ,
+    #             'training_date'     : item.training_date    ,
+    #             'training_time'     : item.training_time    ,
+    #             'duration'          : item.duration         ,
+    #             'location'          : item.location         ,
+    #         } for item in queryset]
+    #     return JsonResponse(data, safe=False)
     return render(request, 'executive/pages/prodev_attendance.html')
 
 
