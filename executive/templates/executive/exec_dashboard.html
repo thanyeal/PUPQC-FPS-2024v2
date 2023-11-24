@@ -367,14 +367,8 @@
                         <h4 class="card-title mb-0 flex-grow-1">Professional Development</h4>
                         <div class="flex-shrink-0">
                             <div class="dropdown card-header-dropdown">
-                                <a class="dropdown-btn text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Sort by time <i class="mdi mdi-chevron-down ms-1"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="#">All Time</a>
-                                    <a class="dropdown-item" href="#">Last 7 Days</a>
-                                    <a class="dropdown-item" href="#">Last 30 Days</a>
-                                    <a class="dropdown-item" href="#">Last 90 Days</a>
+                                <div class="flex-shrink-0">
+                                    <a href="{% url 'prodev_analytics' %}" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
                                 </div>
                             </div>
                         </div>

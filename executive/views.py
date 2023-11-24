@@ -22,6 +22,8 @@ from .modules.acad_head.merit_prmot.views_exec_mrt_promotion    import mrt_promo
 from .modules.acad_head.merit_prmot.views_exec_mrt_analytics    import mrt_analytics
 from .modules.acad_head.feedbacks.views_exec_feedback_comms     import fac_contents
 from .modules.acad_head.feedbacks.views_exec_feedback_analytics import fac_analytics
+from .modules.acad_head.research.views_exec_research            import rsrch_tracking
+from .modules.acad_head.research.views_exec_research_analytics  import rsrch_analytics
 
 # Authentication
 registry
@@ -38,6 +40,9 @@ eval_analytics
 
 exec_p_page
 exec_p_sett
+
+rsrch_analytics
+rsrch_tracking
 
 prdv_wrkshp_att
 prdv_wrkshp_anl
