@@ -135,7 +135,7 @@
                     <div class="card-header align-items-center d-flex">
                         <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">Research Productivity</h4>
                         <div class="flex-shrink-0">
-                            <a href="#" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
+                            <a href="{% url 'rsrch_analytics' %}" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
                         </div>
                     </div>
                     <div class="card-body pb-0">
@@ -235,7 +235,7 @@
                         <div class="d-flex align-items-center">
                             <h6 class="card-title mb-0 flex-grow-1">Promotion</h6>
                             <div class="flex-shrink-0">
-                                <a href="#" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
+                                <a href="{% url 'mrt_promotion' %}" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
                             </div>
                         </div>
                     </div>
@@ -427,6 +427,9 @@
                 <div class="card">
                     <div class="card-header border-0 align-items-center d-flex">
                         <h4 class="card-title mb-0 flex-grow-1">Awards and Recognition Impact</h4>
+                        <div class="flex-shrink-0">
+                            <a href="{% url 'awards_recog' %}" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
+                        </div>
                         <!--div>
                             <button type="button" class="btn btn-soft-secondary btn-sm shadow-none">
                                 2020

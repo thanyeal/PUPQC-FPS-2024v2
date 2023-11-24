@@ -91,8 +91,6 @@ class TableFive(models.Model):
     merit_training_attended = models.CharField(max_length=100)
     merit_promotion         = models.BooleanField()
 
-# start
-
 class TableSix(models.Model):
     leave_faculty   = models.CharField(max_length=50)
     leave_type      = models.CharField(max_length=50)
@@ -101,7 +99,29 @@ class TableSix(models.Model):
     leave_duration  = models.IntegerField(default=0)
     leave_status    = models.CharField(max_length=20)
 
-# class TableSeven(models.Model):
+class TableSeven(models.Model):
+    eval_faculty  = models.CharField(max_length=50)
+    eval_type     = models.CharField(max_length=20)
+    eval_person   = models.CharField(max_length=20)
+    eval_score    = models.DecimalField(decimal_places=2, default=0.0, max_digits=3)
+    eval_comms    = models.CharField(max_length=900)
+
+class TableEight(models.Model):
+    workload_faculty    = models.CharField(max_length=50)
+    workload_semester   = models.CharField(max_length=10)
+    workload_course     = models.CharField(max_length=20)
+    workload_types      = models.CharField(max_length=100)
+    workload_duties     = models.CharField(max_length=100)
+    workload_total      = models.IntegerField(default=0)
+
+# class TableNine(models.Model):
+#     awards_faculty  = models.CharField(max_length=50)
+#     awards_title    = models.CharField(max_length=50)
+#     awards_date     = models.DateField()
+#     awards_type     = models.CharField(max_length=10)
+#     awards_project  = models.CharField(max_length=300)
+
+# class TableTen(models.Model):
 #     exit_faculty  = models.CharField(max_length=50)
 #     exit_join_d   = models.DateField
 #     exit_rank     = models.CharField(max_length=20)
@@ -110,28 +130,6 @@ class TableSix(models.Model):
 #     exit_factors  = models.CharField(max_length=300)
 #     exit_insight  = models.CharField(max_length=300)
 #     exit_status   = models.CharField(max_length=20)
-
-# class TableEight(models.Model):
-#     eval_faculty  = models.CharField(max_length=50)
-#     eval_type     = models.CharField(max_length=20)
-#     eval_person   = models.CharField(max_length=20)
-#     eval_score    = models.IntegerField(default=0)
-#     eval_comms    = models.CharField(max_length=300)
-
-# class TableNine(models.Model):
-#     workload_faculty    = models.CharField(max_length=50)
-#     workload_semester   = models.CharField(max_length=10)
-#     workload_course     = models.CharField(max_length=20)
-#     workload_types      = models.CharField(max_length=100)
-#     workload_duties     = models.CharField(max_length=100)
-#     workload_total      = models.IntegerField(default=0)
-
-# class TableTen(models.Model):
-#     awards_faculty  = models.CharField(max_length=50)
-#     awards_title    = models.CharField(max_length=50)
-#     awards_date     = models.DateField()
-#     awards_type     = models.CharField(max_length=10)
-#     awards_project  = models.CharField(max_length=300)
 
 # not yet migrated
 

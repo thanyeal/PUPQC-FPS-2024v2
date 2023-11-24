@@ -24,6 +24,7 @@ from .modules.acad_head.feedbacks.views_exec_feedback_comms     import fac_conte
 from .modules.acad_head.feedbacks.views_exec_feedback_analytics import fac_analytics
 from .modules.acad_head.research.views_exec_research            import rsrch_tracking
 from .modules.acad_head.research.views_exec_research_analytics  import rsrch_analytics
+from .modules.acad_head.workload.views_exec_workload            import workload_dat
 
 # Authentication
 registry
@@ -58,6 +59,8 @@ fac_contents
 
 mrt_analytics
 mrt_promote
+
+workload_dat
 
 awards_recog
 

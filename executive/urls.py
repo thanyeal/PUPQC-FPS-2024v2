@@ -38,6 +38,8 @@ urlpatterns = [
     path("rsrch_analytics"  , views.rsrch_analytics   , name="rsrch_analytics"  ),
     path("rsrch_tracking"   , views.rsrch_tracking    , name="rsrch_tracking"   ),
 
+    path("workload_dat"     , views.workload_dat      , name="workload_dat"     ),
+
     # for maintenance page
     path('coming_soon'      , views.coming_soon     , name="coming_soon"),
 

@@ -120,7 +120,7 @@
 
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI">
-                    <i class="ri-feedback-fill"></i> <span class="span-text-title" data-key="t-advance-ui" style="color: red;">Evaluation Feedback</span>
+                    <i class="ri-feedback-fill"></i> <span class="span-text-title" data-key="t-advance-ui">Evaluation Feedback</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarAdvanceUI">
                     <ul class="nav nav-sm flex-column">
@@ -128,7 +128,7 @@
                             <a href="{% url 'fac_contents' %}" class="nav-link" data-key="t-sweet-alerts">Feedbacks</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'fac_analytics' %}" class="nav-link" data-key="t-nestable-list">Analytics</a>
+                            <a href="{% url 'fac_analytics' %}" class="nav-link" data-key="t-nestable-list" style="color: red !important;">Analytics</a>
                         </li>
                     </ul>
                 </div>
@@ -171,7 +171,7 @@
                                     <a href="{% url 'mrt_promotion' %}" class="nav-link" data-key="t-alerts">Promotions</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{% url 'mrt_analytics' %}" class="nav-link" data-key="t-badges">Analytics</a>
+                                    <a href="{% url 'mrt_analytics' %}" class="nav-link" data-key="t-badges" style="color: red !important;">Analytics</a>
                                 </li>
                             </ul>
                         </div>
@@ -180,8 +180,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link disabled text-muted" href="{% url 'awards_recog' %}" role="button" aria-expanded="false">
-                    <i class="ri-medal-line"></i> <span class="span-text-title">Awards & Recognition</span>
+                <a class="nav-link menu-link" href="{% url 'awards_recog' %}" role="button" aria-expanded="false">
+                    <i class="ri-medal-line"></i> <span class="span-text-title" style="color: red;">Awards & Recognition</span>
                 </a>
             </li>
 
@@ -189,7 +189,7 @@
 
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebarAdvanceUI1" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI1">
-                    <i class="ri-walk-line"></i> <span class="span-text-title" style="color: red;">Leave Management</span>
+                    <i class="ri-walk-line"></i> <span class="span-text-title">Leave Management</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarAdvanceUI1">
                     <ul class="nav nav-sm flex-column">
@@ -200,7 +200,7 @@
                             <a href="{% url 'attendance_leaves' %}" class="nav-link" data-key="t-nestable-list">Leaves Requests</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'alm_analytics' %}" class="nav-link" data-key="t-nestable-list">Analytics</a>
+                            <a href="{% url 'alm_analytics' %}" class="nav-link" data-key="t-nestable-list" style="color: red !important;">Analytics</a>
                         </li>
                     </ul>
                 </div>
@@ -208,7 +208,7 @@
 
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebarIcons" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarIcons">
-                    <i class="ri-run-line"></i> <span class="span-text-title" data-key="t-icons" style="color: red;">Retention Management</span>
+                    <i class="ri-run-line"></i> <span class="span-text-title" data-key="t-icons">Retention Management</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarIcons">
                     <ul class="nav nav-sm flex-column">
@@ -216,7 +216,7 @@
                             <a href="{% url 'retentions' %}" class="nav-link" data-key="t-remix">Insights</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'ret_analytics' %}" class="nav-link" data-key="t-boxicons" style="color: violet !important;">Analytics</a>
+                            <a href="{% url 'ret_analytics' %}" class="nav-link" data-key="t-boxicons" style="color: red !important;">Analytics</a>
                         </li>
                     </ul>
                 </div>
@@ -224,21 +224,15 @@
 
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebarTables" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarTables">
-                    <i class="ri-refresh-line"></i> <span class="span-text-title" data-key="t-tables" style="color: green;">Workload Distribution</span>
+                    <i class="ri-refresh-line"></i> <span class="span-text-title" data-key="t-tables">Workload Distribution</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarTables">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                            <a href="#" class="nav-link" data-key="t-basic-tables">...</a>
+                            <a href="{% url 'workload_dat' %}" class="nav-link" data-key="t-basic-tables">Records</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" data-key="t-grid-js">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-key="t-list-js">...</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-key="t-datatables">...</a>
+                            <a href="#" class="nav-link" data-key="t-grid-js" style="color: red !important;">Analytics</a>
                         </li>
                     </ul>
                 </div>
@@ -246,7 +240,7 @@
 
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebar_perfEval" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebar_perfEval">
-                    <i class="ri-contacts-book-upload-line"></i> <span class="span-text-title" data-key="t-landing" style="color: green;">Performance Eval & <br> Goal Setting</span>
+                    <i class="ri-contacts-book-upload-line"></i> <span class="span-text-title" data-key="t-landing" style="color: red;">Performance Eval & <br> Goal Setting</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebar_perfEval">
                     <ul class="nav nav-sm flex-column">
@@ -281,8 +275,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link disabled text-muted" href="#sidebar_committeeService" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebar_committeeService">
-                    <i class="ri-service-line"></i> <span class="span-text-title" data-key="t-landing">Committee Participation</span>
+                <a class="nav-link menu-link disabled" href="#sidebar_committeeService" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebar_committeeService">
+                    <i class="ri-service-line"></i> <span class="span-text-title" data-key="t-landing" style="color: red;">Committee Participation</span>
                 </a>
                 <div class="collapse menu-dropdown" id="sidebar_committeeService">
                     <ul class="nav nav-sm flex-column">
