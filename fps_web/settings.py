@@ -84,29 +84,29 @@ WSGI_APPLICATION = 'fps_web.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # ? For Local PSQL Database.
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mypupqc_fpsv2',
-        'USER': 'postgres',
-        'PASSWORD': '986495',
-        'HOST': 'localhost',
-    }
-}
-
-
-# ? Neon Tech PSQL Host for POSTGRESQL Database
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': DB_NAME,
-#         'USER': DB_USER,
-#         'PASSWORD': DB_PASSWORD,
-#         'HOST': DB_HOST,
-#         'PORT': DB_PORT,
-#         'OPTIONS': DB_OPTIONS,
+#         'NAME': 'mypupqc_fpsv2',
+#         'USER': 'postgres',
+#         'PASSWORD': '986495',
+#         'HOST': 'localhost',
 #     }
 # }
+
+
+# ? Neon Tech PSQL Host for POSTGRESQL Database
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
+        'OPTIONS': DB_OPTIONS,
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
