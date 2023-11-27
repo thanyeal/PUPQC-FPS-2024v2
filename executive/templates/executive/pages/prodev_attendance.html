@@ -40,24 +40,26 @@
                         </div>
                     </div>
                 </div>
-                <!-- modal for announcement -->
+                <!-- modal -->
                 <div class="modal fade" id="myannouncementModal" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-dialog modal-xl">
                         <div class="modal-content">
-                            <div class="modal-body text-center p-5">
-                                <lord-icon
-                                    src="https://cdn.lordicon.com/tdrtiskw.json"
-                                    trigger="loop"
-                                    colors="primary:#f7b84b,secondary:#405189"
-                                    style="width:130px;height:130px">
-                                </lord-icon>
-                                <div class="mt-4 pt-4">
-                                    <h4>Announcement</h4>
-                                    <p class="text-muted">We will be conducting a roll out system rotation from April 2024 up to August 2024 for scheduled maintenance.<br>Thank you for your understanding.</p>
-                                    <button class="btn btn-warning" data-bs-target="#secondmodal" data-bs-toggle="modal" data-bs-dismiss="modal">
-                                        Continue
-                                    </button>
-                                </div>
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="myExtraLargeModalLabel">Attendance List</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <table id="prodev_dtble_modal" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Faculty Name</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Training Title</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -73,7 +75,7 @@
                     </div>
 
                     <div class="card-body">
-                        <table id="datatablez" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width:100%">
+                        <table id="prodev_dtble" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -92,42 +94,9 @@
                 </div>
             </div>
         </div>
+
         <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
-        <script src="{% static 'js/main/eval_upload/eval_u_datatable.js' %}"></script>
-
-        <script>
-            $(document).ready(function () {
-                $('#datatablez').DataTable({
-                    "ajax": {
-                        "url": "prodev_attendance",
-                        "dataSrc": ""
-                    },
-                    "columns": [
-                        { "data": "faculty_no" },
-                        { "data": "training_title" },
-                        { "data": "description" },
-                        { "data": "training_date" },
-                        { "data": "training_time" },
-                        { "data": "duration" },
-                        { "data": "location" },
-                        {
-                            // "Actions" column with a button
-                            "data": null,
-                            "render": function (data, type, full, meta) {
-                                return '<center><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#myannouncementModal">Attendees</button></center>';
-                            }
-                        }
-                    ]
-                    //"pageLength": 25
-                });
-            
-                // Check if the table has no data
-                if (dataTable.data().count() === 0) {
-                    $('#datatablez tbody').html('<tr><td colspan="9">There is currently no data in the database.</td></tr>');
-                }
-            });
-        </script>
-
+        <script src="{% static 'js/main/pro_dev/prod_attendees.js' %}"></script>
 
 {% endblock %}

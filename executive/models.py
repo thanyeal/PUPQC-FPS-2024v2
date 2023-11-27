@@ -3,49 +3,37 @@ from django.utils import timezone
 
 class TableOne(models.Model):
 
-    faculty_num = models.IntegerField(
-        default=0
-    )
+    faculty_num = models.IntegerField(default=0)
 
-    facultyname = models.CharField(
-        max_length=50
-    )
+    facultyname = models.CharField(max_length=50)
 
     spvs_rating = models.DecimalField(
         max_digits=5,
         decimal_places=2,
         default=0.00
     )
-    spvs_interp = models.CharField(
-        max_length=20
-    )
+    spvs_interp = models.CharField(max_length=20)
 
     stud_rating = models.DecimalField(
         max_digits=5,
         decimal_places=2,
         default=0.00
     )
-    stud_interp = models.CharField(
-        max_length=20
-    )
+    stud_interp = models.CharField(max_length=20)
 
     peer_rating = models.DecimalField(
         max_digits=5,
         decimal_places=2,
         default=0.00
     )
-    peer_interp = models.CharField(
-        max_length=20
-    )
+    peer_interp = models.CharField(max_length=20)
 
     self_rating = models.DecimalField(
         max_digits=5,
         decimal_places=2,
         default=0.00
     )
-    self_interp = models.CharField(
-        max_length=20
-    )
+    self_interp = models.CharField(max_length=20)
     
     load_rating = models.DecimalField(
         max_digits=5,
@@ -67,12 +55,10 @@ class TableOne(models.Model):
         default=''
     )
 
-    eval_year = models.DateTimeField(
-        default=timezone.now
-    )
+    eval_year = models.DateTimeField(default=timezone.now)
 
-    
-class TableThree(models.Model):
+
+class TableTwo(models.Model):
     faculty_no = models.CharField(max_length=10)
     training_title = models.CharField(max_length=100)
     description = models.TextField()
@@ -81,28 +67,68 @@ class TableThree(models.Model):
     duration = models.CharField(max_length=20)
     location = models.CharField(max_length=50)
 
+class TableThree(models.Model):
+    faculty_name = models.CharField(max_length=100)
+    time_in = models.TimeField()
+    time_out = models.TimeField()
+    training_title = models.CharField(max_length=100)
 
-    # @classmethod
-    # def insert_data(cls):
-    #     data = [
-    #         ["01", "Effective Teaching Strategies", "Innovative pedagogical approaches, Active learning techniques, Flipped classroom methodologies", "2023-11-15", "3:00 - 4:30 PM", "3 Days", "PUPQC - Gymnasium"],
-    #         ["02", "Technology Integration", "Integrating technology into the curriculum, Online teaching best practices, Utilizing learning management systems effectively", "2023-01-13", "10:00 - 11:30 PM", "3 Days", "PUPQC - Gymnasium"],
-    #         ["03", "Research Skills", "Research methodologies and design, Grant writing and funding opportunities, Publication strategies", "2023-08-28", "3:00 - 4:30 PM", "3 Days", "PUPQC - Gymnasium"],
-    #         ["04", "Inclusive Teaching", "Culturally responsive teaching, Creating an inclusive classroom environment, Addressing diverse learning styles", "2023-09-04", "3:00 - 4:30 PM", "3 Days", "PUPQC - Gymnasium"],
-    #         ["05", "Communication Skills", "Effective communication with students and colleagues, Public speaking and presentation skills, Writing for academic and non-academic audiences", "2023-07-20", "10:00 - 11:30 PM", "3 Days", "PUPQC - Gymnasium"],
-    #         ["06", "Leadership and Management", "Academic leadership skills, Team building and collaboration, Conflict resolution and management", "2023-04-29", "9:00 - 10:30 PM", "3 Days", "PUPQC - Gymnasium"],
-    #         ["07", "Professional Networking", "Building and maintaining a professional network, Attending conferences and academic events, Online networking strategies", "2023-01-13", "9:00 - 10:30 PM", "3 Days", "PUPQC - Gymnasium"],
-    #     ]
+class TableFour(models.Model):
+    rsrch_author = models.CharField(max_length=100)
+    rsrch_title = models.CharField(max_length=200)
+    rsrch_year = models.DateField()
+    rsrch_publisher = models.CharField(max_length=100)
 
-    #     for item in data:
-    #         cls.objects.create(
-    #             faculty_no=item[0],
-    #             training_title=item[1],
-    #             description=item[2],
-    #             training_date=item[3],
-    #             training_time=item[4],
-    #             duration=item[5],
-    #             location=item[6],
-    #         )
+class TableFive(models.Model):
+    merit_faculty_name      = models.CharField(max_length=50)
+    merit_faculty_status    = models.CharField(max_length=50)
+    merit_ave_dept_rate     = models.DecimalField(
+                                max_digits=4,
+                                decimal_places=2,
+                                default=0.00
+                                )
+    merit_rsrch_publish     = models.CharField(max_length=200)
+    merit_training_attended = models.CharField(max_length=100)
+    merit_promotion         = models.BooleanField()
 
-# TableThree.insert_data()
+class TableSix(models.Model):
+    leave_faculty   = models.CharField(max_length=50)
+    leave_type      = models.CharField(max_length=50)
+    leave_start     = models.DateField()
+    leave_end       = models.DateField()
+    leave_duration  = models.IntegerField(default=0)
+    leave_status    = models.CharField(max_length=20)
+
+class TableSeven(models.Model):
+    eval_faculty  = models.CharField(max_length=50)
+    eval_type     = models.CharField(max_length=20)
+    eval_person   = models.CharField(max_length=20)
+    eval_score    = models.DecimalField(decimal_places=2, default=0.0, max_digits=3)
+    eval_comms    = models.CharField(max_length=900)
+
+class TableEight(models.Model):
+    workload_faculty    = models.CharField(max_length=50)
+    workload_semester   = models.CharField(max_length=50)
+    workload_course     = models.CharField(max_length=50)
+    workload_types      = models.CharField(max_length=100)
+    workload_duties     = models.CharField(max_length=100)
+    workload_total      = models.IntegerField(default=0)
+
+class TableNine(models.Model):
+    awards_faculty  = models.CharField(max_length=50)
+    awards_title    = models.CharField(max_length=50)
+    awards_date     = models.DateField()
+    awards_type     = models.CharField(max_length=50)
+    awards_status   = models.CharField(max_length=300)
+
+# class TableTen(models.Model):
+#     exit_faculty  = models.CharField(max_length=50)
+#     exit_join_d   = models.DateField
+#     exit_rank     = models.CharField(max_length=20)
+#     exit_salary   = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+#     exit_workload = models.CharField(max_length=300)
+#     exit_factors  = models.CharField(max_length=300)
+#     exit_insight  = models.CharField(max_length=300)
+#     exit_status   = models.CharField(max_length=20)
+
+# not yet migrated

@@ -21,9 +21,9 @@ var upadatedonutchart,
   chartDonutBasicColors =
     (chartPieBasicColors &&
       ((options = {
-        series: [44, 55, 13, 43, 22],
+        series: [24, 55, 53, 43],
         chart: { height: 300, type: "pie" },
-        labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+        labels: ["Research Skills", "Inclusive Teaching", "Communication Skills", "Professional Networking"],
         legend: { position: "bottom" },
         dataLabels: { dropShadow: { enabled: !1 } },
         colors: chartPieBasicColors,
@@ -32,6 +32,7 @@ var upadatedonutchart,
         document.querySelector("#simple_pie_chart"),
         options
       )).render()),
+
     getChartColorsArray("simple_dount_chart")),
   chartDonutupdatingColors =
     (chartDonutBasicColors &&

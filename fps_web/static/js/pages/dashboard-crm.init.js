@@ -194,4 +194,3 @@ var options,
             document.querySelector("#revenue-expenses-charts"),
             options
         )).render());
-
