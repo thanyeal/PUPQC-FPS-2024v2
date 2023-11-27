@@ -25,22 +25,19 @@ var options,
             ((options = {
                 series: [
                     {
-                        name: "Number of Projects",
+                        name: "1st Semestral Year Awardees",
                         type: "bar",
-                        data: [34, 65, 46, 68, 49, 61, 42, 44, 78, 52, 63, 67],
+                        data: [12, 10, 16, 18, 10, 11, 12, 14, 18],
                     },
                     {
-                        name: "Revenue",
+                        name: "No. of Performing Faculties in Academic Year",
                         type: "area",
-                        data: [
-                            89.25, 98.58, 68.74, 108.87, 77.54, 84.03, 51.24, 28.57, 92.57,
-                            42.36, 88.51, 36.57,
-                        ],
+                        data: [15, 20, 19, 14, 12, 15, 16, 12, 11],
                     },
                     {
-                        name: "Active Projects",
+                        name: "2nd Semestral Year Awardees",
                         type: "bar",
-                        data: [8, 12, 7, 17, 21, 11, 5, 9, 7, 29, 12, 35],
+                        data: [10, 18, 18, 11, 9, 10, 2, 4, 10],
                     },
                 ],
                 chart: { height: 374, type: "line", toolbar: { show: !1 } },
@@ -49,18 +46,15 @@ var options,
                 markers: { size: [0, 4, 0], strokeWidth: 2, hover: { size: 4 } },
                 xaxis: {
                     categories: [
-                        "Jan",
-                        "Feb",
-                        "Mar",
-                        "Apr",
-                        "May",
-                        "Jun",
-                        "Jul",
-                        "Aug",
-                        "Sep",
-                        "Oct",
-                        "Nov",
-                        "Dec",
+                        "2015",
+                        "2016",
+                        "2017",
+                        "2018",
+                        "2019",
+                        "2020",
+                        "2021",
+                        "2022",
+                        "2023",
                     ],
                     axisTicks: { show: !1 },
                     axisBorder: { show: !1 },
@@ -89,11 +83,11 @@ var options,
                                 return void 0 !== e ? e.toFixed(0) : e;
                             },
                         },
-                        {
-                            formatter: function (e) {
-                                return void 0 !== e ? "$" + e.toFixed(2) + "k" : e;
-                            },
-                        },
+                        //{
+                        //    formatter: function (e) {
+                        //        return void 0 !== e ? "$" + e.toFixed(2) : e;
+                        //    },
+                        //},
                         {
                             formatter: function (e) {
                                 return void 0 !== e ? e.toFixed(0) : e;

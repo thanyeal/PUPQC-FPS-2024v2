@@ -37,69 +37,34 @@
                 </div>
             </div>
         </div>
+
         <div class="row mt-n5">
-            <div class="col-xxl">
+            <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header border-0 align-items-center d-flex">
-                        <h4 class="card-title mb-0 flex-grow-1">Awards and Recognition Impact</h4>
-                        <!--div>
-                            <button type="button" class="btn btn-soft-secondary btn-sm shadow-none">
-                                2020
-                            </button>
-                            <button type="button" class="btn btn-soft-secondary btn-sm shadow-none">
-                                2021
-                            </button>
-                            <button type="button" class="btn btn-soft-secondary btn-sm shadow-none">
-                                2022
-                            </button>
-                            <button type="button" class="btn btn-soft-primary btn-sm shadow-none">
-                                2023
-                            </button>
-                        </div-->
+                    <div class="card-header">
+                        <h4 class="card-title mb-0 flex-grow-1">Recognition and Awards Record</h4>
                     </div>
 
-                    <div class="card-header p-0 border-0 bg-light-subtle">
-                        <div class="row g-0 text-center">
-                            <div class="col-6 col-sm-3">
-                                <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="131">0</span></h5>
-                                    <p class="text-muted mb-0">Faculties w/ High Recognition Score</p>
-                                </div>
-                            </div>
-                            
-                            <div class="col-6 col-sm-3">
-                                <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="102">0</span></h5>
-                                    <p class="text-muted mb-0">Faculties w/ High Evaluation Score</p>
-                                </div>
-                            </div>
-                            
-                            <div class="col-6 col-sm-3">
-                                <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="225">0</span></h5>
-                                    <p class="text-muted mb-0">No. of Eligible Awardee</p>
-                                </div>
-                            </div>
-                            
-                            <div class="col-6 col-sm-3">
-                                <div class="p-3 border border-dashed border-start-0 border-end-0">
-                                    <h5 class="mb-1 text-success"><span class="counter-value" data-target="10589">0</span>h</h5>
-                                    <p class="text-muted mb-0">Faculty Working Hours</p>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="card-body p-0 pb-2">
-                        <div>
-                            <div id="projects-overview-chart" data-colors='["--vz-primary", "--vz-warning", "--vz-success"]' class="apex-charts" dir="ltr"></div>
-                        </div>
+                    <div class="card-body">
+                        <table id="recog_dtble" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Faculty Name</th>
+                                    <th>Award Title</th>
+                                    <th>Award Date</th>
+                                    <th>Award Type</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        
+
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
-        <script src="{% static 'js/main/eval_upload/eval_u_datatable.js' %}"></script>
+        <script src="{% static 'js/main/awards/awards_dtble.js' %}"></script>
 
 {% endblock %}

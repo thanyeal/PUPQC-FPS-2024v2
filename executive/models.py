@@ -108,18 +108,18 @@ class TableSeven(models.Model):
 
 class TableEight(models.Model):
     workload_faculty    = models.CharField(max_length=50)
-    workload_semester   = models.CharField(max_length=10)
-    workload_course     = models.CharField(max_length=20)
+    workload_semester   = models.CharField(max_length=50)
+    workload_course     = models.CharField(max_length=50)
     workload_types      = models.CharField(max_length=100)
     workload_duties     = models.CharField(max_length=100)
     workload_total      = models.IntegerField(default=0)
 
-# class TableNine(models.Model):
-#     awards_faculty  = models.CharField(max_length=50)
-#     awards_title    = models.CharField(max_length=50)
-#     awards_date     = models.DateField()
-#     awards_type     = models.CharField(max_length=10)
-#     awards_project  = models.CharField(max_length=300)
+class TableNine(models.Model):
+    awards_faculty  = models.CharField(max_length=50)
+    awards_title    = models.CharField(max_length=50)
+    awards_date     = models.DateField()
+    awards_type     = models.CharField(max_length=50)
+    awards_status   = models.CharField(max_length=300)
 
 # class TableTen(models.Model):
 #     exit_faculty  = models.CharField(max_length=50)
@@ -132,5 +132,3 @@ class TableEight(models.Model):
 #     exit_status   = models.CharField(max_length=20)
 
 # not yet migrated
-
-

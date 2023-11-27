@@ -25,6 +25,7 @@ urlpatterns = [
     path('alm_analytics'    , views.alm_analytics     , name="alm_analytics"     ),
 
     path('awards_recog'     , views.awards_recog      , name="awards_recog"      ),
+    path('awards_analytics' , views.awards_analytics  , name="awards_analytics"  ),
 
     path('retentions'       , views.retention_insights   , name="retentions"     ),
     path('ret_analytics'    , views.retention_analytics  , name="ret_analytics"  ),
@@ -39,6 +40,7 @@ urlpatterns = [
     path("rsrch_tracking"   , views.rsrch_tracking    , name="rsrch_tracking"   ),
 
     path("workload_dat"     , views.workload_dat      , name="workload_dat"     ),
+    path("workload_analytics", views.workload_analytics , name="workload_analytics"),
 
     # for maintenance page
     path('coming_soon'      , views.coming_soon     , name="coming_soon"),
