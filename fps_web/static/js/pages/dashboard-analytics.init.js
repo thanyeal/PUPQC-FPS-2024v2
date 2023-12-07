@@ -17,6 +17,8 @@ function getChartColorsArray(e) {
         console.warn("data-colors atributes not found on", e);
     }
 }
+
+
 var worldemapmarkers = "";
 function loadCharts() {
     var e = getChartColorsArray("users-by-country");
@@ -60,12 +62,15 @@ function loadCharts() {
                 lineStyle: { animation: !0, strokeDasharray: "6 3 6" },
             })));
 }
+
 (window.onresize = function () {
     setTimeout(() => {
         loadCharts();
     }, 0);
 }),
     loadCharts();
+
+
 var barchartCountriesColors = getChartColorsArray("countries_charts");
 function generateData(e, t) {
     for (var a = 0, o = []; a < e;) {
@@ -75,6 +80,8 @@ function generateData(e, t) {
     }
     return o;
 }
+
+
 barchartCountriesColors &&
     ((options = {
         series: [
@@ -119,6 +126,8 @@ barchartCountriesColors &&
             document.querySelector("#countries_charts"),
             options
         )).render());
+
+
 var columnoptions,
     options,
     chart,
