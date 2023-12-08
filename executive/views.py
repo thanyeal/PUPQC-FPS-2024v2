@@ -1,10 +1,6 @@
-
-# from .modules.auth.views_login                                  import log_in
-# from .modules.auth.views_logout                                 import logout
-# from .modules.acad_head.attend_leave.views_exec_alm_attendance    import alm_attendance_rec
-
 from .modules.error_pages.views_error_404                         import error_page_404
 from .modules.auth.views_registry                                 import registry
+from .modules.auth.views_logout                                   import custom_logout
 from .modules.acad_head.dashboard.views_exec_dashboard            import exec_dashboard
 from .modules.acad_head.evaluations.views_exec_evalupload         import evaluations
 from .modules.acad_head.evaluations.views_exec_evaluation         import eval_analytics
@@ -31,7 +27,7 @@ from .modules.acad_head.workload.views_exec_workload_analytics    import workloa
 # Authentication
 registry
 # log_in
-# logout
+custom_logout
 
 # Errors
 error_page_404
