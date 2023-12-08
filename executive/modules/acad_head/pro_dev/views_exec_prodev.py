@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.core.serializers import serialize
 from django.http import JsonResponse
 from executive.models import TableTwo, TableThree
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='login')
 def prdv_wrkshp_att(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         queryset_tabletwo = TableTwo.objects.all()
