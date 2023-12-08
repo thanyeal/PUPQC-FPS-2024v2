@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from executive.models import TableNine
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='login')
 def awards_recog(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         queryset = TableNine.objects.all() 

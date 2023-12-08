@@ -10,7 +10,7 @@ from django.db.models import Avg
 from decimal import Decimal
 import json
 
-
+@login_required(login_url='login')
 def convert_decimal_to_float(obj):
     if isinstance(obj, Decimal):
         return float(obj)
