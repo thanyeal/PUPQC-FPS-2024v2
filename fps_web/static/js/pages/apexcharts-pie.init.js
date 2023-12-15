@@ -37,8 +37,9 @@ var upadatedonutchart,
   chartDonutupdatingColors =
     (chartDonutBasicColors &&
       ((options = {
-        series: [44, 55, 41, 17, 15],
+        series: [44, 55, 41],
         chart: { height: 300, type: "donut" },
+        labels: ["New Performing Faculties", "Existing Performing Faculties", "Subject to Promotion"],
         legend: { position: "bottom" },
         dataLabels: { dropShadow: { enabled: !1 } },
         colors: chartDonutBasicColors,
