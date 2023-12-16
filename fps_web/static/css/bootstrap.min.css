@@ -47,6 +47,7 @@
     --vz-danger: #c64640;
     --vz-light: #f3f6f9;
     --vz-dark: #1a2432;
+
     --vz-primary-rgb: 52, 108, 190;
     --vz-secondary-rgb: 110, 122, 143;
     --vz-success-rgb: 91, 175, 83;
@@ -65,6 +66,7 @@
     --vz-danger-text-emphasis: #cc563d;
     --vz-light-text-emphasis: #ced4da;
     --vz-dark-text-emphasis: #343a40;
+
     --vz-primary-bg-subtle: #e4e1f4;
     --vz-secondary-bg-subtle: #e1ebfd;
     --vz-success-bg-subtle: #e3f7ed;
@@ -81,11 +83,13 @@
     --vz-danger-border-subtle: #f9c1b6;
     --vz-light-border-subtle: #eff2f7;
     --vz-dark-border-subtle: #adb5bd;
+
     --vz-white-rgb: 255, 255, 255;
     --vz-black-rgb: 0, 0, 0;
     --vz-font-sans-serif: "Inter", sans-serif;
     --vz-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --vz-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+
     --vz-body-font-family: var(--vz-font-sans-serif);
     --vz-body-font-size: 0.8125rem;
     --vz-body-font-weight: 400;
@@ -94,24 +98,32 @@
     --vz-body-color-rgb: 33, 37, 41;
     --vz-body-bg: #f2f2f7;
     --vz-body-bg-rgb: 242, 242, 247;
+
     --vz-emphasis-color: #1a2432;
     --vz-emphasis-color-rgb: 33, 37, 41;
+
     --vz-secondary-color: #878a99;
     --vz-secondary-color-rgb: 135, 138, 153;
     --vz-secondary-bg: #fff;
     --vz-secondary-bg-rgb: 255, 255, 255;
+
     --vz-tertiary-color: rgba(33, 37, 41, 0.5);
     --vz-tertiary-color-rgb: 33, 37, 41;
     --vz-tertiary-bg: #eff2f7;
     --vz-tertiary-bg-rgb: 239, 242, 247;
+
     --vz-heading-color: #495057;
+
     --vz-link-color: #346cbe;
     --vz-link-color-rgb: 75, 56, 179;
     --vz-link-decoration: none;
     --vz-link-hover-color: #346cbe;
     --vz-link-hover-color-rgb: 75, 56, 179;
+
     --vz-code-color: #f672a7;
+
     --vz-highlight-bg: #fcf8e3;
+
     --vz-border-width: 1px;
     --vz-border-style: solid;
     --vz-border-color: #e9ebec;
@@ -123,13 +135,16 @@
     --vz-border-radius-xxl: 2rem;
     --vz-border-radius-2xl: var(--vz-border-radius-xxl);
     --vz-border-radius-pill: 50rem;
+
     --vz-box-shadow: 0 3px 3px rgba(56, 65, 74, 0.1);
     --vz-box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     --vz-box-shadow-lg: 0 5px 10px rgba(30, 32, 37, 0.12);
     --vz-box-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+
     --vz-focus-ring-width: 0.25rem;
     --vz-focus-ring-opacity: 0.25;
     --vz-focus-ring-color: rgba(var(--vz-primary-rgb), 0.25);
+    
     --vz-form-valid-color: #5baf53;
     --vz-form-valid-border-color: #5baf53;
     --vz-form-invalid-color: #c64640;
@@ -8548,7 +8563,7 @@ fieldset:disabled .btn {
 
 .link-primary:focus,
 .link-primary:hover {
-    color: RGBA(60, 45, 143, var(--vz-link-opacity, 1)) !important;
+    color: RGBA(92, 128, 203, var(--vz-link-opacity, 1)) !important;
     -webkit-text-decoration-color: RGBA(60, 45, 143, var(--vz-link-underline-opacity, 1)) !important;
     text-decoration-color: RGBA(60, 45, 143, var(--vz-link-underline-opacity, 1)) !important
 }
@@ -8561,7 +8576,7 @@ fieldset:disabled .btn {
 
 .link-secondary:focus,
 .link-secondary:hover {
-    color: RGBA(42, 95, 193, var(--vz-link-opacity, 1)) !important;
+    color: RGBA(139, 149, 165, var(--vz-link-opacity, 1)) !important;
     -webkit-text-decoration-color: RGBA(42, 95, 193, var(--vz-link-underline-opacity, 1)) !important;
     text-decoration-color: RGBA(42, 95, 193, var(--vz-link-underline-opacity, 1)) !important
 }
@@ -8574,7 +8589,7 @@ fieldset:disabled .btn {
 
 .link-success:focus,
 .link-success:hover {
-    color: RGBA(55, 162, 106, var(--vz-link-opacity, 1)) !important;
+    color: RGBA(123, 191, 117, var(--vz-link-opacity, 1)) !important;
     -webkit-text-decoration-color: RGBA(55, 162, 106, var(--vz-link-underline-opacity, 1)) !important;
     text-decoration-color: RGBA(55, 162, 106, var(--vz-link-underline-opacity, 1)) !important
 }
@@ -8587,7 +8602,7 @@ fieldset:disabled .btn {
 
 .link-info:focus,
 .link-info:hover {
-    color: RGBA(33, 125, 175, var(--vz-link-opacity, 1)) !important;
+    color: RGBA(121, 173, 226, var(--vz-link-opacity, 1)) !important;
     -webkit-text-decoration-color: RGBA(33, 125, 175, var(--vz-link-underline-opacity, 1)) !important;
     text-decoration-color: RGBA(33, 125, 175, var(--vz-link-underline-opacity, 1)) !important
 }
@@ -8600,7 +8615,7 @@ fieldset:disabled .btn {
 
 .link-warning:focus,
 .link-warning:hover {
-    color: RGBA(204, 152, 9, var(--vz-link-opacity, 1)) !important;
+    color: RGBA(235, 140, 88, var(--vz-link-opacity, 1)) !important;
     -webkit-text-decoration-color: RGBA(204, 152, 9, var(--vz-link-underline-opacity, 1)) !important;
     text-decoration-color: RGBA(204, 152, 9, var(--vz-link-underline-opacity, 1)) !important
 }
@@ -8613,7 +8628,7 @@ fieldset:disabled .btn {
 
 .link-danger:focus,
 .link-danger:hover {
-    color: RGBA(192, 81, 58, var(--vz-link-opacity, 1)) !important;
+    color: RGBA(209, 107, 102, var(--vz-link-opacity, 1)) !important;
     -webkit-text-decoration-color: RGBA(192, 81, 58, var(--vz-link-underline-opacity, 1)) !important;
     text-decoration-color: RGBA(192, 81, 58, var(--vz-link-underline-opacity, 1)) !important
 }
@@ -8626,7 +8641,7 @@ fieldset:disabled .btn {
 
 .link-light:focus,
 .link-light:hover {
-    color: RGBA(245, 248, 250, var(--vz-link-opacity, 1)) !important;
+    color: RGBA(202, 205, 211, var(--vz-link-opacity, 1)) !important;
     -webkit-text-decoration-color: RGBA(245, 248, 250, var(--vz-link-underline-opacity, 1)) !important;
     text-decoration-color: RGBA(245, 248, 250, var(--vz-link-underline-opacity, 1)) !important
 }
@@ -8639,7 +8654,7 @@ fieldset:disabled .btn {
 
 .link-dark:focus,
 .link-dark:hover {
-    color: RGBA(26, 30, 33, var(--vz-link-opacity, 1)) !important;
+    color: RGBA(72, 80, 91                                                                                                                          , var(--vz-link-opacity, 1)) !important;
     -webkit-text-decoration-color: RGBA(26, 30, 33, var(--vz-link-underline-opacity, 1)) !important;
     text-decoration-color: RGBA(26, 30, 33, var(--vz-link-underline-opacity, 1)) !important
 }

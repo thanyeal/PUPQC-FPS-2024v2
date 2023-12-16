@@ -117,7 +117,7 @@
             </div>
             <div class="card-body p-0 pb-2">
                 <div class="card-body">
-                    <div id="prjects-status-1" data-colors='["--vz-success", "--vz-primary", "--vz-warning", "--vz-danger"]' class="apex-charts" dir="ltr"></div>
+                    <div id="prjects-status-1" class="apex-charts" dir="ltr"></div>
                     <div class="mt-3">
                         <div class="d-flex justify-content-center align-items-center mb-4">
                             <h2 class="me-3 ff-secondary mb-0"><span id="rb3">0</span></h2>
@@ -458,6 +458,10 @@
             height: '350px',
         },
         labels: ['Above 3.0', 'Below or Equal to 3.0'],
+        colors: [
+            getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
+            getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
+        ],
     };
     var chart = new ApexCharts(document.querySelector("#prjects-status-1"), options);
     chart.render();
