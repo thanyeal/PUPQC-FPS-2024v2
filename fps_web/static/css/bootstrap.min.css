@@ -47,14 +47,14 @@
     --vz-danger: #c64640;
     --vz-light: #f3f6f9;
     --vz-dark: #1a2432;
-    --vz-primary-rgb: 75, 56, 179;
-    --vz-secondary-rgb: 53, 119, 241;
-    --vz-success-rgb: 69, 203, 133;
-    --vz-info-rgb: 41, 156, 219;
-    --vz-warning-rgb: 255, 190, 11;
-    --vz-danger-rgb: 240, 101, 72;
+    --vz-primary-rgb: 52, 108, 190;
+    --vz-secondary-rgb: 110, 122, 143;
+    --vz-success-rgb: 91, 175, 83;
+    --vz-info-rgb: 121, 173, 226;
+    --vz-warning-rgb: 231, 111, 46;
+    --vz-danger-rgb: 198, 70, 64;
     --vz-light-rgb: 243, 246, 249;
-    --vz-dark-rgb: 33, 37, 41;
+    --vz-dark-rgb: 26, 36, 50;
 
     
     --vz-primary-text-emphasis: #403098;
@@ -133,7 +133,7 @@
     --vz-form-valid-color: #5baf53;
     --vz-form-valid-border-color: #5baf53;
     --vz-form-invalid-color: #c64640;
-    --vz-form-invalid-border-color: #c64640
+    --vz-form-invalid-border-color: #c64640;
 }
 
 [data-bs-theme=dark] {
