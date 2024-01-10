@@ -37,30 +37,39 @@ exec_dashboard
 evaluations
 eval_analytics
 
+# Profile
 exec_p_page
 exec_p_sett
 
+# Research Publication
 rsrch_analytics
 rsrch_tracking
 
+# Professional Development
 prdv_wrkshp_att
 prdv_wrkshp_anl
 
+# Attendance Leave Management
 alm_analytics
 alm_leaves_rec
 
+# Retention Exit
 retention_analytics
 retention_insights
 
+# Faculty
 fac_analytics
 fac_contents
 
+# Merit Promotions
 mrt_analytics
 mrt_promote
 
+# Workloads
 workload_dat
 workload_analytics
 
+# Awards and Recognition
 awards_analytics
 awards_recog
 
