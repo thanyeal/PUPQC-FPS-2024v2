@@ -95,7 +95,7 @@ def eval_analytics(request):
                 for key, value in semester_avg.items():
                     semester_avg[key] = round(float(value) ,1)
         # ================================================================================================================================================================================== teaching first data 
-        first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2023).order_by('semester', 'eval_year')
+        first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2024).order_by('semester', 'eval_year')
         first_semester_avg = first_semester_data.aggregate(
             avgz_spvs_rating=Avg('spvs_rating'),
             avgz_stud_rating=Avg('stud_rating'),
@@ -103,7 +103,7 @@ def eval_analytics(request):
             avgz_self_rating=Avg('self_rating') 
         )
 
-        second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2023).order_by('semester', 'eval_year')
+        second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2024).order_by('semester', 'eval_year')
         second_semester_avg = second_semester_data.aggregate(
             avgz_spvs_rating=Avg('spvs_rating'),
             avgz_stud_rating=Avg('stud_rating'),
@@ -123,7 +123,7 @@ def eval_analytics(request):
         }
         # ================================================================================================================================================================================== header
 
-        first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2023).order_by('semester', 'eval_year')
+        first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2024).order_by('semester', 'eval_year')
         first_semester_avg = first_semester_data.aggregate(
             avgz_spvs_rating=Avg('spvs_rating'),
             avgz_stud_rating=Avg('stud_rating'),
@@ -132,7 +132,7 @@ def eval_analytics(request):
         )
 
         # Calculate the average for the second semester
-        second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2023).order_by('semester', 'eval_year')
+        second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2024).order_by('semester', 'eval_year')
         second_semester_avg = second_semester_data.aggregate(
             avgz_spvs_rating=Avg('spvs_rating'),
             avgz_stud_rating=Avg('stud_rating'),

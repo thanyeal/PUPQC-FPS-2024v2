@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+# Table 1 - Evaluations w/ Upload
 class TableOne(models.Model):
 
     faculty_num = models.IntegerField(default=0)
@@ -57,7 +58,7 @@ class TableOne(models.Model):
 
     eval_year = models.DateTimeField(default=timezone.now)
 
-
+# Table 2 and 3 - Professional Development
 class TableTwo(models.Model):
     faculty_no = models.CharField(max_length=10)
     training_title = models.CharField(max_length=100)
@@ -73,12 +74,16 @@ class TableThree(models.Model):
     time_out = models.TimeField()
     training_title = models.CharField(max_length=100)
 
+# Table 4- Research Informations
 class TableFour(models.Model):
     rsrch_author = models.CharField(max_length=100)
     rsrch_title = models.CharField(max_length=200)
     rsrch_year = models.DateField()
     rsrch_publisher = models.CharField(max_length=100)
+    rsrch_category = models.CharField(max_length=100)
+    rsrch_author_type = models.CharField(max_length=50)
 
+# Table 5 - Merit and Promotions
 class TableFive(models.Model):
     merit_faculty_name      = models.CharField(max_length=50)
     merit_faculty_status    = models.CharField(max_length=50)
@@ -91,6 +96,7 @@ class TableFive(models.Model):
     merit_training_attended = models.CharField(max_length=100)
     merit_promotion         = models.BooleanField()
 
+# Table 6 - Faculty Leave Mgmt.
 class TableSix(models.Model):
     leave_faculty   = models.CharField(max_length=50)
     leave_type      = models.CharField(max_length=50)
@@ -99,14 +105,8 @@ class TableSix(models.Model):
     leave_duration  = models.IntegerField(default=0)
     leave_status    = models.CharField(max_length=20)
 
+# Table 7 - Faculty Workload
 class TableSeven(models.Model):
-    eval_faculty  = models.CharField(max_length=50)
-    eval_type     = models.CharField(max_length=20)
-    eval_person   = models.CharField(max_length=20)
-    eval_score    = models.DecimalField(decimal_places=2, default=0.0, max_digits=3)
-    eval_comms    = models.CharField(max_length=900)
-
-class TableEight(models.Model):
     workload_faculty    = models.CharField(max_length=50)
     workload_semester   = models.CharField(max_length=50)
     workload_course     = models.CharField(max_length=50)
@@ -114,21 +114,10 @@ class TableEight(models.Model):
     workload_duties     = models.CharField(max_length=100)
     workload_total      = models.IntegerField(default=0)
 
-class TableNine(models.Model):
+# Table 8 - Awards and Recognition
+class TableEight(models.Model):
     awards_faculty  = models.CharField(max_length=50)
     awards_title    = models.CharField(max_length=50)
     awards_date     = models.DateField()
     awards_type     = models.CharField(max_length=50)
     awards_status   = models.CharField(max_length=300)
-
-# class TableTen(models.Model):
-#     exit_faculty  = models.CharField(max_length=50)
-#     exit_join_d   = models.DateField
-#     exit_rank     = models.CharField(max_length=20)
-#     exit_salary   = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
-#     exit_workload = models.CharField(max_length=300)
-#     exit_factors  = models.CharField(max_length=300)
-#     exit_insight  = models.CharField(max_length=300)
-#     exit_status   = models.CharField(max_length=20)
-
-# not yet migrated

@@ -8,7 +8,10 @@ $(document).ready(function () {
             { "data": "rsrch_author" },
             { "data": "rsrch_title" },
             { "data": "rsrch_year" },
-            { "data": "rsrch_publisher" }
+            { "data": "rsrch_publisher" },
+            { "data": "rsrch_category" },
+            { "data": "rsrch_author_type" }
+
         ]
         //"pageLength": 25
     });
