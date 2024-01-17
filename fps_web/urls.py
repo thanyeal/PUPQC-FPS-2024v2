@@ -17,15 +17,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-# from fps_web import views
+from fps_web import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     path('', include('executive.urls')),
     path('', include('django.contrib.auth.urls')), 
     path('admin/', admin.site.urls),
-    # path('table/', views.table_list),
-    # path('table/<int:id>',views.table2_detail),
+    path('table/', views.table_list),
+    path('table/<int:id>',views.table2_detail),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
