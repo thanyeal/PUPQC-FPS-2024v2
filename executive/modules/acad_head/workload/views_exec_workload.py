@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from executive.models import TableEight
+from executive.models import TableSeven
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='login')
 def workload_dat(request):
     # Check if it's an AJAX request and return JSON data
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        queryset = TableEight.objects.all() 
+        queryset = TableSeven.objects.all() 
         data = [{
                 'workload_faculty'  : item.workload_faculty ,
                 'workload_semester' : item.workload_semester,

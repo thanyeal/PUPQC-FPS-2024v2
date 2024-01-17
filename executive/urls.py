@@ -27,14 +27,14 @@ urlpatterns = [
     path('awards_recog'     , views.awards_recog      , name="awards_recog"      ),
     path('awards_analytics' , views.awards_analytics  , name="awards_analytics"  ),
 
-    path('retentions'       , views.retention_insights   , name="retentions"     ),
-    path('ret_analytics'    , views.retention_analytics  , name="ret_analytics"  ),
+    # path('retentions'       , views.retention_insights   , name="retentions"     ),
+    # path('ret_analytics'    , views.retention_analytics  , name="ret_analytics"  ),
 
     path("mrt_promotion"    , views.mrt_promote     , name="mrt_promotion"  ),
     path("mrt_analytics"    , views.mrt_analytics   , name="mrt_analytics"  ),
 
-    path("fac_contents"     , views.fac_contents     , name="fac_contents"  ),
-    path("fac_analytics"    , views.fac_analytics    , name="fac_analytics" ),
+    # path("fac_contents"     , views.fac_contents     , name="fac_contents"  ),
+    # path("fac_analytics"    , views.fac_analytics    , name="fac_analytics" ),
 
     path("rsrch_analytics"  , views.rsrch_analytics   , name="rsrch_analytics"  ),
     path("rsrch_tracking"   , views.rsrch_tracking    , name="rsrch_tracking"   ),

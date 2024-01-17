@@ -9,10 +9,12 @@ def rsrch_tracking(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         queryset = TableFour.objects.all() 
         data = [{
-                'rsrch_author'      : item.rsrch_author     ,
-                'rsrch_title'       : item.rsrch_title      ,
-                'rsrch_year'        : item.rsrch_year       ,
-                'rsrch_publisher'   : item.rsrch_publisher  ,
+                'rsrch_author'      : item.rsrch_author         ,
+                'rsrch_title'       : item.rsrch_title          ,
+                'rsrch_year'        : item.rsrch_year           ,
+                'rsrch_publisher'   : item.rsrch_publisher      ,
+                'rsrch_category'    : item.rsrch_category       ,
+                'rsrch_author_type' : item.rsrch_author_type    ,
             } for item in queryset]
         return JsonResponse(data, safe=False)
     return render(request, 'executive/pages/rsrch_tracking.html')
