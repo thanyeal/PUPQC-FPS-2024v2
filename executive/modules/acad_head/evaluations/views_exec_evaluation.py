@@ -1,7 +1,3 @@
-
-
-
-
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import ExtractYear
 from django.shortcuts import render, redirect
@@ -168,8 +164,8 @@ def eval_analytics(request):
             'overall_avg_second': overall_avg_second_percentage
         }
         # ==================================================================================================================================================================================
-        rating_above_3 = TableOne.objects.filter(stud_rating__gt=3.00)
-        rating_below_3 = TableOne.objects.filter(stud_rating__lte=2.99)
+        rating_above_3 = TableOne.objects.filter(stud_rating__gt=4.00)
+        rating_below_3 = TableOne.objects.filter(stud_rating__lte=3.99)
 
         count_ra3 = rating_above_3.count()
         count_rb3 = rating_below_3.count()
@@ -209,4 +205,6 @@ def eval_analytics(request):
             'percentage'  : serialized_prctg_rating 
         }
         return render(request, 'executive/pages/eval_analytics.html', context)
-        # return JsonResponse(count_ra3, safe=False)
+
+        #from django.http import JsonResponse
+        #return JsonResponse(context, safe=False)

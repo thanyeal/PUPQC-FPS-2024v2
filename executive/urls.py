@@ -58,4 +58,8 @@ urlpatterns = [
     path('validate-lname'   , csrf_exempt(LastnameValidation.as_view()) , name=''),
     path('validate-fname'   , csrf_exempt(FirstnameValidation.as_view()), name=''),
     path('validate-mname'   , csrf_exempt(UsernameValidation.as_view()) , name=''),
+
+    path('table/', views.table_list),
+    path('table/<int:id>',views.table2_detail),
 ]
+
