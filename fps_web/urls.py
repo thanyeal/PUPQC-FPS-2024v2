@@ -18,7 +18,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 # from fps_web import views
-from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     path('', include('executive.urls')),
@@ -28,4 +27,9 @@ urlpatterns = [
     # path('table/<int:id>',viewzs.table2_detail),
 ]
 
+from rest_framework.urlpatterns import format_suffix_patterns
 urlpatterns = format_suffix_patterns(urlpatterns)
+
+
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+urlpatterns += staticfiles_urlpatterns()

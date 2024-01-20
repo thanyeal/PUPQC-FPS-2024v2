@@ -20,6 +20,7 @@ django-filepond = "*"
 gunicorn = "*"
 djangorestframework = "*"
 requests = "*"
+dj-database-url = "*"
 
 [dev-packages]
 
