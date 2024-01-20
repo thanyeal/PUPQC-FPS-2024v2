@@ -90,36 +90,127 @@ def eval_analytics(request):
             for semester_avg in [year_data['first_semester_avg'], year_data['second_semester_avg']]:
                 for key, value in semester_avg.items():
                     semester_avg[key] = round(float(value) ,1)
+
         # ================================================================================================================================================================================== teaching first data 
-        first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2024).order_by('semester', 'eval_year')
-        first_semester_avg = first_semester_data.aggregate(
-            avgz_spvs_rating=Avg('spvs_rating'),
-            avgz_stud_rating=Avg('stud_rating'),
-            avgz_peer_rating=Avg('peer_rating'),
-            avgz_self_rating=Avg('self_rating') 
+        frst_sem_avg_year = (
+            TableOne.objects.filter(semester='First')
+            .annotate(eval_year_year=ExtractYear('eval_year'))
+            .values('eval_year_year')
+            .annotate(
+                avgz_spvs_rating=Avg('spvs_rating'),
+                avgz_stud_rating=Avg('stud_rating'),
+                avgz_peer_rating=Avg('peer_rating'),
+                avgz_self_rating=Avg('self_rating')
+            )
+        )
+        scnd_sem_avg_year = (
+            TableOne.objects.filter(semester='Second')
+            .annotate(eval_year_year=ExtractYear('eval_year'))
+            .values('eval_year_year')
+            .annotate(
+                avgz_spvs_rating=Avg('spvs_rating'),
+                avgz_stud_rating=Avg('stud_rating'),
+                avgz_peer_rating=Avg('peer_rating'),
+                avgz_self_rating=Avg('self_rating')
+            )
+        )
+        summer_sem_avg_year = (
+            TableOne.objects.filter(semester='Summer')
+            .annotate(eval_year_year=ExtractYear('eval_year'))
+            .values('eval_year_year')
+            .annotate(
+                avgz_spvs_rating=Avg('spvs_rating'),
+                avgz_stud_rating=Avg('stud_rating'),
+                avgz_peer_rating=Avg('peer_rating'),
+                avgz_self_rating=Avg('self_rating')
+            )
         )
 
-        second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2024).order_by('semester', 'eval_year')
-        second_semester_avg = second_semester_data.aggregate(
-            avgz_spvs_rating=Avg('spvs_rating'),
-            avgz_stud_rating=Avg('stud_rating'),
-            avgz_peer_rating=Avg('peer_rating'),
-            avgz_self_rating=Avg('self_rating')
-        )
+        ave_per_cattz = {}
 
-        ave_per_cattz = {
-            'spvs_first':   [round ( float ( first_semester_avg  ['avgz_spvs_rating'] ), 1)],
-            'stud_first':   [round ( float ( first_semester_avg  ['avgz_stud_rating'] ), 1)],
-            'peerr_first':  [round ( float ( first_semester_avg  ['avgz_peer_rating'] ), 1)],
-            'selff_first':  [round ( float ( first_semester_avg  ['avgz_self_rating'] ), 1)],
-            'spvs_second':  [round ( float ( second_semester_avg ['avgz_spvs_rating'] ), 1)],
-            'stud_second':  [round ( float ( second_semester_avg ['avgz_stud_rating'] ), 1)],
-            'peerr_second': [round ( float ( second_semester_avg ['avgz_peer_rating'] ), 1)],
-            'selff_second': [round ( float ( second_semester_avg ['avgz_self_rating'] ), 1)],
-        }
+        for entry in frst_sem_avg_year:
+            years = entry['eval_year_year']
+            if years not in ave_per_cattz:
+                ave_per_cattz[years] = {
+                    'year': years,
+                    'frst_semester_avg': {},
+                    'scnd_semester_avg': {},
+                    'summer_semester_avg': {},
+                }
+            ave_per_cattz[years]['frst_semester_avg'] = {
+                'avgz_spvs_rating': entry['avgz_spvs_rating'],
+                'avgz_stud_rating': entry['avgz_stud_rating'],
+                'avgz_peer_rating': entry['avgz_peer_rating'],
+                'avgz_self_rating': entry['avgz_self_rating'],
+            }
+
+        for entry in scnd_sem_avg_year:
+            years = entry['eval_year_year']
+            if years not in ave_per_cattz:
+                ave_per_cattz[years] = {
+                    'year': years,
+                    'frst_semester_avg': {},
+                    'scnd_semester_avg': {},
+                    'summer_semester_avg': {},
+                }
+            ave_per_cattz[years]['scnd_semester_avg'] = {
+                'avgz_spvs_rating': entry['avgz_spvs_rating'],
+                'avgz_stud_rating': entry['avgz_stud_rating'],
+                'avgz_peer_rating': entry['avgz_peer_rating'],
+                'avgz_self_rating': entry['avgz_self_rating'],
+            }
+
+        for entry in summer_sem_avg_year:
+            years = entry['eval_year_year']
+            if years not in ave_per_cattz:
+                ave_per_cattz[years] = {
+                    'year': years,
+                    'frst_semester_avg': {},
+                    'scnd_semester_avg': {},
+                    'summer_semester_avg': {},
+                }
+            ave_per_cattz[years]['summer_semester_avg'] = {
+                'avgz_spvs_rating': entry['avgz_spvs_rating'],
+                'avgz_stud_rating': entry['avgz_stud_rating'],
+                'avgz_peer_rating': entry['avgz_peer_rating'],
+                'avgz_self_rating': entry['avgz_self_rating'],
+            }
+
+        for years_data in ave_per_cattz.values():
+            for semester_avgz in [years_data['frst_semester_avg'], years_data['scnd_semester_avg'], years_data['summer_semester_avg']]:
+                for key, value in semester_avgz.items():
+                    semester_avgz[key] = round(float(value) ,1)
+
+
+        # first_semester_data = TableOne.objects.filter(semester='First').order_by('semester', 'eval_year')
+        # first_semester_avg = first_semester_data.aggregate(
+        #     avgz_spvs_rating=Avg('spvs_rating'),
+        #     avgz_stud_rating=Avg('stud_rating'),
+        #     avgz_peer_rating=Avg('peer_rating'),
+        #     avgz_self_rating=Avg('self_rating') 
+        # )
+
+        # second_semester_data = TableOne.objects.filter(semester='Second').order_by('semester', 'eval_year')
+        # second_semester_avg = second_semester_data.aggregate(
+        #     avgz_spvs_rating=Avg('spvs_rating'),
+        #     avgz_stud_rating=Avg('stud_rating'),
+        #     avgz_peer_rating=Avg('peer_rating'),
+        #     avgz_self_rating=Avg('self_rating')
+        # )
+
+        # ave_per_cattz = {
+        #     'spvs_first':   [round ( float ( first_semester_avg  ['avgz_spvs_rating'] ), 1)],
+        #     'stud_first':   [round ( float ( first_semester_avg  ['avgz_stud_rating'] ), 1)],
+        #     'peerr_first':  [round ( float ( first_semester_avg  ['avgz_peer_rating'] ), 1)],
+        #     'selff_first':  [round ( float ( first_semester_avg  ['avgz_self_rating'] ), 1)],
+        #     'spvs_second':  [round ( float ( second_semester_avg ['avgz_spvs_rating'] ), 1)],
+        #     'stud_second':  [round ( float ( second_semester_avg ['avgz_stud_rating'] ), 1)],
+        #     'peerr_second': [round ( float ( second_semester_avg ['avgz_peer_rating'] ), 1)],
+        #     'selff_second': [round ( float ( second_semester_avg ['avgz_self_rating'] ), 1)],
+        # }
         # ================================================================================================================================================================================== header
 
-        first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=2024).order_by('semester', 'eval_year')
+        first_semester_data = TableOne.objects.filter(semester='First').order_by('semester', 'eval_year')
         first_semester_avg = first_semester_data.aggregate(
             avgz_spvs_rating=Avg('spvs_rating'),
             avgz_stud_rating=Avg('stud_rating'),
@@ -128,7 +219,7 @@ def eval_analytics(request):
         )
 
         # Calculate the average for the second semester
-        second_semester_data = TableOne.objects.filter(semester='Second', eval_year__year=2024).order_by('semester', 'eval_year')
+        second_semester_data = TableOne.objects.filter(semester='Second').order_by('semester', 'eval_year')
         second_semester_avg = second_semester_data.aggregate(
             avgz_spvs_rating=Avg('spvs_rating'),
             avgz_stud_rating=Avg('stud_rating'),
@@ -206,5 +297,5 @@ def eval_analytics(request):
         }
         return render(request, 'executive/pages/eval_analytics.html', context)
 
-        #from django.http import JsonResponse
-        #return JsonResponse(context, safe=False)
+        from django.http import JsonResponse
+        return JsonResponse(context, safe=False)

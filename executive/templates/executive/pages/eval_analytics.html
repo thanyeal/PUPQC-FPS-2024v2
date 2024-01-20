@@ -57,27 +57,11 @@
     <div class="col-lg-9">
         <div class="card card-height-100">
             <div class="card-header border-0 align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">Faculty Evaluation Average Ratings</h4>
-                <div>
-                    <button type="button" class="btn btn-soft-secondary btn-sm shadow-none">
-                        2019
-                    </button>
-                    <button type="button" class="btn btn-soft-secondary btn-sm shadow-none">
-                        2020
-                    </button>
-                    <button type="button" class="btn btn-soft-secondary btn-sm shadow-none">
-                        2021
-                    </button>
-                    <button type="button" class="btn btn-soft-secondary btn-sm shadow-none">
-                        2022
-                    </button>
-                    <button type="button" class="btn btn-soft-secondary btn-sm shadow-none">
-                        2023
-                    </button>
-                    <button type="button" class="btn btn-soft-primary btn-sm shadow-none">
-                        2024
-                    </button>
-                </div>
+                <h4 class="col-10 card-title mb-0 flex-grow-1">Faculty Evaluation Average Ratings</h4>
+                
+                <label class="col-2 m-0">
+                    <select id="yearDropdownForEval" onchange="updateEvaluationz()" class="form-select form-select-sm"></select>
+                </label>
             </div>
             <div class="card-body p-0 pb-2">
                 <div class="w-100">
@@ -145,8 +129,15 @@
     <div class="col-lg-12">
         <div class="card card-height-100">
             <div class="card-header align-items-center d-flex">
-                <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">Trends in Teaching Effectiveness Over Time</h4>
+                <h4 class="col-11 table-h4-white-text card-title mb-0 flex-grow-1">
+                    Trends in Teaching Effectiveness Over Time
+                </h4>
+                
+                <label class="col-1">
+                    <select id="yearDropdown" onchange="updateChart()" class="form-select form-select-sm"></select>
+                </label>
             </div>
+
             <div class="card-body p-0 pb-2">
                 <div class="w-100">
                     <div class="card-header p-0 border-0 bg-light-subtle">
@@ -203,11 +194,268 @@
 <script>
     // Faculty Performance vs. Institutional Requirement
     var chartDataTwo = JSON.parse('{{ chart_data_two|escapejs|safe }}');
+    var chartData= Object.values(chartDataTwo);
+    var yearForEval = chartData.map(item => item.year);
+    
+    
+    var frstSemesterRatings = chartData.map(function (item) {
+        return {
+            'avgz_spvs_rating': item.frst_semester_avg.avgz_spvs_rating,
+            'avgz_stud_rating': item.frst_semester_avg.avgz_stud_rating,
+            'avgz_peer_rating': item.frst_semester_avg.avgz_peer_rating,
+            'avgz_self_rating': item.frst_semester_avg.avgz_self_rating,
+        };
+    });
+
+    var scndSemesterRatings = chartData.map(function (item) {
+        return {
+            'avgz_spvs_rating': item.scnd_semester_avg.avgz_spvs_rating,
+            'avgz_stud_rating': item.scnd_semester_avg.avgz_stud_rating,
+            'avgz_peer_rating': item.scnd_semester_avg.avgz_peer_rating,
+            'avgz_self_rating': item.scnd_semester_avg.avgz_self_rating,
+        };
+    });
+
+    var summmerSemesterRatings = chartData.map(function (item) {
+        return {
+            'avgz_spvs_rating': item.summer_semester_avg.avgz_spvs_rating,
+            'avgz_stud_rating': item.summer_semester_avg.avgz_stud_rating,
+            'avgz_peer_rating': item.summer_semester_avg.avgz_peer_rating,
+            'avgz_self_rating': item.summer_semester_avg.avgz_self_rating,
+        };
+    });
+
+    var series = [
+
+        {
+            name: '1st Sem SPVS Rating',
+            data: frstSemesterRatings.map(function (item) {
+                return item.avgz_spvs_rating;
+            }),
+        },
+
+        {
+            name: '1st Sem Students Rating',
+            data: frstSemesterRatings.map(function (item) {
+                return item.avgz_stud_rating;
+            }),
+        },
+
+        {
+            name: '1st Sem Peer Rating',
+            data: frstSemesterRatings.map(function (item) {
+                return item.avgz_peer_rating;
+            }),
+        },
+
+        {
+            name: '1st Sem Self Rating',
+            data: frstSemesterRatings.map(function (item) {
+                return item.avgz_self_rating;
+            }),
+        },
+
+        {
+            name: '2nd Sem SPVS Rating',
+            data: scndSemesterRatings.map(function (item) {
+                return item.avgz_spvs_rating;
+            }),
+        },
+
+        {
+            name: '2nd Sem Students Rating',
+            data: scndSemesterRatings.map(function (item) {
+                return item.avgz_stud_rating;
+            }),
+        },
+
+        {
+            name: '2nd Sem Peer Rating',
+            data: scndSemesterRatings.map(function (item) {
+                return item.avgz_peer_rating;
+            }),
+        },
+
+        {
+            name: '2nd Sem Self Rating',
+            data: scndSemesterRatings.map(function (item) {
+                return item.avgz_self_rating;
+            }),
+        },
+
+        {
+            name: 'Summer Semester SPVS Rating',
+            data: summmerSemesterRatings.map(function (item) {
+                return item.avgz_spvs_rating;
+            }),
+        },
+
+        {
+            name: 'Summer Students Rating',
+            data: summmerSemesterRatings.map(function (item) {
+                return item.avgz_stud_rating;
+            }),
+        },
+
+        {
+            name: 'Summer Semester Peer Rating',
+            data: summmerSemesterRatings.map(function (item) {
+                return item.avgz_peer_rating;
+            }),
+        },
+
+        {
+            name: 'Summer Semester Self Rating',
+            data: summmerSemesterRatings.map(function (item) {
+                return item.avgz_self_rating;
+            }),
+        },
+    ];
+
+    // Chart configuration object
+    var options = {
+        chart: {
+            type: 'bar',
+            height: 350,
+            zoom: { enabled: false },
+            toolbar: { show: false },
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+            },
+        },
+        colors: [
+            getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
+            getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
+            getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
+            getComputedStyle(document.documentElement).getPropertyValue('--vz-dark'),
+        ],
+        xaxis: {
+            categories: yearForEval,
+            title: {
+                text: 'Academic Year/s',
+            },
+        },
+        yaxis: {
+            title: {
+                text: 'Average Rating',
+            },
+        },
+        series: series,
+    };
+
+    var chartz = new ApexCharts(document.querySelector("#line-chart-two"), options);
+    chartz.render();
+
+        // Populate the year dropdown
+        var yearDropdownForEval = document.getElementById('yearDropdownForEval');
+        
+        // Add "Display All" option as the first option
+        var allOptionForEval = document.createElement('option');
+            allOptionForEval.value = "all";
+            allOptionForEval.text = "Display All";
+        yearDropdownForEval.add(allOptionForEval);
+
+        // Read the Json data for "Years"
+        yearForEval.forEach( yearForEval => {
+            var optionForEval = document.createElement('option');
+                optionForEval.value = yearForEval;
+                optionForEval.text = yearForEval;
+            yearDropdownForEval.appendChild(optionForEval);
+        });
+
+        // Function to update the chart based on the selected year
+        function updateEvaluationz() {
+            var selectedYearForEval = yearDropdownForEval.value;
+            var filteredYearDataForEval = chartData.filter(item => item.year == selectedYearForEval);
+            
+            if (selectedYearForEval == "all") {
+                var filteredYearDataForEval = chartData;
+            }
+            
+            if (filteredYearDataForEval.length > 0) {
+                var filteredSeriesForEval = [
+                    //++++++++
+                    {
+                        name: '1st Sem SPVS Rating',
+                        data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_spvs_rating)
+                    },
+                    
+                    {
+                        name: '1st Sem Students Rating',
+                        data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_stud_rating)
+                    },
+                    {
+                        name: '1st Sem Peer Rating',
+                        data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_peer_rating)
+                    },
+                    
+                    {
+                        name: '1st Sem Self Rating',
+                        data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_self_rating)
+                    },
+                    //++++++++
+                    {
+                        name: '2nd Sem SPVS Rating',
+                        data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_spvs_rating)
+                    },
+                    
+                    {
+                        name: '2nd Sem Students Rating',
+                        data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_stud_rating)
+                    },
+                    {
+                        name: '2nd Sem Peer Rating',
+                        data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_peer_rating)
+                    },
+                    
+                    {
+                        name: '2nd Sem Self Rating',
+                        data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_self_rating)
+                    },
+                    //+++++++++
+                    {
+                        name: 'Summer Sem SPVS Rating',
+                        data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_spvs_rating)
+                    },
+                    
+                    {
+                        name: 'Summer Sem Students Rating',
+                        data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_stud_rating)
+                    },
+                    {
+                        name: 'Summer Sem Peer Rating',
+                        data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_peer_rating)
+                    },
+                    
+                    {
+                        name: 'Summer Sem Self Rating',
+                        data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_self_rating)
+                    },
+
+                ];
+                
+                chartz.updateOptions({
+                    xaxis: {
+                        categories: filteredYearDataForEval.map(item => item.year)
+                    }
+                    
+                });
+                chartz.updateSeries(filteredSeriesForEval);
+            }
+            else {
+                console.error('No data found for the selected year.');
+            }
+        }
+        
+        updateEvaluationz();
+        yearDropdownForEval.addEventListener('change', updateEvaluationz);
 </script>
 
 <script>
     // Trends in Teaching Effectiveness Over Time
-    var combinedData = JSON.parse('{{ combined_data|safe }}');
+    var combinedData = JSON.parse('{{ combined_data|escapejs|safe }}');
 </script>
 
 <script>
@@ -219,6 +467,7 @@
     // Average Student Scores for Each Faculty: Count
     const percentaging = JSON.parse('{{ percentage|escapejs }}');
 </script>
+
 
 <script src="{% static 'js/main/eval_analytics/eval_analytics.js' %}"></script>
 {% endblock %}

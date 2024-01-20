@@ -5,7 +5,7 @@ $(document).ready(function () {
             "dataSrc": ""
         },
         "columns": [
-            { "data": "faculty_num" },
+            //{ "data": "faculty_num" },
             { "data": "facultyname" },
             { "data": "spvs_rating" },
             { "data": "spvs_interp" },

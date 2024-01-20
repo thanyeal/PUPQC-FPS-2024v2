@@ -6,7 +6,7 @@ def insert_data(apps, schema_editor):
     TableEight = apps.get_model('executive', 'TableEight')
 
     data = [
-        ["Abalos, Karl Christian D."        , "Teaching Excellence Award"                            , "2023-11-19"      , "Teaching Excellence"    , "Verified"],
+        ["Abalos, Karl Christian D."        , "Teaching Excellence Award"                           , "2023-11-19"      , "Teaching Excellence"    , "Verified"],
         ["Aquino, Rodolfo Y.  Jr."          , "Research Achievement Award"                          , "2023-11-19"      , "Teaching Excellence"    , "Verified"],
         ["Aribon, Mark Anthony R. III"      , "Service to the Community Award"                      , "2023-11-19"      , "Teaching Excellence"    , "Verified"],
         ["Bactasa, Melanie F."              , "Outstanding Mentorship Award"                        , "2023-11-19"      , "Teaching Excellence"    , "Verified"],
