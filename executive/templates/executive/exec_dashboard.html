@@ -24,7 +24,7 @@
 </style>
 
         <!-- start page title -->
-        <div class="row">
+        <!--div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0">
@@ -45,14 +45,31 @@
 
                 </div>
             </div>
-        </div>
-
+        </div-->
+<div class="card-body px-4 pb-4">
         <div class="position-relative mx-n4 mt-n4">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0">
+                    <span id="greeting"></span>, 
+                    {% if user.is_authenticated %}
+                        {{ user.first_name }}
+                    {% else %}
+                        Guest
+                    {% endif %}
+                </h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <b class="breadcrumb-item" id="time"></b>
+                        <b class="breadcrumb-item" id="date"></b>
+                    </ol>
+                </div>
+            </div>
             <div class="profile-wid-bg profile-setting-img">
                 <img src="{% static 'img/pup-main.jpg' %}" class="profile-wid-img" alt="">
             </div>
         </div>
-
+    </div>
         <div class="row">
             <div class="col-xl-12">
                 <div class="card crm-widget mt-n5">
