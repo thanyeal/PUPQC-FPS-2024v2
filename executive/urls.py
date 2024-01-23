@@ -44,6 +44,7 @@ urlpatterns = [
 
     # for maintenance page
     path('coming_soon'      , views.coming_soon     , name="coming_soon"),
+    path('fac_mgmnt'      , views.fac_mgmnt    , name="fac_mgmnt"),
 
     # for log and reg page
     path('registry/'        , views.registry        , name="registry"   ),
