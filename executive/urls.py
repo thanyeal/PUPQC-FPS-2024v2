@@ -61,5 +61,8 @@ urlpatterns = [
 
     path('table/', views.table_list),
     path('table/<int:id>',views.table2_detail),
+    path('postman/', views.testapifrompostmanshit),
+    path('ris/', views.testresearchinfodata),
+    path('fis/', views.testfacultyinfodata)
 ]
 

@@ -18,15 +18,8 @@ function getChartColorsArray(e) {
     }
 }
 // THIS IS FOR FPS
-var valrepResearch = {
-    // for research published
-    36: 50,    
-    27: 30,  
-    18: 20,  
-    9: 10,  
-    0: 0,
-    
-}
+// --- -m: already imported
+
 
 var valrepCommittee = {
     // for committee and service contributions
@@ -36,72 +29,11 @@ var valrepCommittee = {
     104: 40,
     52: 20,
     0: 0,
-};
+}
 // for research and productivity
-var options,
-    chart,
-    areachartSalesColors = getChartColorsArray("sales-forecast-chart"),
-    dealTypeChartsColors =
-        (areachartSalesColors &&
-            ((options = {
-                series: [
-                    { name: "2021", data: [37] },
-                    { name: "2022", data: [12] },
-                    { name: "2023", data: [18] },
-                ],
-                chart: { type: "bar", height: 341, toolbar: { show: !1 } },
-                plotOptions: { bar: { horizontal: !1, columnWidth: "65%" } },
-                stroke: { show: !0, width: 5, colors: ["transparent"] },
-                xaxis: {
-                    categories: [""],
-                    axisTicks: {
-                        show: !1,
-                        borderType: "solid",
-                        color: "#78909C",
-                        height: 6,
-                        offsetX: 0,
-                        offsetY: 0,
-                    },
-                    title: {
-                        text: "Total Forecasted Value",
-                        offsetX: 0,
-                        offsetY: -30,
-                        style: { color: "#78909C", fontSize: "12px", fontWeight: 400 },
-                    },
-                },
-                yaxis: {       
-                    labels: {
-                        formatter: function (e) {
-                            // Check if 'e' exists in the lookup table, if so, replace it
-                            if (valrepResearch.hasOwnProperty(e)) {
-                                e = valrepResearch[e];
-                            }
-                            // Format and return the modified 'e'
-                            return e;
-                        },
-                    },
-                    max: 50,
-                },
-                fill: { opacity: 1 },
-                legend: {
-                    show: !0,
-                    position: "bottom",
-                    horizontalAlign: "center",
-                    fontWeight: 500,
-                    offsetX: 0,
-                    offsetY: -14,
-                    itemMargin: { horizontal: 8, vertical: 0 },
-                    markers: { width: 10, height: 10 },
-                },
-                colors: areachartSalesColors,
-            }),
-            (chart = new ApexCharts(
-                document.querySelector("#sales-forecast-chart"),
-                options
-            )).render()),
-
+// --- -m: already imported in rsrch.html
+    
 // for performance evaluation
-            getChartColorsArray("deal-type-charts")),
     revenueExpensesChartsColors =
         (dealTypeChartsColors &&
             ((options = {

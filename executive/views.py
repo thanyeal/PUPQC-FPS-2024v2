@@ -86,6 +86,32 @@ from .serializers import TableTwoSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+import requests
+
+
+@api_view(['GET'])
+def testapifrompostmanshit(request, format=None):
+    # try:
+        response = requests.get('https://covid-api.com/api/regions')
+        response.raise_for_status()
+        data = response.json()
+        return Response(data)
+    # except requests.exceptions.RequestException as e:
+        # return Response({'error': str(e)}, status=500)  # Handle errors gracefully
+    
+@api_view(['GET'])
+def testresearchinfodata(request, format=None):
+    response_one = requests.get('https://research-info-system-qegn.onrender.com/integration/faculty/research-papers/list')
+    response_one.raise_for_status()
+    data_one = response_one.json()
+    return Response(data_one)
+    
+@api_view(['GET'])
+def testfacultyinfodata(request, format=None):
+    response_two = requests.get('https://pupqcfis-com.onrender.com/api/all/FISFaculty')
+    response_two.raise_for_status()
+    data_two = response_two.json()
+    return Response(data_two)
 
 @api_view(['GET', 'POST'])
 def table_list(request, format=None):
@@ -100,7 +126,6 @@ def table_list(request, format=None):
         if serializer.is_valid():           
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def table2_detail(request, id, format=None):

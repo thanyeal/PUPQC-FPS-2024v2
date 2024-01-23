@@ -14,6 +14,8 @@ from pathlib import Path
 from .db_config import SECRET_KEY, DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_OPTIONS
 import os, dj_database_url
 from django.contrib import messages
+from dotenv import load_dotenv; load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -114,7 +116,7 @@ DATABASES = {
         default='postgres://mypupqc_fpsv2_user:Po94FCMtdoftbbE1zMTd8AM9v695XlZ4@dpg-cmlv5v7109ks7395m7n0-a.singapore-postgres.render.com/mypupqc_fpsv2',
     )
 }
-print(os.environ.get("DATABASE_URL"))
+# print(os.environ.get("DATABASE_URL"))
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

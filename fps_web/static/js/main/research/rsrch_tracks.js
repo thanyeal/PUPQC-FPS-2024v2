@@ -5,12 +5,12 @@ $(document).ready(function () {
             "dataSrc": ""
         },
         "columns": [
-            { "data": "rsrch_author" },
-            { "data": "rsrch_title" },
-            { "data": "rsrch_year" },
-            { "data": "rsrch_publisher" },
-            { "data": "rsrch_category" },
-            { "data": "rsrch_author_type" }
+            { "data": "Author" },
+            { "data": "Research Title" },
+            { "data": "Publication Year" },
+            { "data": "Publisher" },
+            { "data": "Category" },
+            { "data": "Author Type" }
 
         ]
         //"pageLength": 25

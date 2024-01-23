@@ -113,9 +113,8 @@ chart.render();
         else {
             console.error('No data found for the selected year.');
         }
-    }
+    } updateChart();
     
-    updateChart();
     yearDropdown.addEventListener('change', updateChart);
 
 
@@ -172,5 +171,3 @@ function initializePercentCount () {
         rb3.textContent = valueToSetFour;
     });
 }  initializePercentCount ()
-
-

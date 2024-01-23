@@ -21,6 +21,8 @@ gunicorn = "*"
 djangorestframework = "*"
 requests = "*"
 dj-database-url = "*"
+python-dotenv = "*"
+python-dateutil = "*"
 
 [dev-packages]
 

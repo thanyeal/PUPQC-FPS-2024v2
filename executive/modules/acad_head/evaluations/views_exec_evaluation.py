@@ -5,6 +5,7 @@ from executive.models import TableOne
 from django.db.models import Avg
 from decimal import Decimal
 import json
+from django.http import JsonResponse
 
 @login_required(login_url='login')
 def convert_decimal_to_float(obj):
@@ -280,7 +281,7 @@ def eval_analytics(request):
         serialized_data_two      = json.dumps(ave_per_cattz)
         serialized_overall_avg   = json.dumps(overall_avg_dict)
         serialized_combined_data = json.dumps(combined_data)
-        serialized_prctg_rating     = json.dumps(two_ratings)
+        serialized_prctg_rating  = json.dumps(two_ratings)
 
 
         # serialized_data           = json.dumps(data)
@@ -295,7 +296,5 @@ def eval_analytics(request):
             'combined_data'     : serialized_combined_data  ,
             'percentage'  : serialized_prctg_rating 
         }
+        #return JsonResponse(context, safe=False)
         return render(request, 'executive/pages/eval_analytics.html', context)
-
-        from django.http import JsonResponse
-        return JsonResponse(context, safe=False)
