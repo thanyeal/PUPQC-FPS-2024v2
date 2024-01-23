@@ -79,7 +79,7 @@
                                 {% comment %} <label  class="btn btn-primary w-100">Choose File</label>{{ form.excel_file }} {% endcomment %}
 
                                 <div class="mt-1 pt-2 hstack gap-2">
-                                    <button type="submit" class="btn btn-primary w-100">Upload</button> {% comment %}data-bs-toggle="modal" data-bs-target="#myuploadModal"{% endcomment %}
+                                    <button type="submit" class="btn btn-primary w-100" disabled>Upload</button> {% comment %}data-bs-toggle="modal" data-bs-target="#myuploadModal"{% endcomment %}
                                     <a href="#!" class="btn btn-soft-danger btn-icon custom-toggle flex-shrink-0"  data-bs-toggle="modal" data-bs-target="#myannouncementModal">
                                         <span class="icon-on"><i class="ri-question-line align-bottom"></i></span>
                                         <span class="icon-off"><i class="ri-question-fill align-bottom"></i></span>
@@ -143,7 +143,6 @@
                         <table id="datatable" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Faculty Number</th>
                                     <th>Faculty Name</th>
                                     <th>Supervisor Rating</th>
                                     <th>Supervisor Interpretation</th>

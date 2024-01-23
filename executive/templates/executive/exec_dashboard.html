@@ -58,22 +58,24 @@
                 <div class="card crm-widget mt-n5">
                     <div class="card-body p-0">
                         <div class="row row-cols-xxl-5 row-cols-md-3 row-cols-1 g-0">
+
                             <div class="col">
                                 <div class="py-4 px-3">
-                                    <h5 class="text-muted text-uppercase fs-13">Performing Faculties <i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i></h5>
+                                    <h5 class="text-muted text-uppercase fs-13">Institutional Average Rating <!--i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i--></h5>
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
-                                            <i class="ri-user-line display-6 text-muted"></i>
+                                            <i class="ri-chat-smile-3-line display-6 text-muted"></i>
                                         </div>
                                         <div class="flex-grow-1 ms-3">
-                                            <h2 class="mb-0"><span class="counter-value" data-target="35">0</span></h2>
+                                            <h2 class="mb-0"><span class="counter-value" data-target="4.2">0</span></h2>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col">
                                 <div class="mt-3 mt-md-0 py-4 px-3">
-                                    <h5 class="text-muted text-uppercase fs-13">Research Product<i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i></h5>
+                                    <h5 class="text-muted text-uppercase fs-13">Total Research Products <!--i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i--></h5>
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
                                             <i class="ri-book-line display-6 text-muted"></i>
@@ -84,45 +86,94 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col">
                                 <div class="mt-3 mt-md-0 py-4 px-3">
-                                    <h5 class="text-muted text-uppercase fs-13">Merit and Promotion<i class="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle"></i></h5>
+                                    <h5 class="text-muted text-uppercase fs-13">Awarded Faculties <!--i class="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle"></i--></h5>
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
                                             <i class="ri-award-fill display-6 text-muted"></i>
                                         </div>
                                         <div class="flex-grow-1 ms-3">
-                                            <h2 class="mb-0"><span class="counter-value" data-target="52.89">0</span>%</h2>
+                                            <h2 class="mb-0"><span class="counter-value" data-target="23">0</span></h2>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col">
                                 <div class="mt-3 mt-lg-0 py-4 px-3">
-                                    <h5 class="text-muted text-uppercase fs-13">Successfull Trainings<i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i></h5>
+                                    <h5 class="text-muted text-uppercase fs-13">Successfull Trainings<!--i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i--></h5>
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
-                                            <i class="ri-trophy-line display-6 text-muted"></i>
+                                            <i class="ri-user-settings-line display-6 text-muted"></i>
                                         </div>
                                         <div class="flex-grow-1 ms-3">
-                                            <h2 class="mb-0"><span class="counter-value" data-target="1235">0</span></h2>
+                                            <h2 class="mb-0"><span class="counter-value" data-target="135">0</span></h2>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col">
                                 <div class="mt-3 mt-lg-0 py-4 px-3">
-                                    <h5 class="text-muted text-uppercase fs-13">Highest Faculty Performance Rate<i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i></h5>
+                                    <h5 class="text-muted text-uppercase fs-13">Reduced Workloads <!--i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i--></h5>
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
-                                            <i class="ri-service-line display-6 text-muted"></i>
+                                            <i class="ri-refresh-line display-6 text-muted"></i>
                                         </div>
                                         <div class="flex-grow-1 ms-3">
-                                            <h2 class="mb-0"><span class="counter-value" data-target="94.67">0</span>%</h2>
+                                            <h2 class="mb-0"><span class="counter-value" data-target="14">0</span></h2>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xxl-12">
+                <div class="card card-height-100">
+                    <div class="card-header border-0 align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1">Faculty Evaluations</h4>
+                        <div class="flex-shrink-0">
+                            <a href="{% url 'eval_analytics' %}" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+            
+                    <div class="card-header p-0 border-0 bg-light-subtle">
+                        <div class="row g-0 text-center">
+                            <div class="col-6 col-sm ">
+                                <div class="p-3 border border-dashed border-start-0">
+                                    <h5 class="mb-1 fs-17 fw-semibold text-info"><span class="counter-value" data-target="98" >0</span>%</h5>
+                                    <p class="text-muted mb-0">Department Institutional Rating<br>over 100%</p>
+                                </div>
+                            </div>
+            
+                            <div class="col-6 col-sm-3">
+                                <div class="p-3 border border-dashed border-start-0">
+                                    <h5 class="mb-1 fs-17 fw-semibold text-primary"><span class="counter-value" id="frfs">0</span>%</h5>
+                                    <p class="text-muted mb-0">Faculty Rating over 100%:<br>First Semester</p>
+                                </div>
+                            </div>
+            
+                            <div class="col-6 col-sm">
+                                <div class="p-3 border border-dashed border-start-0">
+                                    <h5 class="mb-1 fs-17 fw-semibold text-secondary"><span class="counter-value" id="frss">0</span>%</h5>
+                                    <p class="text-muted mb-0">Faculty Rating over 100%:<br>Second Semester</p>
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+            
+                    <div class="card-body p-0 pb-2">
+                        <div class="w-100">
+                            <div id="line-chart-two"></div>
                         </div>
                     </div>
                 </div>
@@ -144,24 +195,10 @@
                 </div>
             </div>
 
-            <!--div class="col-xxl-3 col-md-6">
-                <div class="card card-height-100">
-                    <div class="card-header align-items-center d-flex">
-                        <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">Performance Evaluation</h4>
-                        <div class="flex-shrink-0">
-                            <a href="{% url 'eval_upload' %}" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
-                        </div>
-                    </div>
-                    <div class="card-body pb-0">
-                        <div id="deal-type-charts" data-colors='["--vz-warning", "--vz-danger", "--vz-success"]' class="apex-charts" dir="ltr"></div>
-                    </div>
-                </div>
-            </div-->
-
             <div class="col-xxl-6">
                 <div class="card card-height-100">
                     <div class="card-header align-items-center d-flex">
-                        <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">Committee and Service Contributions</h4>
+                        <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">Workload Distributions</h4>
                         <div class="flex-shrink-0">
                             <a href="#" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
                         </div>
@@ -169,192 +206,18 @@
                     <div class="card-body px-0">
                         <ul class="list-inline main-chart text-center mb-0">
                             <li class="list-inline-item chart-border-left me-0 border-0">
-                                <h4 class="text-primary">100%<span class="text-muted d-inline-block fs-13 align-middle ms-2">Committee Participations</span></h4>
+                                <h4 class="text-primary">45<span class="text-muted d-inline-block fs-13 align-middle ms-2">Non-Reduced Workload</span></h4>
                             </li>
                             <li class="list-inline-item chart-border-left me-0">
-                                <h4 class="text-secondary">2021<span class="text-muted d-inline-block fs-13 align-middle ms-2">Most Performing Year</span>
+                                <h4 class="text-secondary">23<span class="text-muted d-inline-block fs-13 align-middle ms-2">Reduced Workload</span>
                                 </h4>
                             </li>
                             <li class="list-inline-item chart-border-left me-0">
-                                <h4 class="text-success"><span data-plugin="counterup">43.6</span>%<span class="text-muted d-inline-block fs-13 align-middle ms-2">Average Contributions</span></h4>
+                                <h4 class="text-success"><span data-plugin="counterup">4.2</span>%<span class="text-muted d-inline-block fs-13 align-middle ms-2">Average Faculty Rating</span></h4>
                             </li>
                         </ul>
 
-                        <div id="revenue-expenses-charts" data-colors='["--vz-success", "--vz-warning", "--vz-primary"]' class="apex-charts" dir="ltr"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xxl-8">
-                <div class="card card-height-100">
-                    <div class="card-header border-0 align-items-center d-flex">
-                        <h4 class="card-title mb-0 flex-grow-1">Faculty Performance vs. Institutional Requirement: Academic Year 20xx</h4>
-                        <div class="flex-shrink-0">
-                            <a href="{% url 'eval_analytics' %}" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
-                        </div>
-                    </div>
-            
-                    <div class="card-header p-0 border-0 bg-light-subtle">
-                        <div class="row g-0 text-center">
-                            <div class="col-6 col-sm ">
-                                <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1 fs-17 fw-semibold text-warning"><span class="counter-value" data-target="98" >0</span>%</h5>
-                                    <p class="text-muted mb-0">Department Institutional Rating<br>over 100%</p>
-                                </div>
-                            </div>
-            
-                            <div class="col-6 col-sm-3">
-                                <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1 fs-17 fw-semibold text-primary"><span class="counter-value" id="frfs">0</span>%</h5>
-                                    <p class="text-muted mb-0">Faculty Rating over 100%:<br>First Semester</p>
-                                </div>
-                            </div>
-            
-                            <div class="col-6 col-sm">
-                                <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1 fs-17 fw-semibold text-success"><span class="counter-value" id="frss">0</span>%</h5>
-                                    <p class="text-muted mb-0">Faculty Rating over 100%:<br>Second Semester</p>
-                                </div>
-                            </div>
-            
-                        </div>
-                    </div>
-            
-                    <div class="card-body p-0 pb-2">
-                        <div class="w-100">
-                            <div id="line-chart-two"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-4">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex align-items-center">
-                            <h6 class="card-title mb-0 flex-grow-1">Promotion</h6>
-                            <div class="flex-shrink-0">
-                                <a href="{% url 'mrt_promotion' %}" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row g-0">
-                        <div class="col-lg-6">
-                            <div class="card-body border-end">
-                                <div class="search-box">
-                                    <input type="text" class="form-control bg-light border-light" autocomplete="off" id="searchList" placeholder="Search candidate...">
-                                    <i class="ri-search-line search-icon"></i>
-                                </div>
-                                <div data-simplebar style="max-height: 190px" class="px-3 mx-n3">
-                                    <ul class="list-unstyled mb-0 pt-2" id="candidate-list">
-                                        <li>
-                                            <a href="javascript:void(0);" class="d-flex align-items-center py-2">
-                                                <div class="flex-shrink-0 me-2">
-                                                    <div class="avatar-xs">
-                                                        <img src="{% static 'images/users/avatar-10.jpg' %}" alt="" class="img-fluid rounded-circle candidate-img">
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <h5 class="fs-13 mb-1 text-truncate"><span class="candidate-name">Joanna Oliquino</span> <span class="text-muted fw-normal">@pup.edu.ph</span></h5>
-                                                    <div class="d-none candidate-position">Part-time Designee</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                
-                                        <li>
-                                            <a href="javascript:void(0);" class="d-flex align-items-center py-2">
-                                                <div class="flex-shrink-0 me-2">
-                                                    <div class="avatar-xs">
-                                                        <img src="{% static 'images/users/avatar-1.jpg' %}" alt="" class="img-fluid rounded-circle candidate-img">
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <h5 class="fs-13 mb-1 text-truncate"><span class="candidate-name">Leandro Avena III</span> <span class="text-muted fw-normal">@pup.edu.ph</span></h5>
-                                                    <div class="d-none candidate-position">Part-time Designee</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="d-flex align-items-center py-2">
-                                                <div class="flex-shrink-0 me-2">
-                                                    <div class="avatar-xs">
-                                                        <img src="{% static 'images/users/avatar-9.jpg' %}" alt="" class="img-fluid rounded-circle candidate-img">
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <h5 class="fs-13 mb-1 text-truncate"><span class="candidate-name">Irynne Gatchalian</span> <span class="text-muted fw-normal">@pup.edu.ph</span></h5>
-                                                    <div class="d-none candidate-position">Regular Designee</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="d-flex align-items-center py-2">
-                                                <div class="flex-shrink-0 me-2">
-                                                    <div class="avatar-xs">
-                                                        <img src="{% static 'images/users/avatar-2.jpg' %}" alt="" class="img-fluid rounded-circle candidate-img">
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <h5 class="fs-13 mb-1 text-truncate"><span class="candidate-name">Rosicar Escober</span> <span class="text-muted fw-normal">@pup.edu.ph</span></h5>
-                                                    <div class="d-none candidate-position">Part-time Designee</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="d-flex align-items-center py-2">
-                                                <div class="flex-shrink-0 me-2">
-                                                    <div class="avatar-xs">
-                                                        <img src="{% static 'images/users/avatar-5.jpg' %}" alt="" class="img-fluid rounded-circle candidate-img">
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <h5 class="fs-13 mb-1 text-truncate"><span class="candidate-name">Roberto Doromal</span> <span class="text-muted fw-normal">@pup.edu.ph</span></h5>
-                                                    <div class="d-none candidate-position">Regular Designee</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card-body text-center">
-                                <div class="avatar-md mb-3 mx-auto">
-                                    <img src="" alt="" id="candidate-img" class="img-thumbnail rounded-circle shadow-none">
-                                </div>
-                
-                                <h5 id="candidate-name" class="mb-0">Please select a faculty</h5>
-                                <p id="candidate-position" class="text-muted">if you want to promote</p>                
-                                <div>
-                                    <button type="button" class="btn btn-success custom-toggle w-100" data-bs-toggle="button" aria-pressed="false">
-                                        <span class="icon-on"><i class="ri-add-line align-bottom me-1"></i>Promote</span>
-                                        <span class="icon-off"><i class="ri-user-unfollow-line align-bottom me-1"></i>Demote</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card overflow-hidden shadow-none">
-                    <div class="card-body bg-secondary-subtle">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                                <div class="avatar-sm">
-                                    <div class="avatar-title bg-danger bg-opacity-10 text-success rounded-circle fs-17">
-                                        <i class="ri-user-smile-line"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <h6 class="fs-16">Dear Faculty,</h6>
-                                <p class="text-muted mb-0">Thank your for your hardwork especially in the tough times where you need to do risky things.</p>
-                            </div>
-                        </div>
-                        <div class="mt-3 text-end">
-                            <a href="#!" class="btn btn-primary">You're Welcome!</a>
-                        </div>
+                        <div id="revenue-expenses-charts" data-colors='["--vz-success", "--vz-secondary", "--vz-primary"]' class="apex-charts" dir="ltr"></div>
                     </div>
                 </div>
             </div>
@@ -448,31 +311,24 @@
 
                     <div class="card-header p-0 border-0 bg-light-subtle">
                         <div class="row g-0 text-center">
-                            <div class="col-6 col-sm-3">
+                            <div class="col-6 col-sm-4">
                                 <div class="p-3 border border-dashed border-start-0">
                                     <h5 class="mb-1"><span class="counter-value" data-target="131">0</span></h5>
                                     <p class="text-muted mb-0">Faculties w/ High Recognition Score</p>
                                 </div>
                             </div>
                             
-                            <div class="col-6 col-sm-3">
+                            <div class="col-6 col-sm-4">
                                 <div class="p-3 border border-dashed border-start-0">
                                     <h5 class="mb-1"><span class="counter-value" data-target="102">0</span></h5>
                                     <p class="text-muted mb-0">Faculties w/ High Evaluation Score</p>
                                 </div>
                             </div>
                             
-                            <div class="col-6 col-sm-3">
+                            <div class="col-6 col-sm-4">
                                 <div class="p-3 border border-dashed border-start-0">
                                     <h5 class="mb-1"><span class="counter-value" data-target="225">0</span></h5>
                                     <p class="text-muted mb-0">No. of Eligible Awardee</p>
-                                </div>
-                            </div>
-                            
-                            <div class="col-6 col-sm-3">
-                                <div class="p-3 border border-dashed border-start-0 border-end-0">
-                                    <h5 class="mb-1 text-success"><span class="counter-value" data-target="10589">0</span>h</h5>
-                                    <p class="text-muted mb-0">Faculty Working Hours</p>
                                 </div>
                             </div>
                             
@@ -486,120 +342,7 @@
                 </div>
             </div>
         </div>
-    {% comment %}
-        <div class="row">
-            <div class="col-xxl-12">
-                <div class="card">
-                    <div class="card-header align-items-center d-flex">
-                        <h4 class="card-title mb-0 flex-grow-1">Retention and Exit Insights</h4>
-                        <div class="flex-shrink-0">
-                            <div class="flex-shrink-0">
-                                <a href="#" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="card-body">
-                        <div class="table-responsive table-card">
-                            <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
-                                <thead class="text-muted table-light">
-                                    <tr>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Faculty Name</th>
-                                        <th scope="col">Designation</th>
-                                        <th scope="col">Salary</th>
-                                        <th scope="col">Feedback</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Faculty Rating</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <a href="#!" class="fw-medium link-primary">facultynumberone@pup.edu.ph</a>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0 me-2">
-                                                    <img src="{% static 'images/users/avatar-1.jpg' %}" alt="" class="avatar-xs rounded-circle" />
-                                                </div>
-                                                <div class="flex-grow-1">Ben Agbayani</div>
-                                            </div>
-                                        </td>
-                                        <td>Part-time Instructor</td>
-                                        <td>
-                                            <span class="text-success">₱49,000.00</span>
-                                        </td>
-                                        <td>The university is good, and also the work env. but I need a break. I need to find myself, It's not you, it's me. </td>
-                                        <td>
-                                            <span class="badge bg-secondary-subtle text-secondary">Part-time Designee</span>
-                                        </td>
-                                        <td>
-                                            <h5 class="fs-14 fw-medium mb-0">5.0<span class="text-muted fs-11 ms-1"></span></h5>
-                                        </td>
-                                    </tr>
 
-                                    <tr>
-                                        <td>
-                                            <a href="#!" class="fw-medium link-primary">facultynumbertwo@pup.edu.ph</a>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0 me-2">
-                                                    <img src="{% static 'images/users/avatar-2.jpg' %}" alt="" class="avatar-xs rounded-circle" />
-                                                </div>
-                                                <div class="flex-grow-1">Elizabeth Olsen</div>
-                                            </div>
-                                        </td>
-                                        <td>Regular Instructor</td>
-                                        <td>
-                                            <span class="text-success">₱39,500.00</span>
-                                        </td>
-                                        <td>
-                                            bkit uhaw sayong sayaw? bakit ikaw? di bibitaw, sayong sayo, laging ikaw. ako'y giniginaw, bigyan ng jacket yan
-                                        </td>
-                                        <td>
-                                            <span class="badge bg-warning-subtle text-warning">Part-time Non Designee</span>
-                                        </td>
-                                        <td>
-                                            <h5 class="fs-14 fw-medium mb-0">4.5<span class="text-muted fs-11 ms-1"></span></h5>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <a href="#!" class="fw-medium link-primary">facultynumberthree@pup.edu.ph</a>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0 me-2">
-                                                    <img src=" {% static 'images/users/avatar-3.jpg' %}" alt="" class="avatar-xs rounded-circle" />
-                                                </div>
-                                                <div class="flex-grow-1">Jay Cassiopeia</div>
-                                            </div>
-                                        </td>
-                                        <td>Faculty</td>
-                                        <td>
-                                            <span class="text-success">₱25,000.00</span>
-                                        </td>
-                                        <td>
-                                            I knew my rent was gon' be late about a week ago I worked my ass off, but I still can't pay it though
-                                        </td>
-                                        <td>
-                                            <span class="badge bg-success-subtle text-success">Regular Designee</span>
-                                        </td>
-                                        <td>
-                                            <h5 class="fs-14 fw-medium mb-0">4.9<span class="text-muted fs-11 ms-1"></span></h5>
-                                        </td>
-                                    </tr>
-                                </tbody><!-- end tbody -->
-                            </table><!-- end table -->
-                        </div>
-                    </div>
-                </div> <!-- .card-->
-            </div>
-        </div>
-    {% endcomment %}
     <script>
         //For showing time and date
         function updateDateTime() {

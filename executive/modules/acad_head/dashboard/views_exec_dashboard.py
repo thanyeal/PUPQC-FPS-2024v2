@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from executive.models import TableOne
 from django.db.models import Avg
 import json
+
 @login_required(login_url='login')
 def exec_dashboard(request):
     if not TableOne.objects.exists():
@@ -91,7 +92,7 @@ def exec_dashboard(request):
 
         if request.user.is_authenticated:
             first_name = request.user.first_name
-            custom_data = User.objects.filter(first_name=first_name)  # Replace with your query
+            custom_data = User.objects.filter(first_name=first_name)  
         else:
             first_name = "" 
             custom_data = []
