@@ -118,6 +118,7 @@
         </div>
 
         <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
+        <script src="{% static 'js/main/research/rsrch_analytics.js' %}"></script>
 
         <script>
             var groupedCountedData = JSON.parse('{{ js_grouped_counted|safe }}');
@@ -238,15 +239,12 @@
         <script>
             var TotalResearch = parseInt('{{ js_totalresearch|safe }}');
             var GroupPercent = JSON.parse('{{ js_grouped_percent|safe }}');
-        
             var yearsz = [];
             var percentagesz = [];
-        
             for (const year in GroupPercent) {
                 yearsz.push(year);
                 percentagesz.push(GroupPercent[year].percentage);
             }
-        
             var options = {
                 series: percentagesz,
                 chart: { height: 350, type: "radialBar" },
@@ -272,10 +270,7 @@
                     getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
                 ],
             };
-        
             var rsrch_bound_chart = new ApexCharts(document.querySelector("#multiple_radialbar"), options);
             rsrch_bound_chart.render();
-    
         </script>
-        
 {% endblock %}

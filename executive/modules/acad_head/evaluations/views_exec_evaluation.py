@@ -219,7 +219,6 @@ def eval_analytics(request):
             avgz_self_rating=Avg('self_rating') 
         )
 
-        # Calculate the average for the second semester
         second_semester_data = TableOne.objects.filter(semester='Second').order_by('semester', 'eval_year')
         second_semester_avg = second_semester_data.aggregate(
             avgz_spvs_rating=Avg('spvs_rating'),
