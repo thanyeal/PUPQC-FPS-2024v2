@@ -13,7 +13,7 @@ $(document).ready(function () {
             {
                 "data": null,
                 "render": function (data, type, full, meta) {
-                    return '<center><button type="button" class="btn btn-sm btn-primary attendees-btn">Performances</button></center>';
+                    return '<center><button type="button" class="btn btn-sm btn-primary attendees-btn" data-bs-toggle="modal" data-bs-target="#faculty_mgmt_modal">Performances</button></center>';
                 }
             }
         ]
