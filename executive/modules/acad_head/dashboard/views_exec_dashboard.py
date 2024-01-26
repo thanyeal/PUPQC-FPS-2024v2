@@ -50,10 +50,10 @@ def exec_dashboard(request):
             'stud_second':  [round ( float ( second_semester_avg ['avgz_stud_rating'] ), 1)],
             'peerr_second': [round ( float ( second_semester_avg ['avgz_peer_rating'] ), 1)],
             'selff_second': [round ( float ( second_semester_avg ['avgz_self_rating'] ), 1)],
-            'spvs_second':  [round ( float ( summer_semester_avg ['avgz_spvs_rating'] ), 1)],
-            'stud_second':  [round ( float ( summer_semester_avg ['avgz_stud_rating'] ), 1)],
-            'peerr_second': [round ( float ( summer_semester_avg ['avgz_peer_rating'] ), 1)],
-            'selff_second': [round ( float ( summer_semester_avg ['avgz_self_rating'] ), 1)],
+            'spvs_summer':  [round ( float ( summer_semester_avg ['avgz_spvs_rating'] ), 1)],
+            'stud_summer':  [round ( float ( summer_semester_avg ['avgz_stud_rating'] ), 1)],
+            'peerr_summer': [round ( float ( summer_semester_avg ['avgz_peer_rating'] ), 1)],
+            'selff_summer': [round ( float ( summer_semester_avg ['avgz_self_rating'] ), 1)],
         }
 
         first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=present_date).order_by('semester', 'eval_year')

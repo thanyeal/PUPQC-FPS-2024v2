@@ -6,19 +6,19 @@ $(document).ready(function () {
         },
         "columns": [
             //{ "data": "faculty_num" },
-            { "data": "facultyname" },
-            { "data": "spvs_rating" },
-            { "data": "spvs_interp" },
-            { "data": "stud_rating" },
-            { "data": "stud_interp" },
-            { "data": "peer_rating" },
-            { "data": "peer_interp" },
-            { "data": "self_rating" },
-            { "data": "self_interp" },
+            { "data": "FacultyName" },
+            { "data": "Supervisor Rating" },
+            { "data": "Supervisor Interpretation" },
+            { "data": "Students Rating" },
+            { "data": "Students Interpretation" },
+            { "data": "Peer Rating" },
+            { "data": "Peer Interpretation" },
+            { "data": "Self Rating" },
+            { "data": "Self Interpretation" },
             //{ "data": "load_rating" },
             //{ "data": "load_interp" },
             //{ "data": "faculty_stat"},
-            { "data": "semester" }
+            { "data": "Semester" }
         ]
         //"pageLength": 25
     });
