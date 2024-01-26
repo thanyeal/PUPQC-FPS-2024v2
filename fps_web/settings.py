@@ -34,6 +34,8 @@ ALLOWED_HOSTS = ["*"]
 # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 SESSION_COOKIE_AGE = 3600
+SESSION_COOKIE_SECURE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Application definition
 INSTALLED_APPS = [

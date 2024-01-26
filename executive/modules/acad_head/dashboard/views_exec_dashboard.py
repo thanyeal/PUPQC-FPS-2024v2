@@ -193,7 +193,7 @@ def exec_dashboard(request):
             'first_name'            : serialized_first_name      ,
             #'custom_data'           : serialized_custom_data    ,
             'chart_data_two'        : serialized_data_two        ,
-            'overall_avg_data'      : serialized_overall_avg
+            'overall_avg_data'      : serialized_overall_avg   
         }
         return render(request, 'executive/exec_dashboard.html', context)
         
