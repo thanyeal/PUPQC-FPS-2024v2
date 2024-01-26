@@ -33,9 +33,9 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
+SESSION_COOKIE_AGE = 3600
 
 # Application definition
-
 INSTALLED_APPS = [
     'rest_framework',
     'django.contrib.admin',
@@ -76,7 +76,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-        },
+        }
     },
 ]
 
@@ -164,6 +164,7 @@ MESSAGE_TAGS = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 # Other essentials
 

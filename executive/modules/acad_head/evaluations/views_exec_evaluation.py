@@ -4,8 +4,10 @@ from django.shortcuts import render, redirect
 from executive.models import TableOne
 from django.db.models import Avg
 from decimal import Decimal
-import json
+import json, os, requests
 from django.http import JsonResponse
+from itertools import groupby
+import datetime
 
 @login_required(login_url='login')
 def convert_decimal_to_float(obj):
@@ -15,17 +17,6 @@ def convert_decimal_to_float(obj):
 
 @login_required(login_url='login')
 def eval_analytics(request):
-    # ==================================================================================================================================================================================
-    # chart_data = TableOne.objects.all()
-
-    # data = {
-    #     'faculty': [item.facultyname for item in chart_data],
-    #     'supervisor': [convert_decimal_to_float(item.spvs_rating) for item in chart_data],
-    #     'student': [convert_decimal_to_float(item.stud_rating) for item in chart_data],
-    #     'peer': [convert_decimal_to_float(item.peer_rating) for item in chart_data],
-    #     'self': [convert_decimal_to_float(item.self_rating) for item in chart_data],
-    # }
-    # ================================================================================================================================================================================== year
     if not TableOne.objects.exists():
         return redirect('error_page_404')
     else:

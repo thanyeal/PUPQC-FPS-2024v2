@@ -23,6 +23,7 @@ requests = "*"
 dj-database-url = "*"
 python-dotenv = "*"
 python-dateutil = "*"
+django-csp = "*"
 
 [dev-packages]
 

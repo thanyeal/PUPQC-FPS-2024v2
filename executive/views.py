@@ -5,6 +5,7 @@
 
 
 from .modules.error_pages.views_error_404                         import error_page_404
+from .modules.error_pages.views_error_500                         import error_page_500
 from .modules.auth.views_registry                                 import registry
 from .modules.auth.views_logout                                   import custom_logout
 from .modules.acad_head.dashboard.views_exec_dashboard            import exec_dashboard
@@ -34,6 +35,7 @@ custom_logout
 
 # Errors
 error_page_404
+error_page_500
 
 # Acad_Head
 exec_dashboard
@@ -104,7 +106,6 @@ def testapifrompostmanshit(request, format=None):
         # return Response({'error': str(e)}, status=500)  # Handle errors gracefully
 
 
-
 @api_view(['GET'])
 def testresearchinfodata(request, format=None):
     token_url = os.environ.get('RIS_API_TOKEN')
@@ -132,12 +133,9 @@ def testresearchinfodata(request, format=None):
     else:
         return Response({'error': f"Failed to get token: {token_response.status_code} - {token_response.text}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
-
-
 @api_view(['GET'])
 def testfacultyinfodata(request, format=None):
-    response_two = requests.get('https://pupqcfis-com.onrender.com/api/all/FISFaculty')
+    response_two = requests.get('https://pupqcfis-com.onrender.com/api/FISFaculty/Evaluations')
     response_two.raise_for_status()
     data_two = response_two.json()
     return Response(data_two)
