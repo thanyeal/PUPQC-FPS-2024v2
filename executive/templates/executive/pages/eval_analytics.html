@@ -228,14 +228,14 @@
     var series = [
 
         {
-            name: '1st Sem SPVS Rating',
+            name: '1st Sem Supervisor Rating',
             data: frstSemesterRatings.map(function (item) {
                 return item.avgz_spvs_rating;
             }),
         },
 
         {
-            name: '1st Sem Students Rating',
+            name: '1st Sem Student Rating',
             data: frstSemesterRatings.map(function (item) {
                 return item.avgz_stud_rating;
             }),
@@ -256,14 +256,14 @@
         },
 
         {
-            name: '2nd Sem SPVS Rating',
+            name: '2nd Sem Supervisor Rating',
             data: scndSemesterRatings.map(function (item) {
                 return item.avgz_spvs_rating;
             }),
         },
 
         {
-            name: '2nd Sem Students Rating',
+            name: '2nd Sem Student Rating',
             data: scndSemesterRatings.map(function (item) {
                 return item.avgz_stud_rating;
             }),
@@ -284,14 +284,14 @@
         },
 
         {
-            name: 'Summer Semester SPVS Rating',
+            name: 'Summer Semester Supervisor Rating',
             data: summmerSemesterRatings.map(function (item) {
                 return item.avgz_spvs_rating;
             }),
         },
 
         {
-            name: 'Summer Students Rating',
+            name: 'Summer Student Rating',
             data: summmerSemesterRatings.map(function (item) {
                 return item.avgz_stud_rating;
             }),
@@ -378,12 +378,12 @@
                 var filteredSeriesForEval = [
                     //++++++++
                     {
-                        name: '1st Sem SPVS Rating',
+                        name: '1st Sem Supervisor Rating',
                         data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_spvs_rating)
                     },
                     
                     {
-                        name: '1st Sem Students Rating',
+                        name: '1st Sem Student Rating',
                         data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_stud_rating)
                     },
                     {
@@ -397,12 +397,12 @@
                     },
                     //++++++++
                     {
-                        name: '2nd Sem SPVS Rating',
+                        name: '2nd Sem Supervisor Rating',
                         data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_spvs_rating)
                     },
                     
                     {
-                        name: '2nd Sem Students Rating',
+                        name: '2nd Sem Student Rating',
                         data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_stud_rating)
                     },
                     {
@@ -416,12 +416,12 @@
                     },
                     //+++++++++
                     {
-                        name: 'Summer Sem SPVS Rating',
+                        name: 'Summer Sem Supervisor Rating',
                         data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_spvs_rating)
                     },
                     
                     {
-                        name: 'Summer Sem Students Rating',
+                        name: 'Summer Sem Student Rating',
                         data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_stud_rating)
                     },
                     {

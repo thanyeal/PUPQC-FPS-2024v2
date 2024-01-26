@@ -25,12 +25,21 @@ import os, requests
 
 @login_required(login_url='login')
 def rsrch_tracking(request):
-    api_url = os.environ.get('NEW_RIS_API_URL')
-
-    # Check if it's an AJAX request and return JSON data
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        response_one = requests.get(api_url)
-        response_one.raise_for_status()
-        data_one = response_one.json()
-        return JsonResponse(data_one, safe=False)
+        token_url = os.environ.get('RIS_API_TOKEN')
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        token_response = requests.get(token_url, headers=headers)
+        data = token_response.json()
+        token = data['result']['access_token']
+        api_url = os.environ.get('RIS_API_URLZZ')
+        
+        headers = {
+            'Authorization': f'Bearer {token}'
+        }
+        api_response = requests.get(api_url, headers=headers)
+        ris_api_data = api_response.json()
+        return JsonResponse(ris_api_data, safe=False)
     return render(request, 'executive/pages/rsrch_tracking.html')
+

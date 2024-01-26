@@ -1,7 +1,6 @@
-
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
+<html lang="en" data-layout="horizontal" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
 <head>
 
     <meta charset="utf-8">
@@ -37,7 +36,7 @@
                     <div class="modal-header">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="NotificationModalbtn-close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body">    
                         <div class="mt-2 text-center">
                             <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
                             <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
@@ -95,6 +94,14 @@
     </button>
 
     <!-- js dependencies -->
+    <script>
+        $(document).ready(function() {
+            $('.nav-link').click(function() {
+                $('.nav-link').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
     {% include 'partials/_jvsdep.html' %}
 </body>
 </html>

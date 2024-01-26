@@ -5,6 +5,7 @@
 
 
 from .modules.error_pages.views_error_404                         import error_page_404
+from .modules.error_pages.views_error_500                         import error_page_500
 from .modules.auth.views_registry                                 import registry
 from .modules.auth.views_logout                                   import custom_logout
 from .modules.acad_head.dashboard.views_exec_dashboard            import exec_dashboard
@@ -25,6 +26,7 @@ from .modules.acad_head.research.views_exec_research              import rsrch_t
 from .modules.acad_head.research.views_exec_research_analytics    import rsrch_analytics
 from .modules.acad_head.workload.views_exec_workload              import workload_dat
 from .modules.acad_head.workload.views_exec_workload_analytics    import workload_analytics
+from .modules.acad_head.fac_mgmnt.views_faculty_management        import fac_mgmnt
 
 # Authentication
 registry
@@ -33,6 +35,7 @@ custom_logout
 
 # Errors
 error_page_404
+error_page_500
 
 # Acad_Head
 exec_dashboard
@@ -70,6 +73,9 @@ awards_recog
 # Maintenance
 coming_soon
 
+#Faculty Management
+fac_mgmnt
+
 # Retention Exit - Eliminated from the System
 # retention_analytics
 # retention_insights
@@ -86,7 +92,7 @@ from .serializers import TableTwoSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-import requests
+import requests, os
 
 
 @api_view(['GET'])
@@ -98,17 +104,38 @@ def testapifrompostmanshit(request, format=None):
         return Response(data)
     # except requests.exceptions.RequestException as e:
         # return Response({'error': str(e)}, status=500)  # Handle errors gracefully
-    
+
+
 @api_view(['GET'])
 def testresearchinfodata(request, format=None):
-    response_one = requests.get('https://research-info-system-qegn.onrender.com/integration/faculty/research-papers/list')
-    response_one.raise_for_status()
-    data_one = response_one.json()
-    return Response(data_one)
+    token_url = os.environ.get('RIS_API_TOKEN')
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    token_response = requests.get(token_url, headers=headers)
     
+    if token_response.status_code == 200:
+        data = token_response.json()
+        token = data['result']['access_token']
+        api_url = os.environ.get('RIS_API_URLZZ')
+        
+        headers = {
+            'Authorization': f'Bearer {token}'
+        }
+        
+        api_response = requests.get(api_url, headers=headers)
+        
+        if api_response.status_code == 200:
+            ris_api_data = api_response.json()
+            return Response(ris_api_data)
+        else:
+            return Response({'error': f"Failed to access API: {api_response.status_code} - {api_response.text}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    else:
+        return Response({'error': f"Failed to get token: {token_response.status_code} - {token_response.text}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 @api_view(['GET'])
 def testfacultyinfodata(request, format=None):
-    response_two = requests.get('https://pupqcfis-com.onrender.com/api/all/FISFaculty')
+    response_two = requests.get('https://pupqcfis-com.onrender.com/api/FISFaculty/Evaluations')
     response_two.raise_for_status()
     data_two = response_two.json()
     return Response(data_two)

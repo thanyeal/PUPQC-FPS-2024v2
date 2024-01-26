@@ -10,45 +10,28 @@ Make sure you have the latest version of Python installed.
 https://github.com/daenyuhl/PUPQC-FPS-2024v2.git
 ```
 
-2. Navigate the project
-
-```bash
-cd <path of this repo on your device>
-```
-
-3. Create the python environment
+2. Initialize the Python environment
 
 ```bash
 pipenv shell
 ```
 
-4. Install the django itself and it's modules
+3. Install the django itself and it's modules
 
 ```bash
 pip install -r requirements.txt
 ```
 
-5. Make migrations
-
-```bash
-python manage.py makemigrations
-```
-
-6. Migrate the database tables
-
-```bash
-python manage.py migrate
-```
-
-7. Run the file
+4. Run the file
 
 ```bash
 python manage.py runserver
 ```
 
-## Viewing The App
+5. View the app
 
 just find that sus url: `http://127.0.0.1:8000` in the command line.
+
 <br />
 
 ## Project Details

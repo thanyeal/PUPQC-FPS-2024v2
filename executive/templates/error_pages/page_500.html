@@ -12,7 +12,6 @@
         <!-- css dependencies -->
         {% include 'partials/_cssdep.html' %}
     </head>
-
     <style>
         * {
             -webkit-box-sizing: border-box ;
@@ -52,7 +51,7 @@
             display: inline-block ;
             width: 140px ;
             height: 140px ;
-            background-image: url({% static 'img/error/404.png' %}) ;
+            background-image: url({% static 'img/error/500.png' %}) ;
             background-size: cover ;
         }
         
@@ -98,11 +97,11 @@
         <div id="error_500">
             <div class="error_500">
                 <div class="error_500-404"></div>
-                <h1>404</h1>
-                <h2>Page Not Found</h2>
-                <p>Sorry but the the server could not find a client-requested asset or did not find the target resource.</p>
+                <h1>500</h1>
+                <h2>Internal Server Error</h2>
+                <p>Sorry but the the server encountered an unexpected condition that prevented it from fulfilling the request.</p>
                 <a href="{% url 'exec_dashboard' %}" class="btn btn-success"><i class="mdi mdi-home me-1"></i>Back to Dashboard</a>
-            </div>  
+            </div>
         </div>
     </body>
 </html>

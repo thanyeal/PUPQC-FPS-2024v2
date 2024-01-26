@@ -6,7 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     #for error pages
-    path('error'            , views.error_page_404  , name="error_page_404"),
+    path('error_404'            , views.error_page_404  , name="error_page_404"),
+    path('error_500'            , views.error_page_500  , name="error_page_500"),
 
     #for acad head
     path(''                 , views.exec_dashboard  , name="exec_dashboard" ),
@@ -44,6 +45,7 @@ urlpatterns = [
 
     # for maintenance page
     path('coming_soon'      , views.coming_soon     , name="coming_soon"),
+    path('fac_mgmnt'      , views.fac_mgmnt    , name="fac_mgmnt"),
 
     # for log and reg page
     path('registry/'        , views.registry        , name="registry"   ),

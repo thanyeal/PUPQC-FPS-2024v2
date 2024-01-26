@@ -35,6 +35,35 @@
                         </div>
                     </div>
                 </div>
+                <!--  Extra Large modal example -->
+                <div class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="myExtraLargeModalLabel">List of Research Publications</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <table id="rsrch_dtble" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Author</th>
+                                            <th>Research Title</th>
+                                            <th>Publication Year</th>
+                                            <th>Publisher</th>
+                                            <th>Category</th>
+                                            <th>Author Type</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="javascript:void(0);" class="btn btn-link link-success shadow-none fw-medium" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Close</a>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
             </div>
         </div>
 
@@ -42,13 +71,17 @@
             <div class="col-lg-12">
                 <div class="card card-height-100">
                     <div class="card-header border-0 align-items-center d-flex">
-                        <h4 class="col-11 card-title mb-0 flex-grow-1">
+                        <h4 class="col-9 card-title mb-0 flex-grow-1">
                             Average Rating Based Faculty Performance Development in Research Methodologies
                         </h4>
                 
-                        <label class="col-1">
+                        <label class="col-1" style="padding-right: 1rem !important;">
                             <select id="rsrch_year_filter" onchange="rsrch_updateChart()" class="form-select form-select-sm"></select>
                         </label>
+
+                        <button class="col-2 btn btn-info btn-icon mb-2" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl">
+                            <i class="ri-eye-line"></i>
+                        </button>
                     </div>
                     <div class="card-header p-0 border-0 bg-light-subtle">
                         <div class="row g-0 text-center">
@@ -91,7 +124,7 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Present University Research Goals (S.Y. 22-23)</h4>
+                            <h4 class="card-title mb-0">Present Academic University Research Goals</h4>
                         </div>
                         <div class="card-body">
                             {% comment %} <div id="basic_radialbar" data-colors='["--vz-success"]' class="apex-charts" dir="ltr"></div> {% endcomment %}
@@ -105,7 +138,7 @@
                     <div class="card card-height-100">
                         <div class="card-header align-items-center d-flex">
                             <h4 class="col-10 card-title mb-0 justify-content-around">
-                                Research Bound and Published  Over Years
+                                Analytical Research Bound and Published  Over Years
                             </h4>
                         </div>
 
@@ -117,7 +150,11 @@
             </div>
         </div>
 
+        
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{% static 'js/main/research/rsrch_tracks.js' %}"></script>
         <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
+        <script src="{% static 'js/main/research/rsrch_analytics.js' %}"></script>
 
         <script>
             var groupedCountedData = JSON.parse('{{ js_grouped_counted|safe }}');
@@ -170,46 +207,47 @@
             var rsrch_chart = new ApexCharts(document.querySelector('#rsrch_counts'), options);
             rsrch_chart.render();
             
-                // Create and populate the dropdown
-                var yearFilterDropdown = document.getElementById('rsrch_year_filter');
+            // Create and populate the dropdown
+            var yearFilterDropdown = document.getElementById('rsrch_year_filter');
 
-                // Add 'All' option to show all data
-                var rsrch_allOption = document.createElement('option');
-                    rsrch_allOption.value = 'all';
-                    rsrch_allOption.text = 'Display All';
-                yearFilterDropdown.add(rsrch_allOption);
+            // Add 'All' option to show all data
+            var rsrch_allOption = document.createElement('option');
+                rsrch_allOption.value = 'all';
+                rsrch_allOption.text = 'Display All';
+            yearFilterDropdown.add(rsrch_allOption);
 
-                years.forEach(year => {
-                    var option = document.createElement('option');
-                    option.value = year;
-                    option.text = year;
-                    yearFilterDropdown.appendChild(option);
-                });
+            years.forEach(year => {
+                var option = document.createElement('option');
+                option.value = year;
+                option.text = year;
+                yearFilterDropdown.appendChild(option);
+            });
 
-                function rsrch_updateChart() {
-                    var selectedYear = yearFilterDropdown.value;
-                    var filteredData = {};
+            function rsrch_updateChart() {
+                var selectedYear = yearFilterDropdown.value;
+                var filteredData = {};
 
-                    if (selectedYear === 'all') {
-                        filteredData = groupedCountedData; // Show all data
-                    }
-                    
-                    else {
-                        // Filter by year
-                        filteredData[selectedYear] = groupedCountedData[selectedYear];
-                    }
-
-                    var filteredYears = Object.keys(filteredData);
-                    var filteredCounts = filteredYears.map(year => filteredData[year].count);
-                    
-                    // Update the chart options with filtered data
-                    rsrch_chart.updateOptions({ xaxis: { categories: filteredYears } });
-                    rsrch_chart.updateSeries([{ data: filteredCounts }]);
+                if (selectedYear === 'all') {
+                    filteredData = groupedCountedData; // Show all data
+                }
+                
+                else {
+                    // Filter by year
+                    filteredData[selectedYear] = groupedCountedData[selectedYear];
                 }
 
-                yearFilterDropdown.addEventListener('change', rsrch_updateChart);
-                // Initial data filtering
-                rsrch_updateChart();
+                var filteredYears = Object.keys(filteredData);
+                var filteredCounts = filteredYears.map(year => filteredData[year].count);
+                
+                // Update the chart options with filtered data
+                rsrch_chart.updateOptions({ xaxis: { categories: filteredYears } });
+                rsrch_chart.updateSeries([{ data: filteredCounts }]);
+            }
+
+            yearFilterDropdown.addEventListener('change', rsrch_updateChart);
+            // Initial data filtering
+            rsrch_updateChart();
+
         </script>
 
         <script>
@@ -238,15 +276,12 @@
         <script>
             var TotalResearch = parseInt('{{ js_totalresearch|safe }}');
             var GroupPercent = JSON.parse('{{ js_grouped_percent|safe }}');
-        
             var yearsz = [];
             var percentagesz = [];
-        
             for (const year in GroupPercent) {
                 yearsz.push(year);
                 percentagesz.push(GroupPercent[year].percentage);
             }
-        
             var options = {
                 series: percentagesz,
                 chart: { height: 350, type: "radialBar" },
@@ -272,10 +307,7 @@
                     getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
                 ],
             };
-        
             var rsrch_bound_chart = new ApexCharts(document.querySelector("#multiple_radialbar"), options);
             rsrch_bound_chart.render();
-    
         </script>
-        
 {% endblock %}

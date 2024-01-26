@@ -48,7 +48,7 @@
         </div>
         
         <div class="row mt-n5">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title mb-0">Reduced Workload to Performance Metrics</h4>
@@ -58,279 +58,283 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title mb-0">High Average Performing Faculties</h4>
-                    </div>
-                    <div class="card-body">
-                        <div id="custom_datalabels_bar" data-colors='["--vz-primary", "--vz-secondary", "--vz-success", "--vz-info", "--vz-warning", "--vz-danger", "--vz-dark", "--vz-primary", "--vz-success", "--vz-secondary"]' class="apex-charts" dir="ltr"></div>
+            {% comment %}
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title mb-0">High Average Performing Faculties</h4>
+                        </div>
+                        <div class="card-body">
+                            <div id="custom_datalabels_bar" data-colors='["--vz-primary", "--vz-secondary", "--vz-success", "--vz-info", "--vz-warning", "--vz-danger", "--vz-dark", "--vz-primary", "--vz-success", "--vz-secondary"]' class="apex-charts" dir="ltr"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endcomment %}
         </div>
-        
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card" id="customerList">
-                    <div class="card-header border-bottom-dashed">
+        {% comment %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card" id="customerList">
+                        <div class="card-header border-bottom-dashed">
 
-                        <div class="row g-4 align-items-center">
-                            <div class="col-sm">
-                                <div>
-                                    <h5 class="card-title mb-0">Faculty Member Subject to Reduce Workloads</h5>
+                            <div class="row g-4 align-items-center">
+                                <div class="col-sm">
+                                    <div>
+                                        <h5 class="card-title mb-0">Faculty Member Subject to Reduce Workloads</h5>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-auto">
-                                <div class="d-flex flex-wrap align-items-start gap-2">
-                                    <button class="btn btn-soft-danger" id="remove-actions" onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                    {% comment %} <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add Customer</button> {% endcomment %}
-                                    {% comment %}<button type="button" class="btn btn-info"><i class="ri-file-download-line align-bottom me-1"></i> Import</button> {% endcomment %}
+                                <div class="col-sm-auto">
+                                    <div class="d-flex flex-wrap align-items-start gap-2">
+                                        <button class="btn btn-soft-danger" id="remove-actions" onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
+                                        {% comment %} <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add Customer</button> {% endcomment %}
+                                        {% comment %}<button type="button" class="btn btn-info"><i class="ri-file-download-line align-bottom me-1"></i> Import</button> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body border-bottom-dashed border-bottom">
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-xl-6">
-                                    <div class="search-box">
-                                        <input type="text" class="form-control search" placeholder="Search a faculty">
-                                        <i class="ri-search-line search-icon"></i>
+                        <div class="card-body border-bottom-dashed border-bottom">
+                            <form>
+                                <div class="row g-3">
+                                    <div class="col-xl-6">
+                                        <div class="search-box">
+                                            <input type="text" class="form-control search" placeholder="Search a faculty">
+                                            <i class="ri-search-line search-icon"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                <!--end col-->
-                                <div class="col-xl-6">
-                                    <div class="row g-3">
-                                        <div class="col-sm-4">
-                                            <div class="">
-                                                <input type="text" class="form-control" id="datepicker-range" data-provider="flatpickr" data-date-format="d M, Y" data-range-date="true" placeholder="Select date">
+                                    <!--end col-->
+                                    <div class="col-xl-6">
+                                        <div class="row g-3">
+                                            <div class="col-sm-4">
+                                                <div class="">
+                                                    <input type="text" class="form-control" id="datepicker-range" data-provider="flatpickr" data-date-format="d M, Y" data-range-date="true" placeholder="Select date">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!--end col-->
-                                        <div class="col-sm-4">
-                                            <div>
-                                                <select class="form-control" data-plugin="choices" data-choices data-choices-search-false name="choices-single-default" id="idStatus">
-                                                    <option value="">Status</option>
-                                                    <option value="all" selected>All</option>
-                                                    <option value="Regular Designee">Regular Designee</option>
-                                                    <option value="Regular Non-Designee">Regular Non-Designee</option>
-                                                </select>
+                                            <!--end col-->
+                                            <div class="col-sm-4">
+                                                <div>
+                                                    <select class="form-control" data-plugin="choices" data-choices data-choices-search-false name="choices-single-default" id="idStatus">
+                                                        <option value="">Status</option>
+                                                        <option value="all" selected>All</option>
+                                                        <option value="Regular Designee">Regular Designee</option>
+                                                        <option value="Regular Non-Designee">Regular Non-Designee</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!--end col-->
+                                            <!--end col-->
 
-                                        <div class="col-sm-4">
-                                            <div>
-                                                <button type="button" class="btn btn-primary w-100" onclick="SearchData();"> <i class="ri-equalizer-fill me-2 align-bottom"></i>Filters</button>
+                                            <div class="col-sm-4">
+                                                <div>
+                                                    <button type="button" class="btn btn-primary w-100" onclick="SearchData();"> <i class="ri-equalizer-fill me-2 align-bottom"></i>Filters</button>
+                                                </div>
                                             </div>
+                                            <!--end col-->
                                         </div>
-                                        <!--end col-->
                                     </div>
                                 </div>
-                            </div>
-                            <!--end row-->
-                        </form>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <div class="table-responsive table-card mb-1">
-                                <table class="table align-middle" id="customerTable">
-                                    <thead class="table-light text-muted">
-                                        <tr>
-                                            <th scope="col" style="width: 50px;">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="checkAll" value="option">
-                                                </div>
-                                            </th>
-
-                                            <th class="sort" data-sort="customer_name">Faculty</th>
-                                            <th class="sort" data-sort="email">Email</th>
-                                            <th class="sort" data-sort="phone">Phone</th>
-                                            <th class="sort" data-sort="date">Current Workload</th>
-                                            <th class="sort" data-sort="status">Designation</th>
-                                            <th class="sort" data-sort="action">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list form-check-all">
-                                        <tr>
-                                            <th scope="row">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
-                                                </div>
-                                            </th>
-                                            <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
-                                            <td class="customer_name">Faculty 1</td>
-                                            <td class="email">facultyone@pup.com</td>
-                                            <td class="phone">580-464-4694</td>
-                                            <td class="date">10 Subject per Course</td>
-                                            <td class="status"><span class="badge bg-success-subtle text-success text-uppercase">Regular Non-Designee</span>
-                                            </td>
-                                            <td>
-                                                <ul class="list-inline hstack gap-2 mb-0">
-                                                    <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                        <a href="apps-ecommerce-customers.html#showModal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn">
-                                                            <i class="ri-pencil-fill fs-16"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                        <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="apps-ecommerce-customers.html#deleteRecordModal">
-                                                            <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
-                                                </div>
-                                            </th>
-                                            <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
-                                            <td class="customer_name">Faculty 2</td>
-                                            <td class="email">facultytwo@pup.com</td>
-                                            <td class="phone">580-464-4694</td>
-                                            <td class="date">15 Subject per Course</td>
-                                            <td class="status"><span class="badge bg-success-subtle text-success text-uppercase">Regular Non-Designee</span>
-                                            </td>
-                                            <td>
-                                                <ul class="list-inline hstack gap-2 mb-0">
-                                                    <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                        <a href="apps-ecommerce-customers.html#showModal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn">
-                                                            <i class="ri-pencil-fill fs-16"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                        <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="apps-ecommerce-customers.html#deleteRecordModal">
-                                                            <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
-                                                </div>
-                                            </th>
-                                            <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
-                                            <td class="customer_name">Faculty 3</td>
-                                            <td class="email">facultythr@pup.com</td>
-                                            <td class="phone">580-464-4694</td>
-                                            <td class="date">7 Subject per Course</td>
-                                            <td class="status"><span class="badge bg-success-subtle text-success text-uppercase">Regular Non-Designee</span>
-                                            </td>
-                                            <td>
-                                                <ul class="list-inline hstack gap-2 mb-0">
-                                                    <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                        <a href="apps-ecommerce-customers.html#showModal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn">
-                                                            <i class="ri-pencil-fill fs-16"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                        <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="apps-ecommerce-customers.html#deleteRecordModal">
-                                                            <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="noresult" style="display: none">
-                                    <div class="text-center">
-                                        <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
-                                        <h5 class="mt-2">Sorry! No Result Found</h5>
-                                        <p class="text-muted mb-0">We've searched more than 150+ customer We did not find any customer for you search.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <div class="pagination-wrap hstack gap-2">
-                                    <a class="page-item pagination-prev disabled" href="#">
-                                        Previous
-                                    </a>
-                                    <ul class="pagination listjs-pagination mb-0"></ul>
-                                    <a class="page-item pagination-next" href="#">
-                                        Next
-                                    </a>
-                                </div>
-                            </div>
+                                <!--end row-->
+                            </form>
                         </div>
-                        <div class="modal fade" id="showModal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header bg-light p-3">
-                                        <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+                        <div class="card-body">
+                            <div>
+                                <div class="table-responsive table-card mb-1">
+                                    <table class="table align-middle" id="customerTable">
+                                        <thead class="table-light text-muted">
+                                            <tr>
+                                                <th scope="col" style="width: 50px;">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="checkAll" value="option">
+                                                    </div>
+                                                </th>
+
+                                                <th class="sort" data-sort="customer_name">Faculty</th>
+                                                <th class="sort" data-sort="email">Email</th>
+                                                <th class="sort" data-sort="phone">Phone</th>
+                                                <th class="sort" data-sort="date">Current Workload</th>
+                                                <th class="sort" data-sort="status">Designation</th>
+                                                <th class="sort" data-sort="action">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="list form-check-all">
+                                            <tr>
+                                                <th scope="row">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
+                                                    </div>
+                                                </th>
+                                                <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
+                                                <td class="customer_name">Faculty 1</td>
+                                                <td class="email">facultyone@pup.com</td>
+                                                <td class="phone">580-464-4694</td>
+                                                <td class="date">10 Subject per Course</td>
+                                                <td class="status"><span class="badge bg-success-subtle text-success text-uppercase">Regular Non-Designee</span>
+                                                </td>
+                                                <td>
+                                                    <ul class="list-inline hstack gap-2 mb-0">
+                                                        <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                                            <a href="apps-ecommerce-customers.html#showModal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn">
+                                                                <i class="ri-pencil-fill fs-16"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
+                                                            <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="apps-ecommerce-customers.html#deleteRecordModal">
+                                                                <i class="ri-delete-bin-5-fill fs-16"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
+                                                    </div>
+                                                </th>
+                                                <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
+                                                <td class="customer_name">Faculty 2</td>
+                                                <td class="email">facultytwo@pup.com</td>
+                                                <td class="phone">580-464-4694</td>
+                                                <td class="date">15 Subject per Course</td>
+                                                <td class="status"><span class="badge bg-success-subtle text-success text-uppercase">Regular Non-Designee</span>
+                                                </td>
+                                                <td>
+                                                    <ul class="list-inline hstack gap-2 mb-0">
+                                                        <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                                            <a href="apps-ecommerce-customers.html#showModal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn">
+                                                                <i class="ri-pencil-fill fs-16"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
+                                                            <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="apps-ecommerce-customers.html#deleteRecordModal">
+                                                                <i class="ri-delete-bin-5-fill fs-16"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
+                                                    </div>
+                                                </th>
+                                                <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
+                                                <td class="customer_name">Faculty 3</td>
+                                                <td class="email">facultythr@pup.com</td>
+                                                <td class="phone">580-464-4694</td>
+                                                <td class="date">7 Subject per Course</td>
+                                                <td class="status"><span class="badge bg-success-subtle text-success text-uppercase">Regular Non-Designee</span>
+                                                </td>
+                                                <td>
+                                                    <ul class="list-inline hstack gap-2 mb-0">
+                                                        <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                                            <a href="apps-ecommerce-customers.html#showModal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn">
+                                                                <i class="ri-pencil-fill fs-16"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
+                                                            <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="apps-ecommerce-customers.html#deleteRecordModal">
+                                                                <i class="ri-delete-bin-5-fill fs-16"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="noresult" style="display: none">
+                                        <div class="text-center">
+                                            <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
+                                            <h5 class="mt-2">Sorry! No Result Found</h5>
+                                            <p class="text-muted mb-0">We've searched more than 150+ customer We did not find any customer for you search.</p>
+                                        </div>
                                     </div>
-                                    <form class="tablelist-form" autocomplete="off">
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <div class="pagination-wrap hstack gap-2">
+                                        <a class="page-item pagination-prev disabled" href="#">
+                                            Previous
+                                        </a>
+                                        <ul class="pagination listjs-pagination mb-0"></ul>
+                                        <a class="page-item pagination-next" href="#">
+                                            Next
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="showModal" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-light p-3">
+                                            <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+                                        </div>
+                                        <form class="tablelist-form" autocomplete="off">
+                                            <div class="modal-body">
+                                                <input type="hidden" id="id-field" />
+
+                                                <div class="mb-3" id="modal-id" style="display: none;">
+                                                    <label for="id-field1" class="form-label">ID</label>
+                                                    <input type="text" id="id-field1" class="form-control" placeholder="ID" readonly />
+                                                </div>
+
+                                                <div>
+                                                    <label for="status-field" class="form-label">Modify Workload</label>
+                                                    <select class="form-control" data-choices data-choices-search-false name="status-field" id="status-field"  required>
+                                                        <option value="">No. of Workload</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="hstack gap-2 justify-content-end">
+                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-success" id="add-btn">Modify</button>
+                                                    <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="btn-close" id="deleteRecord-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
+                                        </div>
                                         <div class="modal-body">
-                                            <input type="hidden" id="id-field" />
-
-                                            <div class="mb-3" id="modal-id" style="display: none;">
-                                                <label for="id-field1" class="form-label">ID</label>
-                                                <input type="text" id="id-field1" class="form-control" placeholder="ID" readonly />
+                                            <div class="mt-2 text-center">
+                                                <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                                                <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                                                    <h4>Are you sure ?</h4>
+                                                    <p class="text-muted mx-4 mb-0">Are you sure you want to remove this record ?</p>
+                                                </div>
                                             </div>
-
-                                            <div>
-                                                <label for="status-field" class="form-label">Modify Workload</label>
-                                                <select class="form-control" data-choices data-choices-search-false name="status-field" id="status-field"  required>
-                                                    <option value="">No. of Workload</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                </select>
+                                            <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                                                <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn w-sm btn-danger" id="delete-record">Yes, Delete It!</button>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <div class="hstack gap-2 justify-content-end">
-                                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-success" id="add-btn">Modify</button>
-                                                <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Modal -->
-                        <div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="btn-close" id="deleteRecord-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="mt-2 text-center">
-                                            <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
-                                            <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
-                                                <h4>Are you sure ?</h4>
-                                                <p class="text-muted mx-4 mb-0">Are you sure you want to remove this record ?</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                                            <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn w-sm btn-danger" id="delete-record">Yes, Delete It!</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!--end modal -->
                         </div>
-                        <!--end modal -->
                     </div>
-                </div>
 
+                </div>
+                <!--end col-->
             </div>
-            <!--end col-->
-        </div>
+        {% endcomment %}
+
         
         <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
         <script src="{% static 'js/main/eval_upload/eval_u_datatable.js' %}"></script>
