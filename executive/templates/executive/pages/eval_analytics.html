@@ -45,23 +45,62 @@
                         </div>
                     </div>
                 </div>
-                <!-- end card body -->
             </div>
         </div>
-        <!-- end card -->
+        <!--  Extra Large modal example -->
+        <div class="modal fade eval_analytics" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myExtraLargeModalLabel">List of Research Publications</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table id="datatable" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Faculty Name</th>
+                                    <th>Supervisor Rating</th>
+                                    <th>Supervisor Interpretation</th>
+                                    <th>Students Rating</th>
+                                    <th>Students Interpretation</th>
+                                    <th>Peer Rating</th>
+                                    <th>Peer Interpretation</th>
+                                    <th>Self Rating</th>
+                                    <th>Self Interpretation</th>
+                                {% comment %}
+                                    <th>Load Rating</th>
+                                    <th>Load Interpretation</th>
+                                    <th>Faculty Status</th>
+                                {% endcomment %}
+                                    <th>Semester</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:void(0);" class="btn btn-link link-success shadow-none fw-medium" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Close</a>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
-    <!--end col-->
 </div>
 
 <div class="row mt-n5">
     <div class="col-lg-9">
         <div class="card card-height-100">
             <div class="card-header border-0 align-items-center d-flex">
-                <h4 class="col-10 card-title mb-0 flex-grow-1">Faculty Evaluation Average Ratings</h4>
+                <h4 class="col-7 card-title mb-0 flex-grow-1">Faculty Evaluation Average Ratings</h4>
                 
-                <label class="col-2 m-0">
+                <label class="col-2 m-0" style="padding-right: 1rem !important;">
                     <select id="yearDropdownForEval" onchange="updateEvaluationz()" class="form-select form-select-sm"></select>
                 </label>
+
+                <button class="col-2 btn btn-info btn-icon " data-bs-toggle="modal" data-bs-target=".eval_analytics">
+                    <i class="ri-eye-line"></i>
+                </button>
             </div>
             <div class="card-body p-0 pb-2">
                 <div class="w-100">
@@ -185,10 +224,19 @@
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
+<script src="{% static 'js/main/eval_upload/eval_u_datatable.js' %}"></script>
 
 <script>
     // Faculty Performance vs. Institutional Requirement Percentage
-    const json_data = JSON.parse('{{ overall_avg_data|escapejs }}');
+    const json_data = JSON.parse('{{ overall_avg_data|escapejs|safe }}');
+    const valueToSet = json_data.overall_avg_first;
+    const valueToSetTwo = json_data.overall_avg_second;
+
+    const frfs = document.getElementById('frfs');
+    frfs.textContent = valueToSet;
+
+    const frss = document.getElementById('frss');
+    frss.textContent = valueToSetTwo;
 </script>
 
 <script>
@@ -455,19 +503,165 @@
 
 <script>
     // Trends in Teaching Effectiveness Over Time
-    var combinedData = JSON.parse('{{ combined_data|escapejs|safe }}');
+    var combinedData = JSON.parse('{{ chart_data_two|escapejs|safe }}');
+    // Trends in Teaching Effectiveness Over Time
+    var chartStudRating = Object.values(combinedData);
+    var years = chartStudRating.map(item => item.year);
+
+    var firstSemesterRatings = chartStudRating.map(function (item) {
+        return {
+            'avgz_stud_rating': item.frst_semester_avg.avgz_stud_rating,
+        };
+    });
+
+    var secondSemesterRatings = chartStudRating.map(function (item) {
+        return {
+            'avgz_stud_rating': item.scnd_semester_avg.avgz_stud_rating,
+        };
+    });
+
+    var series = [
+
+        {
+            name: '1st Sem Students Rating',
+            data: firstSemesterRatings.map(function (item) {
+                return item.avgz_stud_rating;
+            }),
+        },
+
+        {
+            name: '2nd Sem Students Rating',
+            data: secondSemesterRatings.map(function (item) {
+                return item.avgz_stud_rating;
+            }),
+        },
+    ];
+
+    var options = {
+        chart: {
+            type: 'bar',
+            height: 350,
+            zoom: { enabled: false },
+            toolbar: { show: false },
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+            },
+        },
+        colors: [
+            getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
+            getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
+            getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
+        ],
+        xaxis: {
+            categories: years,
+            title: {
+                text: 'Academic Year/s',
+            },
+        },
+        yaxis: {
+            title: {
+                text: 'Average Rating',
+            },
+        },
+        series: series,
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chartz"), options);
+    chart.render();
+
+        // Populate the year dropdown
+        var yearDropdown = document.getElementById('yearDropdown');
+        
+        // Add "Display All" option as the first option
+        var allOption = document.createElement('option');
+            allOption.value = "all";
+            allOption.text = "Display All";
+        yearDropdown.add(allOption);
+
+        // Read the Json data for "Years"
+        years.forEach( year => {
+            var option = document.createElement('option');
+                option.value = year;
+                option.text = year
+            yearDropdown.appendChild(option);
+        });
+            
+        // Function to update the chart based on the selected year
+        function updateChart() {
+            var selectedYear = yearDropdown.value; 
+            var filteredYearData = chartStudRating.filter(item => item.year == selectedYear);
+
+            if (selectedYear === "all") {
+                var filteredYearData = chartStudRating;
+            }
+            
+            if (filteredYearData.length > 0) {
+                var filteredSeries = [
+                    {
+                        name: '1st Sem Students Rating',
+                        data: filteredYearData.map(item => item.frst_semester_avg.avgz_stud_rating)
+                    },
+                    
+                    {
+                        name: '2nd Sem Students Rating',
+                        data: filteredYearData.map(item => item.scnd_semester_avg.avgz_stud_rating)
+                    }
+                ];
+                chart.updateOptions({
+                    xaxis: {
+                        categories: filteredYearData.map(item => item.year)
+                    }
+                });
+                chart.updateSeries(filteredSeries);
+            }
+            else {
+                console.error('No data found for the selected year.');
+            }
+        } updateChart();
+        
+        yearDropdown.addEventListener('change', updateChart);
 </script>
 
 <script>
     // Average Student Scores for Each Faculty 
     var percentage_data = JSON.parse('{{ percentage|safe }}');
+    var percentage_above_3 = percentage_data.pctg_ra3;
+    var percentage_below_3 = percentage_data.pctg_rb3;
+
+    var options = {
+        series: [percentage_above_3, percentage_below_3],
+        chart: {
+            type: 'pie',
+            height: '400px',
+            width: '400px', 
+        },
+        labels: ['Above 4.0', 'Less/Equal  3.99'],
+        colors: [
+            getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
+            getComputedStyle(document.documentElement).getPropertyValue('--vz-warning'),
+        ],
+    };
+    var chart = new ApexCharts(document.querySelector("#prjects-status-1"), options);
+    chart.render();
 </script>
 
 <script>
     // Average Student Scores for Each Faculty: Count
-    const percentaging = JSON.parse('{{ percentage|escapejs }}');
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const percentaging = JSON.parse('{{ percentage|escapejs }}');
+        const valueToSetThree = percentaging.count_ra3;
+        const valueToSetFour  = percentaging.count_rb3;
+
+        const ra3 = document.getElementById('ra3');
+        ra3.textContent = valueToSetThree;
+
+        const rb3 = document.getElementById('rb3');
+        rb3.textContent = valueToSetFour;
+    });
 </script>
 
 
-<script src="{% static 'js/main/eval_analytics/eval_analytics.js' %}"></script>
 {% endblock %}
