@@ -37,8 +37,9 @@ urlpatterns = [
     # path("fac_contents"     , views.fac_contents     , name="fac_contents"  ),
     # path("fac_analytics"    , views.fac_analytics    , name="fac_analytics" ),
 
-    path("rsrch_analytics"  , views.rsrch_analytics   , name="rsrch_analytics"  ),
-    path("rsrch_tracking"   , views.rsrch_tracking    , name="rsrch_tracking"   ),
+    path("rsrch_analytics"      , views.rsrch_analytics   , name="rsrch_analytics"  ),
+    path("rsrch_tracking"       , views.rsrch_tracking    , name="rsrch_tracking"   ),
+    # path("rsrch_generate_pdf"   , views.rsrch_generate_pdf, name="rsrch_generate_pdf"),
 
     path("workload_dat"     , views.workload_dat      , name="workload_dat"     ),
     path("workload_analytics", views.workload_analytics , name="workload_analytics"),

@@ -24,6 +24,7 @@ from .modules.acad_head.merit_prmot.views_exec_mrt_promotion      import mrt_pro
 from .modules.acad_head.merit_prmot.views_exec_mrt_analytics      import mrt_analytics
 from .modules.acad_head.research.views_exec_research              import rsrch_tracking
 from .modules.acad_head.research.views_exec_research_analytics    import rsrch_analytics
+# from .modules.acad_head.research.views_exec_research_generate     import rsrch_generate_pdf
 from .modules.acad_head.workload.views_exec_workload              import workload_dat
 from .modules.acad_head.workload.views_exec_workload_analytics    import workload_analytics
 from .modules.acad_head.fac_mgmnt.views_faculty_management        import fac_mgmnt
@@ -49,6 +50,7 @@ exec_p_sett
 # # Research Publication
 rsrch_analytics
 rsrch_tracking
+# rsrch_generate_pdf
 
 # # Professional Development
 prdv_wrkshp_att
@@ -93,19 +95,22 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 import requests, os
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='login')
 @api_view(['GET'])
 def testapifrompostmanshit(request, format=None):
-    # try:
+    try:
         response = requests.get('https://covid-api.com/api/regions')
         response.raise_for_status()
         data = response.json()
         return Response(data)
-    # except requests.exceptions.RequestException as e:
-        # return Response({'error': str(e)}, status=500)  # Handle errors gracefully
+    except requests.exceptions.RequestException as e:
+        return Response({'error': str(e)}, status=500) 
 
 
+@login_required(login_url='login')
 @api_view(['GET'])
 def testresearchinfodata(request, format=None):
     token_url = os.environ.get('RIS_API_TOKEN')
@@ -133,6 +138,7 @@ def testresearchinfodata(request, format=None):
     else:
         return Response({'error': f"Failed to get token: {token_response.status_code} - {token_response.text}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@login_required(login_url='login')
 @api_view(['GET'])
 def testfacultyinfodata(request, format=None):
     response_two = requests.get('https://pupqcfis-com.onrender.com/api/FISFaculty/Evaluations')
@@ -140,6 +146,7 @@ def testfacultyinfodata(request, format=None):
     data_two = response_two.json()
     return Response(data_two)
 
+@login_required(login_url='login')
 @api_view(['GET', 'POST'])
 def table_list(request, format=None):
     if request.method == 'GET':
@@ -154,6 +161,7 @@ def table_list(request, format=None):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+@login_required(login_url='login')
 @api_view(['GET', 'PUT', 'DELETE'])
 def table2_detail(request, id, format=None):
     try:

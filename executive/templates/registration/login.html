@@ -74,8 +74,8 @@
                                 <p class="text-muted">Sign in to continue.</p>
                             </div>
                             <div class="p-2 mt-4">
+                                {% csrf_token %}
                                 <form class="needs-validation" novalidate action="{% url 'login' %}" method="post">
-                                    {% csrf_token %}
                                     {% include 'partials/_messages.html' %}
                                     {% comment %}  {{form}}  {% endcomment %}
                                 
