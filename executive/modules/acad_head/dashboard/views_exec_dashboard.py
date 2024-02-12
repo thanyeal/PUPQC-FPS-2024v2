@@ -31,7 +31,7 @@ def exec_dashboard(request):
             avgz_stud_rating=Avg('stud_rating'),
             avgz_peer_rating=Avg('peer_rating'),
             avgz_self_rating=Avg('self_rating')
-        )
+        )   
 
         summer_semester_data = TableOne.objects.filter(semester='Summer', eval_year__year=present_date).order_by('semester', 'eval_year')
         summer_semester_avg = summer_semester_data.aggregate(
@@ -55,7 +55,7 @@ def exec_dashboard(request):
             'peerr_summer': [round ( float ( summer_semester_avg ['avgz_peer_rating'] ), 1)],
             'selff_summer': [round ( float ( summer_semester_avg ['avgz_self_rating'] ), 1)],
         }
-
+#======================================================================================= # ================================================= # ===========
         first_semester_data = TableOne.objects.filter(semester='First', eval_year__year=present_date).order_by('semester', 'eval_year')
         first_semester_avg = first_semester_data.aggregate(
             avgz_spvs_rating=Avg('spvs_rating'),
@@ -188,12 +188,12 @@ def exec_dashboard(request):
         # ==========     MASSIV RIS CONDITIONALS FOR DETAILED API ============= #
 
         context = {
-            'total_research_papers' : serialized_grouped_counted ,
-            'percent_research_papers' : serialized_percentage_data,
-            'first_name'            : serialized_first_name      ,
-            #'custom_data'           : serialized_custom_data    ,
-            'chart_data_two'        : serialized_data_two        ,
-            'overall_avg_data'      : serialized_overall_avg   
+            'total_research_papers'     : serialized_grouped_counted ,
+            'percent_research_papers'   : serialized_percentage_data,
+            'first_name'                : serialized_first_name      ,
+            #'custom_data'              : serialized_custom_data    ,
+            'chart_data_two'            : serialized_data_two        ,
+            'overall_avg_data'          : serialized_overall_avg   
         }
         return render(request, 'executive/exec_dashboard.html', context)
         

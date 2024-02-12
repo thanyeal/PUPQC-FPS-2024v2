@@ -1,15 +1,8 @@
 
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from executive.forms import ExcelUploadForm
 from django.http import JsonResponse
-from executive.models import TableOne
-from django.contrib import messages
-import pandas as pd
 import requests, os
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import status
 
 @login_required(login_url='login')
 def evaluations(request):

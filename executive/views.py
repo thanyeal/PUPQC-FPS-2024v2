@@ -28,6 +28,9 @@ from .modules.acad_head.research.views_exec_research_analytics    import rsrch_a
 from .modules.acad_head.workload.views_exec_workload              import workload_dat
 from .modules.acad_head.workload.views_exec_workload_analytics    import workload_analytics
 from .modules.acad_head.fac_mgmnt.views_faculty_management        import fac_mgmnt
+from .modules.acad_head.fac_mgmnt.views_testing_faculty           import testing_num1
+
+testing_num1
 
 # Authentication
 registry

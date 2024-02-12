@@ -18,7 +18,8 @@ $(document).ready(function () {
             //{ "data": "load_rating" },
             //{ "data": "load_interp" },
             //{ "data": "faculty_stat"},
-            { "data": "Semester" }
+            { "data": "Semester" },
+            { "data": "Year" },
         ]
         //"pageLength": 25
     });

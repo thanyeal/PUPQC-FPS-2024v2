@@ -46,7 +46,9 @@ urlpatterns = [
 
     # for maintenance page
     path('coming_soon'      , views.coming_soon     , name="coming_soon"),
-    path('fac_mgmnt'      , views.fac_mgmnt    , name="fac_mgmnt"),
+
+    # for Faculty Management Page
+    path('fac_mgmnt'        , views.fac_mgmnt       , name="fac_mgmnt"),
 
     # for log and reg page
     path('registry/'        , views.registry        , name="registry"   ),
@@ -66,6 +68,7 @@ urlpatterns = [
     path('table/<int:id>',views.table2_detail),
     path('postman/', views.testapifrompostmanshit),
     path('ris/', views.testresearchinfodata),
-    path('fis/', views.testfacultyinfodata)
+    path('fis/', views.testfacultyinfodata),
+    path("testing_num1", views.testing_num1, name='testing_num1') 
 ]
 

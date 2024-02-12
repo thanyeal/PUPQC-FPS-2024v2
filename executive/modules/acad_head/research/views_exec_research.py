@@ -42,4 +42,3 @@ def rsrch_tracking(request):
         ris_api_data = api_response.json()
         return JsonResponse(ris_api_data, safe=False)
     return render(request, 'executive/pages/rsrch_tracking.html')
-

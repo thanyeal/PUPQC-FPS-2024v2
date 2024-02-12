@@ -106,7 +106,7 @@ def rsrch_analytics(request):
                     'Categories'            : slrzd_rsrch_categories    ,
                     'Grouped Data'          : slrzd_grouped_data        ,
                     'js_grouped_counted'    : slrzd_grouped_counted     ,
-                    'js_grouped_percent'    : slrzd_percentage_data       ,
+                    'js_grouped_percent'    : slrzd_percentage_data     ,
                     'js_specific_data'      : slrzd_specific_year_data  ,
                     'js_highest_year'       : slrzd_highest_year        ,
                     'js_lowest_year'        : slrzd_lowest_year         ,

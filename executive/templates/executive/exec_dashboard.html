@@ -51,9 +51,9 @@
             <div class="col-xl-12">
                 <div class="card crm-widget mt-n5">
                     <div class="card-body p-0">
-                        <div class="row row-cols-xxl-5 row-cols-md-3 row-cols-1 g-0">
+                        <div class="row row-cols-xxl row-cols-md-2 row-cols-1 g-0">{% comment %}  row-cols-xxl-5 {% endcomment %}
 
-                            <div class="col">
+                            <div class="col d-flex justify-content-center align-items-center">
                                 <div class="py-4 px-3">
                                     <h5 class="text-muted text-uppercase fs-13">Present Institutional Rating <!--i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i--></h5>
                                     <div class="d-flex align-items-center">
@@ -67,7 +67,7 @@
                                 </div>
                             </div>
 
-                            <div class="col">
+                            <div class="col d-flex justify-content-center align-items-center">
                                 <div class="mt-3 mt-md-0 py-4 px-3">
                                     <h5 class="text-muted text-uppercase fs-13">Present Research Products <!--i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i--></h5>
                                     <div class="d-flex align-items-center">
@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                             </div>
-
+{% comment %}
                             <div class="col">
                                 <div class="mt-3 mt-md-0 py-4 px-3">
                                     <h5 class="text-muted text-uppercase fs-13">Present Awarded Faculties <!--i class="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle"></i--></h5>
@@ -122,7 +122,7 @@
                                     </div>
                                 </div>
                             </div>
-
+{% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
         </div>
 
         <div class="row">
-            <div class="col-xxl-6">
+            <div class="col-xxl-12">
                 <div class="card">
                     <div class="card-header align-items-center d-flex">
                         <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">Research Productivity</h4>
@@ -189,7 +189,7 @@
                 </div>
             </div>
 
-            <div class="col-xxl-6">
+            <!--div class="col-xxl-6">
                 <div class="card card-height-100">
                     <div class="card-header align-items-center d-flex">
                         <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">Workload Distributions</h4>
@@ -214,9 +214,10 @@
                         <div id="revenue-expenses-charts" data-colors='["--vz-success", "--vz-secondary", "--vz-primary"]' class="apex-charts" dir="ltr"></div>
                     </div>
                 </div>
-            </div>
+            </div-->
         </div>
 
+        {% comment %}
         <div class="row">
             <div class="col-xxl-4">
                 <div class="card card-height-100">
@@ -232,8 +233,8 @@
                     </div>
 
                     <div class="card-body">
-                        {% comment %}
-                            <div id="prjects-status" data-colors='["--vz-success", "--vz-primary", "--vz-secondary", "--vz-danger"]' class="apex-charts" dir="ltr"></div>
+                        
+                            <!--div id="prjects-status" data-colors='["--vz-success", "--vz-primary", "--vz-secondary", "--vz-danger"]' class="apex-charts" dir="ltr"></div>
                             <div class="mt-3">
                                 <div class="d-flex justify-content-center align-items-center mb-4">
                                     <h2 class="me-3 ff-secondary mb-0">0</h2>
@@ -277,8 +278,8 @@
                                         <span class="text-success fw-medium fs-12">900hrs</span>
                                     </div>
                                 </div>
-                            </div>
-                        {% endcomment %}
+                            </div-->
+                        
                     </div>
                 </div>
             </div>
@@ -306,7 +307,7 @@
                     </div>
 
                     {% comment %}
-                        <div class="card-header p-0 border-0 bg-light-subtle">
+                        <!--div class="card-header p-0 border-0 bg-light-subtle">
                             <div class="row g-0 text-center">
                                 <div class="col-6 col-sm-4">
                                     <div class="p-3 border border-dashed border-start-0">
@@ -335,11 +336,11 @@
                             <div>
                                 <div id="projects-overview-chart" data-colors='["--vz-primary", "--vz-info", "--vz-secondary"]' class="apex-charts" dir="ltr"></div>
                             </div>
-                        </div>
-                    {% endcomment %}
+                        </div-->
                 </div>
             </div>
         </div>
+        {% endcomment %}
 
     <script>
         //For showing time and date

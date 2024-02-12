@@ -169,12 +169,12 @@
                 
             </li>
             {% endcomment %}
-
+            {% comment %}
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url 'awards_analytics' %}" {% comment %}data-bs-toggle="collapse"{% endcomment %} role="button" aria-expanded="false" aria-controls="sidebar_proAwards">
+                <a class="nav-link menu-link" href="{% url 'awards_analytics' %}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebar_proAwards">
                     <i class="ri-medal-line"></i> <span class="span-text-title" data-key="t-pages">Awards and Recognition</span>
                 </a>
-                {% comment %}
+                
                     <div class="collapse menu-dropdown" id="sidebar_proAwards">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
@@ -189,8 +189,8 @@
                             </li>
                         </ul>
                     </div>
-                {% endcomment %}
             </li>
+            {% endcomment %}
             {% comment %}
             <li class="nav-item">
                 <a class="nav-link menu-link" href="{% url 'prodev_analytics' %}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebar_proTraining">
@@ -233,11 +233,12 @@
                 
             </li>
             {% endcomment %}
+            {% comment %}
+
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url 'alm_analytics' %}" {% comment %}data-bs-toggle="collapse"{% endcomment %} role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI1">
+                <a class="nav-link menu-link" href="{% url 'alm_analytics' %}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI1">
                     <i class="ri-walk-line"></i> <span class="span-text-title">Leave Management</span>
                 </a>
-                {% comment %}
                     <div class="collapse menu-dropdown" id="sidebarAdvanceUI1">
                         <ul class="nav nav-sm flex-column"> 
                             <li class="nav-item">
@@ -248,9 +249,9 @@
                             </li>
                         </ul>
                     </div>
-                {% endcomment %}
+                
             </li>
-
+            {% endcomment %}
 
         </ul>
     </div>
