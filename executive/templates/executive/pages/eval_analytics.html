@@ -159,6 +159,9 @@
                     <div class="card-body p-0 pb-2">
                         <div class="card-body">
                             <div id="prjects-status-1" class="apex-charts mt-5" dir="ltr"></div>
+                        </div>
+                        <div class="card-body">
+                            
                             <div class="mt-3">
                                 <div class="d-flex justify-content-center align-items-center mb-4">
                                     <h2 class="me-3 ff-secondary mb-0 text-warning"><span id="rb3">0</span></h2>
@@ -409,6 +412,11 @@
                 getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
                 getComputedStyle(document.documentElement).getPropertyValue('--vz-warning'),
             ],
+            dataLabels: {
+                enabled: true,
+                offsetX: -10,
+                offsetY: 50,
+            },
         };
         var chart = new ApexCharts(document.querySelector("#prjects-status-1"), options);
         chart.render();

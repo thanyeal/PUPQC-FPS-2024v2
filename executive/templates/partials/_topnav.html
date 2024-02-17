@@ -40,17 +40,15 @@
                         <img class="rounded-circle header-profile-user" src="{% static 'images/maam_dem.jpg' %}" alt="Header Avatar">
                         <span class="text-start ms-xl-2">
                             <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
-                                {{ user.first_name }} {{ user.last_name }}                         
+                                {{ user.first_name }} E. {{ user.last_name }}, Ph.D
                             </span>
-                            <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Faculty type</span>
+                            <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Academic Head</span>
                         </span>
                     </span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <h6 class="dropdown-header">Welcome, 
-                        {{ user.first_name }}
-                    </h6>
+                    <h6 class="dropdown-header">Welcome, Ma'am {{ user.first_name }} </h6>
                     <a class="dropdown-item" href="{% url "error_page_404" %}"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'logout' %}"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
