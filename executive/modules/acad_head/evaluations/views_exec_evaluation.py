@@ -1,13 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models.functions import ExtractYear
-from django.shortcuts import render, redirect
-from executive.models import TableOne
-from django.db.models import Avg
+from django.shortcuts import render
 from decimal import Decimal
-import json, os, requests
-from django.http import JsonResponse
-from itertools import groupby
+import json
 import datetime
+from executive.api import api_routes
 
 @login_required(login_url='login')
 def convert_decimal_to_float(obj):
@@ -17,13 +13,13 @@ def convert_decimal_to_float(obj):
 
 @login_required(login_url='login')
 def eval_analytics(request):
-    api_url = os.environ.get('FIS_API_EVALZ') 
-    response = requests.get(api_url)
-    api_data = response.json()
-
+    # responsez = testfacultyinfodata(request)
+    # api_data = responsez.data
+    
+    fis_api_data = api_routes.get_fis_eval_api(request)
     grouped_data = {}
 
-    for item in api_data:
+    for item in fis_api_data:
         eval_year = item['Year']
         year = eval_year[:4]
         semester = item['Semester']
@@ -116,7 +112,7 @@ def eval_analytics(request):
             overall_avg_second_percentage = overall_avg_dict.get('overall_avg_second', 0)
 # # ============================================================================================
     student_rate_data = {}
-    for item in api_data:  # Process all items in the API data
+    for item in fis_api_data:  # Process all items in the API data
         eval_year = item['Year']
         year = eval_year[:4]
         semester = item['Semester']  # Get the semester for each item
@@ -153,13 +149,13 @@ def eval_analytics(request):
             semester_data['Students Rating'] = round(sum(float(rating) for rating in semester_data['Students Rating'])/ len(semester_data['Students Rating']),1)
 # # ============================================================================================
 
-    rating_above_3 = [item for item in api_data if float(item['Students Rating']) > 4.00]
-    rating_below_3 = [item for item in api_data if float(item['Students Rating']) <= 3.99]
+    rating_above_3 = [item for item in fis_api_data if float(item['Students Rating']) > 4.00]
+    rating_below_3 = [item for item in fis_api_data if float(item['Students Rating']) <= 3.99]
 
     count_ra3 = len(rating_above_3)
     count_rb3 = len(rating_below_3)
 
-    total_rec = len(api_data)
+    total_rec = len(fis_api_data)
 
     pctg_ra3 = (count_ra3 / total_rec) * 100
     pctg_rb3 = (count_rb3 / total_rec) * 100

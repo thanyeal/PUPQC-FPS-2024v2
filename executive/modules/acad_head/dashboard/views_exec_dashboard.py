@@ -4,11 +4,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from executive.models import TableOne
 from django.db.models import Avg
-import json, os, requests
-from rest_framework.response import Response
-from django.http import JsonResponse
-from rest_framework import status
+import json, requests
 from datetime import date
+from executive.api import api_routes
 
 @login_required(login_url='login')
 def exec_dashboard(request):
@@ -137,54 +135,35 @@ def exec_dashboard(request):
 
         # ==========     MASSIV RIS CONDITIONALS FOR DETAILED API ============= #
 
-        token_url = os.environ.get('RIS_API_TOKEN')
-        headers = {
-            'Content-Type': 'application/json'
-        }
-        token_response = requests.get(token_url, headers=headers)
+        # responsez = testresearchinfodata(request)
+        # ris_api_data = responsez.data
+        #return Response(ris_api_data)
+    
+        # # Research Publications Counted per Year
+        # ris_api_data = os.environ.get('RIS_API_URLZZ')
+        # response = requests.get(ris_api_data)
+        # response.raise_for_status()
+        # rsrch_data = response.json()
+        
+        ris_api_data = api_routes.get_ris_api(request)
 
-        if token_response.status_code == 200:
-            data = token_response.json()
-            token = data['result']['access_token']
-            api_url = os.environ.get('RIS_API_URLZZ')
-            
-            headers = {
-                'Authorization': f'Bearer {token}'
-            }
-            
-            api_response = requests.get(api_url, headers=headers)
-            
-            if api_response.status_code == 200:
-                ris_api_data = api_response.json()
-                #return Response(ris_api_data)
-            
-                # # Research Publications Counted per Year
-                # ris_api_data = os.environ.get('RIS_API_URLZZ')
-                # response = requests.get(ris_api_data)
-                # response.raise_for_status()
-                # rsrch_data = response.json()
 
-                totalresearch = len(ris_api_data)
 
-                # Research Publications Percentaged per Year
-                grouped_counted = {}
-                total_count = 50
-                for item in ris_api_data:
-                    year = item['Publication Year'][:4]
-                    grouped_counted.setdefault(year, {'count': 0})['count'] += 1
+        totalresearch = len(ris_api_data)
 
-                percentage_data = {}
-                for year, count in grouped_counted.items():
-                    percentage_data[year] = {'percentage': (count['count'] / total_count * 100)}
+        # Research Publications Percentaged per Year
+        grouped_counted = {}
+        total_count = 50
+        for item in ris_api_data:
+            year = item['Publication Year'][:4]
+            grouped_counted.setdefault(year, {'count': 0})['count'] += 1
 
-                serialized_grouped_counted  = json.dumps(totalresearch)
-                serialized_percentage_data  = json.dumps(percentage_data)
+        percentage_data = {}
+        for year, count in grouped_counted.items():
+            percentage_data[year] = {'percentage': (count['count'] / total_count * 100)}
 
-            else:
-                return Response({'error': f"Failed to access API: {api_response.status_code} - {api_response.text}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        else:
-            return Response({'error': f"Failed to get token: {token_response.status_code} - {token_response.text}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
+        serialized_grouped_counted  = json.dumps(totalresearch)
+        serialized_percentage_data  = json.dumps(percentage_data)
         # ==========     MASSIV RIS CONDITIONALS FOR DETAILED API ============= #
 
         context = {

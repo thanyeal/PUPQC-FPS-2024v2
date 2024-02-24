@@ -64,11 +64,7 @@ urlpatterns = [
     path('validate-fname'   , csrf_exempt(FirstnameValidation.as_view()), name=''),
     path('validate-mname'   , csrf_exempt(UsernameValidation.as_view()) , name=''),
 
-    path('table/', views.table_list),
-    path('table/<int:id>',views.table2_detail),
-    path('postman/', views.testapifrompostmanshit),
     path('ris/', views.testresearchinfodata),
     path('fis/', views.testfacultyinfodata),
-    path("testing_num1", views.testing_num1, name='testing_num1') 
 ]
 
