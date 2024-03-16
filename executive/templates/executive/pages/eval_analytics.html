@@ -68,20 +68,16 @@
                                         <tr>
                                             <th>Faculty Name</th>
                                             <th>Supervisor Rating</th>
-                                            <th>Supervisor Interpretation</th>
                                             <th>Students Rating</th>
-                                            <th>Students Interpretation</th>
                                             <th>Peer Rating</th>
-                                            <th>Peer Interpretation</th>
                                             <th>Self Rating</th>
-                                            <th>Self Interpretation</th>
                                         {% comment %}
                                             <th>Load Rating</th>
                                             <th>Load Interpretation</th>
                                             <th>Faculty Status</th>
                                         {% endcomment %}
                                             <th>Semester</th>
-                                            <th>Year</th>
+                                            <th>Academic Year</th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -99,13 +95,13 @@
     <div id="printableArea">
 
         <div class="row mt-n5">
-            <div class="col-lg-9">
+            <div class="col-lg-8">
                 <div class="card card-height-100">
                     <div class="card-header border-0 align-items-center d-flex">
                         <h4 class="col-7 card-title mb-0 flex-grow-1">Faculty Evaluation Average Ratings</h4>
                         
                         <label class="col-2 m-0" style="padding-right: 1rem !important;">
-                            <select id="yearDropdownForEval" onchange="updateEvaluationz()" class="form-select form-select-sm"></select>
+                            <select id="yearDropdownForEval" onchange="updateEvaluationz(event)" class="form-select form-select-sm"></select>
                         </label>
 
                         <button class="col-2 btn btn-info btn-icon" style="margin-right: 1rem !important;" data-bs-toggle="modal" data-bs-target=".eval_analytics">
@@ -129,13 +125,13 @@
                                     <div class="col-6 col-sm-3">
                                         <div class="p-3 border border-dashed border-start-0">
                                             <h5 class="mb-1 fs-17 fw-semibold text-primary"><span id="frfs">0</span>%</h5>
-                                            <p class="text-muted mb-0">Faculty Rating: First Semester</p>
+                                            <p class="text-muted mb-0">Present Faculty Rating: First Semester</p>
                                         </div>
                                     </div>
                                     <div class="col-6 col-sm">
                                         <div class="p-3 border border-dashed border-start-0">
                                             <h5 class="mb-1 fs-17 fw-semibold text-secondary"><span id="frss">0</span>%</h5>
-                                            <p class="text-muted mb-0">Faculty Rating: Second Semester</p>
+                                            <p class="text-muted mb-0">Present Faculty Rating: Second Semester</p>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +145,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="card card-height-100">
                     <div class="card-header align-items-center d-flex">
                         <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">
@@ -190,27 +186,13 @@
                         </h4>
                         
                         <label class="col-1">
-                            <select id="yearDropdown" onchange="updateChart()" class="form-select form-select-sm"></select>
+                            <select id="yearDropdown" onchange="updateChart(event)" class="form-select form-select-sm"></select>
                         </label>
                     </div>
 
                     <div class="card-body p-0 pb-2">
                         <div class="w-100">
                             <div class="card-header p-0 border-0 bg-light-subtle">
-                                {% comment %} <div class="row g-0 text-center">
-                                    <div class="col-6">
-                                        <div class="p-3 border border-dashed border-start-0">
-                                            <h5 class="mb-1 fs-17 fw-semibold text-primary"><span id="#">0</span></h5>
-                                            <p class="text-muted mb-0">Most Performing Year</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-sm">
-                                        <div class="p-3 border border-dashed border-start-0">
-                                            <h5 class="mb-1 fs-17 fw-semibold text-warning"><span id="#">0</span></h5>
-                                            <p class="text-warning mb-0">Least Performing Year</p>
-                                        </div>
-                                    </div>
-                                </div> {% endcomment %}
                             </div>
                             <div class="card-body p-0 pb-2">
                                 <div class="w-100">
@@ -221,22 +203,7 @@
                     </div>
                 </div>
             </div>
-            {% comment %} <div class="col-xxl-9">
-                <div class="card card-height-100">
-                    <div class="card-header align-items-center d-flex">
-                        <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">
-                            Faculty Ratings
-                        </h4>
-                    </div>
-                    <div class="card-body p-0 pb-2">
-                        <div class="w-100">
-                            <div id="line-chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div> {% endcomment %}
         </div>
-
     </div>
 
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -258,7 +225,7 @@
     </script>
 
     <script>
-        // Faculty Performance vs. Institutional Requirement Percentage
+        // Faculty Evaluation Average Ratings
         const json_data = JSON.parse('{{ overall_avg_data|escapejs|safe }}');
         const valueToSet = json_data.overall_avg_first;
         const valueToSetTwo = json_data.overall_avg_second;
@@ -273,7 +240,6 @@
     <script>
         // Trends in Teaching Effectiveness Over Time
         var combinedData = JSON.parse('{{ chart_data_two|escapejs|safe }}');
-        // Trends in Teaching Effectiveness Over Time
         var chartStudRating = Object.values(combinedData);
         var years = chartStudRating.map(item => item.year);
 
@@ -310,8 +276,21 @@
             chart: {
                 type: 'bar',
                 height: 350,
-                zoom: { enabled: false },
+                zoom: { enabled: true },
                 toolbar: { show: false },
+                animations: {
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 800,
+                    animateGradually: {
+                        enabled: true,
+                        delay: 150
+                    },
+                    dynamicAnimation: {
+                        enabled: true,
+                        speed: 350
+                    }
+                },
             },
             plotOptions: {
                 bar: {
@@ -341,57 +320,59 @@
         var re_chart = new ApexCharts(document.querySelector("#chartz"), options);
         re_chart.render();
 
-            // Populate the year dropdown
-            var yearDropdown = document.getElementById('yearDropdown');
-            
-            // Add "Display All" option as the first option
-            var allOption = document.createElement('option');
-                allOption.value = "all";
-                allOption.text = "Display All";
-            yearDropdown.add(allOption);
+        var yearDropdown = document.getElementById('yearDropdown');
 
-            // Read the Json data for "Years"
-            years.forEach( year => {
-                var option = document.createElement('option');
-                    option.value = year;
-                    option.text = year
-                yearDropdown.appendChild(option);
-            });
-                
-            // Function to update the chart based on the selected year
-            function updateChart() {
-                var selectedYear = yearDropdown.value; 
-                var filteredYearData = chartStudRating.filter(item => item.year == selectedYear);
+        var allOption = document.createElement('option');
+            allOption.value = "all";
+            allOption.text = "Display All";
+        yearDropdown.add(allOption);
 
-                if (selectedYear === "all") {
-                    var filteredYearData = chartStudRating;
-                }
-                
-                if (filteredYearData.length > 0) {
-                    var filteredSeries = [
-                        {
-                            name: '1st Sem Students Rating',
-                            data: filteredYearData.map(item => item.frst_semester_avg.avgz_stud_rating)
-                        },
-                        
-                        {
-                            name: '2nd Sem Students Rating',
-                            data: filteredYearData.map(item => item.scnd_semester_avg.avgz_stud_rating)
-                        }
-                    ];
-                    chart.updateOptions({
-                        xaxis: {
-                            categories: filteredYearData.map(item => item.year)
-                        }
-                    });
-                    re_chart.updateSeries(filteredSeries);
-                }
-                else {
-                    console.error('No data found for the selected year.');
-                }
-            } updateChart();
+        years.forEach( years => {
+            var option = document.createElement('option');
+                option.value = years;
+                option.text = years
+            yearDropdown.appendChild(option);
+        });
+
+        function updateChart(event) {
+            if (event) {
+                event.preventDefault();
+            }
+
+            var selectedYear = yearDropdown.value; 
+            var filteredYearData = chartStudRating.filter(item => item.year == selectedYear);
+
+            if (selectedYear == "all") {
+                var filteredYearData = chartStudRating;
+            }
             
-            yearDropdown.addEventListener('change', updateChart);
+            if (filteredYearData.length > 0) {
+                var filteredSeries = [
+                    {
+                        name: '1st Sem Students Rating',
+                        data: filteredYearData.map(item => item.frst_semester_avg.avgz_stud_rating)
+                    },
+                    
+                    {
+                        name: '2nd Sem Students Rating',
+                        data: filteredYearData.map(item => item.scnd_semester_avg.avgz_stud_rating)
+                    }
+                ];
+
+                re_chart.updateOptions({
+                    xaxis: {
+                        categories: filteredYearData.map(item => item.year)
+                    }
+                });
+                re_chart.updateSeries(filteredSeries);
+            }
+            else {
+                console.error('No data found for the selected year.');
+            }
+        }
+
+        var yearDropdown = document.getElementById('yearDropdown');
+        yearDropdown.addEventListener('change', updateChart);
     </script>
 
     <script>
@@ -424,7 +405,6 @@
 
     <script>
         // Average Student Scores for Each Faculty: Count
-        
         document.addEventListener("DOMContentLoaded", function () {
             const percentaging = JSON.parse('{{ percentage|escapejs }}');
             const valueToSetThree = percentaging.count_ra3;
@@ -439,7 +419,7 @@
     </script>
 
     <script>
-        // Faculty Performance vs. Institutional Requirement
+        // Faculty Evaluation Average Ratings
         var chartDataTwo = JSON.parse('{{ chart_data_two|escapejs|safe }}');
         var chartData= Object.values(chartDataTwo);
         var yearForEval = chartData.map(item => item.year);
@@ -566,6 +546,19 @@
                 height: 350,
                 zoom: { enabled: false },
                 toolbar: { show: false },
+                animations: {
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 800,
+                    animateGradually: {
+                        enabled: true,
+                        delay: 150
+                    },
+                    dynamicAnimation: {
+                        enabled: true,
+                        speed: 350
+                    }
+                },
             },
             plotOptions: {
                 bar: {
@@ -614,7 +607,10 @@
             });
 
             // Function to update the chart based on the selected year
-            function updateEvaluationz() {
+            function updateEvaluationz(event) {
+                if (event) {
+                    event.preventDefault();
+                }
                 var selectedYearForEval = yearDropdownForEval.value;
                 var filteredYearDataForEval = chartData.filter(item => item.year == selectedYearForEval);
                 
@@ -697,7 +693,7 @@
                 }
             }
             
-            updateEvaluationz();
+            var yearDropdownForEval = document.getElementById('yearDropdownForEval');
             yearDropdownForEval.addEventListener('change', updateEvaluationz);
     </script>
 

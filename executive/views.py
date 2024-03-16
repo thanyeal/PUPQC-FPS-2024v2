@@ -11,6 +11,7 @@ from .modules.auth.views_logout                                   import custom_
 from .modules.acad_head.dashboard.views_exec_dashboard            import exec_dashboard
 from .modules.acad_head.evaluations.views_exec_evalupload         import evaluations
 from .modules.acad_head.evaluations.views_exec_evaluation         import eval_analytics
+from .modules.acad_head.evaluations.views_exec_eval_list          import eval_list
 from .modules.maintenance.views_comesoon                          import coming_soon
 from .modules.acad_head.profile.views_exec_profilepage            import exec_p_page
 from .modules.acad_head.profile.views_exec_profilesetting         import exec_p_sett
@@ -27,6 +28,9 @@ from .modules.acad_head.research.views_exec_research_analytics    import rsrch_a
 from .modules.acad_head.workload.views_exec_workload              import workload_dat
 from .modules.acad_head.workload.views_exec_workload_analytics    import workload_analytics
 from .modules.acad_head.fac_mgmnt.views_faculty_management        import fac_mgmnt
+from .modules.acad_head.fac_mgmnt.views_faculty_info              import faculty_info
+from .modules.acad_head.fac_mgmnt.views_faculty_rep               import faculty_indiv_report
+
 
 # Authentication
 registry
@@ -39,8 +43,11 @@ error_page_500
 
 # Acad_Head
 exec_dashboard
+
+# Teaching Effectiveness
 evaluations
 eval_analytics
+eval_list
 
 # # Profile
 exec_p_page
@@ -75,6 +82,8 @@ coming_soon
 
 #Faculty Management
 fac_mgmnt
+faculty_info
+faculty_indiv_report
 
 # Retention Exit - Eliminated from the System
 # retention_analytics

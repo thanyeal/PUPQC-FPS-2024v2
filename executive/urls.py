@@ -6,8 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     #for error pages
-    path('error_404'            , views.error_page_404  , name="error_page_404"),
-    path('error_500'            , views.error_page_500  , name="error_page_500"),
+    path('error_404'        , views.error_page_404  , name="error_page_404" ),
+    path('error_500'        , views.error_page_500  , name="error_page_500" ),
 
     #for acad head
     path(''                 , views.exec_dashboard  , name="exec_dashboard" ),
@@ -15,6 +15,7 @@ urlpatterns = [
     
     path('eval_upload'      , views.evaluations     , name="eval_upload"    ),
     path('eval_analytics'   , views.eval_analytics  , name="eval_analytics" ),
+    path('eval_list'        , views.eval_list       , name="eval_list"      ),
     
     path('exec_profile'     , views.exec_p_page     , name="exec_profile"   ),
     path('exec_settings'    , views.exec_p_sett     , name="exec_settings"  ),
@@ -41,14 +42,16 @@ urlpatterns = [
     path("rsrch_tracking"       , views.rsrch_tracking    , name="rsrch_tracking"   ),
     # path("rsrch_generate_pdf"   , views.rsrch_generate_pdf, name="rsrch_generate_pdf"),
 
-    path("workload_dat"     , views.workload_dat      , name="workload_dat"     ),
-    path("workload_analytics", views.workload_analytics , name="workload_analytics"),
+    path("workload_dat"         , views.workload_dat        , name="workload_dat"       ),
+    path("workload_analytics"   , views.workload_analytics  , name="workload_analytics" ),
 
     # for maintenance page
     path('coming_soon'      , views.coming_soon     , name="coming_soon"),
 
     # for Faculty Management Page
-    path('fac_mgmnt'        , views.fac_mgmnt       , name="fac_mgmnt"),
+    path('fac_mgmnt'     , views.fac_mgmnt    , name="fac_mgmnt"),
+    path('faculty_info'  , views.faculty_info , name="faculty_info"),
+    path('faculty_indiv_report'  , views.faculty_indiv_report , name="faculty_indiv_report"),
 
     # for log and reg page
     path('registry/'        , views.registry        , name="registry"   ),

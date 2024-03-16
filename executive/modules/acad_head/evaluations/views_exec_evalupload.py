@@ -1,28 +1,43 @@
-
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-import requests, os
-from executive.config import route_config
+from executive.api import api_routes
 
 @login_required(login_url='login')
 def evaluations(request):
-    data = []
+    
+    # if request.method == 'GET':
+    #     fis_te_api_data = api_routes.get_fis_te_api(request)
+    #     return JsonResponse(fis_te_api_data, safe=False)
 
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    fis_te_api_data = api_routes.get_fis_te_api(request)
 
-        fis_api_token =  route_config.FIS_API_TOKEN
-        fis_token_key = fis_api_token
-        fis_api_eval_url = route_config.FIS_API_EVALUATE_URL    
-        fis_headers = {
-            'Authorization': 'API Key'  ,
-            'token': fis_token_key      ,
-            'Content-Type': 'application/json' 
+    result_list = []
+
+    for data in fis_te_api_data:
+        acad_head_avg = (data["acad_head_a"] + data["acad_head_b"] +
+                        data["acad_head_c"] + data["acad_head_d"]) / 4.0
+
+        self_avg = (data["self_a"] + data["self_b"] +
+                    data["self_c"] + data["self_d"]) / 4.0
+
+        director_avg = (data["director_a"] + data["director_b"] +
+                    data["director_c"] + data["director_d"]) / 4.0
+
+        student_avg = (data["student_a"] + data["student_b"] +
+                    data["student_c"] + data["student_d"]) / 4.0
+
+        result = {
+            "Name": data["Name"],
+            "Type": data["Type"],
+            "school_year": data["school_year"],
+            "semester": data["semester"],
+            "acad_head_ave": round(acad_head_avg, 2),
+            "self_ave": round(self_avg, 2),
+            "director_ave": round(director_avg, 2),
+            "student_ave": round(student_avg, 2),
         }
-        fis_token_response = requests.get(fis_api_eval_url, headers=fis_headers)
+        result_list.append(result)
 
-        if fis_token_response.status_code == 200:
-            api_data = fis_token_response.json()
-            data = api_data
-        return JsonResponse(data, safe=False)
-    return render(request, 'executive/pages/eval_upload.html')
+        
+    return (result_list)

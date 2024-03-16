@@ -32,7 +32,27 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-        
+
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: "/" !important;
+        }
+
+        .gridjs-tbody, td.gridjs-td,
+        .gridjs *, .gridjs ::after, .gridjs ::before,
+        .table {
+            font-size: var(--vz-body-font-size);
+        }
+
+        .mt-n5{
+            margin-top: -5rem !important;;
+        }
+
+        .profile-wid-bg::before {
+            background: linear-gradient(to top, #660000, #3e0000);
+        }
+        .profile-wid-bg {
+            height: 200px !important;
+        }
     </style>
 
     <div class="row">
@@ -69,40 +89,143 @@
                 </div>
             </div>
             <!-- modal -->
-            <div class="modal fade" id="faculty_mgmt_modal" aria-hidden="true" aria-labelledby="..." tabindex="-1">
-                <div class="modal-dialog modal-xl">
+            <div class="modal fade exampleModalFullscreen" id="faculty_mgmt_modal" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+                <div class="modal-dialog modal-fullscreen">
                     <div>
                         <div id="chart-loader" style="display: none;">
                             <img src="{% static 'img/loader.gif' %}" style="width: 60%; margin-left: 38px;">
                             <p class="d-flex flex-column align-items-center text-white">Please Wait</p>
                         </div>
                     </div>
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Present Year Evaluation Performance</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body" id="param_content">
-                            <div class="card card-height-100">
-                                <div class="w-100">
-                                    <div id="faculty-mgmt-chart" class="luh"></div>
+                    <div class="modal-content" style="background-color: var(--vz-body-bg) !important;">
+                        <div class="modal-body">
+                            <div style="margin: 2% !important;">
+                                <div class="profile-foreground position-relative mx-n4 mt-n4">
+                                    <div class="profile-wid-bg">
+                                        <img src="/static/images/profile-bg.jpg" alt="" class="profile-wid-img">
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+        
+                                <div class="pt-4 mb-4 mb-lg-3 pb-lg-4 profile-wrapper">
+                                    <div class="row g-4">``
+                                        <div class="col-auto mx-auto">
+                                            <div class="avatar-lg">
+                                                <img src="/static/images/users/user-dummy-img.jpg" alt="user-img" class="img-thumbnail rounded-circle">
+                                            </div>
+                                        </div>
+                                        <!--end col & ri-map-pin-user-line-->
+                                        <div class="col mx-auto">
+                                            <div class="p-2">
+                                                <h3 class="text-white mb-1" id="facultyName"></h3>
+                                                <p class="text-white text-opacity-75" id="facultyType"></p>
+                                                <div class="hstack text-white-50 gap-1">
+                                                    <div>
+                                                        <i class="ri-medal-line me-1 text-white text-opacity-75 fs-16 align-middle"></i><span id="facultyDegr"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end col-->
+                                    </div>
+                                    
+                                    <!--end row-->
+                                </div>
+        
+                                <div class="row" style="--vz-gutter-y: -1.5rem !important;">
+                                    <div class="col-lg-12">
+                                        <div>
+                                            <div class="tab-content text-muted">
+                                                <div class="tab-pane active" id="overview-tab" role="tabpanel">
+                                                    <div class="row">
+                                                        <div class="col-xxl-3">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title mb-5">General Performance Status</h5>
+                                                                    <div class="progress animated-progress custom-progress progress-label">
+                                                                        
+                                                                        <div class="progress-bar bg-danger" id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                                            <div class="label">0%</div>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
-                        <div class="modal-header">
-                            <h5 class="modal-title">Overall Academic Research Performance</h5>
-                        </div>
-                        <div class="modal-body" id="param_content2">
-                            <div class="card card-height-100">
-                                <div class="w-100">
-                                    <div id="rsrch_performance" class="luh2"></div>
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title mb-3">Faculty Information</h5>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-borderless mb-0">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <th class="ps-0" scope="row">Mobile :</th>
+                                                                                    <td class="text-muted" id="facultyNumb"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <th class="ps-0" scope="row">E-mail :</th>
+                                                                                    <td class="text-muted" id="facultyMail"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <th class="ps-0" scope="row">Address :</th>
+                                                                                    <td class="text-muted" id="facultyAddr"></td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div><!-- end card body -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xxl-9">
+                                                            <div class="row">
+                                                                <div class="card">
+                                                                    <div class="w-90" id="param_content3">
+                                                                        {% comment %} <!-- Filtered Evaluation Rates --> {% endcomment %}
+                                                                        <div class="card-header border-0 align-items-center d-flex">
+                                                                            <h5 class="col-10 modal-title">Overall Evaluation Performance</h5>
+                                                                            <label class="col-2 m-0" style="padding-left: 1rem !important;">
+                                                                                <select id="yeardrop_per_rating" class="form-select form-select-sm"></select>
+                                                                            </label>
+                                                                            
+                                                                        </div>
+                                                                        <div id="faculty_overall" class="luh3"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="card card-height-100">
+                                                                        <div class="w-100" id="param_content">
+                                                                            {% comment %} <!-- Teaching Effectiveness --> {% endcomment %}
+                                                                            <div class="card-header"><h5 class="modal-title">Present Evaluation Percentage</h5></div>
+                                                                            <div id="faculty-mgmt-chart" class="luh"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6" id="param_content2">
+                                                                    <div class="card card-height-100">
+                                                                        <div class="w-100">
+                                                                            {% comment %} <!-- Research Contributions --> {% endcomment %}
+                                                                            <div class="card-header"><h5 class="modal-title">Research Performance</h5></div>
+                                                                            <div id="rsrch_performance" class="luh2"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Close</button>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -119,6 +242,7 @@
                             <tr>
                                 <th>Faculty Name</th>
                                 <th>Faculty Type</th>
+                                <th>Faculty Rank</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -132,6 +256,7 @@
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
     <script src="{% static 'js/main/faculty_mgmt/faculty_mgmt.js' %}"></script>
+    
 
 
 {% endblock %}

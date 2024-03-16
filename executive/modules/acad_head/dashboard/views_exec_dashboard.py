@@ -133,42 +133,31 @@ def exec_dashboard(request):
         serialized_first_name = json.dumps(first_name)
         #serialized_custom_data = json.dumps(custom_data)
 
-        # ==========     MASSIV RIS CONDITIONALS FOR DETAILED API ============= #
+        # # ==========     MASSIV RIS CONDITIONALS FOR DETAILED API ============= #
 
-        # responsez = testresearchinfodata(request)
-        # ris_api_data = responsez.data
-        #return Response(ris_api_data)
-    
-        # # Research Publications Counted per Year
-        # ris_api_data = os.environ.get('RIS_API_URLZZ')
-        # response = requests.get(ris_api_data)
-        # response.raise_for_status()
-        # rsrch_data = response.json()
-        
-        ris_api_data = api_routes.get_ris_api(request)
+        # ris_api_data = api_routes.get_ris_api(request)
 
+        # totalresearch = len(ris_api_data)
 
+        # # Research Publications Percentaged per Year
+        # grouped_counted = {}
+        # total_count = 50
+        # for item in ris_api_data:
+        #     year = item['Publication Year'][:4]
+        #     grouped_counted.setdefault(year, {'count': 0})['count'] += 1
 
-        totalresearch = len(ris_api_data)
+        # percentage_data = {}
+        # for year, count in grouped_counted.items():
+        #     percentage_data[year] = {'percentage': (count['count'] / total_count * 100)}
 
-        # Research Publications Percentaged per Year
-        grouped_counted = {}
-        total_count = 50
-        for item in ris_api_data:
-            year = item['Publication Year'][:4]
-            grouped_counted.setdefault(year, {'count': 0})['count'] += 1
+        # serialized_grouped_counted  = json.dumps(totalresearch)
+        # serialized_percentage_data  = json.dumps(percentage_data)
 
-        percentage_data = {}
-        for year, count in grouped_counted.items():
-            percentage_data[year] = {'percentage': (count['count'] / total_count * 100)}
-
-        serialized_grouped_counted  = json.dumps(totalresearch)
-        serialized_percentage_data  = json.dumps(percentage_data)
         # ==========     MASSIV RIS CONDITIONALS FOR DETAILED API ============= #
 
         context = {
-            'total_research_papers'     : serialized_grouped_counted ,
-            'percent_research_papers'   : serialized_percentage_data,
+            # 'total_research_papers'     : serialized_grouped_counted ,
+            # 'percent_research_papers'   : serialized_percentage_data,
             'first_name'                : serialized_first_name      ,
             #'custom_data'              : serialized_custom_data    ,
             'chart_data_two'            : serialized_data_two        ,

@@ -26,6 +26,7 @@ python-dateutil = "*"
 html2pdf = "*"
 xhtml2pdf = "*"
 pdfkit = "*"
+django-jsonresponse = "*"
 
 [dev-packages]
 

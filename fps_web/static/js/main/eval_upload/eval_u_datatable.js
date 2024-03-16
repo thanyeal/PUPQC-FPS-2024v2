@@ -1,25 +1,21 @@
 $(document).ready(function () {
     $('#datatable').DataTable({
         "ajax": {
-            "url": "eval_upload",
+            "url": "eval_list",
             "dataSrc": ""
-        },
+        },  
         "columns": [
             //{ "data": "faculty_num" },
-            { "data": "FacultyName" },
-            { "data": "Supervisor Rating" },
-            { "data": "Supervisor Interpretation" },
-            { "data": "Students Rating" },
-            { "data": "Students Interpretation" },
-            { "data": "Peer Rating" },
-            { "data": "Peer Interpretation" },
-            { "data": "Self Rating" },
-            { "data": "Self Interpretation" },
+            { "data": "Name" },
+            { "data": "acad_head_ave" },
+            { "data": "student_ave" },
+            { "data": "peer_ave" },
+            { "data": "self_ave" },
             //{ "data": "load_rating" },
             //{ "data": "load_interp" },
             //{ "data": "faculty_stat"},
-            { "data": "Semester" },
-            { "data": "Year" },
+            { "data": "semester" },
+            { "data": "school_year" },
         ]
         //"pageLength": 25
     });
