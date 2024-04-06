@@ -27,6 +27,8 @@ html2pdf = "*"
 xhtml2pdf = "*"
 pdfkit = "*"
 django-jsonresponse = "*"
+xlsxwriter = "*"
+bytesbufio = "*"
 
 [dev-packages]
 
