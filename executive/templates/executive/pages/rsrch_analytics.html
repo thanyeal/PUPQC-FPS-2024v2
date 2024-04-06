@@ -99,17 +99,28 @@
                         <div class="row g-0 text-center">
                             <div class="col-6 col-sm-6">
                                 <div class="p-3 border border-dashed border-start-0">
-                                    <h5>
-                                        <span class="text-primary ms-1e">{{ js_highest_year|safe }}</span>
+                                    <h5 class="counter-count text-success">
+                                        <span class="ms-1e">
+                                            {% if js_highest_year %}
+                                                {{ js_highest_year|safe }}
+                                            {% else %}
+                                                0000
+                                            {% endif %}
+                                        </span>
                                     </h5>
                                     <p class="text-muted mb-0">Most Research Productive Year</p>
                                 </div>
                             </div>
                             <div class="col-6 col-sm-6">
                                 <div class="p-3 border border-dashed border-start-0 border-end-0">
-                                    </h5>
-                                    <h5>
-                                        <span class="text-secondary ms-1">{{ js_lowest_year|safe }}</span>
+                                    <h5 class="counter-count text-warning">
+                                        <span class="ms-1">
+                                            {% if js_highest_year %}
+                                                {{ js_lowest_year|safe }}
+                                            {% else %}
+                                                0000
+                                            {% endif %}
+                                        </span>
                                     </h5>
                                     <p class="text-muted mb-0">Least Research Productive Year</p>
                                 </div>
@@ -178,161 +189,26 @@
         }
     </script>
 
+    {% comment %} Average Rating Per Performance Development in Research {% endcomment %}
     <script>
-        // Average Rating Based Faculty Performance Development in Research Methodologies 
+        var base_response = JSON.parse('{{ response_call|safe }}')
         var groupedCountedData = JSON.parse('{{ js_grouped_counted|safe }}');
-        var years = Object.keys(groupedCountedData);
-
-        var counts = years.map(year => groupedCountedData[year].count);
-        var options = {
-            chart: {
-                height: 380,
-                type: "bar",
-                zoom: { enabled: false },
-                toolbar: { show: false },
-            },
-            
-            colors: [
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
-            ],
-            
-            dataLabels: { enabled: !1 },
-            stroke: { width: [3, 3], curve: "straight" },
-            series: [
-                { name: 'No. of Research Published', data: counts },
-            ],
-            grid: {
-                row: { colors: ["transparent", "transparent"], opacity: 0.2 },
-                borderColor: "#f1f1f1",
-            },
-            markers: { style: "inverted", size: 6 },
-            xaxis: {
-                categories: years,
-                title: { text: "Academic Year" },
-            },
-            yaxis: { title: { text: "Research Count" }, min: 0, max: 50 },
-            legend: {
-                position: "top",
-                horizontalAlign: "right",
-                floating: !0,
-                offsetY: -25,
-                offsetX: -5,
-            },
-            responsive: [
-                {
-                    breakpoint: 600,
-                    options: { chart: { toolbar: { show: !1 } }, legend: { show: !1 } },
-                },
-            ],
-        }
-        var rsrch_chart = new ApexCharts(document.querySelector('#rsrch_counts'), options);
-        rsrch_chart.render();
-        
-        // Create and populate the dropdown
-        var yearFilterDropdown = document.getElementById('rsrch_year_filter');
-
-        // Add 'All' option to show all data
-        var rsrch_allOption = document.createElement('option');
-            rsrch_allOption.value = 'all';
-            rsrch_allOption.text = 'Display All';
-        yearFilterDropdown.add(rsrch_allOption);
-
-        years.forEach(year => {
-            var option = document.createElement('option');
-            option.value = year;
-            option.text = year;
-            yearFilterDropdown.appendChild(option);
-        });
-
-        function rsrch_updateChart() {
-            var selectedYear = yearFilterDropdown.value;
-            var filteredData = {};
-
-            if (selectedYear === 'all') {
-                filteredData = groupedCountedData; // Show all data
-            }
-            
-            else {
-                // Filter by year
-                filteredData[selectedYear] = groupedCountedData[selectedYear];
-            }
-
-            var filteredYears = Object.keys(filteredData);
-            var filteredCounts = filteredYears.map(year => filteredData[year].count);
-            
-            // Update the chart options with filtered data
-            rsrch_chart.updateOptions({ xaxis: { categories: filteredYears } });
-            rsrch_chart.updateSeries([{ data: filteredCounts }]);
-        }
-
-        yearFilterDropdown.addEventListener('change', rsrch_updateChart);
-        // Initial data filtering
-        rsrch_updateChart();
-
     </script>
+    <script src="{% static 'js/main/research/rsrch_peryear.js' %}"></script>
 
+    {% comment %} Present Academic University Research Goals {% endcomment %}
     <script>
-        // Present Academic University Research Goals
+        var base_response = JSON.parse('{{ response_call|safe }}')
         var specificYearData = JSON.parse('{{ js_specific_data|safe }}');
-        var percentage = specificYearData.percentage;
-
-        var options = {
-            series: [percentage],
-
-            chart: {
-                height: 350,
-                type: "radialBar"
-            },
-            colors: [
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-info')
-            ],
-            plotOptions: { 
-                radialBar: { hollow: { size: "80%" } } 
-            },
-            labels: ["Research Publications"],
-        }
-        var chart = new ApexCharts(document.querySelector("#basic_radialbar"), options);
-        chart.render();
     </script>
+    <script src="{% static 'js/main/research/rsrch_present.js' %}"></script>
 
+    {% comment %} Analytical Research Bound and Published Over Years  {% endcomment %}
     <script>
-        // Analytical Research Bound and Published Over Years 
+        var base_response = JSON.parse('{{ response_call|safe }}')
         var TotalResearch = parseInt('{{ js_totalresearch|safe }}');
         var GroupPercent = JSON.parse('{{ js_grouped_percent|safe }}');
-        var yearsz = [];
-        var percentagesz = [];
-        for (const year in GroupPercent) {
-            yearsz.push(year);
-            percentagesz.push(GroupPercent[year].percentage);
-        }
-        var options = {
-            series: percentagesz,
-            chart: { height: 350, type: "radialBar" },
-            plotOptions: {
-                radialBar: {
-                    dataLabels: {
-                        name: { fontSize: "22px" },
-                        value: { fontSize: "16px" },
-                        total: {
-                            show: true,
-                            label: "Total",
-                            formatter: function (a) {
-                                return TotalResearch;
-                            },
-                        },
-                    },
-                },
-            },
-            labels: yearsz,
-            colors: [
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
-            ],
-        };
-        var rsrch_bound_chart = new ApexCharts(document.querySelector("#multiple_radialbar"), options);
-        rsrch_bound_chart.render();
     </script>
+    <script src="{% static 'js/main/research/rsrch_stat_peryear.js' %}"></script>
+    <script src="{% static 'js/counter.js' %}"></script>
 {% endblock %}

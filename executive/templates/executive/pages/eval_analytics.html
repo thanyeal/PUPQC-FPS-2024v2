@@ -116,24 +116,20 @@
                         <div class="w-100">
                             <div class="card-header p-0 border-0 bg-light-subtle">
                                 <div class="row g-0 text-center">
+                                    
                                     <div class="col-6 col-sm">
                                         <div class="p-3 border border-dashed border-start-0">
-                                            <h5 class="mb-1 fs-17 fw-semibold text-info"><span class="counter-value" data-target="98" >0</span>%</h5>
-                                            <p class="text-muted mb-0">Average Institutional Rate</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-sm-3">
-                                        <div class="p-3 border border-dashed border-start-0">
-                                            <h5 class="mb-1 fs-17 fw-semibold text-primary"><span id="frfs">0</span>%</h5>
+                                            <h5 class="mb-1 fs-17 fw-semibold text-primary"><span class="counter-count" id="frfs">0</span>%</h5>
                                             <p class="text-muted mb-0">Present Faculty Rating: First Semester</p>
                                         </div>
                                     </div>
                                     <div class="col-6 col-sm">
                                         <div class="p-3 border border-dashed border-start-0">
-                                            <h5 class="mb-1 fs-17 fw-semibold text-secondary"><span id="frss">0</span>%</h5>
+                                            <h5 class="mb-1 fs-17 fw-semibold text-secondary"><span class="counter-count" id="frss">0</span>%</h5>
                                             <p class="text-muted mb-0">Present Faculty Rating: Second Semester</p>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                             <div class="card-body p-0 pb-2">
@@ -157,9 +153,8 @@
                             <div id="prjects-status-1" class="apex-charts mt-5" dir="ltr"></div>
                         </div>
                         <div class="card-body">
-                            
                             <div class="mt-3">
-                                <div class="d-flex justify-content-center align-items-center mb-4">
+                                <div class="d-flex justify-content-center align-items-center mb-4" id="caption-query-changer">
                                     <h2 class="me-3 ff-secondary mb-0 text-warning"><span id="rb3">0</span></h2>
                                     <div>
                                         <p class="mb-0 text-warning">Least Rated Faculties</p>
@@ -210,39 +205,23 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
     <script src="{% static 'js/main/eval_upload/eval_u_datatable.js' %}"></script>
+    <script src="{% static 'js/main/eval_upload/eval_script_report.js' %}"></script>
 
+    {% comment %} Faculty Evaluation Average Ratings {% endcomment %}
     <script>
-        function printDiv(divName) {
-            var printWindow = window.open('', '', 'width=1080,height=720');
-            printWindow.document.write('<html><head><title>Faculty Performance System</title></head><body>');
-            printWindow.document.write(document.getElementById(divName).innerHTML);
-            printWindow.document.write('</body>');
-            printWindow.document.close(); // Necessary for IE
-            printWindow.focus();
-            printWindow.print();
-            printWindow.close();
-        }
-    </script>
-
-    <script>
-        // Faculty Evaluation Average Ratings
         const json_data = JSON.parse('{{ overall_avg_data|escapejs|safe }}');
-        const valueToSet = json_data.overall_avg_first;
-        const valueToSetTwo = json_data.overall_avg_second;
-
-        const frfs = document.getElementById('frfs');
-        frfs.textContent = valueToSet;
-
-        const frss = document.getElementById('frss');
-        frss.textContent = valueToSetTwo;
     </script>
+    <script src="{% static 'js/main/eval_upload/eval_faculty_percnt.js' %}"></script>
+    <script src="{% static 'js/counter.js' %}"></script>
 
+    {% comment %} Trends Teaching Effectiveness Over Time {% endcomment %}
     <script>
-        // Trends in Teaching Effectiveness Over Time
         var combinedData = JSON.parse('{{ chart_data_two|escapejs|safe }}');
+                
+        // Trends in Teaching Effectiveness Over Time
         var chartStudRating = Object.values(combinedData);
         var years = chartStudRating.map(item => item.year);
-
+        
         var firstSemesterRatings = chartStudRating.map(function (item) {
             return {
                 'avgz_stud_rating': item.frst_semester_avg.avgz_stud_rating,
@@ -281,15 +260,7 @@
                 animations: {
                     enabled: true,
                     easing: 'easeinout',
-                    speed: 800,
-                    animateGradually: {
-                        enabled: true,
-                        delay: 150
-                    },
-                    dynamicAnimation: {
-                        enabled: true,
-                        speed: 350
-                    }
+                    speed: 1000,
                 },
             },
             plotOptions: {
@@ -318,384 +289,88 @@
         };
 
         var re_chart = new ApexCharts(document.querySelector("#chartz"), options);
-        re_chart.render();
 
-        var yearDropdown = document.getElementById('yearDropdown');
-
-        var allOption = document.createElement('option');
-            allOption.value = "all";
-            allOption.text = "Display All";
-        yearDropdown.add(allOption);
-
-        years.forEach( years => {
-            var option = document.createElement('option');
-                option.value = years;
-                option.text = years
-            yearDropdown.appendChild(option);
-        });
-
-        function updateChart(event) {
-            if (event) {
-                event.preventDefault();
-            }
-
-            var selectedYear = yearDropdown.value; 
-            var filteredYearData = chartStudRating.filter(item => item.year == selectedYear);
-
-            if (selectedYear == "all") {
-                var filteredYearData = chartStudRating;
-            }
-            
-            if (filteredYearData.length > 0) {
-                var filteredSeries = [
-                    {
-                        name: '1st Sem Students Rating',
-                        data: filteredYearData.map(item => item.frst_semester_avg.avgz_stud_rating)
-                    },
-                    
-                    {
-                        name: '2nd Sem Students Rating',
-                        data: filteredYearData.map(item => item.scnd_semester_avg.avgz_stud_rating)
-                    }
-                ];
-
-                re_chart.updateOptions({
-                    xaxis: {
-                        categories: filteredYearData.map(item => item.year)
-                    }
-                });
-                re_chart.updateSeries(filteredSeries);
-            }
-            else {
-                console.error('No data found for the selected year.');
-            }
+        if (re_chart == null) {
+            document.querySelector("#chartz").innerHTML = '<p class="text-center" style="margin: 10% 0% !important;">No data available.</p>';
         }
+        else {
+            re_chart.render();
 
-        var yearDropdown = document.getElementById('yearDropdown');
-        yearDropdown.addEventListener('change', updateChart);
-    </script>
+            var yearDropdown = document.getElementById('yearDropdown');
 
-    <script>
-        // Average Student Scores for Each Faculty 
-        var percentage_data = JSON.parse('{{ percentage|safe }}');
-        var percentage_above_3 = percentage_data.pctg_ra3;
-        var percentage_below_3 = percentage_data.pctg_rb3;
+            var allOption = document.createElement('option');
+                allOption.value = "all";
+                allOption.text = "Display All";
+            yearDropdown.add(allOption);
 
-        var options = {
-            series: [percentage_above_3, percentage_below_3],
-            chart: {
-                type: 'pie',
-                height: '400px',
-                width: '400px', 
-            },
-            labels: ['Above 4.0', 'Less/Equal  3.99'],
-            colors: [
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-warning'),
-            ],
-            dataLabels: {
-                enabled: true,
-                offsetX: -10,
-                offsetY: 50,
-            },
-        };
-        var chart = new ApexCharts(document.querySelector("#prjects-status-1"), options);
-        chart.render();
-    </script>
-
-    <script>
-        // Average Student Scores for Each Faculty: Count
-        document.addEventListener("DOMContentLoaded", function () {
-            const percentaging = JSON.parse('{{ percentage|escapejs }}');
-            const valueToSetThree = percentaging.count_ra3;
-            const valueToSetFour  = percentaging.count_rb3;
-
-            const ra3 = document.getElementById('ra3');
-            ra3.textContent = valueToSetThree;
-
-            const rb3 = document.getElementById('rb3');
-            rb3.textContent = valueToSetFour;
-        });
-    </script>
-
-    <script>
-        // Faculty Evaluation Average Ratings
-        var chartDataTwo = JSON.parse('{{ chart_data_two|escapejs|safe }}');
-        var chartData= Object.values(chartDataTwo);
-        var yearForEval = chartData.map(item => item.year);
-        
-        
-        var frstSemesterRatings = chartData.map(function (item) {
-            return {
-                'avgz_spvs_rating': item.frst_semester_avg.avgz_spvs_rating,
-                'avgz_stud_rating': item.frst_semester_avg.avgz_stud_rating,
-                'avgz_peer_rating': item.frst_semester_avg.avgz_peer_rating,
-                'avgz_self_rating': item.frst_semester_avg.avgz_self_rating,
-            };
-        });
-
-        var scndSemesterRatings = chartData.map(function (item) {
-            return {
-                'avgz_spvs_rating': item.scnd_semester_avg.avgz_spvs_rating,
-                'avgz_stud_rating': item.scnd_semester_avg.avgz_stud_rating,
-                'avgz_peer_rating': item.scnd_semester_avg.avgz_peer_rating,
-                'avgz_self_rating': item.scnd_semester_avg.avgz_self_rating,
-            };
-        });
-
-        var summmerSemesterRatings = chartData.map(function (item) {
-            return {
-                'avgz_spvs_rating': item.summer_semester_avg.avgz_spvs_rating,
-                'avgz_stud_rating': item.summer_semester_avg.avgz_stud_rating,
-                'avgz_peer_rating': item.summer_semester_avg.avgz_peer_rating,
-                'avgz_self_rating': item.summer_semester_avg.avgz_self_rating,
-            };
-        });
-
-        var series = [
-
-            {
-                name: '1st Sem Supervisor Rating',
-                data: frstSemesterRatings.map(function (item) {
-                    return item.avgz_spvs_rating;
-                }),
-            },
-
-            {
-                name: '1st Sem Student Rating',
-                data: frstSemesterRatings.map(function (item) {
-                    return item.avgz_stud_rating;
-                }),
-            },
-
-            {
-                name: '1st Sem Peer Rating',
-                data: frstSemesterRatings.map(function (item) {
-                    return item.avgz_peer_rating;
-                }),
-            },
-
-            {
-                name: '1st Sem Self Rating',
-                data: frstSemesterRatings.map(function (item) {
-                    return item.avgz_self_rating;
-                }),
-            },
-
-            {
-                name: '2nd Sem Supervisor Rating',
-                data: scndSemesterRatings.map(function (item) {
-                    return item.avgz_spvs_rating;
-                }),
-            },
-
-            {
-                name: '2nd Sem Student Rating',
-                data: scndSemesterRatings.map(function (item) {
-                    return item.avgz_stud_rating;
-                }),
-            },
-
-            {
-                name: '2nd Sem Peer Rating',
-                data: scndSemesterRatings.map(function (item) {
-                    return item.avgz_peer_rating;
-                }),
-            },
-
-            {
-                name: '2nd Sem Self Rating',
-                data: scndSemesterRatings.map(function (item) {
-                    return item.avgz_self_rating;
-                }),
-            },
-
-            {
-                name: 'Summer Semester Supervisor Rating',
-                data: summmerSemesterRatings.map(function (item) {
-                    return item.avgz_spvs_rating;
-                }),
-            },
-
-            {
-                name: 'Summer Student Rating',
-                data: summmerSemesterRatings.map(function (item) {
-                    return item.avgz_stud_rating;
-                }),
-            },
-
-            {
-                name: 'Summer Semester Peer Rating',
-                data: summmerSemesterRatings.map(function (item) {
-                    return item.avgz_peer_rating;
-                }),
-            },
-
-            {
-                name: 'Summer Semester Self Rating',
-                data: summmerSemesterRatings.map(function (item) {
-                    return item.avgz_self_rating;
-                }),
-            },
-        ];
-
-        // Chart configuration object
-        var options = {
-            chart: {
-                type: 'bar',
-                height: 350,
-                zoom: { enabled: false },
-                toolbar: { show: false },
-                animations: {
-                    enabled: true,
-                    easing: 'easeinout',
-                    speed: 800,
-                    animateGradually: {
-                        enabled: true,
-                        delay: 150
-                    },
-                    dynamicAnimation: {
-                        enabled: true,
-                        speed: 350
-                    }
-                },
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                },
-            },
-            colors: [
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
-                getComputedStyle(document.documentElement).getPropertyValue('--vz-dark'),
-            ],
-            xaxis: {
-                categories: yearForEval,
-                title: {
-                    text: 'Academic Year/s',
-                },
-            },
-            yaxis: {
-                title: {
-                    text: 'Average Rating',
-                },
-                max: 5
-            },
-            series: series,
-        };
-
-        var chartz = new ApexCharts(document.querySelector("#line-chart-two"), options);
-        chartz.render();
-
-            // Populate the year dropdown
-            var yearDropdownForEval = document.getElementById('yearDropdownForEval');
-            
-            // Add "Display All" option as the first option
-            var allOptionForEval = document.createElement('option');
-                allOptionForEval.value = "all";
-                allOptionForEval.text = "Display All";
-            yearDropdownForEval.add(allOptionForEval);
-
-            // Read the Json data for "Years"
-            yearForEval.forEach( yearForEval => {
-                var optionForEval = document.createElement('option');
-                    optionForEval.value = yearForEval;
-                    optionForEval.text = yearForEval;
-                yearDropdownForEval.appendChild(optionForEval);
+            years.forEach( years => {
+                var option = document.createElement('option');
+                    option.value = years;
+                    option.text = years
+                yearDropdown.appendChild(option);
             });
 
-            // Function to update the chart based on the selected year
-            function updateEvaluationz(event) {
+            function updateChart(event) {
                 if (event) {
                     event.preventDefault();
                 }
-                var selectedYearForEval = yearDropdownForEval.value;
-                var filteredYearDataForEval = chartData.filter(item => item.year == selectedYearForEval);
-                
-                if (selectedYearForEval == "all") {
-                    var filteredYearDataForEval = chartData;
+
+                var selectedYear = yearDropdown.value; 
+                var filteredYearData = chartStudRating.filter(item => item.year == selectedYear);
+
+                if (selectedYear == "all") {
+                    var filteredYearData = chartStudRating;
                 }
                 
-                if (filteredYearDataForEval.length > 0) {
-                    var filteredSeriesForEval = [
-                        //++++++++
+                if (filteredYearData.length > 0) {
+                    var filteredSeries = [
                         {
-                            name: '1st Sem Supervisor Rating',
-                            data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_spvs_rating)
+                            name: '1st Sem Students Rating',
+                            data: filteredYearData.map(item => item.frst_semester_avg.avgz_stud_rating)
                         },
                         
                         {
-                            name: '1st Sem Student Rating',
-                            data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_stud_rating)
-                        },
-                        {
-                            name: '1st Sem Peer Rating',
-                            data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_peer_rating)
-                        },
-                        
-                        {
-                            name: '1st Sem Self Rating',
-                            data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_self_rating)
-                        },
-                        //++++++++
-                        {
-                            name: '2nd Sem Supervisor Rating',
-                            data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_spvs_rating)
-                        },
-                        
-                        {
-                            name: '2nd Sem Student Rating',
-                            data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_stud_rating)
-                        },
-                        {
-                            name: '2nd Sem Peer Rating',
-                            data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_peer_rating)
-                        },
-                        
-                        {
-                            name: '2nd Sem Self Rating',
-                            data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_self_rating)
-                        },
-                        //+++++++++
-                        {
-                            name: 'Summer Sem Supervisor Rating',
-                            data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_spvs_rating)
-                        },
-                        
-                        {
-                            name: 'Summer Sem Student Rating',
-                            data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_stud_rating)
-                        },
-                        {
-                            name: 'Summer Sem Peer Rating',
-                            data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_peer_rating)
-                        },
-                        
-                        {
-                            name: 'Summer Sem Self Rating',
-                            data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_self_rating)
-                        },
-
-                    ];
-                    
-                    chartz.updateOptions({
-                        xaxis: {
-                            categories: filteredYearDataForEval.map(item => item.year)
+                            name: '2nd Sem Students Rating',
+                            data: filteredYearData.map(item => item.scnd_semester_avg.avgz_stud_rating)
                         }
-                        
+                    ];
+    
+                    re_chart.updateOptions({
+                        xaxis: {
+                            categories: filteredYearData.map(item => item.year)
+                        }
                     });
-                    chartz.updateSeries(filteredSeriesForEval);
+                    re_chart.updateSeries(filteredSeries);
                 }
                 else {
                     console.error('No data found for the selected year.');
                 }
             }
-            
-            var yearDropdownForEval = document.getElementById('yearDropdownForEval');
-            yearDropdownForEval.addEventListener('change', updateEvaluationz);
+
+            var yearDropdown = document.getElementById('yearDropdown');
+            yearDropdown.addEventListener('change', updateChart);
+        }
     </script>
+    {% comment %} <script src="{% static 'js/main/eval_upload/eval_trends_overt.js' %}"></script> {% endcomment %}
+
+    {% comment %} Average Student Scores for Each Faculty: Pie {% endcomment %}
+    <script>
+        var percentage_data = JSON.parse('{{ percentage|safe }}');
+    </script>
+    <script src="{% static 'js/main/eval_upload/eval_studentscr_pie.js' %}"></script>
+
+    {% comment %} Average Student Scores for Each Faculty {% endcomment %}
+    <script>
+        const percentaging = JSON.parse('{{ percentage|escapejs }}');
+    </script>
+    <script src="{% static 'js/main/eval_upload/eval_studentscores.js' %}"></script>
+
+    {% comment %} Faculty Evaluation Average Ratings {% endcomment %}
+    <script>
+        var chartDataTwo = JSON.parse('{{ chart_data_two|escapejs|safe }}');
+    </script>
+    <script src="{% static 'js/main/eval_upload/eval_averagerating.js' %}"></script>
+
 
 
 
