@@ -52,6 +52,8 @@ urlpatterns = [
     path('fac_mgmnt'     , views.fac_mgmnt    , name="fac_mgmnt"),
     path('faculty_info'  , views.faculty_info , name="faculty_info"),
     path('faculty_indiv_report'  , views.faculty_indiv_report , name="faculty_indiv_report"),
+    path('faculty_mgmt_reports'  , views.faculty_mgmt_reports , name="faculty_mgmt_reports"),
+    path('faculty_proc_data'  , views.faculty_proc_data , name="faculty_proc_data"),
 
     # for log and reg page
     path('registry/'        , views.registry        , name="registry"   ),
