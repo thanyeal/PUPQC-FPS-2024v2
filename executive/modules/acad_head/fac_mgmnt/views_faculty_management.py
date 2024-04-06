@@ -10,7 +10,7 @@ from executive.modules.acad_head.evaluations.views_exec_evalupload import evalua
 def fac_mgmnt(request):
     
     fis_api_data = faculty_indiv_report(request)
-    # ris_api_data = api_routes.get_ris_api(request)
+    ris_api_data = api_routes.get_ris_api(request)
     fis_overalls = evaluations(request)
     fis_informat = faculty_info_route(request)
 
@@ -31,10 +31,10 @@ def fac_mgmnt(request):
                 # entry.get('Year', '').startswith(str(present_date))
             ]
             if semester_data:
-                avg_spvs_rating = round(float(sum(float(entry['acad_head_calc_percentage']) for entry in semester_data) / len(semester_data)), 1)
-                avg_stud_rating = round(float(sum(float(entry['student_calc_percentage'  ]) for entry in semester_data) / len(semester_data)), 1)
-                avg_dirc_rating = round(float(sum(float(entry['director_calc_percentage' ]) for entry in semester_data) / len(semester_data)), 1)
-                avg_self_rating = round(float(sum(float(entry['self_calc_percentage'     ]) for entry in semester_data) / len(semester_data)), 1)
+                avg_spvs_rating = round(sum(float(entry['acad_head_calc_percentage']) for entry in semester_data) / len(semester_data), 1)
+                avg_stud_rating = round(sum(float(entry['student_calc_percentage'  ]) for entry in semester_data) / len(semester_data), 1)
+                avg_dirc_rating = round(sum(float(entry['director_calc_percentage' ]) for entry in semester_data) / len(semester_data), 1)
+                avg_self_rating = round(sum(float(entry['self_calc_percentage'     ]) for entry in semester_data) / len(semester_data), 1)
                 average_categories.update({
                     f'Supervisor_{semester}': [avg_spvs_rating],
                     f'Student_{semester}'   : [avg_stud_rating],
@@ -42,11 +42,11 @@ def fac_mgmnt(request):
                     f'Self_{semester}'      : [avg_self_rating],
                 })
 
-        # research_counted = {}
-        # for item in ris_api_data:
-        #     if faculty_name in item.get('Author').upper():
-        #         year = item.get('Publication Year')[:4]
-        #         research_counted.setdefault(year, {'count': 0})['count'] += 1
+        research_counted = {}
+        for item in ris_api_data:
+            if faculty_name in item.get('Author').upper():
+                year = item.get('Publication Year')[:4]
+                research_counted.setdefault(year, {'count': 0})['count'] += 1
 
         overall_ratings = {}
         for faculty in fis_overalls:
@@ -88,7 +88,7 @@ def fac_mgmnt(request):
 
         return JsonResponse({
             'faculty_mgmt'          : average_categories,
-            # 'publication_counts': research_counted,
+            'publication_counts'    : research_counted,
             'overall'               : overall_ratings,
             'the_faculty'           : indiv_information,
             'the_progress'          : faculty_progress,

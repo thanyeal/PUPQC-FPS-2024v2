@@ -105,7 +105,7 @@ def faculty_indiv_report(request):
         calc_data = {
             # FACULTY INFO
             'facultyid': facultyid,
-            'name': name,
+            'name': name + '.',
             'school_year': school_year,
             'type': type,
             'semester': semester,
