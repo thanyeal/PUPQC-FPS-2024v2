@@ -7,6 +7,7 @@ $(document).ready(function () {
     $('#fac_dtble').DataTable({
         // "processing": true,
         // "serverSide": true,
+
         "ajax": {
             "url": "faculty_info",
             "dataSrc": ""
@@ -18,7 +19,7 @@ $(document).ready(function () {
             {
                 "data": null,
                 "render": function (data, type, full, meta) {
-                    return '<center><button type="button" class="btn btn-sm btn-primary attendees-btn" data-bs-toggle="modal" data-bs-target="#faculty_mgmt_modal"  data-faculty-name="'+ full.Faculty_name + '">Performances</button></center>';
+                    return  '<center>' + '<button type="button" style="margin-right:10px !important;" class="btn btn-sm btn-primary attendees-btn" data-bs-toggle="modal" data-bs-target="#faculty_mgmt_modal"  data-faculty-name="'+ full.Faculty_name + '">Performances</button>' + '<button type="button" class="btn btn-sm btn-danger reports-btn" data-bs-toggle="" data-bs-target="#"  data-faculty-name="'+ full.Faculty_name + '">Reports</button>' + '</center>'; 
                 }
             }
         ],
@@ -30,7 +31,6 @@ $(document).ready(function () {
         $('#fac_dtble tbody').html('<tr><td colspan="9">There is currently no data in the database.</td></tr>');
     }
 });
-
 
 var faculty_chart;
 var rsrch_chart;
@@ -51,24 +51,24 @@ $('#fac_dtble tbody').on('click', 'button.attendees-btn', function() {
         },
 
         success: function(response) {
-            console.log(response)
+            //console.log(response)
             $('#chart-loader').fadeOut();
             $('.modal-content').show();
 
             var test_data = response.faculty_mgmt;
-            console.log(test_data);
+            // console.log(test_data);
 
             var test_datz = response.publication_counts;
-            console.log(test_datz);
+            // console.log(test_datz);
 
             var test_overall = response.overall;
-            console.log(test_overall);
+            // console.log(test_overall);
 
             var thefaculty = response.the_faculty;
-            console.log(thefaculty);
+            // console.log(thefaculty);
 
             var theprogress = response.the_progress;
-            console.log(theprogress);
+            // console.log(theprogress);
 
             if ($.isEmptyObject(test_data)) {
                 $('#param_content .luh').html   (`
@@ -115,94 +115,34 @@ $('#fac_dtble tbody').on('click', 'button.attendees-btn', function() {
                 $('#progress-bar').css('width', overallPercentage + '%');
                 $('#progress-bar .label').text(overallPercentage + '%');
                 $('#progress-bar').attr('aria-valuenow', overallPercentage);
-            } else {
-                console.error("Received empty or invalid progress data.");
+            }
+            else {
+                var overallPercentage = 0;
+
+                $('#progress-bar').css('width', overallPercentage + '%');
+                $('#progress-bar .label').text(overallPercentage + '%');
+                $('#progress-bar').attr('aria-valuenow', overallPercentage);
             }
 
             function updateFacultyInfo() {
-                if (response.the_faculty) {
-                    var indiv_information = response.the_faculty;
-                    document.getElementById('facultyName').textContent = indiv_information.faculty_name;
-                    document.getElementById('facultyType').textContent = indiv_information.faculty_type;
-                    document.getElementById('facultyAddr').textContent = indiv_information.faculty_addr;
-                    document.getElementById('facultyMail').textContent = indiv_information.faculty_mail;
-                    document.getElementById('facultyNumb').textContent = indiv_information.faculty_numb;
-                    document.getElementById('facultyDegr').textContent = indiv_information.faculty_degr;
-                } else {
-                    console.error("Received empty or invalid faculty information.");
+                var indiv_information = response.the_faculty;
+                if (indiv_information != null) {
+                    document.getElementById('facultyName').textContent = indiv_information.faculty_name || "Information not available";
+                    document.getElementById('facultyType').textContent = indiv_information.faculty_type || "Information not available";
+                    document.getElementById('facultyAddr').textContent = indiv_information.faculty_addr || "Information not available";
+                    document.getElementById('facultyMail').textContent = indiv_information.faculty_mail || "Information not available";
+                    document.getElementById('facultyNumb').textContent = indiv_information.faculty_numb || "Information not available";
+                    document.getElementById('facultyDegr').textContent = indiv_information.faculty_degr || "Information not available";
                 }
-            } updateFacultyInfo();
-            
-
-            function FacultyPerformance() {
-                var faculty_dataa = response.faculty_mgmt;
-                var semesterData = [
-                    {
-                        name: 'First Semester',
-                        data: [
-                            faculty_dataa.Supervisor_First[0],
-                            faculty_dataa.Student_First[0],
-                            faculty_dataa.Director_First[0],
-                            faculty_dataa.Self_First[0]
-                        ]
-                    },
-                    {
-                        name: 'Second Semester',
-                        data: [
-                            faculty_dataa.Supervisor_Second[0],
-                            faculty_dataa.Student_Second[0],
-                            faculty_dataa.Director_Second[0],
-                            faculty_dataa.Self_Second[0]
-                        ]
-                    },
-                ];
-                var options = {
-                    chart: {
-                        type: 'bar',
-                        height: 345,
-                        zoom: { enabled: true },
-                        toolbar: { show: false },
-                    },
-
-                    plotOptions: {
-                        bar: {
-                            horizontal: true,
-                            columnWidth: '60%',
-                            endingShape: 'rounded',
-                        },
-                    },
-
-                    colors: [
-                        getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
-                        getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-                        getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary')
-                    ],
-
-                    xaxis: {
-                        categories: ['Supervisor', 'Student', 'Director', 'Self'],
-                        title: {
-                            text: 'Rating Based Percentage',
-                        },
-                    },
-
-                    yaxis: {
-                        title: {
-                            text: 'Evaluations',
-                        },
-                        max: 100,
-                    },
-                    
-                    series: semesterData,
-                };
-                if (faculty_chart) {
-                    faculty_chart.destroy();
-                    faculty_chart = new ApexCharts(document.querySelector("#faculty-mgmt-chart"), options);
-                    faculty_chart.render();
-                } else {
-                    faculty_chart = new ApexCharts(document.querySelector("#faculty-mgmt-chart"), options);
-                    faculty_chart.render();
+                else {
+                    document.getElementById('facultyName').textContent = "Information not available";
+                    document.getElementById('facultyType').textContent = "Information not available";
+                    document.getElementById('facultyAddr').textContent = "Information not available";
+                    document.getElementById('facultyMail').textContent = "Information not available";
+                    document.getElementById('facultyNumb').textContent = "Information not available";
+                    document.getElementById('facultyDegr').textContent = "Information not available";
                 }
-            } FacultyPerformance();
+            }   updateFacultyInfo();
 
             function FacultyOverall(response) {
                 var overall_data = response.overall;
@@ -352,87 +292,165 @@ $('#fac_dtble tbody').on('click', 'button.attendees-btn', function() {
                     }
                 }
             } FacultyOverall(response);
+
+            function FacultyPerformance() {
+
+                var faculty_dataa = response.faculty_mgmt;
+                var isFirstSemesterAvailable  = faculty_dataa.Supervisor_First  && faculty_dataa.Student_First  && faculty_dataa.Director_First  && faculty_dataa.Self_First;
+                var isSecondSemesterAvailable = faculty_dataa.Supervisor_Second && faculty_dataa.Student_Second && faculty_dataa.Director_Second && faculty_dataa.Self_Second;
+
+                var semesterData = [];
+                if (isFirstSemesterAvailable) {
+                    semesterData.push({
+                        name: 'First Semester',
+                        data: [
+                            faculty_dataa.Supervisor_First[0],
+                            faculty_dataa.Student_First[0],
+                            faculty_dataa.Director_First[0],
+                            faculty_dataa.Self_First[0]
+                        ]
+                    });
+                }
+                if (isSecondSemesterAvailable) {
+                    semesterData.push({
+                        name: 'Second Semester',
+                        data: [
+                            faculty_dataa.Supervisor_Second[0],
+                            faculty_dataa.Student_Second[0],
+                            faculty_dataa.Director_Second[0],
+                            faculty_dataa.Self_Second[0]
+                        ]
+                    });
+                };
+
+                var options = {
+                    chart: {
+                        type: 'bar',
+                        height: 345,
+                        zoom: { enabled: true },
+                        toolbar: { show: false },
+                    },
+
+                    plotOptions: {
+                        bar: {
+                            horizontal: true,
+                            columnWidth: '60%',
+                            endingShape: 'rounded',
+                        },
+                    },
+
+                    colors: [
+                        getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary')
+                    ],
+
+                    xaxis: {
+                        categories: ['Supervisor', 'Student', 'Director', 'Self'],
+                        title: {
+                            text: 'Rating Based Percentage',
+                        },
+                    },
+
+                    yaxis: {
+                        title: {
+                            text: 'Evaluations',
+                        },
+                        max: 100,
+                    },
+                    
+                    series: semesterData,
+                };
+                if (faculty_chart) {
+                    faculty_chart.destroy();
+                    faculty_chart = new ApexCharts(document.querySelector("#faculty-mgmt-chart"), options);
+                    faculty_chart.render();
+                } else {
+                    faculty_chart = new ApexCharts(document.querySelector("#faculty-mgmt-chart"), options);
+                    faculty_chart.render();
+                }
+            } FacultyPerformance();
             
-            // function ResearchPerformance() {
-            //     var f_research_data = response.publication_counts;
-            //     var entr_year_sum = Object.keys(f_research_data);
-            //     var counts = entr_year_sum.map(year => f_research_data[year].count);
-            //     var options = {
-            //         chart: {
-            //             height: 380,
-            //             type: "bar",
-            //             zoom: { enabled: false },
-            //             toolbar: { show: false },
-            //         },
+            function ResearchPerformance() {
+                var f_research_data = response.publication_counts;
+                var entr_year_sum = Object.keys(f_research_data);
+                var counts = entr_year_sum.map(year => f_research_data[year].count);
+                var options = {
+                    chart: {
+                        height: 380,
+                        type: "bar",
+                        zoom: { enabled: false },
+                        toolbar: { show: false },
+                    },
                     
-            //         colors: [
-            //             getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
-            //             getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-            //             getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
-            //         ],
+                    colors: [
+                        getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
+                    ],
                     
-            //         dataLabels: {
-            //             enabled: !1
-            //         },
+                    dataLabels: {
+                        enabled: !1
+                    },
 
-            //         stroke: {
-            //             width: [3, 3],
-            //             curve: "straight"
-            //         },
+                    stroke: {
+                        width: [3, 3],
+                        curve: "straight"
+                    },
 
-            //         series: [
-            //             {
-            //                 name: 'No. of Research Published',
-            //                 data: counts
-            //             },
-            //         ],
+                    series: [
+                        {
+                            name: 'No. of Research Published',
+                            data: counts
+                        },
+                    ],
 
-            //         grid: {
-            //             row: { colors: ["transparent", "transparent"], opacity: 0.2 },
-            //             borderColor: "#f1f1f1",
-            //         },
+                    grid: {
+                        row: { colors: ["transparent", "transparent"], opacity: 0.2 },
+                        borderColor: "#f1f1f1",
+                    },
 
-            //         markers: {
-            //             style: "inverted",
-            //             size: 6
-            //         },
+                    markers: {
+                        style: "inverted",
+                        size: 6
+                    },
 
-            //         xaxis: {
-            //             categories: entr_year_sum,
-            //             title: { text: "Academic Year" },
-            //         },
+                    xaxis: {
+                        categories: entr_year_sum,
+                        title: { text: "Academic Year" },
+                    },
 
-            //         yaxis: {
-            //             title: {
-            //                 text: "Research Count"
-            //             },
-            //             max: 5
-            //         },
+                    yaxis: {
+                        title: {
+                            text: "Research Count"
+                        },
+                        max: 5
+                    },
 
-            //         legend: {
-            //             position: "top",
-            //             horizontalAlign: "right",
-            //             floating: !0,
-            //             offsetY: -25,
-            //             offsetX: -5,
-            //         },
+                    legend: {
+                        position: "top",
+                        horizontalAlign: "right",
+                        floating: !0,
+                        offsetY: -25,
+                        offsetX: -5,
+                    },
 
-            //         responsive: [
-            //             {
-            //                 breakpoint: 600,
-            //                 options: { chart: { toolbar: { show: !1 } }, legend: { show: !1 } },
-            //             },
-            //         ],
-            //     }
-            //     if (rsrch_chart) {
-            //         rsrch_chart.destroy();
-            //         rsrch_chart = new ApexCharts(document.querySelector("#rsrch_performance"), options);
-            //         rsrch_chart.render();
-            //     } else {
-            //         rsrch_chart = new ApexCharts(document.querySelector("#rsrch_performance"), options);
-            //         rsrch_chart.render();
-            //     }
-            // } ResearchPerformance();
+                    responsive: [
+                        {
+                            breakpoint: 600,
+                            options: { chart: { toolbar: { show: !1 } }, legend: { show: !1 } },
+                        },
+                    ],
+                }
+                if (rsrch_chart) {
+                    rsrch_chart.destroy();
+                    rsrch_chart = new ApexCharts(document.querySelector("#rsrch_performance"), options);
+                    rsrch_chart.render();
+                } else {
+                    rsrch_chart = new ApexCharts(document.querySelector("#rsrch_performance"), options);
+                    rsrch_chart.render();
+                }
+            } ResearchPerformance();
 
             $('#chart-loader').hide();
         },
@@ -461,4 +479,36 @@ $('#fac_dtble tbody').on('click', 'button.attendees-btn', function() {
         }
     });
     
+});
+
+$('#fac_dtble tbody').on('click', 'button.reports-btn', function() {
+    var clickedFacultyName = $(this).data('faculty-name');
+    $.ajax({
+        url: "faculty_mgmt_reports",
+        type: "POST",
+        data: {
+            csrfmiddlewaretoken: getCSRFToken(),
+            faculty_name: clickedFacultyName
+        },
+        xhrFields: {
+            responseType: 'blob'
+        },
+        success: function(response, status, xhr) {
+            var filename = "";
+            var disposition = xhr.getResponseHeader('Content-Disposition');
+            if (disposition && disposition.indexOf('attachment') !== -1) {
+                var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                var matches = filenameRegex.exec(disposition);
+                if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
+            }
+            var blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = filename || 'testtest.xlsx';
+            link.click();
+        },
+        error: function(error) {
+            console.log("Oops, something went wrong.");
+        }
+    });
 });

@@ -211,7 +211,7 @@ document.getElementById("sa-basic") &&
             Swal.fire({
                 position: "middle",
                 icon: "success",
-                title: "Your file has been uploaded",
+                title: "Recevied bitch",
                 showConfirmButton: !1,
                 timer: 1500,
                 showCloseButton: !0,
