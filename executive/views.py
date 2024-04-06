@@ -30,6 +30,8 @@ from .modules.acad_head.workload.views_exec_workload_analytics    import workloa
 from .modules.acad_head.fac_mgmnt.views_faculty_management        import fac_mgmnt
 from .modules.acad_head.fac_mgmnt.views_faculty_info              import faculty_info
 from .modules.acad_head.fac_mgmnt.views_faculty_rep               import faculty_indiv_report
+from .modules.acad_head.fac_mgmnt.views_faculty_reports           import faculty_mgmt_reports
+from .modules.acad_head.fac_mgmnt.views_faculty_proc_data         import faculty_proc_data
 
 
 # Authentication
@@ -84,6 +86,8 @@ coming_soon
 fac_mgmnt
 faculty_info
 faculty_indiv_report
+faculty_mgmt_reports
+faculty_proc_data
 
 # Retention Exit - Eliminated from the System
 # retention_analytics
