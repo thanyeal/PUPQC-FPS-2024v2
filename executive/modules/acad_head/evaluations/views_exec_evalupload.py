@@ -1,27 +1,43 @@
-
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from executive.forms import ExcelUploadForm
 from django.http import JsonResponse
-from executive.models import TableOne
-from django.contrib import messages
-import pandas as pd
-import requests, os
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import status
+from executive.api import api_routes
 
 @login_required(login_url='login')
 def evaluations(request):
-    data = []  # Data to be returned as JSON
+    
+    # if request.method == 'GET':
+    #     fis_te_api_data = api_routes.get_fis_te_api(request)
+    #     return JsonResponse(fis_te_api_data, safe=False)
 
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        # Fetch data from the external API
-        api_url = os.environ.get('FIS_API_EVALZ')
-        response = requests.get(api_url)
+    fis_te_api_data = api_routes.get_fis_te_api(request)
 
-        if response.status_code == 200:
-            api_data = response.json()
-            data = api_data
-        return JsonResponse(data, safe=False)
-    return render(request, 'executive/pages/eval_upload.html')
+    result_list = []
+
+    for data in fis_te_api_data:
+        acad_head_avg = (data["acad_head_a"] + data["acad_head_b"] +
+                        data["acad_head_c"] + data["acad_head_d"]) / 4.0
+
+        self_avg = (data["self_a"] + data["self_b"] +
+                    data["self_c"] + data["self_d"]) / 4.0
+
+        director_avg = (data["director_a"] + data["director_b"] +
+                    data["director_c"] + data["director_d"]) / 4.0
+
+        student_avg = (data["student_a"] + data["student_b"] +
+                    data["student_c"] + data["student_d"]) / 4.0
+
+        result = {
+            "Name": data["Name"],
+            "Type": data["Type"],
+            "school_year": data["school_year"],
+            "semester": data["semester"],
+            "acad_head_ave": round(acad_head_avg, 2),
+            "self_ave": round(self_avg, 2),
+            "director_ave": round(director_avg, 2),
+            "student_ave": round(student_avg, 2),
+        }
+        result_list.append(result)
+
+        
+    return (result_list)

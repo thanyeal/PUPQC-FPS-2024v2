@@ -611,22 +611,22 @@
             document.getElementById("scrollbar").removeAttribute("data-simplebar"),
             document.getElementById("navbar-nav").removeAttribute("data-simplebar"),
             document.getElementById("scrollbar").classList.remove("h-100");
-        var a = M,
-            n = document.querySelectorAll("ul.navbar-nav > li.nav-item"),
-            o = "",
-            s = "";
-        Array.from(n).forEach(function (e, t) {
-            t + 1 === a && (s = e),
-                a < t + 1 && ((o += e.outerHTML), e.remove()),
-                t + 1 === n.length &&
-                s.insertAdjacentHTML &&
-                s.insertAdjacentHTML(
-                    "afterend",
-                    '<li class="nav-item">\t\t\t\t\t\t<a class="nav-link" href="#sidebarMore" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarMore">\t\t\t\t\t\t\t<i class="ri-briefcase-2-line"></i> <span data-key="t-more">More</span>\t\t\t\t\t\t</a>\t\t\t\t\t\t<div class="collapse menu-dropdown" id="sidebarMore"><ul class="nav nav-sm flex-column">' +
-                    o +
-                    "</ul></div>\t\t\t\t\t</li>"
-                );
-        });
+        // var a = M,
+        //     n = document.querySelectorAll("ul.navbar-nav > li.nav-item"),
+        //     o = "",
+        //     s = "";
+        // Array.from(n).forEach(function (e, t) {
+        //     t + 1 === a && (s = e),
+        //         a < t + 1 && ((o += e.outerHTML), e.remove()),
+        //         t + 1 === n.length &&
+        //         s.insertAdjacentHTML &&
+        //         s.insertAdjacentHTML(
+        //             "afterend",
+        //             '<li class="nav-item">\t\t\t\t\t\t<a class="nav-link" href="#sidebarMore" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarMore">\t\t\t\t\t\t\t<i class="ri-briefcase-2-line"></i> <span data-key="t-more">More</span>\t\t\t\t\t\t</a>\t\t\t\t\t\t<div class="collapse menu-dropdown" id="sidebarMore"><ul class="nav nav-sm flex-column">' +
+        //             o +
+        //             "</ul></div>\t\t\t\t\t</li>"
+        //         );
+        // });
     }
     function y(e) {
         "vertical" == e

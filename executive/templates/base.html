@@ -6,14 +6,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- App favicon -->
+    {% comment %} App favicon {% endcomment %}
     <link rel="icon" href="{% static 'img/pupqcfps2.png' %}">
     <title>myPUPQC-FPS</title>
 
-    <!-- css dependencies -->
+    {% comment %} css dependencies {% endcomment %}
     {% include 'partials/_cssdep.html' %}
     
-    <!-- Include the ApexCharts CSS and JS files -->
+    {% comment %} Include the ApexCharts CSS and JS files {% endcomment %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.27.2/dist/apexcharts.min.css">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.27.2/dist/apexcharts.min.js"></script>
     
@@ -21,15 +21,15 @@
 
 <body>
 
-    <!-- Begin page -->
+    {% comment %} Begin page {% endcomment %}
     <div id="layout-wrapper">
 
-        <!-- header -->
+        {% comment %} header {% endcomment %}
         <header id="page-topbar">
             {% include 'partials/_topnav.html' %}
         </header>
 
-        <!-- remove notif modal -->
+        {% comment %} remove notif modal {% endcomment %}
         <div id="removeNotificationModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -54,15 +54,15 @@
             </div>
         </div>
 
-        <!-- sidebar -->
+        {% comment %} sidebar {% endcomment %}
         <div class="app-menu navbar-menu">
             {% include 'partials/_sidebar.html' %}
         </div>
 
-        <!-- vertical overlay -->
+        {% comment %} vertical overlay {% endcomment %}
         <div class="vertical-overlay"></div>
 
-        <!-- main page -->
+        {% comment %} main page {% endcomment %}
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
@@ -71,12 +71,12 @@
             </div>
         </div>
 
-        <!-- footer -->
+        {% comment %} footer {% endcomment %}
         <footer class="footer">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
-                        <script>document.write(new Date().getFullYear())</script>-2024 © BSIT 4-2 Batch 2020
+                        <script>document.write(new Date().getFullYear())</script>© BSIT 4-2 Batch 2020
                     </div>
                     <div class="col-sm-6">
                         <div class="text-sm-end d-none d-sm-block">
@@ -88,12 +88,12 @@
         </footer>        
     </div>
 
-    <!-- back to top -->
+    {% comment %} back to top {% endcomment %}
     <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
         <i class="ri-arrow-up-line"></i>
     </button>
 
-    <!-- js dependencies -->
+    {% comment %} js dependencies {% endcomment %}
     <script>
         $(document).ready(function() {
             $('.nav-link').click(function() {

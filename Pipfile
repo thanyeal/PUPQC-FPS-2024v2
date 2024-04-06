@@ -23,7 +23,12 @@ requests = "*"
 dj-database-url = "*"
 python-dotenv = "*"
 python-dateutil = "*"
-django-csp = "*"
+html2pdf = "*"
+xhtml2pdf = "*"
+pdfkit = "*"
+django-jsonresponse = "*"
+xlsxwriter = "*"
+bytesbufio = "*"
 
 [dev-packages]
 

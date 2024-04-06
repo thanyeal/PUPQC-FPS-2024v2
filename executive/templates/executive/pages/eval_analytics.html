@@ -1,667 +1,377 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-{% comment %} <style>
-    .gridjs-tbody, td.gridjs-td,
-    .gridjs *, .gridjs ::after, .gridjs ::before,
-    .table {
-        font-size: var(--vz-body-font-size);
-    }
-
-    .bg-primary-subtle {
-        background-color: #660000 !important;
-        opacity: .9 !important;
-    }   
-</style> {% endcomment %}
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card mt-n4 mx-n4">
-            <div class="bg-primary-subtle">
-                <div class="card-body px-4 pb-4">
-                    <div class="row mb-3">
-                        <div class="col-md">
-                            <div class="row align-items-center g-3">
-                                <div class="col-md-auto">
-                                    <div class="avatar-md">
-                                        <div class="avatar-title bg-transparent">
-                                            <i class="ri-chat-smile-3-line" style="font-size: 3rem !important;"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md">
-                                    <div>
-                                            <h4 class="fw-bold text-white">Teaching Effectiveness</h4>
-                                        <div class="hstack gap-3 flex-wrap text-white">
-                                            <div id="evalBreadtime"><i class="ri-map-pin-2-line align-bottom me-1"></i></div>
-                                            <div class="vr"></div>
-                                            <div>Post Date : <span id="evalBreaddate"></span></div>
-                                            <div class="vr"></div>
-                                            <div>Your Designation: <div class="badge rounded-pill bg-secondary fs-12">Academic Head</div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--  Extra Large modal example -->
-        <div class="modal fade eval_analytics" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="myExtraLargeModalLabel">List of Research Publications</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table id="datatable" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Faculty Name</th>
-                                    <th>Supervisor Rating</th>
-                                    <th>Supervisor Interpretation</th>
-                                    <th>Students Rating</th>
-                                    <th>Students Interpretation</th>
-                                    <th>Peer Rating</th>
-                                    <th>Peer Interpretation</th>
-                                    <th>Self Rating</th>
-                                    <th>Self Interpretation</th>
-                                {% comment %}
-                                    <th>Load Rating</th>
-                                    <th>Load Interpretation</th>
-                                    <th>Faculty Status</th>
-                                {% endcomment %}
-                                    <th>Semester</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="javascript:void(0);" class="btn btn-link link-success shadow-none fw-medium" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Close</a>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-    </div>
-</div>
-
-<div class="row mt-n5">
-    <div class="col-lg-9">
-        <div class="card card-height-100">
-            <div class="card-header border-0 align-items-center d-flex">
-                <h4 class="col-7 card-title mb-0 flex-grow-1">Faculty Evaluation Average Ratings</h4>
-                
-                <label class="col-2 m-0" style="padding-right: 1rem !important;">
-                    <select id="yearDropdownForEval" onchange="updateEvaluationz()" class="form-select form-select-sm"></select>
-                </label>
-
-                <button class="col-2 btn btn-info btn-icon " data-bs-toggle="modal" data-bs-target=".eval_analytics">
-                    <i class="ri-eye-line"></i>
-                </button>
-            </div>
-            <div class="card-body p-0 pb-2">
-                <div class="w-100">
-                    <div class="card-header p-0 border-0 bg-light-subtle">
-                        <div class="row g-0 text-center">
-                            <div class="col-6 col-sm">
-                                <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1 fs-17 fw-semibold text-info"><span class="counter-value" data-target="98" >0</span>%</h5>
-                                    <p class="text-muted mb-0">Average Institutional Rate</p>
-                                </div>
-                            </div>
-                            <div class="col-6 col-sm-3">
-                                <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1 fs-17 fw-semibold text-primary"><span id="frfs">0</span>%</h5>
-                                    <p class="text-muted mb-0">Faculty Rating: First Semester</p>
-                                </div>
-                            </div>
-                            <div class="col-6 col-sm">
-                                <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1 fs-17 fw-semibold text-secondary"><span id="frss">0</span>%</h5>
-                                    <p class="text-muted mb-0">Faculty Rating: Second Semester</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body p-0 pb-2">
-                        <div class="w-100">
-                            <div id="line-chart-two"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="card card-height-100">
-            <div class="card-header align-items-center d-flex">
-                <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">
-                    Average Student Scores for Each Faculty
-                </h4>
-            </div>
-            <div class="card-body p-0 pb-2">
-                <div class="card-body">
-                    <div id="prjects-status-1" class="apex-charts mt-5" dir="ltr"></div>
-                    <div class="mt-3">
-                        <div class="d-flex justify-content-center align-items-center mb-4">
-                            <h2 class="me-3 ff-secondary mb-0 text-warning"><span id="rb3">0</span></h2>
-                            <div>
-                                <p class="mb-0 text-warning">Least Rated Faculties</p>
-                                <p class="text-success fw-medium mb-0">
-                                    <span class="badge bg-success-subtle text-success p-1 rounded-circle">
-                                        <i class="ri-arrow-right-up-line"></i>
-                                    </span> <span id="ra3"></span> Highest Rated Faculties
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card card-height-100">
-            <div class="card-header align-items-center d-flex">
-                <h4 class="col-11 table-h4-white-text card-title mb-0 flex-grow-1">
-                    Trends in Teaching Effectiveness Over Time
-                </h4>
-                
-                <label class="col-1">
-                    <select id="yearDropdown" onchange="updateChart()" class="form-select form-select-sm"></select>
-                </label>
-            </div>
-
-            <div class="card-body p-0 pb-2">
-                <div class="w-100">
-                    <div class="card-header p-0 border-0 bg-light-subtle">
-                        {% comment %} <div class="row g-0 text-center">
-                            <div class="col-6">
-                                <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1 fs-17 fw-semibold text-primary"><span id="#">0</span></h5>
-                                    <p class="text-muted mb-0">Most Performing Year</p>
-                                </div>
-                            </div>
-                            <div class="col-6 col-sm">
-                                <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1 fs-17 fw-semibold text-warning"><span id="#">0</span></h5>
-                                    <p class="text-warning mb-0">Least Performing Year</p>
-                                </div>
-                            </div>
-                        </div> {% endcomment %}
-                    </div>
-                    <div class="card-body p-0 pb-2">
-                        <div class="w-100">
-                            <div id="chartz"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% comment %} <div class="col-xxl-9">
-        <div class="card card-height-100">
-            <div class="card-header align-items-center d-flex">
-                <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">
-                    Faculty Ratings
-                </h4>
-            </div>
-            <div class="card-body p-0 pb-2">
-                <div class="w-100">
-                    <div id="line-chart"></div>
-                </div>
-            </div>
-        </div>
-    </div> {% endcomment %}
-</div>
-
-
-<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-<script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
-<script src="{% static 'js/main/eval_upload/eval_u_datatable.js' %}"></script>
-
-<script>
-    // Faculty Performance vs. Institutional Requirement Percentage
-    const json_data = JSON.parse('{{ overall_avg_data|escapejs|safe }}');
-    const valueToSet = json_data.overall_avg_first;
-    const valueToSetTwo = json_data.overall_avg_second;
-
-    const frfs = document.getElementById('frfs');
-    frfs.textContent = valueToSet;
-
-    const frss = document.getElementById('frss');
-    frss.textContent = valueToSetTwo;
-</script>
-
-<script>
-    // Faculty Performance vs. Institutional Requirement
-    var chartDataTwo = JSON.parse('{{ chart_data_two|escapejs|safe }}');
-    var chartData= Object.values(chartDataTwo);
-    var yearForEval = chartData.map(item => item.year);
-    
-    
-    var frstSemesterRatings = chartData.map(function (item) {
-        return {
-            'avgz_spvs_rating': item.frst_semester_avg.avgz_spvs_rating,
-            'avgz_stud_rating': item.frst_semester_avg.avgz_stud_rating,
-            'avgz_peer_rating': item.frst_semester_avg.avgz_peer_rating,
-            'avgz_self_rating': item.frst_semester_avg.avgz_self_rating,
-        };
-    });
-
-    var scndSemesterRatings = chartData.map(function (item) {
-        return {
-            'avgz_spvs_rating': item.scnd_semester_avg.avgz_spvs_rating,
-            'avgz_stud_rating': item.scnd_semester_avg.avgz_stud_rating,
-            'avgz_peer_rating': item.scnd_semester_avg.avgz_peer_rating,
-            'avgz_self_rating': item.scnd_semester_avg.avgz_self_rating,
-        };
-    });
-
-    var summmerSemesterRatings = chartData.map(function (item) {
-        return {
-            'avgz_spvs_rating': item.summer_semester_avg.avgz_spvs_rating,
-            'avgz_stud_rating': item.summer_semester_avg.avgz_stud_rating,
-            'avgz_peer_rating': item.summer_semester_avg.avgz_peer_rating,
-            'avgz_self_rating': item.summer_semester_avg.avgz_self_rating,
-        };
-    });
-
-    var series = [
-
-        {
-            name: '1st Sem Supervisor Rating',
-            data: frstSemesterRatings.map(function (item) {
-                return item.avgz_spvs_rating;
-            }),
-        },
-
-        {
-            name: '1st Sem Student Rating',
-            data: frstSemesterRatings.map(function (item) {
-                return item.avgz_stud_rating;
-            }),
-        },
-
-        {
-            name: '1st Sem Peer Rating',
-            data: frstSemesterRatings.map(function (item) {
-                return item.avgz_peer_rating;
-            }),
-        },
-
-        {
-            name: '1st Sem Self Rating',
-            data: frstSemesterRatings.map(function (item) {
-                return item.avgz_self_rating;
-            }),
-        },
-
-        {
-            name: '2nd Sem Supervisor Rating',
-            data: scndSemesterRatings.map(function (item) {
-                return item.avgz_spvs_rating;
-            }),
-        },
-
-        {
-            name: '2nd Sem Student Rating',
-            data: scndSemesterRatings.map(function (item) {
-                return item.avgz_stud_rating;
-            }),
-        },
-
-        {
-            name: '2nd Sem Peer Rating',
-            data: scndSemesterRatings.map(function (item) {
-                return item.avgz_peer_rating;
-            }),
-        },
-
-        {
-            name: '2nd Sem Self Rating',
-            data: scndSemesterRatings.map(function (item) {
-                return item.avgz_self_rating;
-            }),
-        },
-
-        {
-            name: 'Summer Semester Supervisor Rating',
-            data: summmerSemesterRatings.map(function (item) {
-                return item.avgz_spvs_rating;
-            }),
-        },
-
-        {
-            name: 'Summer Student Rating',
-            data: summmerSemesterRatings.map(function (item) {
-                return item.avgz_stud_rating;
-            }),
-        },
-
-        {
-            name: 'Summer Semester Peer Rating',
-            data: summmerSemesterRatings.map(function (item) {
-                return item.avgz_peer_rating;
-            }),
-        },
-
-        {
-            name: 'Summer Semester Self Rating',
-            data: summmerSemesterRatings.map(function (item) {
-                return item.avgz_self_rating;
-            }),
-        },
-    ];
-
-    // Chart configuration object
-    var options = {
-        chart: {
-            type: 'bar',
-            height: 350,
-            zoom: { enabled: false },
-            toolbar: { show: false },
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-            },
-        },
-        colors: [
-            getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
-            getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-            getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
-            getComputedStyle(document.documentElement).getPropertyValue('--vz-dark'),
-        ],
-        xaxis: {
-            categories: yearForEval,
-            title: {
-                text: 'Academic Year/s',
-            },
-        },
-        yaxis: {
-            title: {
-                text: 'Average Rating',
-            },
-        },
-        series: series,
-    };
-
-    var chartz = new ApexCharts(document.querySelector("#line-chart-two"), options);
-    chartz.render();
-
-        // Populate the year dropdown
-        var yearDropdownForEval = document.getElementById('yearDropdownForEval');
-        
-        // Add "Display All" option as the first option
-        var allOptionForEval = document.createElement('option');
-            allOptionForEval.value = "all";
-            allOptionForEval.text = "Display All";
-        yearDropdownForEval.add(allOptionForEval);
-
-        // Read the Json data for "Years"
-        yearForEval.forEach( yearForEval => {
-            var optionForEval = document.createElement('option');
-                optionForEval.value = yearForEval;
-                optionForEval.text = yearForEval;
-            yearDropdownForEval.appendChild(optionForEval);
-        });
-
-        // Function to update the chart based on the selected year
-        function updateEvaluationz() {
-            var selectedYearForEval = yearDropdownForEval.value;
-            var filteredYearDataForEval = chartData.filter(item => item.year == selectedYearForEval);
-            
-            if (selectedYearForEval == "all") {
-                var filteredYearDataForEval = chartData;
-            }
-            
-            if (filteredYearDataForEval.length > 0) {
-                var filteredSeriesForEval = [
-                    //++++++++
-                    {
-                        name: '1st Sem Supervisor Rating',
-                        data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_spvs_rating)
-                    },
-                    
-                    {
-                        name: '1st Sem Student Rating',
-                        data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_stud_rating)
-                    },
-                    {
-                        name: '1st Sem Peer Rating',
-                        data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_peer_rating)
-                    },
-                    
-                    {
-                        name: '1st Sem Self Rating',
-                        data: filteredYearDataForEval.map(item => item.frst_semester_avg.avgz_self_rating)
-                    },
-                    //++++++++
-                    {
-                        name: '2nd Sem Supervisor Rating',
-                        data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_spvs_rating)
-                    },
-                    
-                    {
-                        name: '2nd Sem Student Rating',
-                        data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_stud_rating)
-                    },
-                    {
-                        name: '2nd Sem Peer Rating',
-                        data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_peer_rating)
-                    },
-                    
-                    {
-                        name: '2nd Sem Self Rating',
-                        data: filteredYearDataForEval.map(item => item.scnd_semester_avg.avgz_self_rating)
-                    },
-                    //+++++++++
-                    {
-                        name: 'Summer Sem Supervisor Rating',
-                        data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_spvs_rating)
-                    },
-                    
-                    {
-                        name: 'Summer Sem Student Rating',
-                        data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_stud_rating)
-                    },
-                    {
-                        name: 'Summer Sem Peer Rating',
-                        data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_peer_rating)
-                    },
-                    
-                    {
-                        name: 'Summer Sem Self Rating',
-                        data: filteredYearDataForEval.map(item => item.summer_semester_avg.avgz_self_rating)
-                    },
-
-                ];
-                
-                chartz.updateOptions({
-                    xaxis: {
-                        categories: filteredYearDataForEval.map(item => item.year)
-                    }
-                    
-                });
-                chartz.updateSeries(filteredSeriesForEval);
-            }
-            else {
-                console.error('No data found for the selected year.');
+    <style>
+        @media print {
+            .noPrint{
+                display:none;
             }
         }
+
+        @media (min-width: 1200px) {
+            .modal-xl {
+                --vz-modal-width: 1700px !important;
+            }
+        }
+
+        @media (min-width: 2000px) {
+            .modal-xl {
+                --vz-modal-width: 1440px !important;
+            }
+        }
+    </style>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card mt-n4 mx-n4">
+                    <div class="bg-primary-subtle">
+                        <div class="card-body px-4 pb-4">
+                            <div class="row mb-3">
+                                <div class="col-md">
+                                    <div class="row align-items-center g-3">
+                                        <div class="col-md-auto">
+                                            <div class="avatar-md">
+                                                <div class="avatar-title bg-transparent">
+                                                    <i class="ri-chat-smile-3-line" style="font-size: 3rem !important;"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md">
+                                            <div>
+                                                    <h4 class="fw-bold text-white">Teaching Effectiveness</h4>
+                                                <div class="hstack gap-3 flex-wrap text-white">
+                                                    <div id="evalBreadtime"><i class="ri-map-pin-2-line align-bottom me-1"></i></div>
+                                                    <div class="vr"></div>
+                                                    <div>Post Date : <span id="evalBreaddate"></span></div>
+                                                    <div class="vr"></div>
+                                                    <div>Your Designation: <div class="badge rounded-pill bg-secondary fs-12">Academic Head</div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  Extra Large modal example -->
+                <div class="modal fade eval_analytics" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="myExtraLargeModalLabel">List of Research Publications</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <table id="datatable" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Faculty Name</th>
+                                            <th>Supervisor Rating</th>
+                                            <th>Students Rating</th>
+                                            <th>Peer Rating</th>
+                                            <th>Self Rating</th>
+                                        {% comment %}
+                                            <th>Load Rating</th>
+                                            <th>Load Interpretation</th>
+                                            <th>Faculty Status</th>
+                                        {% endcomment %}
+                                            <th>Semester</th>
+                                            <th>Academic Year</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="javascript:void(0);" class="btn btn-link link-success shadow-none fw-medium" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Close</a>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+
+    <div id="printableArea">
+
+        <div class="row mt-n5">
+            <div class="col-lg-8">
+                <div class="card card-height-100">
+                    <div class="card-header border-0 align-items-center d-flex">
+                        <h4 class="col-7 card-title mb-0 flex-grow-1">Faculty Evaluation Average Ratings</h4>
+                        
+                        <label class="col-2 m-0" style="padding-right: 1rem !important;">
+                            <select id="yearDropdownForEval" onchange="updateEvaluationz(event)" class="form-select form-select-sm"></select>
+                        </label>
+
+                        <button class="col-2 btn btn-info btn-icon" style="margin-right: 1rem !important;" data-bs-toggle="modal" data-bs-target=".eval_analytics">
+                            <i class="ri-eye-line"></i>
+                        </button>
         
-        updateEvaluationz();
-        yearDropdownForEval.addEventListener('change', updateEvaluationz);
-</script>
+                        <button class="col-1 btn btn-success btn-icon" onclick="printDiv('printableArea')"> 
+                            <i class="ri-arrow-down-line"></i>
+                        </button>
+                    </div>
+                    <div class="card-body p-0 pb-2">
+                        <div class="w-100">
+                            <div class="card-header p-0 border-0 bg-light-subtle">
+                                <div class="row g-0 text-center">
+                                    
+                                    <div class="col-6 col-sm">
+                                        <div class="p-3 border border-dashed border-start-0">
+                                            <h5 class="mb-1 fs-17 fw-semibold text-primary"><span class="counter-count" id="frfs">0</span>%</h5>
+                                            <p class="text-muted mb-0">Present Faculty Rating: First Semester</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-sm">
+                                        <div class="p-3 border border-dashed border-start-0">
+                                            <h5 class="mb-1 fs-17 fw-semibold text-secondary"><span class="counter-count" id="frss">0</span>%</h5>
+                                            <p class="text-muted mb-0">Present Faculty Rating: Second Semester</p>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="card-body p-0 pb-2">
+                                <div class="w-100">
+                                    <div id="line-chart-two"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card card-height-100">
+                    <div class="card-header align-items-center d-flex">
+                        <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">
+                            Average Student Scores for Each Faculty
+                        </h4>
+                    </div>
+                    <div class="card-body p-0 pb-2">
+                        <div class="card-body">
+                            <div id="prjects-status-1" class="apex-charts mt-5" dir="ltr"></div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-center align-items-center mb-4" id="caption-query-changer">
+                                    <h2 class="me-3 ff-secondary mb-0 text-warning"><span id="rb3">0</span></h2>
+                                    <div>
+                                        <p class="mb-0 text-warning">Least Rated Faculties</p>
+                                        <p class="text-success fw-medium mb-0">
+                                            <span class="badge bg-success-subtle text-success p-1 rounded-circle">
+                                                <i class="ri-arrow-right-up-line"></i>
+                                            </span> <span id="ra3"></span> Highest Rated Faculties
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<script>
-    // Trends in Teaching Effectiveness Over Time
-    var combinedData = JSON.parse('{{ chart_data_two|escapejs|safe }}');
-    // Trends in Teaching Effectiveness Over Time
-    var chartStudRating = Object.values(combinedData);
-    var years = chartStudRating.map(item => item.year);
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-height-100">
+                    <div class="card-header align-items-center d-flex">
+                        <h4 class="col-11 table-h4-white-text card-title mb-0 flex-grow-1">
+                            Trends in Teaching Effectiveness Over Time
+                        </h4>
+                        
+                        <label class="col-1">
+                            <select id="yearDropdown" onchange="updateChart(event)" class="form-select form-select-sm"></select>
+                        </label>
+                    </div>
 
-    var firstSemesterRatings = chartStudRating.map(function (item) {
-        return {
-            'avgz_stud_rating': item.frst_semester_avg.avgz_stud_rating,
-        };
-    });
+                    <div class="card-body p-0 pb-2">
+                        <div class="w-100">
+                            <div class="card-header p-0 border-0 bg-light-subtle">
+                            </div>
+                            <div class="card-body p-0 pb-2">
+                                <div class="w-100">
+                                    <div id="chartz"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    var secondSemesterRatings = chartStudRating.map(function (item) {
-        return {
-            'avgz_stud_rating': item.scnd_semester_avg.avgz_stud_rating,
-        };
-    });
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
+    <script src="{% static 'js/main/eval_upload/eval_u_datatable.js' %}"></script>
+    <script src="{% static 'js/main/eval_upload/eval_script_report.js' %}"></script>
 
-    var series = [
+    {% comment %} Faculty Evaluation Average Ratings {% endcomment %}
+    <script>
+        const json_data = JSON.parse('{{ overall_avg_data|escapejs|safe }}');
+    </script>
+    <script src="{% static 'js/main/eval_upload/eval_faculty_percnt.js' %}"></script>
+    <script src="{% static 'js/counter.js' %}"></script>
 
-        {
-            name: '1st Sem Students Rating',
-            data: firstSemesterRatings.map(function (item) {
-                return item.avgz_stud_rating;
-            }),
-        },
-
-        {
-            name: '2nd Sem Students Rating',
-            data: secondSemesterRatings.map(function (item) {
-                return item.avgz_stud_rating;
-            }),
-        },
-    ];
-
-    var options = {
-        chart: {
-            type: 'bar',
-            height: 350,
-            zoom: { enabled: false },
-            toolbar: { show: false },
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-            },
-        },
-        colors: [
-            getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
-            getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-            getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
-        ],
-        xaxis: {
-            categories: years,
-            title: {
-                text: 'Academic Year/s',
-            },
-        },
-        yaxis: {
-            title: {
-                text: 'Average Rating',
-            },
-        },
-        series: series,
-    };
-
-    var chart = new ApexCharts(document.querySelector("#chartz"), options);
-    chart.render();
-
-        // Populate the year dropdown
-        var yearDropdown = document.getElementById('yearDropdown');
+    {% comment %} Trends Teaching Effectiveness Over Time {% endcomment %}
+    <script>
+        var combinedData = JSON.parse('{{ chart_data_two|escapejs|safe }}');
+                
+        // Trends in Teaching Effectiveness Over Time
+        var chartStudRating = Object.values(combinedData);
+        var years = chartStudRating.map(item => item.year);
         
-        // Add "Display All" option as the first option
-        var allOption = document.createElement('option');
-            allOption.value = "all";
-            allOption.text = "Display All";
-        yearDropdown.add(allOption);
-
-        // Read the Json data for "Years"
-        years.forEach( year => {
-            var option = document.createElement('option');
-                option.value = year;
-                option.text = year
-            yearDropdown.appendChild(option);
+        var firstSemesterRatings = chartStudRating.map(function (item) {
+            return {
+                'avgz_stud_rating': item.frst_semester_avg.avgz_stud_rating,
+            };
         });
-            
-        // Function to update the chart based on the selected year
-        function updateChart() {
-            var selectedYear = yearDropdown.value; 
-            var filteredYearData = chartStudRating.filter(item => item.year == selectedYear);
 
-            if (selectedYear === "all") {
-                var filteredYearData = chartStudRating;
-            }
-            
-            if (filteredYearData.length > 0) {
-                var filteredSeries = [
-                    {
-                        name: '1st Sem Students Rating',
-                        data: filteredYearData.map(item => item.frst_semester_avg.avgz_stud_rating)
-                    },
-                    
-                    {
-                        name: '2nd Sem Students Rating',
-                        data: filteredYearData.map(item => item.scnd_semester_avg.avgz_stud_rating)
-                    }
-                ];
-                chart.updateOptions({
-                    xaxis: {
-                        categories: filteredYearData.map(item => item.year)
-                    }
-                });
-                chart.updateSeries(filteredSeries);
-            }
-            else {
-                console.error('No data found for the selected year.');
-            }
-        } updateChart();
-        
-        yearDropdown.addEventListener('change', updateChart);
-</script>
+        var secondSemesterRatings = chartStudRating.map(function (item) {
+            return {
+                'avgz_stud_rating': item.scnd_semester_avg.avgz_stud_rating,
+            };
+        });
 
-<script>
-    // Average Student Scores for Each Faculty 
-    var percentage_data = JSON.parse('{{ percentage|safe }}');
-    var percentage_above_3 = percentage_data.pctg_ra3;
-    var percentage_below_3 = percentage_data.pctg_rb3;
+        var series = [
 
-    var options = {
-        series: [percentage_above_3, percentage_below_3],
-        chart: {
-            type: 'pie',
-            height: '400px',
-            width: '400px', 
-        },
-        labels: ['Above 4.0', 'Less/Equal  3.99'],
-        colors: [
-            getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-            getComputedStyle(document.documentElement).getPropertyValue('--vz-warning'),
-        ],
-    };
-    var chart = new ApexCharts(document.querySelector("#prjects-status-1"), options);
-    chart.render();
-</script>
+            {
+                name: '1st Sem Students Rating',
+                data: firstSemesterRatings.map(function (item) {
+                    return item.avgz_stud_rating;
+                }),
+            },
 
-<script>
-    // Average Student Scores for Each Faculty: Count
+            {
+                name: '2nd Sem Students Rating',
+                data: secondSemesterRatings.map(function (item) {
+                    return item.avgz_stud_rating;
+                }),
+            },
+        ];
+
+        var options = {
+            chart: {
+                type: 'bar',
+                height: 350,
+                zoom: { enabled: true },
+                toolbar: { show: false },
+                animations: {
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 1000,
+                },
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                },
+            },
+            colors: [
+                getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
+                getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
+                getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
+            ],
+            xaxis: {
+                categories: years,
+                title: {
+                    text: 'Academic Year/s',
+                },
+            },
+            yaxis: {
+                title: {
+                    text: 'Average Rating',
+                },
+                max: 5
+            },
+            series: series,
+        };
+
+        var re_chart = new ApexCharts(document.querySelector("#chartz"), options);
+
+        if (re_chart == null) {
+            document.querySelector("#chartz").innerHTML = '<p class="text-center" style="margin: 10% 0% !important;">No data available.</p>';
+        }
+        else {
+            re_chart.render();
+
+            var yearDropdown = document.getElementById('yearDropdown');
+
+            var allOption = document.createElement('option');
+                allOption.value = "all";
+                allOption.text = "Display All";
+            yearDropdown.add(allOption);
+
+            years.forEach( years => {
+                var option = document.createElement('option');
+                    option.value = years;
+                    option.text = years
+                yearDropdown.appendChild(option);
+            });
+
+            function updateChart(event) {
+                if (event) {
+                    event.preventDefault();
+                }
+
+                var selectedYear = yearDropdown.value; 
+                var filteredYearData = chartStudRating.filter(item => item.year == selectedYear);
+
+                if (selectedYear == "all") {
+                    var filteredYearData = chartStudRating;
+                }
+                
+                if (filteredYearData.length > 0) {
+                    var filteredSeries = [
+                        {
+                            name: '1st Sem Students Rating',
+                            data: filteredYearData.map(item => item.frst_semester_avg.avgz_stud_rating)
+                        },
+                        
+                        {
+                            name: '2nd Sem Students Rating',
+                            data: filteredYearData.map(item => item.scnd_semester_avg.avgz_stud_rating)
+                        }
+                    ];
     
-    document.addEventListener("DOMContentLoaded", function () {
+                    re_chart.updateOptions({
+                        xaxis: {
+                            categories: filteredYearData.map(item => item.year)
+                        }
+                    });
+                    re_chart.updateSeries(filteredSeries);
+                }
+                else {
+                    console.error('No data found for the selected year.');
+                }
+            }
+
+            var yearDropdown = document.getElementById('yearDropdown');
+            yearDropdown.addEventListener('change', updateChart);
+        }
+    </script>
+    {% comment %} <script src="{% static 'js/main/eval_upload/eval_trends_overt.js' %}"></script> {% endcomment %}
+
+    {% comment %} Average Student Scores for Each Faculty: Pie {% endcomment %}
+    <script>
+        var percentage_data = JSON.parse('{{ percentage|safe }}');
+    </script>
+    <script src="{% static 'js/main/eval_upload/eval_studentscr_pie.js' %}"></script>
+
+    {% comment %} Average Student Scores for Each Faculty {% endcomment %}
+    <script>
         const percentaging = JSON.parse('{{ percentage|escapejs }}');
-        const valueToSetThree = percentaging.count_ra3;
-        const valueToSetFour  = percentaging.count_rb3;
+    </script>
+    <script src="{% static 'js/main/eval_upload/eval_studentscores.js' %}"></script>
 
-        const ra3 = document.getElementById('ra3');
-        ra3.textContent = valueToSetThree;
+    {% comment %} Faculty Evaluation Average Ratings {% endcomment %}
+    <script>
+        var chartDataTwo = JSON.parse('{{ chart_data_two|escapejs|safe }}');
+    </script>
+    <script src="{% static 'js/main/eval_upload/eval_averagerating.js' %}"></script>
 
-        const rb3 = document.getElementById('rb3');
-        rb3.textContent = valueToSetFour;
-    });
-</script>
+
 
 
 {% endblock %}

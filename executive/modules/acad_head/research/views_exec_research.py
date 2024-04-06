@@ -22,24 +22,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 import os, requests
+from executive.api import api_routes
 
 @login_required(login_url='login')
 def rsrch_tracking(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        token_url = os.environ.get('RIS_API_TOKEN')
-        headers = {
-            'Content-Type': 'application/json'
-        }
-        token_response = requests.get(token_url, headers=headers)
-        data = token_response.json()
-        token = data['result']['access_token']
-        api_url = os.environ.get('RIS_API_URLZZ')
-        
-        headers = {
-            'Authorization': f'Bearer {token}'
-        }
-        api_response = requests.get(api_url, headers=headers)
-        ris_api_data = api_response.json()
+        ris_api_data = api_routes.get_ris_api(request)
         return JsonResponse(ris_api_data, safe=False)
     return render(request, 'executive/pages/rsrch_tracking.html')
-

@@ -11,6 +11,7 @@ from .modules.auth.views_logout                                   import custom_
 from .modules.acad_head.dashboard.views_exec_dashboard            import exec_dashboard
 from .modules.acad_head.evaluations.views_exec_evalupload         import evaluations
 from .modules.acad_head.evaluations.views_exec_evaluation         import eval_analytics
+from .modules.acad_head.evaluations.views_exec_eval_list          import eval_list
 from .modules.maintenance.views_comesoon                          import coming_soon
 from .modules.acad_head.profile.views_exec_profilepage            import exec_p_page
 from .modules.acad_head.profile.views_exec_profilesetting         import exec_p_sett
@@ -27,6 +28,11 @@ from .modules.acad_head.research.views_exec_research_analytics    import rsrch_a
 from .modules.acad_head.workload.views_exec_workload              import workload_dat
 from .modules.acad_head.workload.views_exec_workload_analytics    import workload_analytics
 from .modules.acad_head.fac_mgmnt.views_faculty_management        import fac_mgmnt
+from .modules.acad_head.fac_mgmnt.views_faculty_info              import faculty_info
+from .modules.acad_head.fac_mgmnt.views_faculty_rep               import faculty_indiv_report
+from .modules.acad_head.fac_mgmnt.views_faculty_reports           import faculty_mgmt_reports
+from .modules.acad_head.fac_mgmnt.views_faculty_proc_data         import faculty_proc_data
+
 
 # Authentication
 registry
@@ -39,8 +45,11 @@ error_page_500
 
 # Acad_Head
 exec_dashboard
+
+# Teaching Effectiveness
 evaluations
 eval_analytics
+eval_list
 
 # # Profile
 exec_p_page
@@ -50,7 +59,7 @@ exec_p_sett
 rsrch_analytics
 rsrch_tracking
 
-# # Professional Development
+# # Professional Development    
 prdv_wrkshp_att
 prdv_wrkshp_anl
 
@@ -75,103 +84,59 @@ coming_soon
 
 #Faculty Management
 fac_mgmnt
+faculty_info
+faculty_indiv_report
+faculty_mgmt_reports
+faculty_proc_data
 
 # Retention Exit - Eliminated from the System
 # retention_analytics
 # retention_insights
 
-# Faculty - Eliminated from the System
-# fac_analytics
-# fac_contents
-
 # =====================================================================================================
 
-from django.http import JsonResponse
-from executive.models import TableTwo
-from .serializers import TableTwoSerializer
+
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from rest_framework import status
-import requests, os
+from rest_framework.response import Response
+from django.contrib.auth.decorators import login_required
+from executive.config import route_config
+import requests
 
-
+@login_required(login_url='login')
 @api_view(['GET'])
-def testapifrompostmanshit(request, format=None):
-    # try:
-        response = requests.get('https://covid-api.com/api/regions')
-        response.raise_for_status()
-        data = response.json()
-        return Response(data)
-    # except requests.exceptions.RequestException as e:
-        # return Response({'error': str(e)}, status=500)  # Handle errors gracefully
-
-
-@api_view(['GET'])
-def testresearchinfodata(request, format=None):
-    token_url = os.environ.get('RIS_API_TOKEN')
-    headers = {
+def testfacultyinfodata(request):
+    selected_token = route_config.FIS_API_TOKEN
+    fis_token_key = selected_token
+    fis_eval_url = route_config.FIS_API_EVALUATE_URL
+    fis_headers = {
+        'Authorization': 'API Key',
+        'token': fis_token_key,
         'Content-Type': 'application/json'
     }
-    token_response = requests.get(token_url, headers=headers)
-    
-    if token_response.status_code == 200:
-        data = token_response.json()
-        token = data['result']['access_token']
-        api_url = os.environ.get('RIS_API_URLZZ')
-        
-        headers = {
-            'Authorization': f'Bearer {token}'
-        }
-        
-        api_response = requests.get(api_url, headers=headers)
-        
-        if api_response.status_code == 200:
-            ris_api_data = api_response.json()
-            return Response(ris_api_data)
-        else:
-            return Response({'error': f"Failed to access API: {api_response.status_code} - {api_response.text}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    fis_token_response = requests.get(fis_eval_url, headers=fis_headers)
+    if fis_token_response.status_code == 200:
+        fis_api_data = fis_token_response.json()
+        return Response(fis_api_data)
     else:
-        return Response({'error': f"Failed to get token: {token_response.status_code} - {token_response.text}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response({'error': f"Failed to access API: {fis_token_response.status_code} - {fis_token_response.text}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@login_required(login_url='login')
 @api_view(['GET'])
-def testfacultyinfodata(request, format=None):
-    response_two = requests.get('https://pupqcfis-com.onrender.com/api/FISFaculty/Evaluations')
-    response_two.raise_for_status()
-    data_two = response_two.json()
-    return Response(data_two)
+def testresearchinfodata(request, format=None):
+    ris_token = route_config.RIS_API_TOKEN
+    ris_token_key = ris_token
+    ris_rsrch_url = route_config.RIS_API_RESEARCH_URL
+    ris_headers = {
+        'Authorization': f'Bearer {ris_token_key}',
+        'Content-Type'  : 'application/json' 
+    }   
 
-@api_view(['GET', 'POST'])
-def table_list(request, format=None):
-    if request.method == 'GET':
-        table2 = TableTwo.objects.all()
-        serializer = TableTwoSerializer(table2, many=True)
-        return Response(serializer.data)
-        # return JsonResponse(serializer.data, safe=False) # Also, it can set a list into dictionary by using this format {'var': var2.data, safe=False}
-    
-    if request.method == 'POST':
-        serializer = TableTwoSerializer(data=request.data)
-        if serializer.is_valid():           
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    ris_token_response = requests.get(ris_rsrch_url, headers=ris_headers)
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def table2_detail(request, id, format=None):
-    try:
-        tablez = TableTwo.objects.get(pk=id)
-    except TableTwo.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    if ris_token_response.status_code == 200:
+        ris_api_data = ris_token_response.json()
+        return Response(ris_api_data)
+    else:
+        return Response({'error': f"Failed to access API: {ris_token_response.status_code} - {ris_token_response.text}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    if request.method == 'GET':
-        serializer = TableTwoSerializer(tablez)
-        return Response(serializer.data)
-    
-    elif request.method == 'PUT':
-        serializer = TableTwoSerializer(tablez, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == 'DELETE':
-        tablez.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)

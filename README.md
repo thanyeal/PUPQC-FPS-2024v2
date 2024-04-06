@@ -19,7 +19,7 @@ pipenv shell
 3. Install the django itself and it's modules
 
 ```bash
-pip install -r requirements.txt
+pipenv install -r requirements.txt
 ```
 
 4. Run the file
