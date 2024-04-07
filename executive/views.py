@@ -32,8 +32,6 @@ from .modules.acad_head.fac_mgmnt.views_faculty_info              import faculty
 from .modules.acad_head.fac_mgmnt.views_faculty_rep               import faculty_indiv_report
 from .modules.acad_head.fac_mgmnt.views_faculty_reports           import faculty_mgmt_reports
 from .modules.acad_head.fac_mgmnt.views_faculty_proc_data         import faculty_proc_data
-
-
 # Authentication
 registry
 # log_in
@@ -140,3 +138,7 @@ def testresearchinfodata(request, format=None):
     else:
         return Response({'error': f"Failed to access API: {ris_token_response.status_code} - {ris_token_response.text}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+
+from executive.tests import testfunct
+testfunct
