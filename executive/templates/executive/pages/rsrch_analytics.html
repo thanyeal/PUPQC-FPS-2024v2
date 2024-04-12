@@ -63,6 +63,16 @@
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th><input type="text" class="form-control input-sm mt-2" placeholder="Search by Author" id="searchAuthor" value=""></th>
+                                            <th><input type="text" class="form-control input-sm mt-2" placeholder="Search by Research Title" id="searchTitle" value=""></th>
+                                            <th><input type="text" class="form-control input-sm mt-2" placeholder="Search by Publication" id="searchYear" value=""></th>
+                                            <th><input type="text" class="form-control input-sm mt-2" placeholder="Search by Publisher" id="searchPublisher" value=""></th>
+                                            <th><input type="text" class="form-control input-sm mt-2" placeholder="Search by Category" id="searchCategory" value=""></th>
+                                            <th><input type="text" class="form-control input-sm mt-2" placeholder="Search by Author Type" id="searchAuthorType" value=""></th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                             <div class="modal-footer">
@@ -73,8 +83,6 @@
                 </div><!-- /.modal -->
             </div>
         </div>
-
-    <div id="printableArea">
 
         <div class="row mt-n5">
             <div class="col-lg-12">
@@ -90,10 +98,6 @@
 
                         <button class="col-1 btn btn-info btn-icon mb-2" style="margin-right: 1rem !important;" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl">
                             <i class="ri-eye-line"></i>
-                        </button>
-                        <button class="col-1 btn btn-success btn-icon mb-2" onclick="printDiv('printableArea')"> 
-                            <i class="ri-arrow-down-line"></i>
-                        </button>
                     </div>
                     <div class="card-header p-0 border-0 bg-light-subtle">
                         <div class="row g-0 text-center">
@@ -168,26 +172,12 @@
                 </div>
             </div>
         </div>
-
-    </div>
     
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/main/research/rsrch_tracks.js' %}"></script>
     <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
     <script src="{% static 'js/main/research/rsrch_analytics.js' %}"></script>
 
-    <script>
-        function printDiv(divName) {
-            var printWindow = window.open('', '', 'width=1080,height=720');
-            printWindow.document.write('<html><head><title>Faculty Performance System</title></head><body>');
-            printWindow.document.write(document.getElementById(divName).innerHTML);
-            printWindow.document.write('</body>');
-            printWindow.document.close(); // Necessary for IE
-            printWindow.focus();
-            printWindow.print();
-            printWindow.close();
-        }
-    </script>
 
     {% comment %} Average Rating Per Performance Development in Research {% endcomment %}
     <script>
