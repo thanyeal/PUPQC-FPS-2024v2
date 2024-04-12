@@ -32,6 +32,7 @@ from .modules.acad_head.fac_mgmnt.views_faculty_info              import faculty
 from .modules.acad_head.fac_mgmnt.views_faculty_rep               import faculty_indiv_report
 from .modules.acad_head.fac_mgmnt.views_faculty_reports           import faculty_mgmt_reports
 from .modules.acad_head.fac_mgmnt.views_faculty_proc_data         import faculty_proc_data
+
 # Authentication
 registry
 # log_in
