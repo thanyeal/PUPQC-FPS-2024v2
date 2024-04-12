@@ -17,63 +17,47 @@ def faculty_mgmt_reports(request):
         faculty_name_from_ajax = request.POST.get('faculty_name')
         faculty_name = faculty_name_from_ajax
 
-        # current_year = datetime.now().year
-        # academic_years_to_include = [f"{current_year - i}-{current_year - i + 1}" for i in range(4)]
-        # semesters_to_include = ["First", "Second"]
-
-        # faculty_data_dict = defaultdict(lambda: defaultdict(list))
-        # for item in fis_api_data:
-        #     if (faculty_name in item.get('name')
-        #             and item.get('school_year') in academic_years_to_include
-        #             and item.get('semester') in semesters_to_include):
-        #         school_year = item.get('school_year')
-        #         student_calc_percentage = item.get('student_calc_percentage')
-        #         acad_head_ave_percentage = item.get('acad_head_ave_percentage')
-        #         semester = item.get('semester')
-
-        #         faculty_data_dict[school_year][semester].append({
-        #             'Student Percentage': student_calc_percentage,
-        #             'Supervisor Percentage': acad_head_ave_percentage
-        #         })
-
-        # result = []
-        # for academic_year, semesters in faculty_data_dict.items():
-        #     for semester, percentages_list in semesters.items():
-        #         total_student_percentage = sum(entry['Student Percentage'] for entry in percentages_list)
-        #         total_supervisor_percentage = sum(entry['Supervisor Percentage'] for entry in percentages_list)
-        #         num_entries = len(percentages_list)
-        #         if num_entries != 0:
-        #             average_student_percentage = total_student_percentage / num_entries
-        #             average_supervisor_percentage = total_supervisor_percentage / num_entries
-        #         else:
-        #             average_student_percentage = 0
-        #             average_supervisor_percentage = 0
-        #         result.append({
-        #             'Faculty Name': faculty_name,
-        #             'Academic Year': "A.Y.  " + academic_year,
-        #             'Average Student Percentage': average_student_percentage,
-        #             'Average Supervisor Percentage': average_supervisor_percentage,
-        #             'Semester': semester
-        #         })
-
-        # Data
-        data = {
-            # 'LAST NAME'       : faculty_name  ,
-            # 'FIRST NAME, EXT.': 'MyFirstName' ,
-            # 'MIDDLE NAME'     : 'MyLastName'
-            'FULLNAME' : faculty_name
-        }
-        # headers = [
-        #     'Faculty Name' ,
-        #     'Academic Year',
-        #     'Average Student Percentage',
-        #     'Average Supervisor Percentage',
-        #     'Semester'
-        # ]
-        # for col, header in enumerate(headers):
-        #     worksheet.write(0, col, header)
+        current_year = datetime.now().year
+        academic_years_to_include = [f"{current_year - i}-{current_year - i + 1}" for i in range(4)]
 
 
+        semesters_to_include = ["First", "Second"]
+        faculty_data_dict = defaultdict(lambda: defaultdict(list))
+        for item in fis_api_data:
+            if (faculty_name in item.get('name')
+                    and item.get('school_year') in academic_years_to_include
+                    and item.get('semester') in semesters_to_include):
+
+                school_year = item.get('school_year')
+                student_calc_percentage = item.get('student_calc_percentage')
+                acad_head_ave_percentage = item.get('acad_head_ave_percentage')
+                semester = item.get('semester')
+
+                faculty_data_dict[school_year][semester].append({
+                    'Student Percentage': student_calc_percentage,
+                    'Supervisor Percentage': acad_head_ave_percentage
+                })
+
+        result = []
+        for academic_year, semesters in faculty_data_dict.items():
+            for semester, percentages_list in semesters.items():
+                total_student_percentage = sum(entry['Student Percentage'] for entry in percentages_list)
+                total_supervisor_percentage = sum(entry['Supervisor Percentage'] for entry in percentages_list)
+                num_entries = len(percentages_list)
+                if num_entries != 0:
+                    average_student_percentage = round(total_student_percentage / num_entries, 2)
+                    average_supervisor_percentage = round(total_supervisor_percentage / num_entries, 2)
+                else:
+                    average_student_percentage = 0
+                    average_supervisor_percentage = 0
+                result.append({
+                    'Academic Year': academic_year,
+                    'Average Student Percentage': average_student_percentage,
+                    'Average Supervisor Percentage': average_supervisor_percentage,
+                    'Semester': semester
+                })
+        
+        # result = resultz
 
         # Cell Default Styles
         outlines = workbook.add_format({'border': 1})
@@ -123,7 +107,7 @@ def faculty_mgmt_reports(request):
         # worksheet.merge_range('C5:K5', data['MIDDLE NAME'] , row_b_col_b)
 
         worksheet.write('B5', 'FULLNAME' , row_b_col_a)
-        worksheet.merge_range('C5:K5', data['FULLNAME'] , row_b_col_b)
+        worksheet.merge_range('C5:K5', faculty_name , row_b_col_b)
 
 
         worksheet.merge_range('B7:K7', 'CRITERION A - TEACHING EFFECTIVENESS (MAX = 60 POINTS)', row_e)
@@ -133,7 +117,7 @@ def faculty_mgmt_reports(request):
         worksheet.write_rich_string('C8', workbook.add_format({'bold': True}), 'FACULTY PERFORMANCE.', workbook.add_format({'italic': True}), ' Enter average rating received by the faculty/semester. For newly appointed faculty from private HEI, LUCs, TESDA/DepEd schools who still decided to proceed with the evaluation, put "0" in semesters with no student and supervisor\'s evaluation.', row_f_col_b)
         worksheet.conditional_format('B8:K11', {'type': 'no_blanks', 'format': bold_outlines})
 
-        # Student Eval Headers
+# Student Eval Headers
         worksheet.write('B12', '1.1', row_g_col_a)
         worksheet.merge_range('C12:K12', 'STUDENT EVALUATION (60%)', row_g_col_b)
         worksheet.conditional_format('B12:K12', {'type': 'no_blanks', 'format': bold_outlines})
@@ -167,46 +151,73 @@ def faculty_mgmt_reports(request):
         worksheet.merge_range('J16:K16', '< Evidence Link >', row_j_col_b_sub_a_d)
         worksheet.conditional_format('J16:K16', {'type': 'no_blanks', 'format': bold_outlines})
         
-        worksheet.merge_range('B17:C17', 'a) AY 2019-2020', row_k)
-        worksheet.merge_range('B18:C18', 'b) AY 2020-2021', row_k)
-        worksheet.merge_range('B19:C19', 'c) AY 2021-2022', row_k)
-        worksheet.merge_range('B20:C20', 'd) AY 2022-2023', row_k)
+        worksheet.merge_range('B17:C17', 'a) AY 2020-2021', row_k)
+        worksheet.merge_range('B18:C18', 'b) AY 2021-2022', row_k)
+        worksheet.merge_range('B19:C19', 'c) AY 2022-2023', row_k)
+        worksheet.merge_range('B20:C20', 'd) AY 2023-2024', row_k)
         worksheet.conditional_format('B17:C20', {'type': 'no_blanks', 'format': outlines})
 
-        worksheet.merge_range('D17:E17', '0', row_k_datums)
-        worksheet.merge_range('D18:E18', '0', row_k_datums)
-        worksheet.merge_range('D19:E19', '0', row_k_datums)
-        worksheet.merge_range('D20:E20', '0', row_k_datums)
+        # First Sem Values
+        for entry in result:
+            academic_year = entry["Academic Year"]
+            semester = entry["Semester"]
+            student_percentage = entry["Average Student Percentage"]
+            
+            if semester == 'First':
+                if academic_year == '2020-2021':
+                    worksheet.merge_range('D17:E17', student_percentage or '0', row_k_datums)
+                elif academic_year == '2021-2022':
+                    worksheet.merge_range('D18:E18', student_percentage or '0', row_k_datums)
+                elif academic_year == '2022-2023':
+                    worksheet.merge_range('D19:E19', student_percentage or '0', row_k_datums)
+                elif academic_year == '2023-2024':
+                    worksheet.merge_range('D20:E20', student_percentage or '0', row_k_datums)
         worksheet.conditional_format('D17:E20', {'type': 'no_blanks', 'format': outlines})
-
+        # First Sem Evidence Link
         worksheet.merge_range('F17:G17', '<>', row_k_datums)
         worksheet.merge_range('F18:G18', '<>', row_k_datums)
         worksheet.merge_range('F19:G19', '<>', row_k_datums)
         worksheet.merge_range('F20:G20', '<>', row_k_datums)
         worksheet.conditional_format('F17:G20', {'type': 'no_blanks', 'format': outlines})
-
-        worksheet.merge_range('H17:I17', '0', row_k_datums)
-        worksheet.merge_range('H18:I18', '0', row_k_datums)
-        worksheet.merge_range('H19:I19', '0', row_k_datums)
-        worksheet.merge_range('H20:I20', '0', row_k_datums)
+        # Second Sem Values
+        for entry in result:
+            academic_year = entry["Academic Year"]
+            semester = entry["Semester"]
+            student_percentage = entry["Average Student Percentage"]
+            
+            if semester == 'Second':
+                if academic_year == '2020-2021':
+                    worksheet.merge_range('H17:I17', student_percentage or '0', row_k_datums)
+                elif academic_year == '2021-2022':
+                    worksheet.merge_range('H18:I18', student_percentage or '0', row_k_datums)
+                elif academic_year == '2022-2023':
+                    worksheet.merge_range('H19:I19', student_percentage or '0', row_k_datums)
+                elif academic_year == '2023-2024':
+                    worksheet.merge_range('H20:I20', student_percentage or '0', row_k_datums)
         worksheet.conditional_format('H17:I20', {'type': 'no_blanks', 'format': outlines})
-
+        # Second Sem Evidence Link
         worksheet.merge_range('J17:K17', '<>', row_k_datums)
         worksheet.merge_range('J18:K18', '<>', row_k_datums)
         worksheet.merge_range('J19:K19', '<>', row_k_datums)
         worksheet.merge_range('J20:K20', '<>', row_k_datums)
         worksheet.conditional_format('J17:K20', {'type': 'no_blanks', 'format': outlines})
-
+        # Student Rate: Overall Average Rating
         worksheet.merge_range('B21:I21', 'OVERALL AVERAGE RATING', row_l)
-        worksheet.merge_range('J21:K21', '0', row_l)
+        student_rating_percentages = [entry['Average Student Percentage'] for entry in result]
+        sr_overall_average = sum(student_rating_percentages) / len(student_rating_percentages)
+        worksheet.merge_range('J21:K21', sr_overall_average or '0', row_l)
+        # Student Rate: Faculty Score
         worksheet.merge_range('B22:I22', 'FACULTY SCORE', row_l)
-        worksheet.merge_range('J22:K22', '0', row_l)
+        sr_score = sr_overall_average * 0.36
+        sr_final_score = round(sr_score, 2)
+        worksheet.merge_range('J22:K22', sr_final_score or '0', row_l)
+
         worksheet.conditional_format('B21:I21', {'type': 'no_blanks', 'format': bold_outlines})
         worksheet.conditional_format('J21:K21', {'type': 'no_blanks', 'format': bold_outlines})
         worksheet.conditional_format('B22:I22', {'type': 'no_blanks', 'format': bold_outlines})
         worksheet.conditional_format('J22:K22', {'type': 'no_blanks', 'format': bold_outlines})
         
-        # Supervisor Eval Headers
+# Supervisor Eval Headers
         worksheet.write('B24', '1.2', row_g_col_a)
         worksheet.merge_range('C24:K24', "SUPERVISOR'S EVALUATION (40%)", row_g_col_b)
         worksheet.conditional_format('B24:K24', {'type': 'no_blanks', 'format': bold_outlines})
@@ -240,40 +251,65 @@ def faculty_mgmt_reports(request):
         worksheet.merge_range('J28:K28', '< Evidence Link >', row_j_col_b_sub_a_d)
         worksheet.conditional_format('J28:K28', {'type': 'no_blanks', 'format': bold_outlines})
         
-        worksheet.merge_range('B29:C29', 'a) AY 2019-2020', row_k)
-        worksheet.merge_range('B30:C30', 'b) AY 2020-2021', row_k)
-        worksheet.merge_range('B31:C31', 'c) AY 2021-2022', row_k)
-        worksheet.merge_range('B32:C32', 'd) AY 2022-2023', row_k)
+        worksheet.merge_range('B29:C29', 'a) AY 2020-2021', row_k)
+        worksheet.merge_range('B30:C30', 'b) AY 2021-2022', row_k)
+        worksheet.merge_range('B31:C31', 'c) AY 2022-2023', row_k)
+        worksheet.merge_range('B32:C32', 'd) AY 2023-2024', row_k)
         worksheet.conditional_format('B29:C32', {'type': 'no_blanks', 'format': outlines})
-
-        worksheet.merge_range('D29:E29', '0', row_k_datums)
-        worksheet.merge_range('D30:E30', '0', row_k_datums)
-        worksheet.merge_range('D31:E31', '0', row_k_datums)
-        worksheet.merge_range('D32:E32', '0', row_k_datums)
+        # First Sem Values
+        for entry in result:
+            academic_year = entry["Academic Year"]
+            semester = entry["Semester"]
+            supervisor_percentage = entry["Average Supervisor Percentage"]
+            
+            if semester == 'First':
+                if academic_year == '2020-2021':
+                    worksheet.merge_range('D29:E29', supervisor_percentage or '0', row_k_datums)
+                elif academic_year == '2021-2022':
+                    worksheet.merge_range('D30:E30', supervisor_percentage or '0', row_k_datums)
+                elif academic_year == '2022-2023':
+                    worksheet.merge_range('D31:E31', supervisor_percentage or '0', row_k_datums)
+                elif academic_year == '2023-2024':
+                    worksheet.merge_range('D32:E32', supervisor_percentage or '0', row_k_datums)
         worksheet.conditional_format('D29:E32', {'type': 'no_blanks', 'format': outlines})
-
+        # First Sem Evidence Link
         worksheet.merge_range('F29:G29', '<>', row_k_datums)
         worksheet.merge_range('F30:G30', '<>', row_k_datums)
         worksheet.merge_range('F31:G31', '<>', row_k_datums)
         worksheet.merge_range('F32:G32', '<>', row_k_datums)
         worksheet.conditional_format('F29:G32', {'type': 'no_blanks', 'format': outlines})
-
-        worksheet.merge_range('H29:I29', '0', row_k_datums)
-        worksheet.merge_range('H30:I30', '0', row_k_datums)
-        worksheet.merge_range('H31:I31', '0', row_k_datums)
-        worksheet.merge_range('H32:I32', '0', row_k_datums)
+        # Second Sem Values
+        for entry in result:
+            academic_year = entry["Academic Year"]
+            semester = entry["Semester"]
+            supervisor_percentage = entry["Average Supervisor Percentage"]
+            if semester == 'Second':
+                if academic_year == '2020-2021':
+                    worksheet.merge_range('H29:I29', supervisor_percentage or '0', row_k_datums)
+                elif academic_year == '2021-2022':
+                    worksheet.merge_range('H30:I30', supervisor_percentage or '0', row_k_datums)
+                elif academic_year == '2022-2023':
+                    worksheet.merge_range('H31:I31', supervisor_percentage or '0', row_k_datums)
+                elif academic_year == '2023-2024':
+                    worksheet.merge_range('H32:I32', supervisor_percentage or '0', row_k_datums)
         worksheet.conditional_format('H29:I32', {'type': 'no_blanks', 'format': outlines})
-
+        # Second Sem Evidence Link
         worksheet.merge_range('J29:K29', '<>', row_k_datums)
         worksheet.merge_range('J30:K30', '<>', row_k_datums)
         worksheet.merge_range('J31:K31', '<>', row_k_datums)
         worksheet.merge_range('J32:K32', '<>', row_k_datums)
         worksheet.conditional_format('J29:K32', {'type': 'no_blanks', 'format': outlines})
-
+        # Supervisor Rate: Overall Average Rating
         worksheet.merge_range('B33:I33', 'OVERALL AVERAGE RATING', row_l)
-        worksheet.merge_range('J33:K33', '0', row_l)
+        supervisor_rating_percentages = [entry['Average Supervisor Percentage'] for entry in result]
+        spr_overall_average = sum(supervisor_rating_percentages) / len(supervisor_rating_percentages)
+        worksheet.merge_range('J33:K33', spr_overall_average or '0', row_l)
+        # Supervisor Rate: Faculty Score
         worksheet.merge_range('B34:I34', 'FACULTY SCORE', row_l)
-        worksheet.merge_range('J34:K34', '0', row_l)
+        spr_score = spr_overall_average * 0.36
+        spr_final_score = round(spr_score, 2)
+        worksheet.merge_range('J34:K34', spr_final_score or '0', row_l)
+
         worksheet.conditional_format('B33:I33', {'type': 'no_blanks', 'format': bold_outlines})
         worksheet.conditional_format('J33:K33', {'type': 'no_blanks', 'format': bold_outlines})
         worksheet.conditional_format('B34:I34', {'type': 'no_blanks', 'format': bold_outlines})
@@ -290,11 +326,16 @@ def faculty_mgmt_reports(request):
 
         try:
             workbook.close()
+
+            faculty_name_for_filename = faculty_name.replace(',', '').replace('.', '').replace(' ', '_')
+            filename = f"PUP-ISS_{faculty_name_for_filename}.xlsx"
+
             response = HttpResponse(output.getvalue(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-            response['Content-Disposition'] = 'attachment; filename=testtest.xlsx'
+            response['Content-Disposition'] = f'attachment; filename={filename}'
             return response
         except Exception as e:
             return HttpResponse("Error generating report: {}".format(str(e)), status=500)
+
 
     else:
         return HttpResponse("Method Not Allowed", status=405)

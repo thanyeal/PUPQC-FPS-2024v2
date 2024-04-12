@@ -71,5 +71,7 @@ urlpatterns = [
 
     path('ris/', views.testresearchinfodata),
     path('fis/', views.testfacultyinfodata),
+
+    path('testpage', views.testfunct),
 ]
 

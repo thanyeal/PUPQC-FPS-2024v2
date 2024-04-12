@@ -67,3 +67,16 @@ from django.test import TestCase
 # ('Ernesto J. Odpaga Jr.'			, 'Part-time', 'Bachelor of Science in Information Technology'			, 'Part-time-Instructor'),
 # ('Jose Gil C. Pineda'				, 'Part-time', 'Master in Business Administration'						, 'Part-time-Instructor'),
 # ('Maricar O. Soberano'				, 'Part-time', 'Bachelor of Business Education'							, 'Part-time-Instructor');
+
+
+
+from django.http import JsonResponse, HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
+@login_required(login_url='login')
+def testfunct(request):
+    return render(request, 'testpage.html')
+
+
+

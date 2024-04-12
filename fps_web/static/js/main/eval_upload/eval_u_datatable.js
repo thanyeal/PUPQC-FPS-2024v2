@@ -1,5 +1,10 @@
 $(document).ready(function () {
-    $('#datatable').DataTable({
+    var dataTable = $('#datatable').DataTable({
+        "processing": true,
+        "searching": true,
+        "paging": true,
+        "lengthChange": true,
+        "ordering": true,
         "ajax": {
             "url": "eval_list",
             "dataSrc": ""
@@ -17,11 +22,13 @@ $(document).ready(function () {
             { "data": "semester" },
             { "data": "school_year" },
         ]
-        //"pageLength": 25
     });
 
-    // Check if the table has no data
+    $('#searchFaculty, #searchSvRating, #searchStRating, #searchPeerRating, #searchSelfRating, #searchSemesters, #searchAcadYear').on('keyup', function () {
+        dataTable.column($(this).parent().index() + ':visible').search(this.value).draw();
+    });
+
     if (dataTable.data().count() === 0) {
-        $('#datatable tbody').html('<tr><td colspan="9">There is currently no data in the database.</td></tr>');
+        $('#datatable tbody').html('<tr><td colspan="9"><center>There is currently no data in the database.</center></td></tr>');
     }
 });

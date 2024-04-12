@@ -7,7 +7,7 @@ from datetime import datetime
 @login_required(login_url='login')
 def faculty_proc_data(request):
     fis_api_data = faculty_indiv_report(request)
-    faculty_name = "Fernandez, Alma A."
+    faculty_name = "Avena, Ian E."
 
     current_year = datetime.now().year
     academic_years_to_include = [f"{current_year - i}-{current_year - i + 1}" for i in range(4)]
@@ -37,20 +37,21 @@ def faculty_proc_data(request):
             total_supervisor_percentage = sum(entry['Supervisor Percentage'] for entry in percentages_list)
             num_entries = len(percentages_list)
             if num_entries != 0:
-                average_student_percentage = total_student_percentage / num_entries
-                average_supervisor_percentage = total_supervisor_percentage / num_entries
+                average_student_percentage = round(total_student_percentage / num_entries, 2)
+                average_supervisor_percentage = round(total_supervisor_percentage / num_entries, 2)
             else:
                 average_student_percentage = 0
                 average_supervisor_percentage = 0
             result.append({
-                'Faculty Name': faculty_name,
-                'Academic Year': "A.Y.  " + academic_year,
+                'FULLNAME': faculty_name,
+                'Academic Year': academic_year,
                 'Average Student Percentage': average_student_percentage,
                 'Average Supervisor Percentage': average_supervisor_percentage,
                 'Semester': semester
             })
 
-    return (result) #JsonResponse(result, safe=False)
+    #return (result)
+    return JsonResponse(result, safe=False)
 
 
 
