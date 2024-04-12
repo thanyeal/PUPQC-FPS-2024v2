@@ -1,5 +1,10 @@
 $(document).ready(function () {
-    $('#rsrch_dtble').DataTable({
+    var dataTable = $('#rsrch_dtble').DataTable({
+        "processing": true,
+        "searching": true,
+        "paging": true,
+        "lengthChange": true,
+        "ordering": true,
         "ajax": {
             "url": "rsrch_tracking",
             "dataSrc": ""
@@ -13,11 +18,13 @@ $(document).ready(function () {
             { "data": "Author Type" }
 
         ]
-        //"pageLength": 25
     });
 
-    // Check if the table has no data
+    $('#searchAuthor, #searchTitle, #searchYear, #searchPublisher, #searchCategory, #searchAuthorType').on('keyup', function () {
+        dataTable.column($(this).parent().index() + ':visible').search(this.value).draw();
+    });
+
     if (dataTable.data().count() === 0) {
-        $('#rsrch_dtble tbody').html('<tr><td colspan="9">There is currently no data in the database.</td></tr>');
+        $('#rsrch_dtble tbody').html('<tr><td colspan="9"><center>There is currently no data in the database.</center></td></tr>');
     }
 });
