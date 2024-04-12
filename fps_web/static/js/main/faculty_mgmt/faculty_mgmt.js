@@ -2,12 +2,13 @@ function getCSRFToken() {
     var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
     return csrfToken;
 }
-
 $(document).ready(function () {
-    $('#fac_dtble').DataTable({
-        // "processing": true,
-        // "serverSide": true,
-
+    var dataTable = $('#fac_dtble').DataTable({
+        "processing": true,
+        "searching": true,
+        "paging": true,
+        "lengthChange": true,
+        "ordering": true,
         "ajax": {
             "url": "faculty_info",
             "dataSrc": ""
@@ -27,10 +28,17 @@ $(document).ready(function () {
             { targets: [3], orderable: false }
         ]
     });
+
+    $('#searchName, #searchType, #searchRank').on('keyup', function () {
+        dataTable.column($(this).parent().index() + ':visible').search(this.value).draw();
+    });
+
     if (dataTable.data().count() === 0) {
-        $('#fac_dtble tbody').html('<tr><td colspan="9">There is currently no data in the database.</td></tr>');
+        $('#fac_dtble tbody').html('<tr><td colspan="9"><center>There is currently no data in the database.</center></td></tr>');
     }
 });
+
+
 
 var faculty_chart;
 var rsrch_chart;
