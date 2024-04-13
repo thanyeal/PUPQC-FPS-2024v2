@@ -139,6 +139,8 @@ def eval_analytics(request):
         'count_rb3': count_rb3
     }
     
+    state = 'active'
+    serialized_state = json.dumps(state)
     serialized_data_two      = json.dumps(ave_per_cattz)
     serialized_overall_avg   = json.dumps(overall_avg_dict)
     serialized_prctg_rating  = json.dumps(two_ratings)
@@ -148,7 +150,8 @@ def eval_analytics(request):
         'chart_data_two'    : serialized_data_two       ,
         'overall_avg_data'  : serialized_overall_avg    ,
         'combined_data'     : serialized_persem         ,
-        'percentage'        : serialized_prctg_rating
+        'percentage'        : serialized_prctg_rating,
+        'requestz': serialized_state
     }
     #return JsonResponse(context, safe=False)
     return render(request, 'executive/pages/eval_analytics.html', context)

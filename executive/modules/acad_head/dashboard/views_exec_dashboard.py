@@ -67,11 +67,16 @@ def exec_dashboard(request):
         first_name = "" 
 
     serialized_first_name = json.dumps(first_name)
+
+    state = 'active'
+    serialized_state = json.dumps(state)
+
     context = {
         'total_research_papers'     : serialized_grouped_counted ,
         'percent_research_papers'   : serialized_percentage_data ,
         'first_name'    : serialized_first_name     ,
         'percentage'    : serialized_prctg_rating   ,
         'response_call' : serialized_response       ,
+        'requestz': serialized_state, 
     }
     return render(request, 'executive/exec_dashboard.html', context)

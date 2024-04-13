@@ -5,6 +5,7 @@ from executive.api import api_routes
 from executive.modules.acad_head.fac_mgmnt.views_faculty_rep import faculty_indiv_report
 from executive.modules.acad_head.fac_mgmnt.views_faculty_inf_route import faculty_info_route
 from executive.modules.acad_head.evaluations.views_exec_evalupload import evaluations
+import json, requests
 
 @login_required(login_url='login')
 def fac_mgmnt(request):
@@ -95,8 +96,14 @@ def fac_mgmnt(request):
 
         })
 
+    
     else:
-        return render(request, 'executive/pages/fac_mgmnt.html')
+        state = 'active'
+        serialized_state = json.dumps(state)
+        context = {
+            'requestz': serialized_state,
+        }
+        return render(request, 'executive/pages/fac_mgmnt.html', context)
     
 
 # specific_year = 2021  # Replace with the desired year

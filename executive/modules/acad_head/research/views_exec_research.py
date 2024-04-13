@@ -16,7 +16,7 @@
 
 from django.shortcuts import render
 from django.http import JsonResponse
-from executive.models import TableFour
+# from executive.models import TableFour
 from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import api_view
 from rest_framework.response import Response

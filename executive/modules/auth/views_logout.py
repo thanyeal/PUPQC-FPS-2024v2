@@ -6,5 +6,5 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def custom_logout(request):
     logout(request)
-    # Redirect to the login page after logout
-    return redirect(reverse('login'))
+    next_url = reverse('login') + '?next=logout'
+    return redirect(next_url)

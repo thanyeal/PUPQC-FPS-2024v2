@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from executive.views import CustomLoginView
+# from executive.views import CustomLogoutView
 from django.contrib.auth import views as auth_views
 from .validate import EmailValidation, PasswValidation, LogEmailValidation, LogPasswValidation, LastnameValidation, FirstnameValidation, UsernameValidation
 from django.views.decorators.csrf import csrf_exempt
@@ -57,7 +59,7 @@ urlpatterns = [
 
     # for log and reg page
     path('registry/'        , views.registry        , name="registry"   ),
-    path('login'   , auth_views.LoginView.as_view() , name="login"      ),
+    path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', views.custom_logout, name='logout'),
 
     # for validation view for labels in the form

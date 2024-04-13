@@ -6,6 +6,7 @@ from rest_framework import status
 import os, requests, json
 from datetime import date
 from executive.api import api_routes
+import json
 
     # return render(request, 'executive/pages/rsrch_analytics.html')
 
@@ -100,6 +101,10 @@ def rsrch_analytics(request):
         slrzd_lowest_year        = json.dumps(   lowest_year       )
         slrzd_totalresearch      = json.dumps(   totalresearch     )
 
+    
+    
+    state = 'active'
+    serialized_state = json.dumps(state)
     context = {
         'Categories'            : slrzd_rsrch_categories    ,
         'Grouped Data'          : slrzd_grouped_data        ,
@@ -110,6 +115,7 @@ def rsrch_analytics(request):
         'js_lowest_year'        : slrzd_lowest_year         ,
         'js_totalresearch'      : slrzd_totalresearch       ,
         'response_call'         : serialized_response       ,
+        'requestz'              : serialized_state          ,
     }
 
     #return JsonResponse(context, safe=False)

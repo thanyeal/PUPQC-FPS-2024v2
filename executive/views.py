@@ -1,9 +1,3 @@
-# from .modules.acad_head.feedbacks.views_exec_feedback_comms       import fac_contents
-# from .modules.acad_head.feedbacks.views_exec_feedback_analytics   import fac_analytics
-# from .modules.acad_head.retention_exits.views_exec_rt_anl         import retention_analytics
-# from .modules.acad_head.retention_exits.views_exec_rt_ins         import retention_insights
-
-
 from .modules.error_pages.views_error_404                         import error_page_404
 from .modules.error_pages.views_error_500                         import error_page_500
 from .modules.auth.views_registry                                 import registry
@@ -32,10 +26,11 @@ from .modules.acad_head.fac_mgmnt.views_faculty_info              import faculty
 from .modules.acad_head.fac_mgmnt.views_faculty_rep               import faculty_indiv_report
 from .modules.acad_head.fac_mgmnt.views_faculty_reports           import faculty_mgmt_reports
 from .modules.acad_head.fac_mgmnt.views_faculty_proc_data         import faculty_proc_data
+from .modules.auth.views_login                                    import CustomLoginView
 
 # Authentication
+CustomLoginView
 registry
-# log_in
 custom_logout
 
 # Errors
