@@ -3,6 +3,7 @@
 {% load static %}
 {% block content %}
 
+
 <style>
     .breadcrumb-item + .breadcrumb-item::before {
         content: "/" !important;
@@ -128,6 +129,7 @@
         </div>
     </div>
     <div class="row">   
+
         <div class="col-lg-6">
             <div class="card card-height-100">
                 <div class="card-header align-items-center d-flex">
@@ -351,6 +353,7 @@
     <script>
         var percentage_data = JSON.parse('{{ percentage|safe }}');
     </script>
+    
     <script src="{% static 'js/main/eval_upload/eval_studentscr_pie.js' %}"></script>
 
     <script>
@@ -412,4 +415,5 @@
         };
     </script>
     
-{% endblock %} 
+
+    {% endblock %} 

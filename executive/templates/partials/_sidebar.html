@@ -54,6 +54,12 @@
 
 </style>
 
+<style>
+    .navbar-menu .navbar-nav .nav-link.active {
+        color: #660000 !important;
+    }
+</style>
+
 <!-- LOGO -->
 <div class="navbar-brand-box">
     <!-- Dark Logo-->
@@ -89,16 +95,16 @@
             <li class="menu-title"><i class="ri-more-fill"></i><span data-key="t-menu">Performance Analytics</span></li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url 'exec_dashboard' %}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                <a id="dashboard-tag" class="nav-link menu-link" href="{% url 'exec_dashboard' %}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                     <i class="ri-dashboard-fill"></i> <span data-key="t-dashboards" class="span-text-title">Dashboard</span>
                 </a>
-            </li>
+            </li> 
 
             <!-- faculty profile mgmt  -->
             <li class="menu-title"><i class="ri-more-fill"></i><span data-key="t-menu">Faculty Performance</span></li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url 'fac_mgmnt' %}" role="button" aria-expanded="false" aria-controls="sidebar_facultyInfo">
+                <a id="facultyMgmt-tag" class="nav-link menu-link" href="{% url 'fac_mgmnt' %}" role="button" aria-expanded="false" aria-controls="sidebar_facultyInfo">
                     <i class="ri-shield-user-line"></i> <span class="span-text-title" data-key="t-apps">Faculty Management</span>
                 </a>
             </li>
@@ -106,7 +112,7 @@
             <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Faculty Components</span></li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url 'eval_analytics' %}" {% comment %}data-bs-toggle="collapse"{% endcomment %} role="button" aria-expanded="false" aria-controls="#">
+                <a id="facultyEval-tag" class="nav-link menu-link" href="{% url 'eval_analytics' %}" {% comment %}data-bs-toggle="collapse"{% endcomment %} role="button" aria-expanded="false" aria-controls="#">
                     <i class="ri-chat-smile-3-line"></i> <span class="span-text-title" data-key="t-authentication">Evaluations</span>
                 </a>
                 {% comment %}
@@ -129,7 +135,7 @@
 
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url "rsrch_analytics" %}" {% comment %}  href="{% url 'rsrch_analytics' %}" data-bs-toggle="collapse"{% endcomment %} role="button" aria-expanded="false" aria-controls="#">
+                <a id="facultyResearch-tag" class="nav-link menu-link" href="{% url 'rsrch_analytics' %}" {% comment %}  href="{% url 'rsrch_analytics' %}" data-bs-toggle="collapse"{% endcomment %} role="button" aria-expanded="false" aria-controls="#">
                     <i class="ri-book-open-fill"></i> <span class="span-text-title" data-key="t-authentication">Research and Publications</span>
                 </a>
                 {% comment %}
@@ -232,8 +238,8 @@
                 
             </li>
             {% endcomment %}
-            {% comment %}
 
+            {% comment %}
             <li class="nav-item">
                 <a class="nav-link menu-link" href="{% url 'alm_analytics' %}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI1">
                     <i class="ri-walk-line"></i> <span class="span-text-title">Leave Management</span>
@@ -256,3 +262,57 @@
     </div>
     <!-- Sidebar -->
 </div>
+
+<script>
+    var active_request = JSON.parse('{{ requestz|safe }}');
+    var currentURL = window.location.href;
+    var urlsToCheck = ["{% url 'exec_dashboard' %}", "{% url 'fac_mgmnt' %}", "{% url 'eval_analytics' %}", "{% url 'rsrch_analytics' %}"];
+
+    urlsToCheck.forEach(function(urlToCheck) {
+        var elementId = "";
+        if (currentURL.includes(urlToCheck)) {
+            if (urlToCheck === "{% url 'exec_dashboard' %}") {
+                elementId = "dashboard-tag";
+            } 
+            else if (urlToCheck === "{% url 'fac_mgmnt' %}") {
+                elementId = "facultyMgmt-tag";
+            }
+            else if (urlToCheck === "{% url 'eval_analytics' %}") {
+                elementId = "facultyEval-tag";
+            }
+            else if (urlToCheck === "{% url 'rsrch_analytics' %}") {
+                elementId = "facultyResearch-tag";
+            }
+
+            var element = document.getElementById(elementId);
+            if (element) {
+                if (!element.classList.contains(active_request)) {
+                    element.classList.add(active_request);
+                }
+            }
+        } 
+        
+        else {
+            if (urlToCheck === "{% url 'exec_dashboard' %}") {
+                elementId = "dashboard-tag";
+            } 
+            else if (urlToCheck === "{% url 'fac_mgmnt' %}") {
+                elementId = "facultyMgmt-tag";
+            }
+            else if (urlToCheck === "{% url 'eval_analytics' %}") {
+                elementId = "facultyEval-tag";
+            }
+            else if (urlToCheck === "{% url 'rsrch_analytics' %}") {
+                elementId = "facultyResearch-tag";
+            }
+
+            var element = document.getElementById(elementId);
+            if (element) {
+                if (element.classList.contains(active_request)) {
+                    element.classList.remove(active_request);
+                }
+            }
+        }
+    });
+</script>
+
