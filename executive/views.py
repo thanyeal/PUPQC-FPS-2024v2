@@ -9,7 +9,8 @@ from .modules.acad_head.evaluations.views_exec_eval_list          import eval_li
 from .modules.maintenance.views_comesoon                          import coming_soon
 from .modules.acad_head.profile.views_exec_profilepage            import exec_p_page
 from .modules.acad_head.profile.views_exec_profilesetting         import exec_p_sett
-from .modules.acad_head.pro_dev.views_exec_prodev                 import prdv_wrkshp_att
+from .modules.acad_head.pro_dev.views_exec_prodev                 import prodev_attendance
+from .modules.acad_head.pro_dev.views_exec_prodev_program_types   import prodev_program_type
 from .modules.acad_head.pro_dev.views_exec_prodev_analytics       import prdv_wrkshp_anl
 from .modules.acad_head.attend_leave.views_exec_alm_leaves        import alm_leaves_rec
 from .modules.acad_head.attend_leave.views_exec_alm_analytics     import alm_analytics
@@ -54,7 +55,8 @@ rsrch_analytics
 rsrch_tracking
 
 # # Professional Development    
-prdv_wrkshp_att
+prodev_attendance
+prodev_program_type
 prdv_wrkshp_anl
 
 # # Attendance Leave Management

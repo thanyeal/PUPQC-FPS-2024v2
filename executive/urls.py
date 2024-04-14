@@ -22,7 +22,8 @@ urlpatterns = [
     path('exec_profile'     , views.exec_p_page     , name="exec_profile"   ),
     path('exec_settings'    , views.exec_p_sett     , name="exec_settings"  ),
 
-    path('prodev_attendance', views.prdv_wrkshp_att   , name="prodev_attendance" ),
+    path('prodev_attendance', views.prodev_attendance   , name="prodev_attendance" ),
+    path('prodev_program_type', views.prodev_program_type   , name="prodev_program_type" ),
     path('prodev_analytics' , views.prdv_wrkshp_anl   , name="prodev_analytics"  ),
 
     path('attendance_leaves', views.alm_leaves_rec    , name="attendance_leaves" ),

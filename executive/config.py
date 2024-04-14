@@ -43,6 +43,15 @@ class route_config:
         return cls.FIS_API_FACULTY
     def get_fis_fac_token(cls):
         return cls.FIS_API_FACULTY_TOKEN
+    
+    #Faculty Information System: Professional Developments
+    FIS_API_PRODEV          = "https://pupqcfis-com.onrender.com/api/FISFaculty/Professional-Development"
+    FIS_API_PRODEV_TOKEN    = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJrZXkiOiJjNmYzMDFjZTg3OWE0M2YwOWMyZWYyZjUzODk1YjY1OSJ9.L0Xs2-s2hAhnOuUEyciVLPHOHDtH3OAeC_UgoMP3X64"
+    @classmethod
+    def get_fis_prodev(cls):
+        return cls.FIS_API_PRODEV
+    def get_fis_prodev_token(cls):
+        return cls.FIS_API_PRODEV_TOKEN
 
 
     # Extension Services Information System
