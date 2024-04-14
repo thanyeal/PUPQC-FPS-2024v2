@@ -12,19 +12,6 @@ else if (base_response == 1) {
             type: "bar",
             zoom: { enabled: false },
             toolbar: { show: false },
-            animations: {
-                enabled: true,
-                easing: 'easeinout',
-                speed: 1000,
-                animateGradually: {
-                    enabled: true,
-                    delay: 150
-                },
-                dynamicAnimation: {
-                    enabled: true,
-                    speed: 350
-                }
-            },
         },
         
         colors: [
@@ -64,6 +51,7 @@ else if (base_response == 1) {
     }
     var rsrch_chart = new ApexCharts(document.querySelector('#rsrch_counts'), options);
     rsrch_chart.render();
+
     
     // Create and populate the dropdown
     var yearFilterDropdown = document.getElementById('rsrch_year_filter');
