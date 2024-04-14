@@ -155,12 +155,13 @@
                     </div>
                 {% endcomment %}
             </li>
-            
+
+            {% comment %}
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url "error_page_404" %}" {% comment %} href="{% url 'awards_analytics' %}" data-bs-toggle="collapse" {% endcomment %} role="button" aria-expanded="false" aria-controls="sidebar_proAwards">
+                <a class="nav-link menu-link" href="{% url "error_page_404" %}" role="button" aria-expanded="false" aria-controls="sidebar_proAwards">
                     <i class="ri-medal-line"></i> <span class="span-text-title" data-key="t-pages">Awards and Recognition</span>
                 </a>
-                {% comment %}
+                
                     <div class="collapse menu-dropdown" id="sidebar_proAwards">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
@@ -175,14 +176,15 @@
                             </li>
                         </ul>
                     </div>
-                {% endcomment %}
+                
             </li>
-            
+            {% endcomment %}
+
+            {% comment %}
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url "error_page_404" %}" {% comment %}  href="{% url 'mrt_analytics' %}" data-bs-toggle="collapse" {% endcomment %}role="button" aria-expanded="false" aria-controls="#">
+                <a class="nav-link menu-link" href="{% url "error_page_404" %}" role="button" aria-expanded="false" aria-controls="#">
                     <i class="ri-shield-cross-line"></i> <span class="span-text-title" data-key="t-base-ui">Merit & Promotion</span>
                 </a>
-                {% comment %}
                     <div class="collapse menu-dropdown" id="sidebarUI">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
@@ -193,12 +195,11 @@
                             </li>
                         </ul>
                     </div>
-                {% endcomment %}
-            </li>
-            
-            
+            </li> 
+            {% endcomment %}
+
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url "error_page_404" %}" {% comment %} href="{% url 'prodev_analytics' %}" data-bs-toggle="collapse" {% endcomment %} role="button" aria-expanded="false" aria-controls="sidebar_proTraining">
+                <a id="facultyProdev-tag" class="nav-link menu-link" href="{% url 'prodev_analytics' %}" role="button" aria-expanded="false" aria-controls="sidebar_proTraining">
                     <i class="ri-user-settings-line"></i> <span class="span-text-title" data-key="t-pages">Professional Development</span>
                 </a>
                 {% comment %}
@@ -219,6 +220,13 @@
                 {% endcomment %}
             </li>
             
+
+            <li class="nav-item">
+                <a class="nav-link menu-link" href="{% url "error_page_404" %}" role="button" aria-expanded="false" aria-controls="sidebar_proAwards">
+                    <i class="ri-medal-line"></i> <span class="span-text-title" data-key="t-pages">Performance Ranking</span>
+                </a>
+            </li>
+
             {% comment %}
             <li class="nav-item">
                 <a class="nav-link menu-link" href="{% url 'workload_analytics' %}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="#">
@@ -266,7 +274,7 @@
 <script>
     var active_request = JSON.parse('{{ requestz|safe }}');
     var currentURL = window.location.href;
-    var urlsToCheck = ["{% url 'exec_dashboard' %}", "{% url 'fac_mgmnt' %}", "{% url 'eval_analytics' %}", "{% url 'rsrch_analytics' %}"];
+    var urlsToCheck = ["{% url 'exec_dashboard' %}", "{% url 'fac_mgmnt' %}", "{% url 'eval_analytics' %}", "{% url 'rsrch_analytics' %}", "{% url 'prodev_analytics' %}"];
 
     urlsToCheck.forEach(function(urlToCheck) {
         var elementId = "";
@@ -282,6 +290,9 @@
             }
             else if (urlToCheck === "{% url 'rsrch_analytics' %}") {
                 elementId = "facultyResearch-tag";
+            }
+            else if (urlToCheck === "{% url 'prodev_analytics' %}") {
+                elementId = "facultyProdev-tag";
             }
 
             var element = document.getElementById(elementId);
@@ -304,6 +315,9 @@
             }
             else if (urlToCheck === "{% url 'rsrch_analytics' %}") {
                 elementId = "facultyResearch-tag";
+            }
+            else if (urlToCheck === "{% url 'prodev_analytics' %}") {
+                elementId = "facultyProdev-tag";
             }
 
             var element = document.getElementById(elementId);

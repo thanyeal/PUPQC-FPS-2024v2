@@ -140,7 +140,7 @@ def eval_analytics(request):
     }
     
     state = 'active'
-    serialized_state = json.dumps(state)
+    serialized_state         = json.dumps(state)
     serialized_data_two      = json.dumps(ave_per_cattz)
     serialized_overall_avg   = json.dumps(overall_avg_dict)
     serialized_prctg_rating  = json.dumps(two_ratings)

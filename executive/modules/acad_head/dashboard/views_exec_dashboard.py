@@ -31,7 +31,10 @@ def exec_dashboard(request):
         'count_ra3': count_ra3  ,
         'count_rb3': count_rb3
     }
+    highest_rated = count_ra3
+
     serialized_prctg_rating  = json.dumps(two_ratings)
+    serialized_high_faculty  = json.dumps(highest_rated)
 
 
     # Research Info System
@@ -74,9 +77,11 @@ def exec_dashboard(request):
     context = {
         'total_research_papers'     : serialized_grouped_counted ,
         'percent_research_papers'   : serialized_percentage_data ,
+        'highest_counts': serialized_high_faculty   , 
         'first_name'    : serialized_first_name     ,
         'percentage'    : serialized_prctg_rating   ,
         'response_call' : serialized_response       ,
         'requestz': serialized_state, 
     }
     return render(request, 'executive/exec_dashboard.html', context)
+    #return JsonResponse(context, safe=False)
