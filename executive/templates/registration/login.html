@@ -49,7 +49,30 @@
 
     <!-- auth page content --> 
     <div class="auth-page-content">
+        <style>
+                #alertForLogout {
+                    position: fixed;
+                    bottom: 50px; 
+                    right: 50px; 
+                    display: none;
+                    transition: opacity 1s, right 1s; 
+                }
+                
+                .fade-out {
+                    opacity: 0;
+                    right: -200px; 
+                }
+        </style>
+
         <div class="container">
+
+            {% if 'next' in request.GET and request.GET.next == 'logout' %}
+                <div id="alertForLogout" class="alert alert-success" role="alert"></div>
+            {% endif %}
+            
+            {% include 'partials/_messages.html' %}
+            
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center mt-sm-5 mb-4 text-white-50">
@@ -58,11 +81,10 @@
                                 <img src="{% static 'img/pupqcfps2.png' %}" alt="" height="90">
                             </a>
                         </div>
-                        <p class="mt-3 fs-15 fw-medium">Polytechnic University of the Philippines, Quezon City <br/>Faculty Performance System<br/>(Production Demo)</p>
+                        <p class="mt-3 fs-15 fw-medium">Polytechnic University of the Philippines, Quezon City <br/>Faculty Performance System<br/>(Demo)</p>
                     </div>
                 </div>
             </div>
-
 
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">
@@ -73,12 +95,11 @@
                                 <h5 class="text-primary" style="font-size: 2rem !important;"><i class="ri-shield-keyhole-line"></i></h5>
                                 <p class="text-muted">Sign in to continue.</p>
                             </div>
+
                             <div class="p-2 mt-4">
+
                                 <form class="needs-validation" novalidate action="{% url 'login' %}" method="post">
                                     {% csrf_token %}
-                                    {% include 'partials/_messages.html' %}
-                                    {% comment %}  {{form}}  {% endcomment %}
-                                
                                     <div class="mb-3">
                                         <label for="" class="form-label">Email</label>
                                         <div class="position-relative auth-pass-inputgroup">
@@ -88,7 +109,6 @@
                                             <div class="valid-feedback text-warning feedbackAreaaa"></div>
                                         </div>
                                     </div> 
-
                                     <div class="mb-3">
                                         <label class="form-label" for="password-input">Password</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">
@@ -98,31 +118,12 @@
                                             <div class="invalid-feedback passFeedbackArea"></div>
                                             <div class="valid-feedback passSuccessArea"></div>
                                         </div>
-                                    </div>
-                                    
+                                    </div>                                    
                                     <div class="mt-4">
                                         <button class="btn btn-primary w-100 submit-btn mt-4" type="submit">Sign In</button>
                                     </div>
-                                    
-                                    <div class="mt-4 text-center">
-                                        {% comment %}
-                                        <div class="signin-other-title"> 
-                                            <h5 class="fs-13 mb-4 title">Or</h5>
-                                        </div>
-                                        <div>
-                                            <p class="mb-0">
-                                                
-                                                Don't have an account ?
-
-                                                <a href="{% url 'registry' %}" class="fw-semibold text-primary text-decoration-underline"> 
-                                                    Create one
-                                                </a>
-                                            </p>
-                                        </div>
-                                        {% endcomment %}
-                                    </div>
-                                    
                                 </form>
+
                             </div>
                         </div>
                         <!-- end card body -->
@@ -135,9 +136,21 @@
                     </div>
                 </div>
             </div>
-            <!-- end row -->
+            
+            <script>
+                var alertBox = document.getElementById('alertForLogout');
+                alertBox.innerText = 'You have been logged out successfully.';
+                alertBox.style.display = 'block';
+                setTimeout(function() {
+                    alertBox.classList.add('fade-out');
+                    setTimeout(function() {
+                        alertBox.style.display = 'none';
+                        alertBox.classList.remove('fade-out');
+                    }, 1000);
+                }, 3000);
+            </script>
+
         </div>
-        {% comment %} <!-- end container  --> {% endcomment %}
     </div>
 
     <!-- footer -->
@@ -147,7 +160,7 @@
                 <div class="col-lg-12">
                     <div class="text-center">
                         <p class="mb-0 text-muted">&copy;
-                            <script>document.write(new Date().getFullYear())</script>-2024 by BSIT 4-2, <a href="{% url 'exec_dashboard' %}">PUPQC-FPS</a>, All Rights Reserved
+                            <script>document.write(new Date().getFullYear())</script>-2024 by BSIT 4-2, <a href="{% url 'dashboard' %}">PUPQC-FPS</a>, All Rights Reserved
                         </p>
                     </div>
                 </div>
@@ -176,10 +189,7 @@
             webmail.classList.remove("is-invalid");
             logemailFeedBackArea.style.display = "none";
             logemailSuccessArea.style.display = "none";
-            feedbackArea.style.display = "none"; // Hide success message by default
-
-            //WebmailSuccessOutput.style.display = 'block';
-            //WebmailSuccessOutput.textContent=`Checking ${emailVal}`
+            feedbackArea.style.display = "none";
 
             if (emailVal.length > 0) {
 
@@ -189,7 +199,6 @@
                 })
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log("data", data);
                     if (data.webmail_valid) {
                         logemailSuccessArea.style.display = "block";
                         logemailSuccessArea.innerHTML = `<p>${data.webmail_valid}</p>`;
@@ -245,29 +254,6 @@
     </script>
 
     <script>
-        document.getElementById("login-form").addEventListener("submit", function(event) {
-        }),
-            
-            // Serialize the login form data
-            const formData = new FormData(this);
-    
-            // Send the form data to the server for login
-            fetch("/login/", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response from the server
-                console.log(data);
-
-            .catch(error => {
-                console.error("Error:", error);
-            }); 
-        });      
-    </script>
-
-    <script>
         const passwordX = document.querySelector("#password-inputX");
         const feedbackAreaX = document.querySelector(".invalid_feedback");
         const passFeedbackAreaX = document.querySelector(".passFeedbackArea");
@@ -287,7 +273,6 @@
                 })
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log("data", data);
                     if (data.webpass_valid) {
                         passSuccessAreaX.style.display = "block";
                         passSuccessAreaX.innerHTML = `<p>${data.webpass_valid}</p>`

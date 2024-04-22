@@ -130,3 +130,22 @@ class api_routes:
             return fis_data_api_data
         else:
             return None
+
+    @staticmethod
+    def get_fis_prodev_data(request):
+        fis_prodev_data_token = route_config.FIS_API_PRODEV_TOKEN
+        fis_prodev_key = fis_prodev_data_token
+        fis_prodev_url = route_config.FIS_API_PRODEV
+
+        fis_prodev_headers = {
+            'Authorization': "API Key",
+            'token': fis_prodev_key,
+            'Content-Type': 'application/json'
+        }
+
+        fis_key_response = requests.get(fis_prodev_url, headers=fis_prodev_headers)
+        if fis_key_response.status_code == 200:
+            fis_data_prodev_api = fis_key_response.json()
+            return fis_data_prodev_api
+        else:
+            return None

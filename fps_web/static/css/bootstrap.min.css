@@ -69,7 +69,8 @@
 
     --vz-primary-bg-subtle: #e4e1f4;
     --vz-secondary-bg-subtle: #e1ebfd;
-    --vz-success-bg-subtle: #e3f7ed;
+    /*--vz-success-bg-subtle: #e3f7ed;*/
+    --vz-success-bg-subtle: #dfefe7;
     --vz-info-bg-subtle: #dff0fa;
     --vz-warning-bg-subtle: #fff5da;
     --vz-danger-bg-subtle: #fde8e4;

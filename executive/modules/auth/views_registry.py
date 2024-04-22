@@ -2,11 +2,11 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import login
-from executive.forms import CustomRegistrationForm
+from executive.forms import RegistrationForm
 
 def registry(request):
     if request.method == "POST":
-        form = CustomRegistrationForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
@@ -17,6 +17,6 @@ def registry(request):
             messages.error(request, 'Registration failed. Please check the form for errors.')
             return render(request, 'registration/registry.html', {'form': form})
     else:
-        form = CustomRegistrationForm()
+        form = RegistrationForm()
 
     return render(request, 'registration/registry.html', {'form': form})

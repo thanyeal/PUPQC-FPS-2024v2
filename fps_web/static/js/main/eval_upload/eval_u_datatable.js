@@ -6,7 +6,7 @@ $(document).ready(function () {
         "lengthChange": true,
         "ordering": true,
         "ajax": {
-            "url": "eval_list",
+            "url": "evales_em",
             "dataSrc": ""
         },  
         "columns": [

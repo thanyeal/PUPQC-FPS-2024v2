@@ -1,0 +1,336 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card mt-n4 mx-n4">
+                    <div class="bg-primary-subtle">
+                        <div class="card-body px-4 pb-4">
+                            <div class="row mb-3">
+                                <div class="col-md">
+                                    <div class="row align-items-center g-3">
+                                        <div class="col-md-auto">
+                                            <div class="avatar-md">
+                                                <div class="avatar-title bg-transparent">
+                                                    <i class="ri-medal-line" style="font-size: 3rem !important;"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md">
+                                            <div>
+                                                <h4 class="fw-bold text-white">Faculty Performance Ranking</h4>
+                                                <div class="hstack gap-3 flex-wrap text-white">
+                                                    <div id="evalBreadtime"><i class="ri-map-pin-2-line align-bottom me-1"></i></div>
+                                                    <div class="vr"></div>
+                                                    <div>Post Date : <span id="evalBreaddate"></span></div>
+                                                    <div class="vr"></div>
+                                                    <div>Your Designation: <div class="badge rounded-pill bg-secondary fs-12">Academic Head</div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        
+        <div class="row project-wrapper mt-n5">
+            <div class="col-xxl-8">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-primary rounded-2 fs-2">
+                                            <i data-feather="briefcase"></i>
+                                        </span>
+                                    </div>
+                                    <div class="flex-grow-1 overflow-hidden ms-3">
+                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-3">General Faculty Rating</p>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="67.29">0</span></h4>
+                                            <span class="badge bg-danger-subtle text-danger fs-12"><i class="ri-arrow-down-s-line fs-13 align-middle me-1"></i>5.02 %</span>
+                                        </div>
+                                        <p class="text-muted text-truncate mb-0">Present general average</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-warning rounded-2 fs-2">
+                                            <i data-feather="award"></i>
+                                        </span>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <p class="text-uppercase fw-medium text-muted mb-3">Present Publications</p>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="40">0</span></h4>
+                                            <span class="badge bg-success-subtle text-success fs-12"><i class="ri-arrow-up-s-line fs-13 align-middle me-1"></i>3.58 %</span>
+                                        </div>
+                                        <p class="text-muted mb-0">Released papers this year</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-info rounded-2 fs-2">
+                                            <i data-feather="clock"></i>
+                                        </span>
+                                    </div>
+                                    <div class="flex-grow-1 overflow-hidden ms-3">
+                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Professional Development</p>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="45">0</h4>
+                                            <span class="badge bg-danger-subtle text-danger fs-12"><i class="ri-arrow-down-s-line fs-13 align-middle me-1"></i>10.35
+                                                %</span>
+                                        </div>
+                                        <p class="text-muted text-truncate mb-0">Total development this year</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header border-0 align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Projects Overview</h4>
+                                <div>
+                                    <button type="button" class="btn btn-soft-secondary btn-sm shadow-none">
+                                        ALL
+                                    </button>
+                                    <button type="button" class="btn btn-soft-secondary btn-sm shadow-none">
+                                        1M
+                                    </button>
+                                    <button type="button" class="btn btn-soft-secondary btn-sm shadow-none">
+                                        6M
+                                    </button>
+                                    <button type="button" class="btn btn-soft-primary btn-sm shadow-none">
+                                        1Y
+                                    </button>
+                                </div>
+                            </div><!-- end card header -->
+
+                            <div class="card-header p-0 border-0 bg-light-subtle">
+                                <div class="row g-0 text-center">
+                                    <div class="col-6 col-sm-3">
+                                        <div class="p-3 border border-dashed border-start-0">
+                                            <h5 class="mb-1"><span class="counter-value" data-target="9851">0</span></h5>
+                                            <p class="text-muted mb-0">Number of Projects</p>
+                                        </div>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col-6 col-sm-3">
+                                        <div class="p-3 border border-dashed border-start-0">
+                                            <h5 class="mb-1"><span class="counter-value" data-target="1026">0</span></h5>
+                                            <p class="text-muted mb-0">Active Projects</p>
+                                        </div>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col-6 col-sm-3">
+                                        <div class="p-3 border border-dashed border-start-0">
+                                            <h5 class="mb-1">$<span class="counter-value" data-target="228.89">0</span>k</h5>
+                                            <p class="text-muted mb-0">Revenue</p>
+                                        </div>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col-6 col-sm-3">
+                                        <div class="p-3 border border-dashed border-start-0 border-end-0">
+                                            <h5 class="mb-1 text-success"><span class="counter-value" data-target="10589">0</span>h</h5>
+                                            <p class="text-muted mb-0">Working Hours</p>
+                                        </div>
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                            </div><!-- end card header -->
+                            
+                            <div class="card-body p-0 pb-2">
+                                <div>
+                                    <div id="projects-overview-chart" data-colors='["--vz-primary", "--vz-warning", "--vz-success"]' class="apex-charts" dir="ltr"></div>
+                                </div>
+                            </div><!-- end card body -->
+                        </div><!-- end card -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div>
+
+            <div class="col-xxl-4">
+                <div class="card card-height-100">
+                    <div class="card-header align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1">Top 10 Performers</h4>
+                        <div>
+                            <button type="button" class="btn btn-soft-info btn-sm shadow-none">
+                                ASC
+                            </button>
+                            <button type="button" class="btn btn-soft-info btn-sm shadow-none">
+                                DESC
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush border-dashed mb-0">
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <img src="/static/images/users/user-dummy-img.jpg" class="avatar-xs shadow rounded-circle" alt="">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fs-14 mb-1">Faculty</h6>
+                                    <p class="text-muted mb-0">Faculty Position</p>
+                                </div>
+                                <div class="flex-shrink-0 text-end">
+                                    <p class="text-success fs-12 mb-0">+4.33% (2024)</p>
+                                    <p class="text-danger  fs-12 mb-0">-6.21% (2023)</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <img src="/static/images/users/user-dummy-img.jpg" class="avatar-xs shadow rounded-circle" alt="">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fs-14 mb-1">Faculty</h6>
+                                    <p class="text-muted mb-0">Faculty Position</p>
+                                </div>
+                                <div class="flex-shrink-0 text-end">
+                                    <p class="text-success fs-12 mb-0">+4.33% (2024)</p>
+                                    <p class="text-danger  fs-12 mb-0">-6.21% (2023)</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <img src="/static/images/users/user-dummy-img.jpg" class="avatar-xs shadow rounded-circle" alt="">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fs-14 mb-1">Faculty</h6>
+                                    <p class="text-muted mb-0">Faculty Position</p>
+                                </div>
+                                <div class="flex-shrink-0 text-end">
+                                    <p class="text-success fs-12 mb-0">+4.33% (2024)</p>
+                                    <p class="text-danger  fs-12 mb-0">-6.21% (2023)</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <img src="/static/images/users/user-dummy-img.jpg" class="avatar-xs shadow rounded-circle" alt="">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fs-14 mb-1">Faculty</h6>
+                                    <p class="text-muted mb-0">Faculty Position</p>
+                                </div>
+                                <div class="flex-shrink-0 text-end">
+                                    <p class="text-success fs-12 mb-0">+4.33% (2024)</p>
+                                    <p class="text-danger  fs-12 mb-0">-6.21% (2023)</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <img src="/static/images/users/user-dummy-img.jpg" class="avatar-xs shadow rounded-circle" alt="">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fs-14 mb-1">Faculty</h6>
+                                    <p class="text-muted mb-0">Faculty Position</p>
+                                </div>
+                                <div class="flex-shrink-0 text-end">
+                                    <p class="text-success fs-12 mb-0">+4.33% (2024)</p>
+                                    <p class="text-danger  fs-12 mb-0">-6.21% (2023)</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <img src="/static/images/users/user-dummy-img.jpg" class="avatar-xs shadow rounded-circle" alt="">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fs-14 mb-1">Faculty</h6>
+                                    <p class="text-muted mb-0">Faculty Position</p>
+                                </div>
+                                <div class="flex-shrink-0 text-end">
+                                    <p class="text-success fs-12 mb-0">+4.33% (2024)</p>
+                                    <p class="text-danger  fs-12 mb-0">-6.21% (2023)</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <img src="/static/images/users/user-dummy-img.jpg" class="avatar-xs shadow rounded-circle" alt="">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fs-14 mb-1">Faculty</h6>
+                                    <p class="text-muted mb-0">Faculty Position</p>
+                                </div>
+                                <div class="flex-shrink-0 text-end">
+                                    <p class="text-success fs-12 mb-0">+4.33% (2024)</p>
+                                    <p class="text-danger  fs-12 mb-0">-6.21% (2023)</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <img src="/static/images/users/user-dummy-img.jpg" class="avatar-xs shadow rounded-circle" alt="">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fs-14 mb-1">Faculty</h6>
+                                    <p class="text-muted mb-0">Faculty Position</p>
+                                </div>
+                                <div class="flex-shrink-0 text-end">
+                                    <p class="text-success fs-12 mb-0">+4.33% (2024)</p>
+                                    <p class="text-danger  fs-12 mb-0">-6.21% (2023)</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <img src="/static/images/users/user-dummy-img.jpg" class="avatar-xs shadow rounded-circle" alt="">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fs-14 mb-1">Faculty</h6>
+                                    <p class="text-muted mb-0">Faculty Position</p>
+                                </div>
+                                <div class="flex-shrink-0 text-end">
+                                    <p class="text-success fs-12 mb-0">+4.33% (2024)</p>
+                                    <p class="text-danger  fs-12 mb-0">-6.21% (2023)</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <img src="/static/images/users/user-dummy-img.jpg" class="avatar-xs shadow rounded-circle" alt="">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fs-14 mb-1">Faculty</h6>
+                                    <p class="text-muted mb-0">Faculty Position</p>
+                                </div>
+                                <div class="flex-shrink-0 text-end">
+                                    <p class="text-success fs-12 mb-0">+4.33% (2024)</p>
+                                    <p class="text-danger  fs-12 mb-0">-6.21% (2023)</p>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+        <script src="{% static 'js/main/eval_upload/eval_u_datentime.js' %}"></script>
+        <script src="{% static 'js/main/pro_dev/prod_activities.js' %}"></script>
+
+{% endblock %}

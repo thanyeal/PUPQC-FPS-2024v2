@@ -91,10 +91,10 @@
                         <h4 class="col-7 card-title mb-0 flex-grow-1">
                             Average Rating Based Faculty Performance Development in Research Methodologies
                         </h4>
-                
+                        {% comment %}                 
                         <label class="col-1" style="padding-right: 1rem !important;">
                             <select id="rsrch_year_filter" onchange="rsrch_updateChart()" class="form-select form-select-sm"></select>
-                        </label>
+                        </label> {% endcomment %}
 
                         <button class="col-1 btn btn-info btn-icon mb-2" style="margin-right: 1rem !important;" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl">
                             <i class="ri-eye-line"></i>
@@ -181,7 +181,7 @@
 
     {% comment %} Average Rating Per Performance Development in Research {% endcomment %}
     <script>
-        var base_response = JSON.parse('{{ response_call|safe }}')
+        var base_response = JSON.parse('{{ response_call|safe }}');
         var groupedCountedData = JSON.parse('{{ js_grouped_counted|safe }}');
     </script>
     <script src="{% static 'js/main/research/rsrch_peryear.js' %}"></script>

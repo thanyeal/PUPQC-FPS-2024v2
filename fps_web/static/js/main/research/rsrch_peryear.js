@@ -9,32 +9,18 @@ else if (base_response == 1) {
     var options = {
         chart: {
             height: 380,
-            type: "bar",
+            type: "line",
             zoom: { enabled: false },
             toolbar: { show: false },
-            animations: {
-                enabled: true,
-                easing: 'easeinout',
-                speed: 1000,
-                animateGradually: {
-                    enabled: true,
-                    delay: 150
-                },
-                dynamicAnimation: {
-                    enabled: true,
-                    speed: 350
-                }
-            },
         },
-        
         colors: [
             getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
             getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
             getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
         ],
         
-        dataLabels: { enabled: !1 },
-        stroke: { width: [3, 3], curve: "straight" },
+        stroke: { width: [3, 3], curve: "smooth" },
+        markers: { style: "inverted", size: 6 },
         series: [
             { name: 'No. of Research Published', data: counts },
         ],
@@ -64,6 +50,7 @@ else if (base_response == 1) {
     }
     var rsrch_chart = new ApexCharts(document.querySelector('#rsrch_counts'), options);
     rsrch_chart.render();
+
     
     // Create and populate the dropdown
     var yearFilterDropdown = document.getElementById('rsrch_year_filter');

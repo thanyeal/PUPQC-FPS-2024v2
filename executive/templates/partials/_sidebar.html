@@ -54,17 +54,23 @@
 
 </style>
 
+<style>
+    .navbar-menu .navbar-nav .nav-link.active {
+        color: #660000 !important;
+    }
+</style>
+
 <!-- LOGO -->
 <div class="navbar-brand-box">
     <!-- Dark Logo-->
-    <a href="#" class="logo logo-dark">
+    {% comment %} <a href="#" class="logo logo-dark">
         <span class="logo-sm">
             <img src="{% static 'img/pupqcfps2.png' %}" alt="" height="50">
         </span>
         <span class="logo-lg">
             <img src="{% static 'img/mypupqc.webp' %}" alt="" height="30">
         </span>
-    </a>
+    </a> {% endcomment %}
     <!-- Light Logo-->
     <a href="#" class="logo logo-light">
         <span class="logo-sm">
@@ -89,16 +95,16 @@
             <li class="menu-title"><i class="ri-more-fill"></i><span data-key="t-menu">Performance Analytics</span></li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url 'exec_dashboard' %}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                <a id="dashboard-tag" class="nav-link menu-link" href="{% url 'dashboard' %}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                     <i class="ri-dashboard-fill"></i> <span data-key="t-dashboards" class="span-text-title">Dashboard</span>
                 </a>
-            </li>
+            </li> 
 
             <!-- faculty profile mgmt  -->
             <li class="menu-title"><i class="ri-more-fill"></i><span data-key="t-menu">Faculty Performance</span></li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url 'fac_mgmnt' %}" role="button" aria-expanded="false" aria-controls="sidebar_facultyInfo">
+                <a id="facultyMgmt-tag" class="nav-link menu-link" href="{% url 'faculties' %}" role="button" aria-expanded="false" aria-controls="sidebar_facultyInfo">
                     <i class="ri-shield-user-line"></i> <span class="span-text-title" data-key="t-apps">Faculty Management</span>
                 </a>
             </li>
@@ -106,7 +112,7 @@
             <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Faculty Components</span></li>
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url 'eval_analytics' %}" {% comment %}data-bs-toggle="collapse"{% endcomment %} role="button" aria-expanded="false" aria-controls="#">
+                <a id="facultyEval-tag" class="nav-link menu-link" href="{% url 'evales_el' %}" {% comment %}data-bs-toggle="collapse"{% endcomment %} role="button" aria-expanded="false" aria-controls="#">
                     <i class="ri-chat-smile-3-line"></i> <span class="span-text-title" data-key="t-authentication">Evaluations</span>
                 </a>
                 {% comment %}
@@ -118,7 +124,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'eval_analytics' %}" class="nav-link" role="button" aria-expanded="false" aria-controls="sidebarSignUp" data-key="t-signup">
+                                <a href="{% url 'evales_el' %}" class="nav-link" role="button" aria-expanded="false" aria-controls="sidebarSignUp" data-key="t-signup">
                                     Analytics 
                                 </a>
                             </li>
@@ -129,7 +135,7 @@
 
 
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url "rsrch_analytics" %}" {% comment %}  href="{% url 'rsrch_analytics' %}" data-bs-toggle="collapse"{% endcomment %} role="button" aria-expanded="false" aria-controls="#">
+                <a id="facultyResearch-tag" class="nav-link menu-link" href="{% url 'publicate' %}" {% comment %}  href="{% url 'rsrch_analytics' %}" data-bs-toggle="collapse"{% endcomment %} role="button" aria-expanded="false" aria-controls="#">
                     <i class="ri-book-open-fill"></i> <span class="span-text-title" data-key="t-authentication">Research and Publications</span>
                 </a>
                 {% comment %}
@@ -149,12 +155,13 @@
                     </div>
                 {% endcomment %}
             </li>
-            
+
+            {% comment %}
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url "error_page_404" %}" {% comment %} href="{% url 'awards_analytics' %}" data-bs-toggle="collapse" {% endcomment %} role="button" aria-expanded="false" aria-controls="sidebar_proAwards">
+                <a class="nav-link menu-link" href="{% url "error_page_404" %}" role="button" aria-expanded="false" aria-controls="sidebar_proAwards">
                     <i class="ri-medal-line"></i> <span class="span-text-title" data-key="t-pages">Awards and Recognition</span>
                 </a>
-                {% comment %}
+                
                     <div class="collapse menu-dropdown" id="sidebar_proAwards">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
@@ -169,14 +176,15 @@
                             </li>
                         </ul>
                     </div>
-                {% endcomment %}
+                
             </li>
-            
+            {% endcomment %}
+
+            {% comment %}
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url "error_page_404" %}" {% comment %}  href="{% url 'mrt_analytics' %}" data-bs-toggle="collapse" {% endcomment %}role="button" aria-expanded="false" aria-controls="#">
+                <a class="nav-link menu-link" href="{% url "error_page_404" %}" role="button" aria-expanded="false" aria-controls="#">
                     <i class="ri-shield-cross-line"></i> <span class="span-text-title" data-key="t-base-ui">Merit & Promotion</span>
                 </a>
-                {% comment %}
                     <div class="collapse menu-dropdown" id="sidebarUI">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
@@ -187,12 +195,11 @@
                             </li>
                         </ul>
                     </div>
-                {% endcomment %}
-            </li>
-            
-            
+            </li> 
+            {% endcomment %}
+
             <li class="nav-item">
-                <a class="nav-link menu-link" href="{% url "error_page_404" %}" {% comment %} href="{% url 'prodev_analytics' %}" data-bs-toggle="collapse" {% endcomment %} role="button" aria-expanded="false" aria-controls="sidebar_proTraining">
+                <a id="facultyProdev-tag" class="nav-link menu-link" href="{% url 'prodev_a' %}" role="button" aria-expanded="false" aria-controls="sidebar_proTraining">
                     <i class="ri-user-settings-line"></i> <span class="span-text-title" data-key="t-pages">Professional Development</span>
                 </a>
                 {% comment %}
@@ -213,6 +220,13 @@
                 {% endcomment %}
             </li>
             
+
+            <li class="nav-item">
+                <a class="nav-link menu-link" href="{% url "rankings" %}" role="button" aria-expanded="false" aria-controls="sidebar_proAwards">
+                    <i class="ri-medal-line"></i> <span class="span-text-title" data-key="t-pages">Performance Ranking</span>
+                </a>
+            </li>
+
             {% comment %}
             <li class="nav-item">
                 <a class="nav-link menu-link" href="{% url 'workload_analytics' %}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="#">
@@ -232,8 +246,8 @@
                 
             </li>
             {% endcomment %}
-            {% comment %}
 
+            {% comment %}
             <li class="nav-item">
                 <a class="nav-link menu-link" href="{% url 'alm_analytics' %}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI1">
                     <i class="ri-walk-line"></i> <span class="span-text-title">Leave Management</span>
@@ -256,3 +270,63 @@
     </div>
     <!-- Sidebar -->
 </div>
+
+<script>
+    var active_request = JSON.parse('{{ requestz|safe }}');
+    var currentURL = window.location.href;
+    var urlsToCheck = ["{% url 'dashboard' %}", "{% url 'faculties' %}", "{% url 'evales_el' %}", "{% url 'publicate' %}", "{% url 'prodev_a' %}"];
+
+    urlsToCheck.forEach(function(urlToCheck) {
+        var elementId = "";
+        if (currentURL.includes(urlToCheck)) {
+            if (urlToCheck === "{% url 'dashboard' %}") {
+                elementId = "dashboard-tag";
+            } 
+            else if (urlToCheck === "{% url 'faculties' %}") {
+                elementId = "facultyMgmt-tag";
+            }
+            else if (urlToCheck === "{% url 'evales_el' %}") {
+                elementId = "facultyEval-tag";
+            }
+            else if (urlToCheck === "{% url 'publicate' %}") {
+                elementId = "facultyResearch-tag";
+            }
+            else if (urlToCheck === "{% url 'prodev_a' %}") {
+                elementId = "facultyProdev-tag";
+            }
+
+            var element = document.getElementById(elementId);
+            if (element) {
+                if (!element.classList.contains(active_request)) {
+                    element.classList.add(active_request);
+                }
+            }
+        } 
+        
+        else {
+            if (urlToCheck === "{% url 'dashboard' %}") {
+                elementId = "dashboard-tag";
+            } 
+            else if (urlToCheck === "{% url 'faculties' %}") {
+                elementId = "facultyMgmt-tag";
+            }
+            else if (urlToCheck === "{% url 'evales_el' %}") {
+                elementId = "facultyEval-tag";
+            }
+            else if (urlToCheck === "{% url 'publicate' %}") {
+                elementId = "facultyResearch-tag";
+            }
+            else if (urlToCheck === "{% url 'prodev_a' %}") {
+                elementId = "facultyProdev-tag";
+            }
+
+            var element = document.getElementById(elementId);
+            if (element) {
+                if (element.classList.contains(active_request)) {
+                    element.classList.remove(active_request);
+                }
+            }
+        }
+    });
+</script>
+
