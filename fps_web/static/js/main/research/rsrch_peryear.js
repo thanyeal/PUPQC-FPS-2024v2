@@ -9,19 +9,18 @@ else if (base_response == 1) {
     var options = {
         chart: {
             height: 380,
-            type: "bar",
+            type: "line",
             zoom: { enabled: false },
             toolbar: { show: false },
         },
-        
         colors: [
             getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
             getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
             getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
         ],
         
-        dataLabels: { enabled: !1 },
-        stroke: { width: [3, 3], curve: "straight" },
+        stroke: { width: [3, 3], curve: "smooth" },
+        markers: { style: "inverted", size: 6 },
         series: [
             { name: 'No. of Research Published', data: counts },
         ],

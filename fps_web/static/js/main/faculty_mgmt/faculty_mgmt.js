@@ -3,6 +3,11 @@ function getCSRFToken() {
     return csrfToken;
 }
 $(document).ready(function () {
+    function deobfuscate(obfuscatedData) {
+        var deobfuscatedData = obfuscatedData.split("").reverse().join("");
+        return deobfuscatedData;
+    }
+    
     var dataTable = $('#fac_dtble').DataTable({
         "processing": true,
         "searching": true,
@@ -10,8 +15,13 @@ $(document).ready(function () {
         "lengthChange": true,
         "ordering": true,
         "ajax": {
-            "url": "faculty_info",
-            "dataSrc": ""
+            "url": "facultyfo",
+            "dataSrc": function (json) {
+                var obfuscatedData = json.x;
+                var deobfuscatedData = deobfuscate(obfuscatedData);
+                var jsonData = JSON.parse(deobfuscatedData);
+                return jsonData;
+            }
         },
         "columns": [
             { "data": "Faculty_name" },
@@ -51,7 +61,7 @@ $('#fac_dtble tbody').on('click', 'button.attendees-btn', function() {
     $('#chart-loader').show();
 
     $.ajax({    
-        url: "fac_mgmnt",
+        url: "facultyfn",
         type: "POST",
         data: {
             csrfmiddlewaretoken: getCSRFToken(),
@@ -492,7 +502,7 @@ $('#fac_dtble tbody').on('click', 'button.attendees-btn', function() {
 $('#fac_dtble tbody').on('click', 'button.reports-btn', function() {
     var clickedFacultyName = $(this).data('faculty-name');
     $.ajax({
-        url: "faculty_mgmt_reports",
+        url: "facultyfp",
         type: "POST",
         data: {
             csrfmiddlewaretoken: getCSRFToken(),

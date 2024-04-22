@@ -97,20 +97,15 @@
             <div class="col-lg-12">
                 <div class="card card-height-100">
         
-                    <div class="card-header border-0 align-items-center d-flex">
+                    <div class="card-header align-items-center d-flex">
                         <h4 class="card-title mb-0 flex-grow-1">Professional Development Programs</h4>
-                        
-                        <label class="col-2 m-0" style="padding-right: 1rem !important;">
-                            <select id="prodevYearFilter" onchange="prodevChartsUpdate(event)" class="form-select form-select-sm"></select>
-                        </label>
-
                         <button class="col-2 btn btn-info btn-icon" style="margin-right: 1rem !important;" data-bs-toggle="modal" data-bs-target=".eval_analytics">
                             <i class="ri-eye-line"></i>
                         </button>
                     </div>
 
                     <div class="card-body" style="padding: 2rem !important;">
-                        <div id="market-overviews"  class="apex-charts mt-n4"></div>
+                        <div id="line_chart_datalabel" class="apex-charts" dir="ltr"></div>
                     </div>
                 </div>
             </div>
@@ -159,15 +154,14 @@
 
             <div class="col-lg-8">
                 <div class="card card-height-100">
-                    <div class="card-header border-0 align-items-center d-flex">
-                        <h4 class="card-title mb-0 flex-grow-1">Participated Faculties</h4>
-
-                        <label class="col-3 m-0" style="padding-right: 1rem !important;">
-                            <select id="prodevTypesYearFilter" onchange="prodevPieChartsUpdate(event)" class="form-select form-select-sm"></select>
+                    <div class="card-header align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1">Programs Conducted</h4>
+                        <label class="col-2 m-0" style="padding-right: 1rem !important;">
+                            <select id="prodevYearFilter" onchange="prodevChartsUpdate(event)" class="form-select form-select-sm"></select>
                         </label>
                     </div>
-                    <div class="card-body mt-4 p-0 pb-2">
-                        <center><h4> hello table attendees </h4></center>
+                    <div class="card-body" style="padding: 2rem !important;">
+                        <div id="market-overviews"  class="apex-charts mt-n4"></div>
                     </div>
                 </div>
             </div>
@@ -293,8 +287,9 @@
         
                 var options = {
                     chart: { height: 350, type: "bar", toolbar: { show: !1 } },
-                    plotOptions: { bar: { horizontal: !0 } },
                     dataLabels: { enabled: !1 },
+                    stroke: { width: [3, 3], curve: "smooth" },
+                    markers: { style: "inverted", size: 6 },
                     series: [
                         { name: 'No. of Programs Conducted', data: prodev_data },
                     ],
@@ -355,7 +350,65 @@
             });
         </script>
         
-        {% comment %} Institutional Professional Development Status {% endcomment %}
+        {% comment %} Programs Conducted {% endcomment %}
+        <script>
+            $(document).ready(function(){
+                // Assuming you've already passed the data from Django to the template using context
+                var programsDistinctCounts = JSON.parse('{{ program_distinctCounts|escapejs }}');
+                var programsDistinct = JSON.parse('{{ program_distinct|escapejs }}');
+        
+                var options = {
+                    chart: {
+                        height: 380,
+                        type: "bar",
+                        zoom: { enabled: !1 },
+                        toolbar: { show: !1 },
+                    },
+                    colors: [
+                        getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--vz-dark'),
+                    ],
+                    dataLabels: { enabled: !1 },
+                    series: [{
+                        name: 'Counts',
+                        data: programsDistinctCounts.map(item => item.count)
+                    }],
+                    title: {
+                        text: "Program Types:",
+                        align: "left",
+                        style: { fontWeight: 500 },
+                    },
+                    grid: {
+                        row: { colors: ["transparent", "transparent"], opacity: 0.2 },
+                        borderColor: "#f1f1f1",
+                    },
+                    xaxis: {
+                        categories: programsDistinct,
+                        title: { text: "Programs" },
+                    },
+                    yaxis: { title: { text: "Counts" } },
+                    legend: {
+                        position: "top",
+                        horizontalAlign: "right",
+                        floating: !0,
+                        offsetY: -25,
+                        offsetX: -5,
+                    },
+                    responsive: [
+                        {
+                            breakpoint: 600,
+                            options: { chart: { toolbar: { show: !1 } }, legend: { show: !1 } },
+                        },
+                    ],
+                }
+                var hnzchart = new ApexCharts(document.querySelector("#line_chart_datalabel"), options)
+                hnzchart.render()
+            });
+        </script>
+        
+        {% comment %} Institutional Professional Development Status: Pie Graph {% endcomment %}
         <script>
             $(document).ready(function(){
                 var programTypes = JSON.parse('{{ program_types|safe }}');
@@ -429,60 +482,6 @@
         
                 yearFilterDropdown.addEventListener('change', prodevPieChartsUpdate);
             });
-        </script>
-        
-        
-
-        {% comment %} Faculty Development Comparison {% endcomment %}
-        <script>
-            var options = {
-                series: [44, 55, 41],
-                chart: { height: 300, type: "donut" },
-                labels: ["New Performing Faculties", "Existing Performing Faculties", "Subject to Promotion"],
-                legend: { position: "bottom" },
-                dataLabels: { dropShadow: { enabled: !1 } },
-                colors: [
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-dark'),
-                ],
-            };
-            
-            var chart = new ApexCharts(document.querySelector("#simple_dount_charts"), options );
-            chart.render();
-        
-        </script>
-
-
-        {% comment %} Professional Development Summary {% endcomment %}
-        <script>
-            var options = {
-                series: [125, 42, 58, 89],
-                labels: ["Completed", "In Progress", "Yet to Start", "Cancelled"],
-                chart: { type: "donut", height: 230 },
-                plotOptions: {
-                    pie: {
-                        size: 100,
-                        offsetX: 0,
-                        offsetY: 0,
-                        donut: { size: "60%", labels: { show: !1 } },
-                    },
-                },
-                dataLabels: { enabled: !1 },
-                legend: { show: !1 },
-                stroke: { lineCap: "round", width: 0 },
-                colors: [
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
-                    getComputedStyle(document.documentElement).getPropertyValue('--vz-dark'),
-                ],
-            };
-            
-            var chart = new ApexCharts(document.querySelector("#prjects-statuses"), options );
-            chart.render();
-        
         </script>
 
 {% endblock %}

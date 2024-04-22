@@ -6,7 +6,7 @@ $(document).ready(function () {
         "lengthChange": true,
         "ordering": true,
         "ajax": {
-            "url": "rsrch_tracking",
+            "url": "public_tb",
             "dataSrc": ""
         },
         "columns": [

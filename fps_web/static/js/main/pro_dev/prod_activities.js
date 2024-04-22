@@ -7,7 +7,7 @@ $(document).ready(function () {
         "lengthChange": true,
         "ordering": true,
         "ajax": {
-            "url": "prodev_attendance",
+            "url": "prodev_b",
             "dataSrc": ""
         },
         "columns": [
