@@ -115,7 +115,11 @@ WSGI_APPLICATION = 'fps_web.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://mypupqc_fpsv2_user:Po94FCMtdoftbbE1zMTd8AM9v695XlZ4@dpg-cmlv5v7109ks7395m7n0-a.singapore-postgres.render.com/mypupqc_fpsv2',
+        #Render
+        # default='postgres://mypupqc_fpsv2_user:Po94FCMtdoftbbE1zMTd8AM9v695XlZ4@dpg-cmlv5v7109ks7395m7n0-a.singapore-postgres.render.com/mypupqc_fpsv2',
+
+        #NeonConsole
+        default='postgresql://mypupqc_fpsv2_owner:EtTQsInjgO19@ep-lively-fire-a1jkm0dc.ap-southeast-1.aws.neon.tech/mypupqc_fpsv2?sslmode=require',
     )
 }
 # print(os.environ.get("DATABASE_URL"))
