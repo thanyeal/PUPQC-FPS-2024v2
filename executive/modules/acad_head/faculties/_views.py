@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse
 from executive.utils import obfuscate
 from executive.modules.acad_head.faculties._json    import faculty_management
 from executive.modules.acad_head.faculties._table   import faculty_management_table
-from executive.modules.acad_head.faculties._export   import faculty_management_report
+from executive.modules.acad_head.faculties._export  import faculty_management_report
 from django.shortcuts import render
 import json
 

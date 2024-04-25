@@ -1,4 +1,5 @@
 from executive.api import api_routes
+from django.http import JsonResponse
 
 def convert_to_percentage(grade):
     max_grade = 5.0
@@ -148,4 +149,7 @@ def individual_data(request):
         calculated_data_by_id.append(calc_data)
 
     desired_calc_data = calculated_data_by_id
-    return desired_calc_data
+    if desired_calc_data:
+        return desired_calc_data
+    else:
+        return JsonResponse({desired_calc_data})

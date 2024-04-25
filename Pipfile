@@ -29,6 +29,7 @@ pdfkit = "*"
 django-jsonresponse = "*"
 xlsxwriter = "*"
 bytesbufio = "*"
+fuzzywuzzy = "*"
 
 [dev-packages]
 

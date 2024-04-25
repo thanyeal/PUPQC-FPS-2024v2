@@ -6,13 +6,13 @@ from executive.modules.maintenance.views_comesoon                          impor
 from executive.modules.acad_head.profile.views_exec_profilepage            import exec_p_page
 from executive.modules.acad_head.profile.views_exec_profilesetting         import exec_p_sett
 from executive.modules.auth.views_login                                    import CustomLoginView
-from executive.modules.acad_head.ranking._json                             import pr_asView
 
 from executive.modules.acad_head.dashboard._views    import db_asView
 from executive.modules.acad_head.faculties._views    import fm_asView, fn_asView, fo_asView, fp_asView
 from executive.modules.acad_head.evaluates._views    import el_asView, em_asView
 from executive.modules.acad_head.research._views     import rs_asView, rt_asView
 from executive.modules.acad_head.pro_dev._views      import pd_asView, pe_asView
+from executive.modules.acad_head.ranking._views      import pr_asView
 
 db_asView
 

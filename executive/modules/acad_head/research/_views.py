@@ -11,6 +11,13 @@ def rs_asView(request):
     context = publications_data(request)
     return render(request, 'executive/pages/rsrch_analytics.html', context)
 
+@login_required(login_url='login')
+def rt_asView(request):
+    ris_api_data = publications_table(request)
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse(ris_api_data, safe=False)
+    else:
+        return JsonResponse(ris_api_data, safe=False)
 
     # ris_api_data = api_routes.get_ris_api(request)
     # if ris_api_data:
@@ -71,11 +78,3 @@ def rs_asView(request):
     # #return JsonResponse(context, safe=False)
     # return render(request, 'executive/pages/rsrch_analytics.html', context)
 
-
-@login_required(login_url='login')
-def rt_asView(request):
-    ris_api_data = publications_table(request)
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        return JsonResponse(ris_api_data, safe=False)
-    else:
-        return JsonResponse(ris_api_data, safe=False)
