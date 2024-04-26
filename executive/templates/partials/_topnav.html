@@ -49,7 +49,7 @@
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
                     <h6 class="dropdown-header">Welcome, Ma'am {{ user.first_name }} </h6>
-                    <a class="dropdown-item" href="{% url "error_page_404" %}"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
+                    {% comment %} <a class="dropdown-item" href="{% url "error_page_404" %}"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a> {% endcomment %}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'logout' %}"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
                 </div>
