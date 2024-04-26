@@ -87,6 +87,41 @@
                             <div class="modal-footer">
                                 <a href="javascript:void(0);" class="btn btn-link link-success shadow-none fw-medium" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Close</a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  Extra Large modal example -->
+                <div class="modal fade prodev_attendees" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="myExtraLargeModalLabel">List of Professional Development Attendees</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <table id="xxten" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Titles</th>
+                                            <th>Duration/Date</th>
+                                            <th>Type</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot> 
+                                        <tr>
+                                            <th><input type="text" class="form-control input-sm mt-2" placeholder="Search by Program Title" id="searchFaculty" value=""></th>
+                                            <th><input type="text" class="form-control input-sm mt-2" placeholder="Search by Start Date"    id="searchTitles" value=""></th>
+                                            <th><input type="text" class="form-control input-sm mt-2" placeholder="Search by End Date"      id="searchDuration" value=""></th>
+                                            <th><input type="text" class="form-control input-sm mt-2" placeholder="Search by Speaker"       id="searchType" value=""></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="javascript:void(0);" class="btn btn-link link-success shadow-none fw-medium" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Close</a>
+                            </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
@@ -159,6 +194,9 @@
                         <label class="col-2 m-0" style="padding-right: 1rem !important;">
                             <select id="prodevYearFilter" onchange="prodevChartsUpdate(event)" class="form-select form-select-sm"></select>
                         </label>
+                        <button class="col-2 btn btn-info btn-icon" style="margin-right: 1rem !important;" data-bs-toggle="modal" data-bs-target=".prodev_attendees">
+                            <i class="ri-eye-line"></i>
+                        </button>
                     </div>
                     <div class="card-body" style="padding: 2rem !important;">
                         <div id="market-overviews"  class="apex-charts mt-n4"></div>
@@ -483,5 +521,35 @@
                 yearFilterDropdown.addEventListener('change', prodevPieChartsUpdate);
             });
         </script>
-
+        
+        <script>
+            $(document).ready(function () {
+                var dataTable = $('#xxten').DataTable({
+                    "processing": true,
+                    "searching": true,
+                    "paging": true,
+                    "lengthChange": true,
+                    "ordering": true,
+                    "ajax": {
+                        "url": "prodev_c",
+                        "dataSrc": ""
+                    },  
+                    "columns": [
+                        { "data": "name"  },
+                        { "data": "title" },
+                        { "data": "date"  },
+                        { "data": "type"  },
+                    ]
+                });
+            
+                $('#searchFaculty, #searchTitles, #searchDuration, #searchType').on('keyup', function () {
+                    dataTable.column($(this).parent().index() + ':visible').search(this.value).draw();
+                });
+            
+                if (dataTable.data().count() === 0) {
+                    $('#xxten tbody').html('<tr><td colspan="9"><center>There is currently no data in the database.</center></td></tr>');
+                }
+            });
+        </script>
+        
 {% endblock %}

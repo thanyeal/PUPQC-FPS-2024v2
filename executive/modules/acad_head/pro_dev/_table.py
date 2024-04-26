@@ -1,7 +1,5 @@
-from django.contrib.auth.decorators import login_required
 from executive.api import api_routes
 
-@login_required(login_url='login')
 def prodev_attendance(request):
     fis_prodev = api_routes.get_fis_prodev_data(request)
     fis_prodev_list = []

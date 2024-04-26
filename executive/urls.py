@@ -22,6 +22,7 @@ urlpatterns = [
 
     path("prodev_a" , views.pd_asView , name="prodev_a" ),
     path("prodev_b" , views.pe_asView , name="prodev_b" ),
+    path("prodev_c" , views.pf_asView , name="prodev_c" ),
 
     path("rankings" , views.pr_asView , name="rankings" ),
 

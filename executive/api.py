@@ -149,3 +149,16 @@ class api_routes:
             return fis_data_prodev_api
         else:
             return None
+        
+    @staticmethod
+    def get_acmis_data(request):
+        acmis_source = route_config.ACMIS_ROUTE
+        acmis_source_headers = {
+            'Content-Type': 'application/json'
+        }
+        acmis_source = requests.get(acmis_source, headers=acmis_source_headers)
+        if acmis_source.status_code == 200:
+            acmis_profdev = acmis_source.json()
+            return acmis_profdev
+        else:
+            return None

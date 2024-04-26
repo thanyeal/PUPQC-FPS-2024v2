@@ -4,20 +4,21 @@ from django.http import JsonResponse
 from executive.modules.acad_head.pro_dev._table import prodev_attendance
 from executive.modules.acad_head.pro_dev._json  import professional_development
 import json
+from executive.modules.acad_head.pro_dev._table_a  import ranking_table
 
 @login_required(login_url='login')
 def pd_asView(request):
-    program_counts = professional_development.workshop_data(request)
-    program_types  = professional_development.programtype_data(request)
-    program_types_total = professional_development.progtypecount_data(request)
-    program_types_total_now = professional_development.prodevpresent_data(request)
-    programs_distinct_counts = professional_development.programcount_data(request)
-    programs_distinct = professional_development.distinctprogram_data(request)
-    serialized_program_counts = json.dumps(program_counts)
-    serialized_program_types = json.dumps(program_types)
-    serialized_pt_total = json.dumps(program_types_total)
-    serialized_ptt_now = json.dumps(program_types_total_now)
-    serialized_programs_distinct_counts = json.dumps(programs_distinct_counts)
+    program_counts              = professional_development.workshop_data(request)
+    program_types               = professional_development.programtype_data(request)
+    program_types_total         = professional_development.progtypecount_data(request)
+    program_types_total_now     = professional_development.prodevpresent_data(request)
+    programs_distinct_counts    = professional_development.programcount_data(request)
+    programs_distinct           = professional_development.distinctprogram_data(request)
+    serialized_program_counts   = json.dumps(program_counts)
+    serialized_program_types    = json.dumps(program_types)
+    serialized_pt_total         = json.dumps(program_types_total)
+    serialized_ptt_now          = json.dumps(program_types_total_now)
+    serialized_pdc              = json.dumps(programs_distinct_counts)
     serialized_program_distinct = json.dumps(programs_distinct)
 
 
@@ -29,7 +30,7 @@ def pd_asView(request):
         'program_types'  : serialized_program_types,
         'program_types_total': serialized_pt_total,
         'program_types_total_now': serialized_ptt_now,
-        'program_distinctCounts': serialized_programs_distinct_counts,
+        'program_distinctCounts': serialized_pdc,
         'program_distinct': serialized_program_distinct,
         'requestz': serialized_state,
     }
@@ -42,3 +43,12 @@ def pe_asView(request):
         return JsonResponse(fis_prodev_list, safe=False)
     else:
         pass
+
+
+@login_required(login_url='login')
+def pf_asView(request):
+    ranking_data = ranking_table(request)
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse(ranking_data, safe=False)
+    else:
+        return JsonResponse(ranking_data, safe=False)
