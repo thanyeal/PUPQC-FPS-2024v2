@@ -1,24 +1,6 @@
 from executive.api  import api_routes
 from executive.modules.acad_head.faculties._component_faculty       import individual_data
-# from django.http import JsonResponse
 from fuzzywuzzy import fuzz
-from collections import defaultdict
-
-def proffinfos_source(request):
-    faculties = api_routes.get_fis_faculty_data(request)
-    return faculties
-
-def evaluation_source(request):
-    fis_eval = api_routes.get_fis_eval_api(request)
-    return fis_eval
-
-def researches_source(request):
-    ris_data = api_routes.get_ris_api(request)
-    return ris_data
-
-def developmnt_source(request):
-    prd_data = api_routes.get_fis_prodev_data(request)
-    return prd_data
 
 class performance_ranking:
     @staticmethod
@@ -27,8 +9,9 @@ class performance_ranking:
         fullname = api_routes.get_fis_faculty_data(request)
         result = []
         try:
-            name_counts = defaultdict(int)
-            for faculty_id, faculty_details in fullname["Faculties"].items():
+            faculties = fullname["Faculties"]
+            sorted_faculties = sorted(faculties.items(), key=lambda x: x[1]['LastName'])
+            for faculty_id, faculty_details in sorted_faculties:
                 faculty_name = f"{faculty_details['LastName']}, {faculty_details['FirstName']} {faculty_details['MiddleInitial']}"
                 matched = False
                 research_pubs = 0
@@ -41,12 +24,20 @@ class performance_ranking:
                         
                 if matched: 
                     result.append({
-                        'Faculty': faculty_name,
-                        'status': matched,
-                        'Research_Published': research_pubs
+                        'Author': faculty_name,
+                        'Ranking': research_pubs
                     })
-            sorted_result = sorted(result, key=lambda x: x['Research_Published'], reverse=True)
-            return sorted_result
+            sorted_result = sorted(result, key=lambda x: x['Ranking'], reverse=True)
+            ranked_result = []
+            rank_counter = 1
+            current_attends = sorted_result[0]['Ranking']
+            for item in sorted_result:
+                if item['Ranking'] < current_attends:
+                    rank_counter += 1
+                    current_attends = item['Ranking']
+                item['Ranking'] = rank_counter
+                ranked_result.append(item)
+            return ranked_result
         except KeyError as e:
             raise KeyError(str(e))
 
@@ -56,7 +47,9 @@ class performance_ranking:
         fullname = api_routes.get_fis_faculty_data(request)
         result = []
         try:
-            for faculty_id, faculty_details in fullname["Faculties"].items():
+            faculties = fullname["Faculties"]
+            sorted_faculties = sorted(faculties.items(), key=lambda x: x[1]['LastName'])
+            for faculty_id, faculty_details in sorted_faculties:
                 faculty_name = f"{faculty_details['LastName']}, {faculty_details['FirstName']} {faculty_details['MiddleInitial']}"
                 matched = False
                 for faculty in fis_eval:
@@ -68,50 +61,58 @@ class performance_ranking:
                         break 
                 if matched:
                     result.append({
-                        'Faculty_name': faculty_name,
+                        'Faculty': faculty_name,
                         'Ranking': round((4 / general_rate * 100), 2)
                     })
-            sorted_result = sorted(result, key=lambda x: x['Ranking'])
-            return sorted_result
+            sorted_result = sorted(result, key=lambda x: x['Ranking'], reverse=True)
+            ranked_result = []
+            rank_counter = 1
+            current_attends = sorted_result[0]['Ranking']
+            for item in sorted_result:
+                if item['Ranking'] < current_attends:
+                    rank_counter += 1
+                    current_attends = item['Ranking']
+                item['Ranking'] = rank_counter
+                ranked_result.append(item)
+            return ranked_result
         except KeyError as e:
             raise KeyError(str(e))
 
-
-
-
-    # def generalrate_data(request):
-    #     pass
-
-    # def gd_percentages(request):
-    #     pass
-
-    # def publication_data(request):
-    #     pass
-
-    # def pd_percentages(request):
-    #     pass
-
-    # def development_data(request):
-    #     pass
-
-    # def dd_percentages(request):
-    #     pass
-
-    # def top_performance(request):
-    #     pass
-
-    # def projects_ov_data(request):
-    #     pass
-
-class performance_headers:
-    # def projects_no_data(request):
-    #     pass
-
-    # def projects_active(request):
-    #     pass
-
-    # def projects_revenue(request):
-    #     pass
-
-    def projects_hours(request):
-        pass
+    @staticmethod
+    def professional_dev(request):
+        fullname_s = api_routes.get_fis_faculty_data(request)
+        acmis_data = api_routes.get_acmis_data(request)['api_data']
+        result = []
+        try:
+            faculties = fullname_s["Faculties"]
+            sorted_faculties = sorted(faculties.items(), key=lambda x: x[1]['LastName'])
+            for faculty_id, faculty_details in sorted_faculties:
+                faculty_name = f"{faculty_details['LastName']}, {faculty_details['FirstName']} {faculty_details['MiddleInitial']}"
+                matched = False
+                attends_count = 0
+                for item in acmis_data: 
+                    attendee_name = item.get('FullName')
+                    parts = attendee_name.split(',')
+                    attendees = parts[0] + ',' + ''.join(parts[1:])
+                    similarity_score = fuzz.ratio(attendee_name, faculty_name)
+                    if similarity_score >= 80:
+                        matched = True
+                        attends_count += 1
+                if matched:
+                    result.append({
+                        'Faculty': faculty_name,
+                        'Ranking': attends_count
+                    })
+            sorted_result = sorted(result, key=lambda x: x['Ranking'], reverse=True)
+            ranked_result = []
+            rank_counter = 1
+            current_attends = sorted_result[0]['Ranking']
+            for item in sorted_result:
+                if item['Ranking'] < current_attends:
+                    rank_counter += 1
+                    current_attends = item['Ranking']
+                item['Ranking'] = rank_counter
+                ranked_result.append(item)
+            return ranked_result
+        except KeyError as e:
+            raise KeyError(str(e))
