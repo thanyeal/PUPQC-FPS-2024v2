@@ -60,7 +60,7 @@
                     <div class="row row-cols-xxl row-cols-md-2 row-cols-1 g-0">{% comment %}  row-cols-xxl-5 {% endcomment %}
                         <div class="col d-flex justify-content-center align-items-center">
                             <div class="py-4 px-3">
-                                <h5 class="text-muted text-uppercase fs-13">Highest Student Rated Faculties<!--i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i--></h5>
+                                <h5 class="text-muted text-uppercase fs-13">No. of Faculties<!--i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i--></h5>
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
                                         <i class="ri-chat-smile-3-line display-6 text-muted"></i>
@@ -128,55 +128,52 @@
             </div>
         </div>
     </div>
-    <div class="row">   
 
-        <div class="col-lg-4">
+    <div class="row">
+        <div class="col-lg-12">
             <div class="card card-height-100">
-                <div class="card-header align-items-center d-flex">
-                    <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">Teaching Effectiveness</h4>
-                    <div class="flex-shrink-0">
-                        <a href="{% url 'evales_el' %}" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
-                    </div>
-                </div>
-                <div class="card-body p-0 pb-2">
-                    <div class="card-body">
-                        <div id="prjects-status-1" class="apex-charts mt-5" dir="ltr"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-header align-items-center d-flex">
-                    <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">Research Publications</h4>
+                <div class="card-header border-0 align-items-center d-flex">
+                    <h4 class="col-7 card-title mb-0 flex-grow-1">
+                        Average Rating Based Faculty Performance Development in Research Methodologies
+                    </h4>
                     <div class="flex-shrink-0">
                         <a href="{% url 'publicate' %}" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
                     </div>
                 </div>
-                <div class="card-body pb-0">
-                    <div id="edx"></div>
-                    <div id="multiple_radialbar" data-colors='["--vz-success", "--vz-warning", "--vz-primary"]' class="apex-charts" dir="ltr"></div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-header">
+                            <h4 class="card-title mb-0 flex-grow-1"></h4>
+                        </div>
+                        <div id="grouped-counted-data" style="display: none;"></div>
+                        <div id="rsrch_counts"></div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="col-lg-4">
+    <div class="row">
+        <div class="col-lg-12">
             <div class="card card-height-100">
+    
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="table-h4-white-text card-title mb-0 flex-grow-1">Professional Development</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Professional Development Programs</h4>
                     <div class="flex-shrink-0">
                         <a href="{% url 'prodev_a' %}" class="link-primary">View All <i class="ri-arrow-right-line"></i></a>
                     </div>
                 </div>
-                
-                <div class="card-body mt-4 mb-4 p-0 pb-2">
-                    <div id="simple_pie_charts" dir="ltr"></div>
+
+                <div class="card-body" style="padding: 2rem !important;">
+                    <div id="line_chart_datalabel" class="apex-charts" dir="ltr"></div>
                 </div>
             </div>
         </div>
     </div>
 
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
     <script>
         function updateDateTime() {
             const now = new Date();
@@ -207,7 +204,6 @@
         updateDateTime(); // Initial update
     </script>
     
-
     {% comment %} Average Student Scores for Each Faculty: Pie {% endcomment %}
     <script>
         var percentage_data = JSON.parse('{{ percentage|safe }}');
@@ -348,6 +344,161 @@
             yearFilterDropdown.addEventListener('change', prodevPieChartsUpdate);
         });
     </script>
+
+    {% comment %} Average Rating Per Performance Development in Research {% endcomment %}
+    <script>
+        var base_response = JSON.parse('{{ response_call|safe }}');
+        var groupedCountedData = JSON.parse('{{ js_grouped_counted|safe }}');
+        var years = Object.keys(groupedCountedData);
+
+        var counts = years.map(year => groupedCountedData[year].count);
+        var options = {
+            chart: {
+                height: 380,
+                type: "line",
+                zoom: { enabled: false },
+                toolbar: { show: false },
+            },
+            colors: [
+                getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
+                getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
+                getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
+            ],
+            
+            stroke: { width: [3, 3], curve: "smooth" },
+            markers: { style: "inverted", size: 6 },
+            series: [
+                { name: 'No. of Research Published', data: counts },
+            ],
+            grid: {
+                row: { colors: ["transparent", "transparent"], opacity: 0.2 },
+                borderColor: "#f1f1f1",
+            },
+            markers: { style: "inverted", size: 6 },
+            xaxis: {
+                categories: years,
+                title: { text: "Academic Year" },
+            },
+            yaxis: { title: { text: "Research Count" }, min: 0, max: 50 },
+            legend: {
+                position: "top",
+                horizontalAlign: "right",
+                floating: !0,
+                offsetY: -25,
+                offsetX: -5,
+            },
+            responsive: [
+                {
+                    breakpoint: 600,
+                    options: { chart: { toolbar: { show: !1 } }, legend: { show: !1 } },
+                },
+            ],
+        }
+        var rsrch_chart = new ApexCharts(document.querySelector('#rsrch_counts'), options);
+        rsrch_chart.render();
+
+        
+        // Create and populate the dropdown
+        var yearFilterDropdown = document.getElementById('rsrch_year_filter');
+
+        // Add 'All' option to show all data
+        var rsrch_allOption = document.createElement('option');
+            rsrch_allOption.value = 'all';
+            rsrch_allOption.text = 'Display All';
+        yearFilterDropdown.add(rsrch_allOption);
+
+        years.forEach(year => {
+            var option = document.createElement('option');
+            option.value = year;
+            option.text = year;
+            yearFilterDropdown.appendChild(option);
+        });
+
+        function rsrch_updateChart(event) {
+            if (event) {
+                event.preventDefault();
+            }
+            var selectedYear = yearFilterDropdown.value;
+            var filteredData = {};
+
+            if (selectedYear === 'all') {
+                filteredData = groupedCountedData; // Show all data
+            }
+            
+            else {
+                // Filter by year
+                filteredData[selectedYear] = groupedCountedData[selectedYear];
+            }
+
+            var filteredYears = Object.keys(filteredData);
+            var filteredCounts = filteredYears.map(year => filteredData[year].count);
+            
+            // Update the chart options with filtered data
+            rsrch_chart.updateOptions({ xaxis: { categories: filteredYears } });
+            rsrch_chart.updateSeries([{ data: filteredCounts }]);
+        }
+
+        yearFilterDropdown.addEventListener('change', rsrch_updateChart);
     
+    </script>
+
+
+    {% comment %} Programs Conducted {% endcomment %}
+    <script>
+        $(document).ready(function(){
+            // Assuming you've already passed the data from Django to the template using context
+            var programsDistinctCounts = JSON.parse('{{ program_distinctCounts|escapejs }}');
+            var programsDistinct = JSON.parse('{{ program_distinct|escapejs }}');
+
+            var options = {
+                chart: {
+                    height: 380,
+                    type: "bar",
+                    zoom: { enabled: !1 },
+                    toolbar: { show: !1 },
+                },
+                colors: [
+                    getComputedStyle(document.documentElement).getPropertyValue('--vz-info'),
+                    getComputedStyle(document.documentElement).getPropertyValue('--vz-primary'),
+                    getComputedStyle(document.documentElement).getPropertyValue('--vz-secondary'),
+                    getComputedStyle(document.documentElement).getPropertyValue('--vz-dark'),
+                ],
+                dataLabels: { enabled: !1 },
+                series: [{
+                    name: 'Counts',
+                    data: programsDistinctCounts.map(item => item.count)
+                }],
+                title: {
+                    text: "Program Types:",
+                    align: "left",
+                    style: { fontWeight: 500 },
+                },
+                grid: {
+                    row: { colors: ["transparent", "transparent"], opacity: 0.2 },
+                    borderColor: "#f1f1f1",
+                },
+                xaxis: {
+                    categories: programsDistinct,
+                    title: { text: "Programs" },
+                },
+                yaxis: { title: { text: "Counts" } },
+                legend: {
+                    position: "top",
+                    horizontalAlign: "right",
+                    floating: !0,
+                    offsetY: -25,
+                    offsetX: -5,
+                },
+                responsive: [
+                    {
+                        breakpoint: 600,
+                        options: { chart: { toolbar: { show: !1 } }, legend: { show: !1 } },
+                    },
+                ],
+            }
+            var hnzchart = new ApexCharts(document.querySelector("#line_chart_datalabel"), options)
+            hnzchart.render()
+        });
+    </script>
 
     {% endblock %} 
